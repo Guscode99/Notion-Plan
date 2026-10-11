@@ -1,0 +1,1574 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><title>Gus OS — 3 versiones</title><style>
+@page { size: 297mm 210mm; margin: 0; }
+:root{
+  --ink:#1f1e1b; --text:#37352f; --muted:#787774; --line:#e9e9e7; --soft:#f7f6f3;
+  --gray:#f1f1ef; --brown:#f4eeee; --orange:#fbecdd; --yellow:#fbf3db; --green:#edf3ec;
+  --blue:#e7f3f8; --purple:#f6f3f9; --pink:#faf1f5; --red:#fdebec;
+  --t-gray:#787774; --t-brown:#9f6b53; --t-orange:#d9730d; --t-yellow:#cb912f; --t-green:#448361;
+  --t-blue:#337ea9; --t-purple:#9065b0; --t-pink:#c14c8a; --t-red:#d44c47;
+  --accA:#2f5d8a; --accB:#6b4f9e; --accC:#c2562a;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{font-family:Inter, "Noto Color Emoji", sans-serif;color:var(--text);-webkit-print-color-adjust:exact;print-color-adjust:exact;background:#fff}
+.page{width:297mm;height:210mm;padding:13mm 15mm 11mm;position:relative;overflow:hidden;page-break-after:always;break-after:page;background:#fff}
+.page:last-child{page-break-after:auto}
+.foot{position:absolute;left:15mm;right:15mm;bottom:6mm;display:flex;justify-content:space-between;font-size:7.5pt;color:#a3a29e}
+.kicker{font-size:8pt;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:2mm}
+h1{font-size:25pt;line-height:1.1;color:var(--ink);font-weight:800;letter-spacing:-.02em}
+h2{font-size:17pt;line-height:1.15;color:var(--ink);font-weight:750;letter-spacing:-.01em;margin-bottom:3mm}
+h3{font-size:11pt;color:var(--ink);font-weight:700;margin:0 0 1.6mm}
+h4{font-size:9pt;color:var(--ink);font-weight:700;margin:0 0 1mm}
+p,li{font-size:9pt;line-height:1.45}
+p+p{margin-top:1.6mm}
+ul{padding-left:4.5mm} li{margin:.6mm 0}
+.lead{font-size:10.5pt;line-height:1.5;color:#4a4943}
+.muted{color:var(--muted)}
+.small{font-size:7.8pt}
+.grid{display:grid;gap:5mm}
+.g2{grid-template-columns:1fr 1fr}.g3{grid-template-columns:1fr 1fr 1fr}.g4{grid-template-columns:repeat(4,1fr)}
+.g12{grid-template-columns:1fr 2fr}.g21{grid-template-columns:2fr 1fr}.g13{grid-template-columns:1fr 3fr}
+.card{border:1px solid var(--line);border-radius:3mm;padding:3.5mm 4mm;background:#fff}
+.card.soft{background:var(--soft);border-color:transparent}
+.pill{display:inline-block;font-size:7pt;font-weight:600;padding:.5mm 1.8mm;border-radius:1mm;margin:0 .6mm .6mm 0;white-space:nowrap}
+.p-gray{background:var(--gray);color:#5a5955}.p-brown{background:var(--brown);color:var(--t-brown)}.p-orange{background:var(--orange);color:var(--t-orange)}
+.p-yellow{background:var(--yellow);color:#a07722}.p-green{background:var(--green);color:var(--t-green)}.p-blue{background:var(--blue);color:var(--t-blue)}
+.p-purple{background:var(--purple);color:var(--t-purple)}.p-pink{background:var(--pink);color:var(--t-pink)}.p-red{background:var(--red);color:var(--t-red)}
+table.t{width:100%;border-collapse:collapse;font-size:8pt}
+table.t th{text-align:left;font-weight:700;color:var(--muted);font-size:7.2pt;text-transform:uppercase;letter-spacing:.05em;border-bottom:1.5px solid var(--line);padding:1.6mm 2mm}
+table.t td{border-bottom:1px solid var(--line);padding:1.6mm 2mm;vertical-align:top;line-height:1.35}
+table.t tr:last-child td{border-bottom:none}
+.num{font-size:22pt;font-weight:800;color:var(--ink);line-height:1}
+.tag-v{display:inline-flex;align-items:center;gap:1.5mm;font-weight:800;font-size:8pt;color:#fff;padding:1mm 2.5mm;border-radius:1.2mm}
+.vA{background:var(--accA)}.vB{background:var(--accB)}.vC{background:var(--accC)}
+.cA{color:var(--accA)}.cB{color:var(--accB)}.cC{color:var(--accC)}
+.bar{height:2.2mm;background:var(--gray);border-radius:2mm;overflow:hidden}.bar>i{display:block;height:100%;border-radius:2mm}
+.callout{display:flex;gap:2.5mm;padding:3mm 3.5mm;border-radius:2mm;font-size:8.6pt;line-height:1.45}
+.callout .ic{font-size:11pt;line-height:1}
+.c-blue{background:var(--blue)}.c-yellow{background:var(--yellow)}.c-green{background:var(--green)}.c-red{background:var(--red)}.c-gray{background:var(--soft)}.c-purple{background:var(--purple)}.c-orange{background:var(--orange)}
+.src{font-size:6.8pt;color:#9b9a97;line-height:1.35}
+
+/* ---------- Notion window mockup ---------- */
+.win{border:1px solid #dcdbd7;border-radius:2.5mm;overflow:hidden;background:#fff;box-shadow:0 1.5mm 5mm rgba(15,15,15,.08);display:flex;flex-direction:column}
+.win .top{height:6.5mm;background:#fbfbfa;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:2mm;padding:0 3mm;font-size:6.6pt;color:var(--muted)}
+.win .dots i{display:inline-block;width:1.8mm;height:1.8mm;border-radius:50%;background:#e2e1dd;margin-right:1mm}
+.win .body{display:flex;flex:1;min-height:0}
+.side{width:30mm;background:#fbfbfa;border-right:1px solid var(--line);padding:2.5mm 2mm;font-size:6.5pt;color:#5f5e5b;flex-shrink:0}
+.side .ws{font-weight:700;color:var(--ink);margin-bottom:2mm;font-size:7pt}
+.side .it{padding:.7mm 1mm;border-radius:1mm;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.side .it.on{background:#efeeeb;color:var(--ink);font-weight:600}
+.side .sec{margin:2mm 0 .6mm;font-size:5.8pt;font-weight:700;color:#a3a29e;text-transform:uppercase;letter-spacing:.06em}
+.main{flex:1;min-width:0;position:relative;overflow:hidden}
+.cover{height:13mm;background-size:cover;background-position:center}
+.pg{padding:0 6mm 4mm;position:relative}
+.pg .icon{font-size:17pt;margin-top:-6mm;line-height:1}
+.pg .title{font-size:13pt;font-weight:800;color:var(--ink);margin:1mm 0 1.6mm;letter-spacing:-.01em}
+.pg.noc .icon{margin-top:3mm}
+.navbar{display:flex;gap:1.2mm;flex-wrap:wrap;margin-bottom:2.2mm}
+.btn{font-size:6.3pt;font-weight:600;border:1px solid var(--line);border-radius:1.2mm;padding:.8mm 1.8mm;background:#fff;color:var(--text);white-space:nowrap}
+.btn.pri{background:#2383e2;color:#fff;border-color:#2383e2}
+.btn.dark{background:var(--ink);color:#fff;border-color:var(--ink)}
+.tabs{display:flex;gap:3mm;border-bottom:1px solid var(--line);margin-bottom:2mm;font-size:6.6pt;color:var(--muted)}
+.tabs span{padding:0 0 1mm}.tabs span.on{color:var(--ink);font-weight:700;border-bottom:1.5px solid var(--ink)}
+.blk{font-size:6.6pt;line-height:1.4}
+.h{font-size:8pt;font-weight:750;color:var(--ink);margin:1.8mm 0 1mm}
+.mini-call{display:flex;gap:1.5mm;padding:1.6mm 2mm;border-radius:1.4mm;font-size:6.4pt;line-height:1.35;margin-bottom:1.6mm}
+.cols{display:grid;gap:2.5mm}
+.vhead{font-size:6.6pt;font-weight:700;color:var(--ink);margin:1.4mm 0 1mm;display:flex;align-items:center;gap:1.2mm}
+.vhead .vt{font-weight:500;color:var(--muted)}
+/* board */
+.board{display:grid;gap:1.6mm}
+.col{background:#f7f6f3;border-radius:1.4mm;padding:1.2mm}
+.col .ch{font-size:5.9pt;font-weight:700;margin-bottom:1mm;display:flex;justify-content:space-between;color:#5f5e5b}
+.kc{background:#fff;border-radius:1.1mm;box-shadow:0 .2mm .6mm rgba(15,15,15,.12);padding:1.2mm 1.4mm;margin-bottom:1.1mm;font-size:5.9pt;line-height:1.3}
+.kc b{display:block;color:var(--ink);font-weight:650;margin-bottom:.5mm}
+.kc .pill{font-size:4.9pt;padding:.2mm 1mm}
+/* table */
+table.nt{width:100%;border-collapse:collapse;font-size:6pt}
+table.nt th{text-align:left;font-weight:500;color:var(--muted);border-bottom:1px solid var(--line);padding:.9mm 1.2mm;white-space:nowrap}
+table.nt td{border-bottom:1px solid var(--line);padding:.9mm 1.2mm;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:32mm}
+table.nt .pill{font-size:5pt;padding:.2mm 1mm;margin:0}
+/* gallery */
+.gal{display:grid;gap:1.8mm}
+.gc{border:1px solid var(--line);border-radius:1.4mm;overflow:hidden;font-size:6pt}
+.gc .gi{height:9mm;background-size:cover;background-position:center;display:flex;align-items:flex-end;padding:1mm;font-size:10pt}
+.gc .gt{padding:1mm 1.4mm;font-weight:650;color:var(--ink)}
+.gc .gm{padding:0 1.4mm 1.2mm;color:var(--muted);font-size:5.4pt}
+/* list */
+.li{display:flex;align-items:center;gap:1.4mm;font-size:6.3pt;padding:.9mm 0;border-bottom:1px solid #f1f1ef}
+.li .r{margin-left:auto;display:flex;gap:1mm}
+.li .pill{font-size:5pt;padding:.2mm 1mm;margin:0}
+.chk{width:2.3mm;height:2.3mm;border:1px solid #c7c6c2;border-radius:.5mm;display:inline-block;flex-shrink:0}
+.chk.on{background:#2383e2;border-color:#2383e2}
+.toggle{font-size:6.3pt;padding:.6mm 0}
+.toggle:before{content:"▸ ";color:var(--muted)}
+.toggle.open:before{content:"▾ "}
+.stat{border:1px solid var(--line);border-radius:1.4mm;padding:1.5mm 2mm}
+.stat .k{font-size:5.6pt;color:var(--muted)}.stat .v{font-size:11pt;font-weight:800;color:var(--ink);line-height:1.1}
+.chart{display:flex;align-items:flex-end;gap:1mm;height:13mm;padding-top:1mm}
+.chart i{flex:1;background:#9ec3e6;border-radius:.6mm .6mm 0 0}
+.heat{display:grid;grid-template-columns:repeat(21,1fr);gap:.5mm}
+.heat i{aspect-ratio:1;border-radius:.4mm;background:#ebedf0}
+.heat i.l1{background:#c6e48b}.heat i.l2{background:#7bc96f}.heat i.l3{background:#239a3b}
+.cal{display:grid;grid-template-columns:repeat(7,1fr);border-top:1px solid var(--line);border-left:1px solid var(--line)}
+.cal div{border-right:1px solid var(--line);border-bottom:1px solid var(--line);min-height:8.5mm;padding:.6mm;font-size:5pt;color:var(--muted)}
+.cal div .pill{font-size:4.6pt;padding:.1mm .8mm;display:block;margin:.4mm 0 0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ann{position:absolute;background:#ffe86b;color:#1f1e1b;font-size:6.6pt;font-weight:700;border-radius:50%;width:4.4mm;height:4.4mm;display:flex;align-items:center;justify-content:center;box-shadow:0 .4mm 1mm rgba(0,0,0,.2);z-index:5}
+.legend li{font-size:8pt;margin:.9mm 0}
+.legend b.n{display:inline-flex;background:#ffe86b;border-radius:50%;width:4.2mm;height:4.2mm;align-items:center;justify-content:center;font-size:6.6pt;margin-right:1.2mm}
+/* architecture diagram */
+.arch{position:relative}
+.db{border:1.5px solid;border-radius:2mm;padding:1.6mm 2.2mm;background:#fff;font-size:7pt;line-height:1.3}
+.db b{display:block;font-size:7.8pt;color:var(--ink)}
+.db span{color:var(--muted);font-size:6.2pt}
+.hl{background:linear-gradient(transparent 55%, #fff3a3 55%)}
+.score{display:flex;gap:.8mm}.score i{width:3mm;height:3mm;border-radius:50%;background:#e3e2de;display:inline-block}.score i.on{background:var(--ink)}
+code,.code{font-family:"DejaVu Sans Mono",monospace;font-size:7pt;background:#f4f3f0;border-radius:1mm;padding:.3mm 1mm;color:#c0392b}
+pre.code{display:block;white-space:pre-wrap;color:#37352f;padding:2mm 2.5mm;line-height:1.4;font-size:6.6pt}
+.ai{display:inline-flex;align-items:center;justify-content:center;background:#ffe86b;color:#1f1e1b;font-size:5.8pt;font-weight:800;border-radius:50%;width:3.6mm;height:3.6mm;margin-right:1mm;vertical-align:middle;box-shadow:0 .3mm .8mm rgba(0,0,0,.25);flex-shrink:0;font-style:normal;line-height:1}
+</style></head><body>
+<!-- ============ PORTADA ============ -->
+<section class="page" style="padding:0;background:#191919;color:#fff">
+  <div style="position:absolute;inset:0;background:radial-gradient(circle at 85% 20%,rgba(47,93,138,.55),transparent 45%),radial-gradient(circle at 70% 85%,rgba(107,79,158,.5),transparent 45%),radial-gradient(circle at 15% 90%,rgba(194,86,42,.35),transparent 40%)"></div>
+  <div style="position:relative;padding:22mm 22mm;height:100%;display:flex;flex-direction:column">
+    <div style="font-size:9pt;letter-spacing:.2em;text-transform:uppercase;color:#bdbdb8;font-weight:700">Rediseño · Sistema de estudio en Notion</div>
+    <div style="margin-top:20mm;font-size:46pt;font-weight:850;letter-spacing:-.035em;line-height:1">Gus OS<br><span style="color:#9fc1e3">3 versiones</span> para aprobar</div>
+    <div style="margin-top:8mm;font-size:13pt;color:#d6d5d0;max-width:170mm;line-height:1.5">Investigación de cómo están diseñados los mejores sistemas de Notion para estudiantes, y tres propuestas completas —con arquitectura, pantallas y flujos— para convertir Notion en tu segundo cerebro de estudio.</div>
+    <div style="margin-top:auto;display:flex;gap:4mm">
+      <div style="background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:3mm;padding:4mm 5mm;width:68mm">
+        <div class="tag-v vA">A</div><div style="font-weight:800;font-size:12pt;margin-top:2mm">Campus</div>
+        <div style="font-size:8.5pt;color:#c9c8c3;margin-top:1mm">Sistema académico completo: programas, sesiones, flashcards, evaluaciones y notas.</div></div>
+      <div style="background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:3mm;padding:4mm 5mm;width:68mm">
+        <div class="tag-v vB">B</div><div style="font-weight:800;font-size:12pt;margin-top:2mm">Segundo Cerebro Jurídico</div>
+        <div style="font-size:8.5pt;color:#c9c8c3;margin-top:1mm">Conocimiento conectado: conceptos, normas, jurisprudencia, fuentes y tesis.</div></div>
+      <div style="background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:3mm;padding:4mm 5mm;width:68mm">
+        <div class="tag-v vC">C</div><div style="font-weight:800;font-size:12pt;margin-top:2mm">Focus OS</div>
+        <div style="font-size:8.5pt;color:#c9c8c3;margin-top:1mm">Diseñado para TDA: una sola pantalla, energía, temporizador, XP y modo rescate.</div></div>
+    </div>
+    <div style="margin-top:7mm;font-size:8pt;color:#9e9d98">Preparado para Carlos Huarcaya · 11 de octubre de 2026 · Documento para aprobación — nada de esto está construido todavía</div>
+  </div>
+</section>
+
+<!-- ============ CONTENIDO ============ -->
+<section class="page">
+  <div class="kicker">Índice</div>
+  <h1 style="margin-bottom:7mm">Qué hay en este documento</h1>
+  <div class="grid g2" style="gap:8mm">
+    <div>
+      <table class="t" style="font-size:9.5pt">
+        <tr><td style="width:12mm" class="muted">01</td><td><b>Por qué la primera versión no sirvió</b><br><span class="muted small">Diagnóstico honesto de lo que entregué</span></td></tr>
+        <tr><td class="muted">02</td><td><b>Lo que hacen los mejores sistemas de Notion</b><br><span class="muted small">Ultimate Brain, Easlo, PPV, plantillas oficiales y de estudiantes de Derecho</span></td></tr>
+        <tr><td class="muted">03</td><td><b>Lo que Notion permite hoy (2026)</b><br><span class="muted small">Funciones avanzadas y qué incluye tu plan</span></td></tr>
+        <tr><td class="muted">04</td><td><b>Principios de diseño para ti</b><br><span class="muted small">Estudio con evidencia + TDA + Claude</span></td></tr>
+        <tr><td class="muted">05</td><td><b class="cA">Versión A — Campus</b><br><span class="muted small">Arquitectura, pantallas, flujos y fórmulas</span></td></tr>
+        <tr><td class="muted">06</td><td><b class="cB">Versión B — Segundo Cerebro Jurídico</b><br><span class="muted small">Arquitectura, pantallas, flujos y fórmulas</span></td></tr>
+        <tr><td class="muted">07</td><td><b class="cC">Versión C — Focus OS</b><br><span class="muted small">Arquitectura, pantallas, flujos y fórmulas</span></td></tr>
+        <tr><td class="muted">08</td><td><b>Comparación, recomendación y decisión</b><br><span class="muted small">Qué necesito que me apruebes</span></td></tr>
+      </table>
+    </div>
+    <div>
+      <div class="callout c-yellow" style="margin-bottom:4mm"><span class="ic">🧭</span><div><b>Cómo leer las maquetas.</b> Cada pantalla es un boceto fiel de cómo se verá en Notion: barra lateral, portada, botones, vistas de bases de datos. Los números amarillos <span style="display:inline-flex;background:#ffe86b;border-radius:50%;width:4mm;height:4mm;align-items:center;justify-content:center;font-size:6.5pt;font-weight:700">1</span> se explican al lado.</div></div>
+      <div class="callout c-blue" style="margin-bottom:4mm"><span class="ic">✅</span><div><b>Qué necesito de ti al final.</b> Elegir una versión (o una combinación) y responder 5 preguntas cortas. Con eso construyo la versión aprobada completa, con tus cursos reales y tus grabaciones de Fireflies migradas.</div></div>
+      <div class="callout c-gray"><span class="ic">💸</span><div><b>Costo.</b> Las tres versiones funcionan con tu plan actual de Notion y con Claude + Fireflies, que ya usas. Donde una función requiere un plan pago, lo marco con <span class="pill p-orange">Plus</span>.</div></div>
+    </div>
+  </div>
+  <div class="foot"><span>Gus OS · Propuesta de rediseño</span><span>2</span></div>
+</section>
+
+<!-- ============ 01 CRÍTICA ============ -->
+<section class="page">
+  <div class="kicker">01 · Diagnóstico</div>
+  <h1>Por qué la primera versión no sirvió</h1>
+  <p class="lead" style="margin:3mm 0 6mm;max-width:230mm">Construí 7 bases de datos conectadas y una página principal con listas. Técnicamente funcionaba, pero se veía y se sentía como una hoja de cálculo. Comparado con los sistemas de referencia, le faltaba casi todo lo que hace que Notion sea agradable de usar todos los días.</p>
+  <div class="grid g3">
+    <div class="card"><h3>😐 Diseño plano</h3><p>Sin portadas, sin columnas, sin pestañas, sin botones, sin jerarquía visual. Una lista debajo de otra. Los sistemas buenos usan <b>dashboards en columnas, galerías con portadas y barras de navegación</b>.</p></div>
+    <div class="card"><h3>🧭 Sin navegación</h3><p>No había un menú para moverse entre áreas ni páginas por programa. Un sistema serio tiene <b>Home, hubs por curso, página de examen y revisión semanal</b>, todos enlazados.</p></div>
+    <div class="card"><h3>🃏 Repaso por clase, no por tarjeta</h3><p>Repasar "la clase entera" es demasiado grueso. Los sistemas de estudio de verdad programan <b>cada pregunta como una tarjeta</b> con su propio calendario de repaso.</p></div>
+    <div class="card"><h3>🎓 Sin la parte académica</h3><p>No había evaluaciones, pesos, notas, promedio, sílabo, cronograma del ciclo ni cuenta regresiva a exámenes. Tampoco subdivisiones de cada programa.</p></div>
+    <div class="card"><h3>⚖️ Nada propio del Derecho</h3><p>Para un abogado en derecho financiero faltaban <b>normas, artículos, modificaciones, jurisprudencia/resoluciones SMV, fuentes y la tesis</b> como proyecto con capítulos.</p></div>
+    <div class="card"><h3>🧠 Poco pensado para TDA</h3><p>Faltaba lo que más ayuda: <b>una sola tarea visible, temporizador, nivel de energía, progreso visible (XP, rachas, gráficos) y un "modo rescate"</b> para días malos.</p></div>
+  </div>
+  <div class="callout c-green" style="margin-top:6mm"><span class="ic">↺</span><div><b>Qué cambia ahora:</b> primero investigué cómo diseñan sus sistemas los creadores más usados de Notion. Después diseñé tres versiones completas y las dibujé pantalla por pantalla, para que apruebes antes de construir. No toco tu Notion hasta que elijas.</div></div>
+  <div class="foot"><span>Gus OS · Propuesta de rediseño</span><span>3</span></div>
+</section>
+<!-- ============ 02 RESEARCH: SISTEMAS DE REFERENCIA ============ -->
+<section class="page">
+  <div class="kicker">02 · Investigación</div>
+  <h1>Lo que hacen los mejores sistemas de Notion</h1>
+  <p class="lead" style="margin:2mm 0 4mm;max-width:250mm">Revisé los sistemas más vendidos y mejor valorados para estudiantes y segundo cerebro, más plantillas de Derecho, TDA y gamificación. En cada uno anoto qué copiamos y en qué versión aparece.</p>
+  <div class="grid g3" style="gap:3.5mm">
+    <div class="card"><h4>🧠 Ultimate Brain 3.0 — Thomas Frank</h4><p class="small muted">US$129 · el sistema de pago más popular · ~3M suscriptores</p><p class="small">Una sola base de Notas con tipo (incluye <b>Clase</b>). Home orientado a la acción. Captura rápida → bandeja → procesar. Páginas "Mi día" y "Mi semana". Casilla <b>Archivado</b> en todo.</p><p class="small" style="margin-top:1mm"><b>Tomamos:</b> bandeja + procesar, Mi día, archivo. <span class="pill p-blue">A</span><span class="pill p-purple">B</span><span class="pill p-orange">C</span></p></div>
+    <div class="card"><h4>🎓 Student Dashboard — Easlo</h4><p class="small muted">4,8★ con más de 1 000 valoraciones en la galería de Notion</p><p class="small">Página por curso, tracker de tareas y exámenes, <b>calculadora de notas</b>, cuenta regresiva a eventos y <b>menú lateral</b> fijo. Diseño minimalista, propiedades escondidas.</p><p class="small" style="margin-top:1mm"><b>Tomamos:</b> hub por curso, notas ponderadas, menú lateral. <span class="pill p-blue">A</span><span class="pill p-purple">B</span></p></div>
+    <div class="card"><h4>🏛️ PPV — August Bradley</h4><p class="small muted">Inició el movimiento "Life OS" · potente pero exigente</p><p class="small">Pilares → Metas → Proyectos → Acciones. Separa la <b>fecha de hacer</b> de la <b>fecha límite</b>. Una sola "Zona de acción diaria" donde pasa la mayor parte del día.</p><p class="small" style="margin-top:1mm"><b>Tomamos:</b> fecha de hacer vs. límite, zona de acción única. <span class="pill p-purple">B</span><span class="pill p-orange">C</span></p></div>
+    <div class="card"><h4>📒 Student OS — Gridfiti</h4><p class="small muted">US$19 · 15+ plantillas integradas</p><p class="small">Cursos con <b>promedio ponderado</b> calculado desde las evaluaciones, cuaderno en formato <b>Cornell</b>, zona de estudio con flashcards y versiones "estética" y "minimal".</p><p class="small" style="margin-top:1mm"><b>Tomamos:</b> Cornell, promedio, flashcards. <span class="pill p-blue">A</span></p></div>
+    <div class="card"><h4>⚖️ Plantillas de Derecho</h4><p class="small muted">Galería oficial de Notion y estudiantes de Derecho</p><p class="small">Fichas de casos en formato <b>IRAC</b> (hechos, problema, regla, análisis, fallo) enlazadas a conceptos doctrinales. Las bases de <b>normas por artículo</b> casi no existen: <b>ahí podemos aportar algo propio.</b></p><p class="small" style="margin-top:1mm"><b>Tomamos:</b> fichas de jurisprudencia, mapa normativo. <span class="pill p-purple">B</span></p></div>
+    <div class="card"><h4>🔁 Repaso espaciado en Notion</h4><p class="small muted">Plantillas oficiales y de la comunidad</p><p class="small">Base de <b>tarjetas</b> con caja (Leitner), último repaso y fórmula de próximo repaso. Los <b>botones</b> "Sabía / No sabía" actualizan todo en un clic. Una vista de "difíciles" separa las tarjetas que hay que reescribir.</p><p class="small" style="margin-top:1mm"><b>Tomamos:</b> tarjetas con botones. <span class="pill p-blue">A</span><span class="pill p-purple">B</span><span class="pill p-orange">C</span></p></div>
+    <div class="card"><h4>🧩 Plantillas para TDA</h4><p class="small muted">ADHD Brain Manager · Your ADHD Mynd · ADHD Second Brain</p><p class="small">Volcado mental, tareas por <b>energía</b> y minutos, "primer paso mínimo", registro de logros, <b>menú de dopamina</b> y paneles de baja estimulación para días difíciles.</p><p class="small" style="margin-top:1mm"><b>Tomamos:</b> energía, primer paso, rescate. <span class="pill p-orange">C</span></p></div>
+    <div class="card"><h4>🎮 Gamificación — LiFE RPG y similares</h4><p class="small muted">Plantillas tipo videojuego</p><p class="small">XP por tarea, hábito y bloque de foco (p. ej. 10 XP por 25 min). Página de "jugador" que suma todo, niveles, <b>monedas</b> y tienda de recompensas.</p><p class="small" style="margin-top:1mm"><b>Tomamos:</b> XP, niveles, tienda. <span class="pill p-orange">C</span></p></div>
+    <div class="card"><h4>🎙️ Fireflies → Notion</h4><p class="small muted">Integración nativa (ayuda de Fireflies, jul 2026)</p><p class="small">Puede escribir cada reunión como <b>fila en una base de datos</b> de Notion: título, fecha, resumen, notas, acuerdos y link a la transcripción. Permite una plantilla de resumen personalizada ("Clase").</p><p class="small" style="margin-top:1mm"><b>Tomamos:</b> bandeja automática. <span class="pill p-blue">A</span><span class="pill p-purple">B</span><span class="pill p-orange">C</span></p></div>
+  </div>
+  <div class="foot"><span>Gus OS · Propuesta de rediseño</span><span>4</span></div>
+</section>
+
+<!-- ============ 02b PATRONES ============ -->
+<section class="page">
+  <div class="kicker">02 · Investigación</div>
+  <h1 style="margin-bottom:4mm">12 patrones que separan un sistema premium de uno básico</h1>
+  <div class="grid g4" style="gap:3.5mm">
+    <div class="card soft"><h4>1 · Una base por entidad</h4><p class="small">Cursos, clases, tarjetas, evaluaciones… cada una en su base y todas enlazadas. Nada de bases repetidas por curso: se filtra.</p></div>
+    <div class="card soft"><h4>2 · El curso como hub</h4><p class="small">La página de cada curso muestra en pestañas sus clases, evaluaciones, lecturas, tarjetas y conceptos.</p></div>
+    <div class="card soft"><h4>3 · Captura → procesar</h4><p class="small">Botones de captura en 1 clic. Todo cae en una bandeja que se vacía en la revisión semanal.</p></div>
+    <div class="card soft"><h4>4 · Una zona de acción</h4><p class="small">Una página donde ocurre el 90% del día: tareas de hoy, clases, repaso y próximo plazo.</p></div>
+    <div class="card soft"><h4>5 · Barras y cuentas regresivas</h4><p class="small">▰▰▰▱▱ de avance por curso, lectura y proyecto; chips de color con los días que faltan a cada examen.</p></div>
+    <div class="card soft"><h4>6 · Notas ponderadas</h4><p class="small">Peso × nota en cada evaluación; promedio por curso y "cuánto necesito" en la escala vigesimal de la PUCP.</p></div>
+    <div class="card soft"><h4>7 · Repaso por tarjeta</h4><p class="small">Cajas Leitner con botones. Separar las tarjetas difíciles para reescribirlas en vez de repetirlas.</p></div>
+    <div class="card soft"><h4>8 · Revisión semanal guiada</h4><p class="small">Una página semanal con preguntas, pendientes vencidos, próximas evaluaciones y horas de estudio.</p></div>
+    <div class="card soft"><h4>9 · Backend escondido</h4><p class="small">Las bases crudas van en una página "⚙️ Sistema". Tú solo ves vistas curadas, con pocas propiedades.</p></div>
+    <div class="card soft"><h4>10 · Navegación como producto</h4><p class="small">Menú lateral o barra superior repetida en cada página; enlaces de "← volver al curso".</p></div>
+    <div class="card soft"><h4>11 · Sistema visual estricto</h4><p class="small">2–5 colores fijos (uno por programa), íconos de un solo estilo y portadas coherentes.</p></div>
+    <div class="card soft"><h4>12 · Archivo y bienvenida</h4><p class="small">Casilla "archivado" para que lo viejo desaparezca sin borrarse, y una página "Empieza aquí" con guía.</p></div>
+  </div>
+  <div class="grid g2" style="gap:6mm;margin-top:5mm">
+    <div class="callout c-gray"><span class="ic">🎨</span><div><b>Paleta propuesta por programa</b> (se usa en etiquetas, portadas y callouts):<br>
+      <span class="pill p-purple" style="font-size:8pt">🎓 Maestría PUCP</span><span class="pill p-blue" style="font-size:8pt">⚖️ Derecho Societario</span><span class="pill p-pink" style="font-size:8pt">📱 Fórmula 100K</span><span class="pill p-red" style="font-size:8pt">🇬🇧 Inglés</span><span class="pill p-green" style="font-size:8pt">📈 Bolsa</span></div></div>
+    <div class="callout c-yellow"><span class="ic">⚠️</span><div class="small"><b>Sobre las fuentes:</b> la investigación se hizo con búsquedas web. No se pudieron abrir todas las páginas directamente, así que precios, planes y fórmulas se confirman al construir.</div></div>
+  </div>
+  <div class="foot"><span>Gus OS · Propuesta de rediseño</span><span>5</span></div>
+</section>
+
+<!-- ============ 03 NOTION 2026 ============ -->
+<section class="page">
+  <div class="kicker">03 · Herramienta</div>
+  <h1 style="margin-bottom:4mm">Lo que Notion permite hoy y en qué plan</h1>
+  <div class="grid" style="grid-template-columns:1.55fr 1fr;gap:6mm">
+    <table class="t">
+      <tr><th>Función</th><th>Para qué la usamos</th><th>Plan</th></tr>
+      <tr><td><b>Diseños de página de base de datos</b></td><td>Clases y cursos con propiedades fijadas y pestañas de relaciones</td><td><span class="pill p-green">Todos</span></td></tr>
+      <tr><td><b>Bloque de pestañas</b> (Notion 3.4, mar 2026)</td><td>Pantallas sin ruido: Ahora · Hoy · Estudio · Rescate</td><td><span class="pill p-gray">Por confirmar</span></td></tr>
+      <tr><td><b>Botones</b> (bloque y propiedad, con fórmulas)</td><td>Sabía / No sabía, Terminé, Nueva clase, Canjear premio</td><td><span class="pill p-green">Todos</span></td></tr>
+      <tr><td><b>Fórmulas 2.0</b></td><td>Próximo repaso, barras ▰▱, cuentas regresivas, rachas, XP, promedio</td><td><span class="pill p-green">Todos</span></td></tr>
+      <tr><td><b>Plantillas recurrentes</b></td><td>Fila diaria de hábitos y check-in, revisión semanal</td><td><span class="pill p-green">Todos</span></td></tr>
+      <tr><td><b>Formularios</b></td><td>Captura rápida y check-in desde el celular</td><td><span class="pill p-green">Todos</span></td></tr>
+      <tr><td><b>Automatizaciones de bases de datos</b></td><td>Al procesar una clase → fecha de repaso; tareas recurrentes</td><td><span class="pill p-orange">Plus</span></td></tr>
+      <tr><td><b>Gráficos</b></td><td>Horas por semana, tarjetas por caja, XP</td><td><span class="pill p-gray">Free: 1</span> <span class="pill p-orange">Plus: ilimitados</span></td></tr>
+      <tr><td><b>Bloques HTML</b> (3.6, jul 2026)</td><td>Temporizador pomodoro visual dentro de la página</td><td><span class="pill p-gray">Por confirmar</span></td></tr>
+      <tr><td><b>Notion Calendar</b></td><td>Bloques de tiempo con tus tareas y clases</td><td><span class="pill p-green">Gratis</span></td></tr>
+      <tr><td><b>Vista Dashboard</b> (3.4)</td><td>No la usamos: la reemplazamos con páginas y pestañas</td><td><span class="pill p-red">Business</span></td></tr>
+      <tr><td><b>Notion AI, Agent, agentes personalizados, AI Meeting Notes</b></td><td>No hace falta: Claude + Fireflies hacen ese trabajo</td><td><span class="pill p-red">Business</span></td></tr>
+      <tr><td><b>Notion Mail</b></td><td>— cerrado el 22 de septiembre de 2026</td><td><span class="pill p-gray">N/A</span></td></tr>
+    </table>
+    <div>
+      <div class="callout c-green" style="margin-bottom:4mm"><span class="ic">🎓</span><div><b>Hallazgo importante: plan Educación.</b> Notion da <b>Plus gratis</b> a estudiantes con correo universitario (no Gmail), con verificación anual. Con un correo <b>@pucp.edu.pe</b> probablemente calificas. Eso desbloquea automatizaciones, gráficos ilimitados y archivos grandes <b>sin pagar</b>. Lo verificamos juntos.</div></div>
+      <div class="callout c-blue" style="margin-bottom:4mm"><span class="ic">🤖</span><div><b>Claude en lugar de Notion AI.</b> Claude ya está conectado a tu Notion, a Fireflies, a Drive y a tu calendario. Procesa clases, crea tarjetas, arma planes de examen y cierra la semana, y puede hacerlo con <b>rutinas programadas</b>. No necesitas el plan Business (US$20–24/mes).</div></div>
+      <div class="callout c-gray"><span class="ic">🗂️</span><div class="small"><b>Archivos pesados en Drive.</b> PDFs, sílabos y grabaciones se quedan en Google Drive con una carpeta por curso; en Notion va el link con vista previa.</div></div>
+    </div>
+  </div>
+  <div class="foot"><span>Gus OS · Propuesta de rediseño</span><span>6</span></div>
+</section>
+
+<!-- ============ 04 PRINCIPIOS ============ -->
+<section class="page">
+  <div class="kicker">04 · Diseño</div>
+  <h1 style="margin-bottom:2mm">Principios de diseño para ti</h1>
+  <p class="lead" style="margin-bottom:4mm">Las tres versiones respetan estos 8 principios. Lo que cambia entre ellas es dónde ponen el centro.</p>
+  <div class="grid g4" style="gap:3.5mm">
+    <div class="card"><div style="font-size:16pt">🚪</div><h4>Una sola puerta</h4><p class="small">Una página de inicio que te dice qué hacer. Nunca tienes que buscar ni decidir por dónde empezar.</p></div>
+    <div class="card"><div style="font-size:16pt">🃏</div><h4>Recordar, no releer</h4><p class="small">Cada clase produce preguntas y tarjetas. Releer el resumen no cuenta como estudiar (Dunlosky 2013; Roediger y Karpicke 2006).</p></div>
+    <div class="card"><div style="font-size:16pt">🤖</div><h4>Claude hace lo pesado</h4><p class="small">Fireflies graba, Claude procesa y ordena. Tu parte se reduce a decir "procesa la clase" y a repasar.</p></div>
+    <div class="card"><div style="font-size:16pt">👀</div><h4>Visible y con límites</h4><p class="small">Kanban con máximo 7 / 3 / 1. Lo importante está a la vista, lo demás escondido (Barkley, punto de desempeño).</p></div>
+    <div class="card"><div style="font-size:16pt">🔗</div><h4>Conectado, no duplicado</h4><p class="small">Cada cosa vive en un solo lugar y aparece donde se necesita mediante vistas enlazadas.</p></div>
+    <div class="card"><div style="font-size:16pt">📈</div><h4>Progreso que se ve</h4><p class="small">Barras, rachas, gráficos y cuentas regresivas. Ver el avance motiva más que cualquier plan.</p></div>
+    <div class="card"><div style="font-size:16pt">🎨</div><h4>Bonito y coherente</h4><p class="small">Portadas, íconos, colores por programa, columnas y pestañas. Si da gusto abrirlo, lo abres.</p></div>
+    <div class="card"><div style="font-size:16pt">🫶</div><h4>Perdona los días malos</h4><p class="small">Rachas con un día de gracia, modo rescate y archivo sin culpa. El sistema se adapta a ti, no al revés.</p></div>
+  </div>
+  <div class="callout c-yellow" style="margin-top:5mm"><span class="ic">🔄</span><div><b>Flujo común a las tres versiones:</b> clase en vivo → Fireflies graba y escribe en Notion → <i>"Claude, procesa la clase"</i> → resumen + preguntas + tarjetas + conceptos + tareas → repaso espaciado → examen / tesis / trabajo.</div></div>
+  <div class="foot"><span>Gus OS · Propuesta de rediseño</span><span>7</span></div>
+</section>
+<!-- ===================== VERSIÓN A — CAMPUS ===================== -->
+<section class="page" style="background:linear-gradient(135deg,#eef4fa 0%,#fff 55%)">
+  <div style="display:flex;align-items:center;gap:3mm"><span class="tag-v vA">VERSIÓN A</span><span class="kicker" style="margin:0">Sistema académico completo</span></div>
+  <h1 style="margin:3mm 0 2mm" class="cA">Campus</h1>
+  <p class="lead" style="max-width:250mm">Notion se convierte en tu universidad personal. Cada programa tiene su hub con cursos, cronograma, evaluaciones y notas. Cada clase se procesa en una página Cornell, y <b>cada pregunta es una tarjeta</b> con su propio calendario de repaso. Toma la estructura de los mejores "Student OS" y la lleva a un nivel de posgrado.</p>
+  <div class="grid" style="grid-template-columns:168mm 1fr;gap:7mm;margin-top:5mm">
+    <div class="card" style="padding:4mm;background:#fff">
+      <h4 style="margin-bottom:2mm">Arquitectura · 11 bases de datos conectadas</h4>
+      <div class="arch" style="width:158mm;height:112mm;position:relative">
+        <svg width="158mm" height="112mm" viewBox="0 0 158 112" style="position:absolute;inset:0">
+          <g stroke="#9db6cf" stroke-width=".5" fill="none"><line x1="22" y1="7" x2="22" y2="38"/><line x1="22" y1="38" x2="62" y2="53"/><line x1="22" y1="38" x2="103" y2="18"/><line x1="22" y1="38" x2="22" y2="68"/><line x1="62" y1="53" x2="140" y2="53"/><line x1="103" y1="18" x2="62" y2="53"/><line x1="103" y1="18" x2="140" y2="18"/><line x1="140" y1="18" x2="103" y2="53"/><line x1="62" y1="53" x2="62" y2="84"/><line x1="62" y1="53" x2="103" y2="84"/><line x1="103" y1="84" x2="140" y2="84"/><line x1="22" y1="68" x2="62" y2="84"/></g>
+        </svg>
+        <div class="db" style="position:absolute;left:2mm;top:3mm;width:40mm;border-color:#7aa3c9"><b>🎓 Programas</b><span>5 · color, ciclo, avance %</span></div>
+        <div class="db" style="position:absolute;left:2mm;top:33mm;width:40mm;border-color:#7aa3c9"><b>📘 Cursos / módulos</b><span>sílabo, profesor, horario, nota ponderada</span></div>
+        <div class="db" style="position:absolute;left:42mm;top:48mm;width:40mm;border-color:#2f5d8a;background:#f2f7fc"><b>🗓️ Sesiones (clases)</b><span>pipeline, Fireflies, comprensión 1–5</span></div>
+        <div class="db" style="position:absolute;left:84mm;top:48mm;width:38mm;border-color:#2f5d8a;background:#f2f7fc"><b>🃏 Tarjetas</b><span>caja Leitner, próximo repaso</span></div>
+        <div class="db" style="position:absolute;left:124mm;top:48mm;width:32mm;border-color:#7aa3c9"><b>🧠 Conceptos</b><span>glosario enlazado</span></div>
+        <div class="db" style="position:absolute;left:84mm;top:14mm;width:38mm;border-color:#7aa3c9"><b>📝 Evaluaciones</b><span>peso %, nota, cuenta regresiva</span></div>
+        <div class="db" style="position:absolute;left:124mm;top:14mm;width:32mm;border-color:#7aa3c9"><b>✅ Tareas</b><span>Kanban + energía</span></div>
+        <div class="db" style="position:absolute;left:2mm;top:64mm;width:40mm;border-color:#7aa3c9"><b>📚 Lecturas</b><span>páginas leídas → barra</span></div>
+        <div class="db" style="position:absolute;left:42mm;top:80mm;width:40mm;border-color:#7aa3c9"><b>🔗 Recursos</b><span>YouTube, Drive, web, PDFs</span></div>
+        <div class="db" style="position:absolute;left:84mm;top:80mm;width:38mm;border-color:#7aa3c9"><b>🍅 Registro de estudio</b><span>minutos por curso → gráficos</span></div>
+        <div class="db" style="position:absolute;left:124mm;top:80mm;width:32mm;border-color:#7aa3c9"><b>🔥 Diario</b><span>hábitos + racha</span></div>
+        <div class="db" style="position:absolute;left:2mm;top:94mm;width:40mm;border-style:dashed;border-color:#b9b8b3"><b>📄 Páginas</b><span>Campus · Hub por programa · Modo examen · Analítica · Revisión semanal</span></div>
+      </div>
+    </div>
+    <div>
+      <h3>Para quién es</h3>
+      <p>Para cuando lo principal es <b>aprobar y dominar tus cursos</b>: ordenar cada programa con sus subdivisiones, no perder entregas, llegar preparado a los exámenes y recordar lo estudiado meses después.</p>
+      <h3 style="margin-top:4mm">Qué la hace distinta</h3>
+      <ul>
+        <li><b>Jerarquía real:</b> Programa → Curso → Sesión → Tarjeta.</li>
+        <li><b>Repaso por tarjeta</b> con cajas Leitner (1→5) y botones <i>Sabía / Dudé / No sabía</i> que reprograman solos.</li>
+        <li><b>Notas y promedios:</b> peso de cada evaluación, aporte a la nota final y promedio por curso y por programa.</li>
+        <li><b>Modo examen:</b> temario, tarjetas pendientes, plan de estudio hacia atrás y simulacros con Claude.</li>
+        <li><b>Analítica:</b> horas de estudio por semana y por curso, tarjetas repasadas y racha.</li>
+      </ul>
+      <div class="grid g2" style="margin-top:4mm;gap:3mm">
+        <div class="stat"><div class="k">Bases de datos</div><div class="v">11</div></div>
+        <div class="stat"><div class="k">Pantallas principales</div><div class="v">5</div></div>
+        <div class="stat"><div class="k">Tu tiempo diario</div><div class="v">20–30 min</div></div>
+        <div class="stat"><div class="k">Complejidad</div><div class="v"><div class="score"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></div></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span>Versión A · Campus</span><span>A1</span></div>
+</section>
+
+<!-- A2: HOME CAMPUS -->
+<section class="page">
+  <div style="display:flex;align-items:center;gap:3mm;margin-bottom:3mm"><span class="tag-v vA">A</span><h2 style="margin:0">Pantalla principal: <span class="cA">Campus</span></h2></div>
+  <div class="grid" style="grid-template-columns:205mm 1fr;gap:5mm">
+    <div class="win" style="height:172mm;position:relative">
+      <div class="top"><span class="dots"><i></i><i></i><i></i></span><span>Gus OS / 🏛️ Campus</span><span style="margin-left:auto">Compartir · ⭐</span></div>
+      <div class="body">
+        <div class="side">
+          <div class="ws">🧠 Gus OS</div>
+          <div class="it on">🏛️ Campus</div><div class="it">🔁 Repaso</div><div class="it">✅ Tareas</div><div class="it">📊 Analítica</div><div class="it">🗓️ Revisión semanal</div>
+          <div class="sec">Programas</div>
+          <div class="it">🎓 Maestría PUCP</div><div class="it">⚖️ Derecho Societario</div><div class="it">📱 Fórmula 100K</div><div class="it">🇬🇧 Inglés</div><div class="it">📈 Bolsa de Valores</div>
+          <div class="sec">Biblioteca</div>
+          <div class="it">🃏 Tarjetas</div><div class="it">🧠 Conceptos</div><div class="it">📚 Lecturas</div><div class="it">🔗 Recursos</div><div class="it">📝 Evaluaciones</div>
+        </div>
+        <div class="main">
+          <div class="cover" style="background:linear-gradient(120deg,#1e3a5f,#2f5d8a 45%,#7fb0dc)"></div>
+          <div class="pg">
+            <div class="icon">🏛️</div>
+            <div class="title">Campus</div>
+            <div class="navbar"><i class="ai">1</i><span class="btn pri">➕ Nueva clase</span><span class="btn">⚡ Captura rápida</span><span class="btn dark">🔁 Repasar (23)</span><span class="btn">🍅 Registrar pomodoro</span><span class="btn">📝 Nueva evaluación</span></div>
+            <div class="mini-call c-blue"><i class="ai">2</i><span>☀️</span><div><b>Buenos días, Carlos.</b> Sábado 11 de octubre · Semana 9 del ciclo. Próximo hito: <b>Parcial de Contratos Bancarios en 9 días</b> (25% de la nota).</div></div>
+            <div class="cols" style="grid-template-columns:1.05fr 1fr 1fr">
+              <div>
+                <div class="vhead">⭐ Hoy <span class="vt">· 3 de 3</span></div>
+                <div class="li"><span class="chk"></span>🐸 Escribir 3 párrafos cap. 2 tesis<span class="r"><span class="pill p-green">Rana</span></span></div>
+                <div class="li"><span class="chk"></span>Leer art. 5–12 LMV<span class="r"><span class="pill p-purple">MV</span></span></div>
+                <div class="li"><span class="chk on"></span><s class="muted">Subir video TikTok tarea 2</s><span class="r"><span class="pill p-pink">100K</span></span></div>
+                <div class="vhead" style="margin-top:2mm">🗓️ Clases de hoy</div>
+                <div class="li">🟣 19:00 · Regulación MV · S10<span class="r"><span class="pill p-gray">Zoom</span></span></div>
+                <div class="li">🔵 21:00 · Fórmula 100K · Clase 6<span class="r"><span class="pill p-gray">Meet</span></span></div>
+              </div>
+              <div>
+                <div class="vhead"><i class="ai">3</i>🔁 Repaso de hoy</div>
+                <div class="grid g2" style="gap:1.5mm;margin-bottom:1.5mm"><div class="stat"><div class="k">Tarjetas</div><div class="v">23</div></div><div class="stat"><div class="k">Tiempo est.</div><div class="v">14′</div></div></div>
+                <div class="li">🎓 Mercado de Valores<span class="r"><span class="pill p-red">9</span></span></div>
+                <div class="li">🎓 Contratos Bancarios<span class="r"><span class="pill p-orange">7</span></span></div>
+                <div class="li">⚖️ Societario<span class="r"><span class="pill p-yellow">4</span></span></div>
+                <div class="li">📱 TikTok Ads<span class="r"><span class="pill p-blue">3</span></span></div>
+              </div>
+              <div>
+                <div class="vhead"><i class="ai">4</i>📝 Próximas evaluaciones</div>
+                <div class="li">Parcial · Contratos Banc.<span class="r"><span class="pill p-red">9 días</span><span class="pill p-gray">25%</span></span></div>
+                <div class="li">Avance tesis cap. 2<span class="r"><span class="pill p-orange">16 días</span><span class="pill p-gray">30%</span></span></div>
+                <div class="li">Exposición · Societario<span class="r"><span class="pill p-yellow">23 días</span><span class="pill p-gray">20%</span></span></div>
+                <div class="vhead" style="margin-top:2mm">📈 Esta semana</div>
+                <div class="grid g3" style="gap:1.2mm"><div class="stat"><div class="k">Estudio</div><div class="v" style="font-size:8.5pt">6h 40′</div></div><div class="stat"><div class="k">Tarjetas</div><div class="v" style="font-size:8.5pt">142</div></div><div class="stat"><div class="k">Racha</div><div class="v" style="font-size:8.5pt">🔥 5</div></div></div>
+                <div class="chart" style="height:9mm"><i style="height:40%"></i><i style="height:65%"></i><i style="height:30%"></i><i style="height:85%"></i><i style="height:55%"></i><i style="height:20%;background:#d7e6f3"></i><i style="height:0"></i></div>
+              </div>
+            </div>
+            <div class="tabs" style="margin-top:3mm"><i class="ai">5</i><span class="on">🎓 Maestría</span><span>⚖️ Societario</span><span>📱 Fórmula 100K</span><span>🇬🇧 Inglés</span><span>📈 Bolsa</span></div>
+            <div class="gal" style="grid-template-columns:repeat(4,1fr)">
+              <div class="gc"><div class="gi" style="background:linear-gradient(135deg,#6b4f9e,#a98bd6)">🏦</div><div class="gt">Regulación del MV</div><div class="gm">Avance 9/14 <div class="bar"><i style="width:64%;background:#9065b0"></i></div>Nota 16.5</div></div>
+              <div class="gc"><div class="gi" style="background:linear-gradient(135deg,#2f5d8a,#7fb0dc)">📑</div><div class="gt">Contratos Bancarios</div><div class="gm">Avance 8/14 <div class="bar"><i style="width:57%;background:#337ea9"></i></div>Nota 15.0</div></div>
+              <div class="gc"><div class="gi" style="background:linear-gradient(135deg,#448361,#9fd1b2)">🔬</div><div class="gt">Seminario de Investigación II</div><div class="gm">Tesis 40% <div class="bar"><i style="width:40%;background:#448361"></i></div>Nota —</div></div>
+              <div class="gc"><div class="gi" style="background:linear-gradient(135deg,#c2562a,#f2b58e)">🧾</div><div class="gt">Tributación Financiera</div><div class="gm">Avance 5/12 <div class="bar"><i style="width:42%;background:#d9730d"></i></div>Nota 17.0</div></div>
+            </div>
+            <div class="cols" style="grid-template-columns:1fr 1fr 1fr;margin-top:3mm">
+              <div><div class="vhead"><i class="ai">6</i>📥 Bandeja de captura <span class="vt">· sin procesar</span></div>
+                <div class="li">🎙️ Fireflies · Regulación MV S09<span class="r"><span class="pill p-gray">clase</span></span></div>
+                <div class="li">🔗 Video: Análisis técnico básico<span class="r"><span class="pill p-red">YouTube</span></span></div>
+                <div class="li">💡 Idea: comparar OPA Perú vs Chile<span class="r"><span class="pill p-yellow">tesis</span></span></div></div>
+              <div><div class="vhead">📚 Lecturas en curso</div>
+                <div class="li">LMV comentada · cap. 4<span class="r"><span class="pill p-blue">62%</span></span></div>
+                <div class="li">Paper: fondos de inversión<span class="r"><span class="pill p-blue">30%</span></span></div>
+                <div class="li">Oxford Legal English U3<span class="r"><span class="pill p-blue">80%</span></span></div></div>
+              <div><div class="vhead">🔥 Hábitos de hoy</div>
+                <div class="li"><span class="chk on"></span>📖 Estudié 25 min</div><div class="li"><span class="chk on"></span>🔁 Repasé tarjetas</div><div class="li"><span class="chk"></span>🇬🇧 Inglés 15 min</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <ul class="legend" style="list-style:none;padding:0">
+        <li><b class="n">1</b><b>Botones de acción.</b> Crean una clase, una captura o una evaluación con la plantilla correcta en un clic. "Repasar" abre la cola del día.</li>
+        <li><b class="n">2</b><b>Saludo dinámico.</b> Te dice en qué semana del ciclo estás y cuál es el próximo hito, con cuenta regresiva y peso en la nota.</li>
+        <li><b class="n">3</b><b>Repaso del día.</b> Cuántas tarjetas tocan, agrupadas por curso, con tiempo estimado. Se calcula solo.</li>
+        <li><b class="n">4</b><b>Evaluaciones y métricas.</b> Semáforo de días restantes; horas, tarjetas y racha de la semana con mini gráfico.</li>
+        <li><b class="n">5</b><b>Pestañas por programa.</b> Cada pestaña muestra los cursos de ese programa como tarjetas con portada, avance y nota actual.</li><li><b class="n">6</b><b>Bandeja de captura.</b> Lo que llega de Fireflies, links y ideas sueltas, esperando que Claude lo procese y lo ubique.</li>
+      </ul>
+      <div class="callout c-gray" style="margin-top:4mm"><span class="ic">📱</span><div class="small">En el celular la página se lee de arriba hacia abajo: botones → hoy → repaso. Las columnas se apilan solas.</div></div>
+      <div class="callout c-yellow" style="margin-top:3mm"><span class="ic">ℹ️</span><div class="small">Nombres de cursos, notas y fechas son <b>ejemplos</b>. Se reemplazan por tus cursos reales al construir.</div></div>
+    </div>
+  </div>
+  <div class="foot"><span>Versión A · Campus</span><span>A2</span></div>
+</section>
+
+<!-- A3: HUB DE PROGRAMA -->
+<section class="page">
+  <div style="display:flex;align-items:center;gap:3mm;margin-bottom:3mm"><span class="tag-v vA">A</span><h2 style="margin:0">Hub de programa: <span class="cA">Maestría PUCP</span></h2></div>
+  <div class="grid" style="grid-template-columns:205mm 1fr;gap:5mm">
+    <div class="win" style="height:160mm;position:relative">
+      <div class="top"><span class="dots"><i></i><i></i><i></i></span><span>Gus OS / Programas / 🎓 Maestría PUCP</span></div>
+      <div class="body">
+        <div class="main">
+          <div class="cover" style="background:linear-gradient(120deg,#3b2a63,#6b4f9e 50%,#c3aee6)"></div>
+          <div class="pg">
+            <div class="icon">🎓</div>
+            <div class="title">Maestría en Derecho Financiero — PUCP</div>
+            <div style="display:flex;gap:4mm;font-size:6.3pt;color:var(--muted);margin-bottom:2mm;align-items:center"><i class="ai">1</i><span>📅 Ciclo 2026-2</span><span>📘 4 cursos</span><span>🧮 Promedio <b style="color:var(--ink)">16.2</b></span><span>📈 Avance <b style="color:var(--ink)">58%</b></span><span>📂 Carpeta Drive</span><span>🔗 Campus Virtual</span></div>
+            <div class="bar" style="margin-bottom:2.5mm"><i style="width:58%;background:#6b4f9e"></i></div>
+            <div class="navbar"><i class="ai">2</i><span class="btn pri">➕ Nueva sesión</span><span class="btn">📝 Nueva evaluación</span><span class="btn">📚 Nueva lectura</span><span class="btn">🧪 Modo examen</span></div>
+            <div class="tabs"><i class="ai">3</i><span class="on">📘 Cursos</span><span>🗓️ Cronograma</span><span>📝 Evaluaciones</span><span>🃏 Tarjetas</span><span>📚 Lecturas</span><span>🧠 Conceptos</span></div>
+            <table class="nt" style="margin-bottom:2.5mm">
+              <tr><th>Curso</th><th>Profesor</th><th>Horario</th><th>Sesiones</th><th>Avance</th><th>Nota actual</th><th>Tarjetas hoy</th></tr>
+              <tr><td>🏦 Regulación del Mercado de Valores</td><td><span class="muted">por cargar</span></td><td>Mar 19:00</td><td>9 / 14</td><td><div class="bar" style="width:18mm"><i style="width:64%;background:#9065b0"></i></div></td><td>16.5</td><td><span class="pill p-red">9</span></td></tr>
+              <tr><td>📑 Contratos Bancarios</td><td><span class="muted">por cargar</span></td><td>Jue 19:00</td><td>8 / 14</td><td><div class="bar" style="width:18mm"><i style="width:57%;background:#337ea9"></i></div></td><td>15.0</td><td><span class="pill p-orange">7</span></td></tr>
+              <tr><td>🔬 Seminario de Investigación II</td><td><span class="muted">por cargar</span></td><td>Sáb 10:00</td><td>6 / 10</td><td><div class="bar" style="width:18mm"><i style="width:60%;background:#448361"></i></div></td><td>—</td><td><span class="pill p-gray">0</span></td></tr>
+              <tr><td>🧾 Tributación Financiera</td><td><span class="muted">por cargar</span></td><td>Lun 19:00</td><td>5 / 12</td><td><div class="bar" style="width:18mm"><i style="width:42%;background:#d9730d"></i></div></td><td>17.0</td><td><span class="pill p-yellow">4</span></td></tr>
+            </table>
+            <div class="cols" style="grid-template-columns:1.25fr 1fr">
+              <div>
+                <div class="vhead"><i class="ai">4</i>📝 Evaluaciones del ciclo <span class="vt">· tabla</span></div>
+                <table class="nt">
+                  <tr><th>Evaluación</th><th>Curso</th><th>Fecha</th><th>Peso</th><th>Nota</th><th>Aporte</th></tr>
+                  <tr><td>Control de lectura 1</td><td>Regulación MV</td><td>02 sep</td><td>15%</td><td>17</td><td>2.55</td></tr>
+                  <tr><td>Parcial</td><td>Contratos Banc.</td><td><span class="pill p-red">20 oct</span></td><td>25%</td><td>—</td><td>—</td></tr>
+                  <tr><td>Avance cap. 2</td><td>Seminario II</td><td><span class="pill p-orange">27 oct</span></td><td>30%</td><td>—</td><td>—</td></tr>
+                  <tr><td>Trabajo grupal</td><td>Tributación</td><td>15 sep</td><td>20%</td><td>17</td><td>3.40</td></tr>
+                </table>
+              </div>
+              <div>
+                <div class="vhead"><i class="ai">5</i>🗓️ Cronograma <span class="vt">· calendario</span></div>
+                <div class="cal">
+                  <div>13<span class="pill p-purple">MV S10</span></div><div>14</div><div>15<span class="pill p-blue">CB S9</span></div><div>16</div><div>17</div><div>18<span class="pill p-green">Seminario</span></div><div>19</div>
+                  <div>20<span class="pill p-red">Parcial CB</span></div><div>21</div><div>22<span class="pill p-blue">CB S10</span></div><div>23</div><div>24</div><div>25</div><div>26</div>
+                </div>
+              </div>
+            </div>
+            <div class="cols" style="grid-template-columns:1.25fr 1fr;margin-top:3mm">
+              <div><div class="vhead"><i class="ai">6</i>📚 Lecturas obligatorias <span class="vt">· galería</span></div>
+                <div class="gal" style="grid-template-columns:repeat(3,1fr)">
+                  <div class="gc"><div class="gi" style="height:6mm;background:linear-gradient(135deg,#e7f3f8,#b9d9ea)">📘</div><div class="gt">TUO Ley del MV</div><div class="gm">120/310 pág.<div class="bar"><i style="width:39%;background:#337ea9"></i></div></div></div>
+                  <div class="gc"><div class="gi" style="height:6mm;background:linear-gradient(135deg,#f6f3f9,#d8c9ec)">📄</div><div class="gt">Contratos bancarios — manual</div><div class="gm">45/180 pág.<div class="bar"><i style="width:25%;background:#9065b0"></i></div></div></div>
+                  <div class="gc"><div class="gi" style="height:6mm;background:linear-gradient(135deg,#edf3ec,#bcdcc5)">📑</div><div class="gt">Guía APA para tesis</div><div class="gm">Completa<div class="bar"><i style="width:100%;background:#448361"></i></div></div></div>
+                </div></div>
+              <div><div class="vhead"><i class="ai">7</i>🧠 Conceptos del programa <span class="vt">· 86</span></div>
+                <div><span class="pill p-gray">OPA</span><span class="pill p-gray">Hecho de importancia</span><span class="pill p-gray">RPMV</span><span class="pill p-gray">Inversionista institucional</span><span class="pill p-gray">Fideicomiso de titulización</span><span class="pill p-gray">SAF</span><span class="pill p-gray">Leasing</span><span class="pill p-gray">Factoring</span><span class="pill p-gray">Información privilegiada</span><span class="pill p-gray">Encaje</span><span class="pill p-gray">+76</span></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <ul class="legend" style="list-style:none;padding:0">
+        <li><b class="n">1</b><b>Ficha del programa.</b> Ciclo, número de cursos, promedio ponderado y avance general, calculados con fórmulas. Accesos a Drive y al campus virtual.</li>
+        <li><b class="n">2</b><b>Acciones del programa.</b> Crean páginas ya ligadas a este programa. "Modo examen" abre la página de preparación.</li>
+        <li><b class="n">3</b><b>Subdivisiones.</b> Cada curso de la maestría con profesor, horario, sesiones vistas, barra de avance, nota actual y tarjetas pendientes.</li>
+        <li><b class="n">4</b><b>Evaluaciones y notas.</b> Peso × nota = aporte. La suma da tu nota proyectada y lo que te falta para aprobar.</li>
+        <li><b class="n">5</b><b>Cronograma del ciclo.</b> Clases y evaluaciones en calendario. Se puede sincronizar con Notion Calendar y Google Calendar.</li>
+      </ul>
+      <ul class="legend" style="list-style:none;padding:0;margin-top:-1mm"><li><b class="n">6</b><b>Lecturas con avance.</b> Páginas leídas sobre el total, con link al PDF en Drive.</li><li><b class="n">7</b><b>Glosario del programa.</b> Todos los conceptos que aparecieron en sus clases.</li></ul><div class="callout c-purple" style="margin-top:3mm"><span class="ic">♻️</span><div class="small">Este mismo hub se repite para <b>Derecho Societario, Fórmula 100K, Inglés y Bolsa</b>. Es una sola plantilla: al crear un programa nuevo aparece listo.</div></div>
+    </div>
+  </div>
+  <div class="foot"><span>Versión A · Campus</span><span>A3</span></div>
+</section>
+
+<!-- A4: SESIÓN + TARJETA -->
+<section class="page">
+  <div style="display:flex;align-items:center;gap:3mm;margin-bottom:3mm"><span class="tag-v vA">A</span><h2 style="margin:0">Página de clase (Cornell), <span class="cA">tarjeta y cola de repaso</span></h2></div>
+  <div class="grid" style="grid-template-columns:148mm 1fr;gap:5mm">
+    <div>
+      <div class="win" style="height:136mm">
+        <div class="top"><span class="dots"><i></i><i></i><i></i></span><span>Maestría PUCP / Regulación MV / 🗓️ S07</span></div>
+        <div class="body"><div class="main">
+          <div class="pg noc" style="padding-top:1mm">
+            <div class="icon">⚖️</div>
+            <div class="title">S07 · Oferta pública vs. oferta privada</div>
+            <div style="display:flex;gap:1.2mm;flex-wrap:wrap;margin-bottom:2mm;align-items:center"><i class="ai">1</i><span class="pill p-purple">🏦 Regulación MV</span><span class="pill p-gray">📅 06 may 2026</span><span class="pill p-blue">🤖 Procesada</span><span class="pill p-yellow">Confianza 🟡</span><span class="pill p-gray">🃏 8 tarjetas</span><span class="pill p-gray">🎙️ Fireflies</span></div>
+            <div class="tabs"><i class="ai">2</i><span class="on">📄 Clase</span><span>🃏 Tarjetas (8)</span><span>🎙️ Transcripción</span><span>❓ Dudas para el profe</span><span>🔗 Fuentes</span></div>
+            <div class="cols" style="grid-template-columns:38mm 1fr;gap:2mm">
+              <div style="background:#fbf3db;border-radius:1.4mm;padding:1.6mm">
+                <div class="h" style="margin-top:0"><i class="ai">3</i>❓ Preguntas clave</div>
+                <div class="blk">· ¿Qué hace "pública" una oferta según la LMV?<br>· ¿Qué excepciones permiten la oferta privada?<br>· ¿Quién supervisa cada una?<br>· ¿Qué es un inversionista institucional?<br>· ¿Qué riesgo corre el emisor si se equivoca?</div>
+              </div>
+              <div>
+                <div class="h" style="margin-top:0">✍️ Notas</div>
+                <div class="blk"><b>Oferta pública:</b> invitación al público en general o a segmentos para adquirir valores → requiere inscripción en el RPMV y prospecto.<br><b>Oferta privada:</b> dirigida a inversionistas institucionales o a menos de 100 personas…<br><span class="muted">[captura de diapositiva 12]</span></div>
+                <div style="height:11mm;border-radius:1.2mm;background:repeating-linear-gradient(45deg,#f1f1ef,#f1f1ef 2mm,#e9e9e7 2mm,#e9e9e7 4mm);margin-top:1.2mm;display:flex;align-items:center;justify-content:center;font-size:5.6pt;color:var(--muted)">🖼️ diapositivas de la clase</div>
+              </div>
+            </div>
+            <div class="mini-call c-blue" style="margin-top:2mm"><i class="ai">4</i><span>🧾</span><div><b>Resumen en 5 líneas:</b> la frontera entre oferta pública y privada define si hay supervisión de la SMV, obligación de prospecto e inscripción en el RPMV…</div></div>
+            <div class="cols" style="grid-template-columns:1fr 1fr;gap:3mm">
+              <div><div class="h">🗣️ Explícalo a un cliente</div><div class="blk muted">"Si tu empresa quiere levantar fondos con 30 inversionistas institucionales…" (lo escribes tú)</div></div>
+              <div><div class="h"><i class="ai">5</i>🔗 Conectado con</div><span class="pill p-gray">🧠 Oferta pública</span><span class="pill p-gray">🧠 Inversionista institucional</span><span class="pill p-gray">🧠 RPMV</span><span class="pill p-brown">📜 LMV art. 4–5</span><span class="pill p-green">✅ Leer art. 5–12</span></div>
+            </div>
+          </div>
+        </div></div>
+      </div>
+      <ul class="legend" style="list-style:none;padding:0;margin-top:3mm;columns:2;column-gap:5mm">
+        <li><b class="n">1</b><b>Propiedades fijadas</b>: curso, fecha, estado, confianza 🟢🟡🔴.</li>
+        <li><b class="n">2</b><b>Pestañas</b>: la transcripción y las dudas no ensucian la clase.</li>
+        <li><b class="n">3</b><b>Cornell</b>: preguntas para taparte las notas y responder.</li>
+        <li><b class="n">4</b><b>Resumen</b> de Claude a partir de Fireflies + tus apuntes.</li>
+        <li><b class="n">5</b><b>Conexiones</b> con conceptos, normas y tareas.</li>
+      </ul>
+    </div>
+    <div>
+      <div class="win" style="height:66mm">
+        <div class="top"><span class="dots"><i></i><i></i><i></i></span><span>🃏 Tarjetas / Oferta privada</span></div>
+        <div class="body"><div class="main"><div class="pg noc">
+          <div class="icon" style="font-size:12pt">🃏</div>
+          <div class="title" style="font-size:9.5pt">¿Qué excepciones permiten hacer una oferta privada?</div>
+          <div style="display:flex;gap:1.2mm;flex-wrap:wrap;margin-bottom:1.6mm;align-items:center"><i class="ai">6</i><span class="pill p-purple">Regulación MV</span><span class="pill p-yellow">📦 Caja 2</span><span class="pill p-gray">⏭️ 14 oct</span><span class="pill p-green">✅ 3</span><span class="pill p-red">❌ 1</span><span class="pill p-gray">Tipo: excepción</span></div>
+          <div class="toggle">Ver respuesta</div>
+          <div style="display:flex;gap:1.5mm;margin-top:2mm;align-items:center"><i class="ai">7</i><span class="btn" style="background:#fdebec;border-color:#f3c7c5">❌ No sabía</span><span class="btn" style="background:#fbf3db;border-color:#f0dfa6">🤔 Dudé</span><span class="btn" style="background:#edf3ec;border-color:#bcd8c3">✅ Sabía</span><span class="btn">⏸️ Suspender</span></div>
+        </div></div></div>
+      </div>
+      <div class="win" style="height:72mm;margin-top:3mm">
+        <div class="top"><span class="dots"><i></i><i></i><i></i></span><span>🔁 Repaso / Hoy</span></div>
+        <div class="body"><div class="main"><div class="pg noc" style="padding-top:1mm">
+          <div class="tabs" style="margin-top:1mm"><i class="ai">8</i><span class="on">Hoy (23)</span><span>Nuevas (12)</span><span>🩸 Difíciles (4)</span><span>Calendario</span></div>
+          <table class="nt">
+            <tr><th>Pregunta</th><th>Curso</th><th>Caja</th><th>Responder</th></tr>
+            <tr><td>¿Qué es un hecho de importancia?</td><td><span class="pill p-purple">MV</span></td><td>3</td><td><span class="pill p-red">❌</span> <span class="pill p-yellow">🤔</span> <span class="pill p-green">✅</span></td></tr>
+            <tr><td>Plazo para comunicar un hecho de imp.</td><td><span class="pill p-purple">MV</span></td><td>1</td><td><span class="pill p-red">❌</span> <span class="pill p-yellow">🤔</span> <span class="pill p-green">✅</span></td></tr>
+            <tr><td>Leasing vs. arrendamiento común</td><td><span class="pill p-blue">CB</span></td><td>2</td><td><span class="pill p-red">❌</span> <span class="pill p-yellow">🤔</span> <span class="pill p-green">✅</span></td></tr>
+            <tr><td>Requisitos del aumento de capital</td><td><span class="pill p-brown">Soc</span></td><td>4</td><td><span class="pill p-red">❌</span> <span class="pill p-yellow">🤔</span> <span class="pill p-green">✅</span></td></tr>
+            <tr><td>"tender offer" en español</td><td><span class="pill p-red">EN</span></td><td>2</td><td><span class="pill p-red">❌</span> <span class="pill p-yellow">🤔</span> <span class="pill p-green">✅</span></td></tr>
+            <tr><td>Gancho de 3 segundos: 5 tipos</td><td><span class="pill p-pink">100K</span></td><td>1</td><td><span class="pill p-red">❌</span> <span class="pill p-yellow">🤔</span> <span class="pill p-green">✅</span></td></tr>
+          </table>
+        </div></div></div>
+      </div>
+      <ul class="legend" style="list-style:none;padding:0;margin-top:3mm">
+        <li><b class="n">6</b><b>Cada tarjeta tiene su calendario</b>: caja 1→6 = 1, 3, 7, 16, 35 y 90 días.</li>
+        <li><b class="n">7</b><b>Botones</b> que mueven la caja y la fecha solos. "No sabía" la regresa a la caja 1.</li>
+        <li><b class="n">8</b><b>Cola de repaso</b> con botones en cada fila: repasas sin abrir páginas. "Difíciles" junta las tarjetas que fallas 4+ veces para reescribirlas.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot"><span>Versión A · Campus</span><span>A4</span></div>
+</section>
+
+<!-- A5: MODO EXAMEN + ANALÍTICA -->
+<section class="page">
+  <div style="display:flex;align-items:center;gap:3mm;margin-bottom:3mm"><span class="tag-v vA">A</span><h2 style="margin:0">Modo examen y <span class="cA">analítica</span></h2></div>
+  <div class="grid g2" style="gap:5mm">
+    <div class="win" style="height:128mm;position:relative">
+      <div class="top"><span class="dots"><i></i><i></i><i></i></span><span>📝 Evaluaciones / Parcial — Contratos Bancarios</span></div>
+      <div class="body"><div class="main">
+        <div class="cover" style="height:9mm;background:linear-gradient(120deg,#7a1f1b,#d44c47 55%,#f6b0ad)"></div>
+        <div class="pg">
+          <div class="icon">🧪</div><div class="title">Parcial — Contratos Bancarios</div>
+          <div class="grid g4" style="gap:1.5mm;margin-bottom:2mm">
+            <div class="stat"><div class="k">Faltan</div><div class="v" style="color:#d44c47">9 días</div></div>
+            <div class="stat"><div class="k">Peso</div><div class="v">25%</div></div>
+            <div class="stat"><div class="k">Temario dominado</div><div class="v">62%</div></div>
+            <div class="stat"><div class="k">Nota necesaria</div><div class="v">≥ 11</div></div>
+          </div>
+          <div class="cols" style="grid-template-columns:1fr 1fr">
+            <div>
+              <div class="vhead">📚 Temario <span class="vt">· semáforo de dominio</span></div>
+              <div class="li">🟢 S1 Contrato de cuenta corriente</div><div class="li">🟢 S2 Depósitos</div><div class="li">🟡 S3 Mutuo bancario</div><div class="li">🟡 S4 Leasing</div><div class="li">🔴 S5 Factoring</div><div class="li">🔴 S6 Fideicomiso bancario</div><div class="li">🟢 S7 Carta fianza</div><div class="li">🟡 S8 Tarjetas de crédito</div>
+            </div>
+            <div>
+              <div class="vhead">🗓️ Plan inverso <span class="vt">· generado por Claude</span></div>
+              <div class="li"><span class="chk on"></span>D-9 · Repasar S5–S6 (rojas)</div><div class="li"><span class="chk"></span>D-7 · 40 tarjetas del temario</div><div class="li"><span class="chk"></span>D-5 · Esquema comparativo de contratos</div><div class="li"><span class="chk"></span>D-3 · Simulacro con Claude (20 preg.)</div><div class="li"><span class="chk"></span>D-2 · Repasar errores del simulacro</div><div class="li"><span class="chk"></span>D-1 · Solo repaso ligero + dormir</div>
+              <div class="vhead" style="margin-top:2mm">🧪 Simulacros</div>
+              <div class="li">Simulacro 1 · 14/20<span class="r"><span class="pill p-yellow">70%</span></span></div>
+            </div>
+          </div>
+        </div>
+      </div></div>
+    </div>
+    <div class="win" style="height:128mm;position:relative">
+      <div class="top"><span class="dots"><i></i><i></i><i></i></span><span>Gus OS / 📊 Analítica</span></div>
+      <div class="body"><div class="main"><div class="pg noc">
+        <div class="icon">📊</div><div class="title">Analítica del ciclo</div>
+        <div class="grid g4" style="gap:1.5mm;margin-bottom:2mm">
+          <div class="stat"><div class="k">Horas este mes</div><div class="v">27.5</div></div><div class="stat"><div class="k">Tarjetas dominadas</div><div class="v">312</div></div>
+          <div class="stat"><div class="k">Racha actual</div><div class="v">🔥 5</div></div><div class="stat"><div class="k">Promedio general</div><div class="v">16.2</div></div>
+        </div>
+        <div class="vhead">⏱️ Horas de estudio por semana <span class="vt">· gráfico de columnas</span></div>
+        <div class="chart" style="height:22mm"><i style="height:35%"></i><i style="height:50%"></i><i style="height:42%"></i><i style="height:70%"></i><i style="height:62%"></i><i style="height:80%"></i><i style="height:55%"></i><i style="height:90%;background:#2f5d8a"></i></div>
+        <div class="cols" style="grid-template-columns:1fr 1fr;margin-top:2mm">
+          <div><div class="vhead">🍩 Tiempo por programa</div>
+            <div style="display:flex;align-items:center;gap:2mm"><div style="width:20mm;height:20mm;border-radius:50%;background:conic-gradient(#9065b0 0 52%,#337ea9 52% 70%,#c14c8a 70% 85%,#d44c47 85% 93%,#448361 93% 100%);-webkit-mask:radial-gradient(circle,transparent 45%,#000 46%)"></div>
+            <div class="blk"><span style="color:#9065b0">■</span> Maestría 52%<br><span style="color:#337ea9">■</span> Societario 18%<br><span style="color:#c14c8a">■</span> 100K 15%<br><span style="color:#d44c47">■</span> Inglés 8%<br><span style="color:#448361">■</span> Bolsa 7%</div></div></div>
+          <div><div class="vhead">🔥 Hábitos · últimos 3 meses</div>
+            <div class="heat">
+              <i class="l1"></i><i class="l2"></i><i></i><i class="l3"></i><i class="l2"></i><i class="l1"></i><i></i><i class="l2"></i><i class="l3"></i><i class="l3"></i><i class="l1"></i><i></i><i></i><i class="l2"></i><i class="l1"></i><i class="l2"></i><i class="l3"></i><i class="l2"></i><i></i><i class="l1"></i><i class="l3"></i>
+              <i class="l2"></i><i></i><i class="l1"></i><i class="l3"></i><i class="l2"></i><i class="l3"></i><i class="l1"></i><i></i><i class="l2"></i><i class="l3"></i><i class="l2"></i><i class="l1"></i><i class="l1"></i><i></i><i class="l2"></i><i class="l3"></i><i class="l3"></i><i class="l2"></i><i class="l1"></i><i></i><i class="l2"></i>
+              <i class="l3"></i><i class="l2"></i><i class="l1"></i><i></i><i class="l1"></i><i class="l2"></i><i class="l3"></i><i class="l3"></i><i class="l2"></i><i></i><i class="l1"></i><i class="l2"></i><i class="l3"></i><i class="l1"></i><i class="l2"></i><i class="l3"></i><i class="l2"></i><i class="l3"></i><i class="l3"></i><i class="l2"></i><i class="l1"></i>
+            </div></div>
+        </div>
+        <div class="vhead" style="margin-top:2mm">🃏 Tarjetas por caja</div>
+        <div style="display:flex;gap:1mm;align-items:flex-end;height:10mm"><div style="flex:1;background:#f6b0ad;height:40%;border-radius:.6mm"></div><div style="flex:1;background:#f8cf9d;height:60%;border-radius:.6mm"></div><div style="flex:1;background:#f3df9c;height:85%;border-radius:.6mm"></div><div style="flex:1;background:#b8dcc2;height:70%;border-radius:.6mm"></div><div style="flex:1;background:#7bc96f;height:100%;border-radius:.6mm"></div></div>
+        <div class="blk muted" style="display:flex;justify-content:space-between"><span>Caja 1</span><span>2</span><span>3</span><span>4</span><span>Caja 5 · dominadas</span></div>
+      </div></div></div>
+    </div>
+  </div>
+  <div class="grid g4" style="gap:4mm;margin-top:4mm">
+    <div class="callout c-red"><span class="ic">🧪</span><div class="small"><b>Semáforo de temario.</b> Cada sesión toma color según el % de sus tarjetas en caja ≥3: 🟢 dominado, 🟡 a medias, 🔴 flojo.</div></div>
+    <div class="callout c-yellow"><span class="ic">🗓️</span><div class="small"><b>Plan inverso.</b> Claude reparte el temario desde la fecha del examen hacia atrás y crea las tareas en tu Kanban.</div></div>
+    <div class="callout c-blue"><span class="ic">🎯</span><div class="small"><b>Nota necesaria.</b> Con los pesos y notas ya obtenidas, una fórmula calcula cuánto necesitas sacar para aprobar o llegar a tu meta.</div></div>
+    <div class="callout c-green"><span class="ic">📊</span><div class="small"><b>Analítica.</b> Gráficos nativos de Notion sobre tu registro de estudio, tarjetas y hábitos. Ves tu progreso, que es lo que más motiva con TDA.</div></div>
+  </div>
+  <div class="foot"><span>Versión A · Campus</span><span>A5</span></div>
+</section>
+
+<!-- A6: FLUJOS -->
+<section class="page">
+  <div style="display:flex;align-items:center;gap:3mm;margin-bottom:3mm"><span class="tag-v vA">A</span><h2 style="margin:0">Cómo funciona en el día a día</h2></div>
+  <div class="grid g3" style="gap:5mm">
+    <div>
+      <h3>🔄 Flujo de una clase</h3>
+      <table class="t">
+        <tr><td style="width:24mm"><b>Antes</b></td><td>La sesión ya existe en el cronograma (creada al inicio del ciclo desde el sílabo).</td></tr>
+        <tr><td><b>Durante</b></td><td>Apuntas rápido en la pestaña "Clase"; pegas capturas. Fireflies graba.</td></tr>
+        <tr><td><b>Después (2 min)</b></td><td><i>"Claude, procesa la S07 de Regulación MV"</i> → resumen, preguntas Cornell, <b>8 tarjetas</b>, conceptos y normas enlazados, tareas con fecha.</td></tr>
+        <tr><td><b>Día +1</b></td><td>Las tarjetas aparecen en "Repaso de hoy".</td></tr>
+        <tr><td><b>Semanas</b></td><td>Cada tarjeta sube de caja hasta quedar dominada.</td></tr>
+      </table>
+    </div>
+    <div>
+      <h3>🗓️ Rituales</h3>
+      <table class="t">
+        <tr><td style="width:24mm"><b>Inicio de ciclo</b></td><td>Me pasas los sílabos → creo cursos, sesiones, evaluaciones con pesos y fechas.</td></tr>
+        <tr><td><b>Cada día</b></td><td>Campus → rana → repaso (15 min) → hábitos.</td></tr>
+        <tr><td><b>Lunes</b></td><td>"Planifiquemos la semana": elegimos 7 tareas y revisamos evaluaciones próximas.</td></tr>
+        <tr><td><b>Viernes</b></td><td>"Cierra la semana": horas, tarjetas, avance por curso, quiz mezclado.</td></tr>
+        <tr><td><b>D-10 examen</b></td><td>Se activa el modo examen con plan inverso.</td></tr>
+      </table>
+    </div>
+    <div>
+      <h3>⚙️ Fórmulas y automatizaciones</h3>
+      <ul>
+        <li><b>Próximo repaso</b> = último repaso + intervalo de la caja (1, 3, 7, 14, 30 días).</li>
+        <li><b>Botones en la tarjeta</b> (propiedad tipo botón): cambian caja y fecha.</li>
+        <li><b>Aporte a la nota</b> = peso × nota; <b>nota proyectada</b> = suma por curso.</li>
+        <li><b>Cuenta regresiva</b> con semáforo 🔴🟠🟡.</li>
+        <li><b>Barras de avance</b> de sesiones, lecturas y programas.</li>
+        <li><b>Racha</b> de hábitos y horas semanales con gráficos.</li>
+        <li><b>Plantillas</b> para sesión, evaluación, lectura y programa.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="grid g3" style="gap:5mm;margin-top:6mm">
+    <div class="card" style="border-color:#bcd8c3;background:#f6faf6"><h3>👍 Ventajas</h3><ul><li>La más fácil de entender: se parece a una universidad.</li><li>Repaso fino por tarjeta, el método con más evidencia.</li><li>Te dice dónde estás en cada curso y qué nota necesitas.</li></ul></div>
+    <div class="card" style="border-color:#f3c7c5;background:#fdf7f7"><h3>👎 Desventajas</h3><ul><li>El conocimiento queda organizado por curso; las conexiones entre materias son más débiles que en B.</li><li>No tiene herramientas específicas de tesis ni de normas.</li><li>El TDA se atiende con hábitos y un Kanban simple, no con una pantalla de foco.</li></ul></div>
+    <div class="card"><h3>🛠️ Construcción</h3><p>Construcción completa + migración de tus clases de Fireflies: <b>1 sesión de trabajo</b> conmigo. Tu parte: enviarme sílabos y fechas.</p><p class="small muted" style="margin-top:2mm">Funciona con Notion Free. Automatizaciones y gráficos ilimitados: <span class="pill p-orange">Plus</span> (posiblemente gratis con correo PUCP).</p></div>
+  </div>
+  <div class="foot"><span>Versión A · Campus</span><span>A6</span></div>
+</section>
+<!-- ===================== VERSIÓN B — SEGUNDO CEREBRO JURÍDICO ===================== -->
+<section class="page" style="background:linear-gradient(135deg,#f4f0fa 0%,#fff 55%)">
+  <div style="display:flex;align-items:center;gap:3mm"><span class="tag-v vB">VERSIÓN B</span><span class="kicker" style="margin:0">Conocimiento conectado · PARA + Zettelkasten + capa jurídica</span></div>
+  <h1 style="margin:3mm 0 2mm" class="cB">Segundo Cerebro Jurídico</h1>
+  <p class="lead" style="max-width:250mm">El centro ya no es el curso, es el <b>conocimiento</b>. Todo lo que estudias se vuelve conceptos, normas, artículos y resoluciones enlazados entre sí. Así, "OPA" o "hecho de importancia" junta en una sola página lo que viste en la maestría, en el taller, en la bolsa y en el trabajo. La tesis tiene su propio estudio de producción. Combina la arquitectura PARA de Ultimate Brain con un Zettelkasten y una capa jurídica que ninguna plantilla del mercado trae.</p>
+  <div class="grid" style="grid-template-columns:168mm 1fr;gap:7mm;margin-top:4mm">
+    <div class="card" style="padding:4mm;background:#fff">
+      <h4 style="margin-bottom:2mm">Arquitectura · 15 bases de datos en 4 capas</h4>
+      <div class="arch" style="width:158mm;height:116mm;position:relative">
+        <div style="position:absolute;left:0;top:0;width:158mm;height:22mm;background:#faf8fd;border-radius:2mm"></div>
+        <div style="position:absolute;left:0;top:25mm;width:158mm;height:22mm;background:#f6f3fb;border-radius:2mm"></div>
+        <div style="position:absolute;left:0;top:50mm;width:158mm;height:38mm;background:#f1ecf9;border-radius:2mm"></div>
+        <div style="position:absolute;left:0;top:91mm;width:158mm;height:24mm;background:#faf8fd;border-radius:2mm"></div>
+        <div style="position:absolute;left:2mm;top:1mm;font-size:6pt;font-weight:800;color:#6b4f9e;letter-spacing:.06em">1 · CAPTURA</div>
+        <div style="position:absolute;left:2mm;top:26mm;font-size:6pt;font-weight:800;color:#6b4f9e;letter-spacing:.06em">2 · ACCIÓN (PARA)</div>
+        <div style="position:absolute;left:2mm;top:51mm;font-size:6pt;font-weight:800;color:#6b4f9e;letter-spacing:.06em">3 · CONOCIMIENTO</div>
+        <div style="position:absolute;left:2mm;top:92mm;font-size:6pt;font-weight:800;color:#6b4f9e;letter-spacing:.06em">4 · TESIS</div>
+        <div class="db" style="position:absolute;left:4mm;top:6mm;width:46mm;border-color:#a891cf"><b>📥 Bandeja Fireflies</b><span>cada grabación llega aquí sola</span></div>
+        <div class="db" style="position:absolute;left:54mm;top:6mm;width:46mm;border-color:#a891cf"><b>📝 Notas</b><span>clase · lectura · reunión · idea</span></div>
+        <div class="db" style="position:absolute;left:104mm;top:6mm;width:50mm;border-color:#a891cf"><b>🔗 Fuentes / Biblioteca</b><span>libros, papers, videos, cita APA</span></div>
+        <div class="db" style="position:absolute;left:4mm;top:31mm;width:36mm;border-color:#a891cf"><b>🧭 Áreas</b><span>programas y temas</span></div>
+        <div class="db" style="position:absolute;left:43mm;top:31mm;width:36mm;border-color:#a891cf"><b>🎯 Proyectos</b><span>con % de avance</span></div>
+        <div class="db" style="position:absolute;left:82mm;top:31mm;width:34mm;border-color:#a891cf"><b>✅ Tareas</b><span>Kanban · fecha de hacer</span></div>
+        <div class="db" style="position:absolute;left:119mm;top:31mm;width:35mm;border-color:#a891cf"><b>🏆 Metas 2026</b><span>tu planificador WOOP</span></div>
+        <div class="db" style="position:absolute;left:4mm;top:57mm;width:46mm;border-color:#6b4f9e;background:#fbf9fe"><b>🧠 Conceptos</b><span>Semilla → Brote → Perenne · término EN</span></div>
+        <div class="db" style="position:absolute;left:54mm;top:57mm;width:32mm;border-color:#6b4f9e;background:#fbf9fe"><b>📜 Normas</b><span>vigente / modificada</span></div>
+        <div class="db" style="position:absolute;left:89mm;top:57mm;width:30mm;border-color:#6b4f9e;background:#fbf9fe"><b>§ Artículos</b><span>texto + paráfrasis</span></div>
+        <div class="db" style="position:absolute;left:122mm;top:57mm;width:32mm;border-color:#6b4f9e;background:#fbf9fe"><b>⚖️ Jurisprudencia</b><span>TC, Casación, SMV</span></div>
+        <div class="db" style="position:absolute;left:54mm;top:74mm;width:65mm;border-color:#a891cf"><b>🃏 Tarjetas</b><span>repaso espaciado de artículos, plazos, definiciones</span></div>
+        <div class="db" style="position:absolute;left:4mm;top:74mm;width:46mm;border-color:#a891cf"><b>🗓️ Revisiones</b><span>semanal · mensual</span></div>
+        <div class="db" style="position:absolute;left:4mm;top:97mm;width:36mm;border-color:#a891cf"><b>📖 Capítulos</b><span>palabras, estado</span></div>
+        <div class="db" style="position:absolute;left:43mm;top:97mm;width:36mm;border-color:#a891cf"><b>🧩 Argumentos</b><span>apoya / refuta</span></div>
+        <div class="db" style="position:absolute;left:82mm;top:97mm;width:34mm;border-color:#a891cf"><b>👨‍🏫 Reuniones asesor</b><span>Fireflies + acuerdos</span></div>
+        <div class="db" style="position:absolute;left:119mm;top:97mm;width:35mm;border-color:#a891cf"><b>📍 Hitos</b><span>plan → sustentación</span></div>
+      </div>
+    </div>
+    <div>
+      <h3>Para quién es</h3>
+      <p>Para cuando quieres que Notion sea <b>tu archivo profesional de abogado</b>: que lo aprendido en cualquier curso, lectura o reunión quede conectado y sirva años después en exámenes, la tesis, el trabajo o un artículo.</p>
+      <h3 style="margin-top:4mm">Qué la hace distinta</h3>
+      <ul>
+        <li><b>Capa jurídica:</b> normas con su historial de modificaciones, artículos con paráfrasis y resoluciones/jurisprudencia con ratio decidendi.</li>
+        <li><b>Conceptos que maduran:</b> 🌱 Semilla → 🌿 Brote → 🌳 Perenne, con su término en inglés (glosario bilingüe).</li>
+        <li><b>Estudio de tesis:</b> capítulos con meta de palabras, mapa de argumentos, fuentes con cita APA y reuniones con asesor.</li>
+        <li><b>Fireflies directo a Notion:</b> cada clase cae en la Bandeja como fila con resumen y acuerdos. Claude la procesa.</li>
+        <li><b>Revisión semanal</b> estilo GTD que mantiene todo limpio.</li>
+      </ul>
+      <div class="grid g2" style="margin-top:3mm;gap:3mm">
+        <div class="stat"><div class="k">Bases de datos</div><div class="v">15</div></div>
+        <div class="stat"><div class="k">Pantallas principales</div><div class="v">6</div></div>
+        <div class="stat"><div class="k">Tu tiempo diario</div><div class="v">25–35 min</div></div>
+        <div class="stat"><div class="k">Complejidad</div><div class="v"><div class="score"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></div></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span>Versión B · Segundo Cerebro Jurídico</span><span>B1</span></div>
+</section>
+
+<!-- B2: COMMAND CENTER -->
+<section class="page">
+  <div style="display:flex;align-items:center;gap:3mm;margin-bottom:3mm"><span class="tag-v vB">B</span><h2 style="margin:0">Pantalla principal: <span class="cB">Centro de mando</span></h2></div>
+  <div class="grid" style="grid-template-columns:205mm 1fr;gap:5mm">
+    <div class="win" style="height:172mm">
+      <div class="top"><span class="dots"><i></i><i></i><i></i></span><span>Gus OS / 🧭 Centro de mando</span></div>
+      <div class="body"><div class="main">
+        <div class="cover" style="background:linear-gradient(120deg,#2a1f45,#6b4f9e 50%,#d4c3ef)"></div>
+        <div class="pg">
+          <div class="icon">🧭</div><div class="title">Centro de mando</div>
+          <div class="cols" style="grid-template-columns:34mm 1fr;gap:4mm">
+            <div style="border-right:1px solid var(--line);padding-right:2mm">
+              <div class="h" style="margin-top:0"><i class="ai">1</i>⚡ Capturar</div>
+              <div class="blk">➕ Nota<br>➕ Tarea<br>➕ Concepto<br>➕ Norma<br>➕ Fuente</div>
+              <div class="h">🎯 Acción</div>
+              <div class="blk">📅 Mi día<br>🗂️ Kanban<br>🎯 Proyectos<br>🏆 Metas 2026</div>
+              <div class="h">🧠 Conocimiento</div>
+              <div class="blk">🧠 Conceptos<br>📜 Normas<br>§ Artículos<br>⚖️ Jurisprudencia<br>🔗 Biblioteca<br>🃏 Repaso</div>
+              <div class="h">🎓 Áreas</div>
+              <div class="blk">Maestría PUCP<br>Derecho Societario<br>Fórmula 100K<br>Inglés · Bolsa</div>
+              <div class="h">✍️ Tesis</div>
+              <div class="blk">Estudio de tesis<br>Revisión semanal</div>
+            </div>
+            <div>
+              <div class="cols" style="grid-template-columns:repeat(4,1fr);gap:1.6mm;margin-bottom:2mm">
+                <div class="stat" style="background:#fdebec;border-color:#f6cfcd"><div class="k"><i class="ai">2</i>📥 Por procesar</div><div class="v">7</div></div>
+                <div class="stat"><div class="k">🃏 Repaso hoy</div><div class="v">31</div></div>
+                <div class="stat"><div class="k">🧠 Conceptos</div><div class="v">312</div></div>
+                <div class="stat"><div class="k">📜 Normas · ⚖️ Casos</div><div class="v">48 · 27</div></div>
+              </div>
+              <div class="cols" style="grid-template-columns:1fr 1fr;gap:3mm">
+                <div>
+                  <div class="vhead"><i class="ai">3</i>🎯 Proyectos en foco</div>
+                  <div class="li">✍️ Tesis — capítulo 2<span class="r" style="width:24mm"><div class="bar" style="width:16mm"><i style="width:42%;background:#6b4f9e"></i></div>42%</span></div>
+                  <div class="li">🧪 Parcial Contratos Banc.<span class="r" style="width:24mm"><div class="bar" style="width:16mm"><i style="width:60%;background:#6b4f9e"></i></div>60%</span></div>
+                  <div class="li">🎤 Exposición Societario<span class="r" style="width:24mm"><div class="bar" style="width:16mm"><i style="width:15%;background:#6b4f9e"></i></div>15%</span></div>
+                  <div class="li">📱 Campaña TikTok (100K)<span class="r" style="width:24mm"><div class="bar" style="width:16mm"><i style="width:70%;background:#6b4f9e"></i></div>70%</span></div>
+                  <div class="vhead" style="margin-top:2mm"><i class="ai">4</i>📅 Mi día <span class="vt">· fecha de hacer = hoy</span></div>
+                  <div class="li"><span class="chk"></span>Redactar sección 2.3 (500 palabras)<span class="r"><span class="pill p-purple">Tesis</span></span></div>
+                  <div class="li"><span class="chk"></span>Procesar 3 clases de la bandeja<span class="r"><span class="pill p-gray">15′</span></span></div>
+                  <div class="li"><span class="chk on"></span><s class="muted">Fichar Res. SMV sobre hechos de imp.</s></div>
+                </div>
+                <div>
+                  <div class="vhead"><i class="ai">5</i>📥 Bandeja <span class="vt">· llegó de Fireflies</span></div>
+                  <div class="li">🎙️ Regulación MV · S10<span class="r"><span class="pill p-gray">ayer</span></span></div>
+                  <div class="li">🎙️ Taller Integrador MV · S8<span class="r"><span class="pill p-gray">mar</span></span></div>
+                  <div class="li">🎙️ Reunión con asesor<span class="r"><span class="pill p-purple">tesis</span></span></div>
+                  <div class="li">🔗 Paper: SPAC regulation<span class="r"><span class="pill p-blue">fuente</span></span></div>
+                  <div class="vhead" style="margin-top:2mm"><i class="ai">6</i>🌱 Conceptos por madurar</div>
+                  <div><span class="pill p-green">🌱 Fondo estructurado</span><span class="pill p-green">🌱 Custodio</span><span class="pill p-green">🌱 NAV</span><span class="pill p-yellow">🌿 Información privilegiada</span><span class="pill p-yellow">🌿 OPA</span></div>
+                </div>
+              </div>
+              <div class="vhead" style="margin-top:2.5mm"><i class="ai">7</i>📜 Novedades normativas y resoluciones recientes</div>
+              <table class="nt">
+                <tr><th>Norma / resolución</th><th>Emisor</th><th>Fecha</th><th>Estado</th><th>Afecta a</th></tr>
+                <tr><td>Reglamento de Hechos de Importancia</td><td>SMV</td><td>—</td><td><span class="pill p-green">Vigente</span></td><td>🧠 Hecho de importancia</td></tr>
+                <tr><td>TUO Ley del Mercado de Valores</td><td>MEF</td><td>2023</td><td><span class="pill p-green">Vigente</span></td><td>🧠 Oferta pública · OPA</td></tr>
+                <tr><td>Ley General de Sociedades</td><td>Congreso</td><td>1997</td><td><span class="pill p-yellow">Modificada</span></td><td>🧠 Aumento de capital</td></tr>
+              </table>
+              <div class="cols" style="grid-template-columns:1fr 1fr;gap:3mm;margin-top:2.5mm">
+                <div><div class="vhead"><i class="ai">8</i>🏆 Metas 2026 <span class="vt">· de tu Planificador WOOP</span></div>
+                  <div class="li">📚 Leer 24 libros de derecho financiero<span class="r" style="width:26mm"><div class="bar" style="width:16mm"><i style="width:38%;background:#6b4f9e"></i></div>9/24</span></div>
+                  <div class="li">🎓 Sustentar la tesis<span class="r" style="width:26mm"><div class="bar" style="width:16mm"><i style="width:42%;background:#6b4f9e"></i></div>42%</span></div>
+                  <div class="li">🇬🇧 Inglés jurídico B2+<span class="r" style="width:26mm"><div class="bar" style="width:16mm"><i style="width:20%;background:#6b4f9e"></i></div>20%</span></div></div>
+                <div><div class="vhead">🃏 Repaso por área</div>
+                  <div class="li">Mercado de valores<span class="r"><span class="pill p-red">14</span></span></div>
+                  <div class="li">Bancario / financiero<span class="r"><span class="pill p-orange">9</span></span></div>
+                  <div class="li">Societario · Inglés · Marketing<span class="r"><span class="pill p-yellow">8</span></span></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div></div>
+    </div>
+    <div>
+      <ul class="legend" style="list-style:none;padding:0">
+        <li><b class="n">1</b><b>Menú lateral fijo</b> (estilo Easlo): capturar, actuar, conocimiento, áreas y tesis. Siempre visible, nunca te pierdes.</li>
+        <li><b class="n">2</b><b>Indicadores</b>: lo que falta procesar, repaso del día y tamaño de tu cerebro.</li>
+        <li><b class="n">3</b><b>Proyectos en foco</b> con barra de avance calculada por sus tareas.</li>
+        <li><b class="n">4</b><b>Mi día</b>: separa "fecha de hacer" de "fecha límite" (método PPV) para que solo veas lo de hoy.</li>
+        <li><b class="n">5</b><b>Bandeja</b>: Fireflies escribe cada grabación como fila. Claude la convierte en nota, conceptos, normas y tareas.</li>
+        <li><b class="n">6</b><b>Conceptos por madurar</b>: semillas que conviene desarrollar esta semana.</li>
+        <li><b class="n">7</b><b>Normas y resoluciones</b> recientes ligadas a tus conceptos.</li><li><b class="n">8</b><b>Metas 2026</b> conectadas a proyectos: tu planificador WOOP deja de estar aislado.</li>
+      </ul>
+      <div class="callout c-yellow" style="margin-top:3mm"><span class="ic">ℹ️</span><div class="small">Normas, fechas y cifras son <b>ilustrativas</b>; se verifican contra El Peruano/SPIJ al cargarlas.</div></div>
+    </div>
+  </div>
+  <div class="foot"><span>Versión B · Segundo Cerebro Jurídico</span><span>B2</span></div>
+</section>
+
+<!-- B3: NORMA + CONCEPTO -->
+<section class="page">
+  <div style="display:flex;align-items:center;gap:3mm;margin-bottom:3mm"><span class="tag-v vB">B</span><h2 style="margin:0">Biblioteca jurídica: <span class="cB">ficha de norma y página de concepto</span></h2></div>
+  <div class="grid g2" style="gap:5mm">
+    <div class="win" style="height:140mm">
+      <div class="top"><span class="dots"><i></i><i></i><i></i></span><span>📜 Normas / TUO Ley del Mercado de Valores</span></div>
+      <div class="body"><div class="main"><div class="pg noc">
+        <div class="icon">📜</div><div class="title" style="font-size:11pt">TUO de la Ley del Mercado de Valores</div>
+        <table class="nt" style="margin-bottom:2mm"><tr><td class="muted" style="width:28mm"><i class="ai">1</i>Tipo</td><td><span class="pill p-orange">Decreto Supremo (TUO)</span></td></tr><tr><td class="muted">Número</td><td>D.S. 020-2023-EF</td></tr><tr><td class="muted">Emisor</td><td>MEF</td></tr><tr><td class="muted">Publicación</td><td>Feb 2023 (verificar)</td></tr><tr><td class="muted">Estado</td><td><span class="pill p-green">Vigente</span></td></tr><tr><td class="muted">Reemplaza a</td><td>📜 TUO D.S. 093-2002-EF</td></tr><tr><td class="muted">Fuente oficial</td><td>🔗 El Peruano · 📁 PDF en Drive</td></tr></table>
+        <div class="vhead"><i class="ai">2</i>🕰️ Línea de tiempo</div>
+        <div style="position:relative;height:12mm;margin:1mm 2mm 2mm">
+          <div style="position:absolute;top:4mm;left:0;right:0;height:.5mm;background:#d4c3ef"></div>
+          <div style="position:absolute;left:0;top:2.6mm;width:3mm;height:3mm;border-radius:50%;background:#6b4f9e"></div><div style="position:absolute;left:-2mm;top:7mm;font-size:5.4pt">1996 · D.Leg. 861</div>
+          <div style="position:absolute;left:38%;top:2.6mm;width:3mm;height:3mm;border-radius:50%;background:#a891cf"></div><div style="position:absolute;left:32%;top:7mm;font-size:5.4pt">2002 · TUO 093</div>
+          <div style="position:absolute;left:96%;top:2.6mm;width:3mm;height:3mm;border-radius:50%;background:#6b4f9e"></div><div style="position:absolute;left:84%;top:7mm;font-size:5.4pt">2023 · TUO 020</div>
+        </div>
+        <div class="vhead"><i class="ai">3</i>§ Artículos fichados <span class="vt">· 14</span></div>
+        <table class="nt">
+          <tr><th>Artículo</th><th>Tema</th><th>Conceptos</th><th>Casos</th><th>🃏</th></tr>
+          <tr><td>Art. 4</td><td>Oferta pública</td><td>Oferta pública</td><td>2</td><td>5</td></tr>
+          <tr><td>Art. 5</td><td>Oferta privada</td><td>Inversionista inst.</td><td>1</td><td>4</td></tr>
+          <tr><td>Art. 28</td><td>Hechos de importancia</td><td>Hecho de imp.</td><td>3</td><td>6</td></tr>
+          <tr><td>Art. 40</td><td>Información privilegiada</td><td>Insider trading</td><td>2</td><td>3</td></tr>
+        </table>
+        <div class="vhead"><i class="ai">4</i>🎓 Dónde la estudiaste</div>
+        <div><span class="pill p-purple">S07 Regulación MV</span><span class="pill p-purple">S03 Taller Integrador</span><span class="pill p-gray">Charla Bolsa</span></div>
+      </div></div></div>
+    </div>
+    <div class="win" style="height:140mm">
+      <div class="top"><span class="dots"><i></i><i></i><i></i></span><span>🧠 Conceptos / Oferta pública</span></div>
+      <div class="body"><div class="main"><div class="pg noc">
+        <div class="icon">🧠</div><div class="title" style="font-size:11pt">Oferta pública</div>
+        <div style="display:flex;gap:1.2mm;flex-wrap:wrap;margin-bottom:2mm;align-items:center"><i class="ai">5</i><span class="pill p-green">🌳 Perenne</span><span class="pill p-blue">EN: public offering</span><span class="pill p-gray">Área: Mercado de valores</span><span class="pill p-gray">Tipo: Institución</span></div>
+        <div class="mini-call c-purple"><span>💬</span><div><b>En mis palabras:</b> invitación dirigida al público para adquirir valores; activa la supervisión de la SMV, el prospecto y la inscripción en el registro.</div></div>
+        <div class="vhead"><i class="ai">6</i>🕸️ Mapa de conexiones</div>
+        <div style="position:relative;height:56mm;background:#fbf9fe;border-radius:2mm;margin-bottom:2mm">
+          <svg width="100%" height="100%" viewBox="0 0 120 56" preserveAspectRatio="none" style="position:absolute;inset:0"><g stroke="#c9b8e6" stroke-width=".4"><line x1="60" y1="28" x2="20" y2="9"/><line x1="60" y1="28" x2="100" y2="9"/><line x1="60" y1="28" x2="16" y2="30"/><line x1="60" y1="28" x2="104" y2="30"/><line x1="60" y1="28" x2="26" y2="49"/><line x1="60" y1="28" x2="94" y2="49"/><line x1="60" y1="28" x2="60" y2="50"/></g></svg>
+          <div style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:#6b4f9e;color:#fff;font-size:6.6pt;font-weight:700;padding:1.4mm 2.5mm;border-radius:2mm">🧠 Oferta pública</div>
+          <div style="position:absolute;left:6%;top:9%" class="pill p-purple">🧠 Oferta privada</div>
+          <div style="position:absolute;right:6%;top:9%" class="pill p-purple">🧠 Prospecto</div>
+          <div style="position:absolute;left:2%;top:47%" class="pill p-orange">📜 LMV art. 4</div>
+          <div style="position:absolute;right:2%;top:47%" class="pill p-brown">⚖️ Res. SMV (ejemplo)</div>
+          <div style="position:absolute;left:10%;bottom:6%" class="pill p-blue">📝 S07 Regulación MV</div>
+          <div style="position:absolute;right:10%;bottom:6%" class="pill p-yellow">🃏 5 tarjetas</div>
+          <div style="position:absolute;left:50%;bottom:2%;transform:translateX(-50%)" class="pill p-green">📖 Tesis cap. 2</div>
+        </div>
+        <div class="h"><i class="ai">7</i>Estructura de la página</div>
+        <div class="toggle">Base legal</div><div class="toggle">Elementos y requisitos</div><div class="toggle">Jurisprudencia y resoluciones clave</div><div class="toggle">Debate doctrinal</div><div class="toggle">Derecho comparado (SEC · UE · Chile · Colombia)</div><div class="toggle">Caso práctico</div>
+      </div></div></div>
+    </div>
+  </div>
+  <div class="grid g4" style="gap:4mm;margin-top:3mm">
+    <p class="small"><b class="n" style="display:inline-flex;background:#ffe86b;border-radius:50%;width:4mm;height:4mm;align-items:center;justify-content:center;font-size:6.5pt">1</b> <b>Ficha de norma</b>: tipo, número, emisor, estado y "reemplaza / modificada por" enlazados entre normas.</p>
+    <p class="small"><b class="n" style="display:inline-flex;background:#ffe86b;border-radius:50%;width:4mm;height:4mm;align-items:center;justify-content:center;font-size:6.5pt">2</b><b class="n" style="display:inline-flex;background:#ffe86b;border-radius:50%;width:4mm;height:4mm;align-items:center;justify-content:center;font-size:6.5pt">3</b> <b>Historia y artículos</b>: cada artículo es su propia ficha con paráfrasis, casos y tarjetas.</p>
+    <p class="small"><b class="n" style="display:inline-flex;background:#ffe86b;border-radius:50%;width:4mm;height:4mm;align-items:center;justify-content:center;font-size:6.5pt">5</b><b class="n" style="display:inline-flex;background:#ffe86b;border-radius:50%;width:4mm;height:4mm;align-items:center;justify-content:center;font-size:6.5pt">6</b> <b>Concepto vivo</b>: madurez, término en inglés y todas sus conexiones en un mapa.</p>
+    <p class="small"><b class="n" style="display:inline-flex;background:#ffe86b;border-radius:50%;width:4mm;height:4mm;align-items:center;justify-content:center;font-size:6.5pt">7</b> <b>Plantilla jurídica</b> del concepto: base legal, requisitos, jurisprudencia, doctrina, comparado y caso.</p>
+  </div>
+  <div class="foot"><span>Versión B · Segundo Cerebro Jurídico</span><span>B3</span></div>
+</section>
+
+<!-- B4: ESTUDIO DE TESIS -->
+<section class="page">
+  <div style="display:flex;align-items:center;gap:3mm;margin-bottom:3mm"><span class="tag-v vB">B</span><h2 style="margin:0">Estudio de tesis</h2></div>
+  <div class="grid" style="grid-template-columns:205mm 1fr;gap:5mm">
+    <div class="win" style="height:160mm">
+      <div class="top"><span class="dots"><i></i><i></i><i></i></span><span>Gus OS / ✍️ Estudio de tesis</span></div>
+      <div class="body"><div class="main">
+        <div class="cover" style="background:linear-gradient(120deg,#1f3b2c,#448361 50%,#b9dcc6)"></div>
+        <div class="pg">
+          <div class="icon">✍️</div><div class="title">Tesis — Maestría en Derecho Financiero</div>
+          <div class="grid g4" style="gap:1.6mm;margin-bottom:2mm">
+            <div class="stat"><div class="k"><i class="ai">1</i>Palabras</div><div class="v">12 480 / 30 000</div></div>
+            <div class="stat"><div class="k">Avance total</div><div class="v">42%</div></div>
+            <div class="stat"><div class="k">Próximo hito</div><div class="v" style="font-size:8.5pt">Avance cap. 2 · 16 días</div></div>
+            <div class="stat"><div class="k">Fuentes leídas</div><div class="v">38 / 61</div></div>
+          </div>
+          <div class="vhead"><i class="ai">2</i>📖 Capítulos <span class="vt">· tablero por estado</span></div>
+          <div class="board" style="grid-template-columns:repeat(5,1fr);margin-bottom:2mm">
+            <div class="col"><div class="ch">Esquema <span>1</span></div><div class="kc"><b>Cap. 4 · Propuesta</b><span class="pill p-gray">0 / 6 000</span></div></div>
+            <div class="col"><div class="ch">Redacción <span>1</span></div><div class="kc"><b>Cap. 2 · Marco teórico</b><div class="bar"><i style="width:55%;background:#448361"></i></div><span class="pill p-gray">4 400 / 8 000</span></div></div>
+            <div class="col"><div class="ch">Revisión <span>1</span></div><div class="kc"><b>Cap. 3 · Análisis</b><div class="bar"><i style="width:80%;background:#448361"></i></div></div></div>
+            <div class="col"><div class="ch">Con asesor <span>0</span></div></div>
+            <div class="col"><div class="ch">Final <span>1</span></div><div class="kc"><b>Cap. 1 · Problema</b><span class="pill p-green">✓ aprobado</span></div></div>
+          </div>
+          <div class="cols" style="grid-template-columns:1.1fr 1fr;gap:3mm">
+            <div>
+              <div class="vhead"><i class="ai">3</i>🔗 Fuentes <span class="vt">· por leer primero</span></div>
+              <table class="nt">
+                <tr><th>Fuente</th><th>Tipo</th><th>Capítulo</th><th>Estado</th></tr>
+                <tr><td>Revelación de negociaciones en curso</td><td>Paper</td><td>Cap. 2</td><td><span class="pill p-yellow">Leyendo</span></td></tr>
+                <tr><td>IOSCO Principles (2017)</td><td>Informe</td><td>Cap. 2</td><td><span class="pill p-gray">Por leer</span></td></tr>
+                <tr><td>Manual de Derecho del MV</td><td>Libro</td><td>Cap. 3</td><td><span class="pill p-green">Fichado</span></td></tr>
+              </table>
+              <div class="vhead" style="margin-top:2mm"><i class="ai">4</i>🧩 Mapa de argumentos</div>
+              <div class="blk"><b>Tesis:</b> faltan criterios objetivos para revelar negociaciones en curso<br>&nbsp;&nbsp;├ ✅ Apoya: discrecionalidad del emisor (3 fuentes)<br>&nbsp;&nbsp;├ ✅ Apoya: comparado Chile/UE (2 fuentes)<br>&nbsp;&nbsp;└ ⚠️ Objeción: costo regulatorio → réplica pendiente</div>
+            </div>
+            <div>
+              <div class="vhead"><i class="ai">5</i>👨‍🏫 Reuniones con asesor</div>
+              <div class="li">12 sep · Delimitar problema<span class="r"><span class="pill p-gray">🎙️</span><span class="pill p-green">3 acuerdos</span></span></div>
+              <div class="li">03 oct · Revisión cap. 1<span class="r"><span class="pill p-gray">🎙️</span><span class="pill p-green">2 acuerdos</span></span></div>
+              <div class="vhead" style="margin-top:2mm"><i class="ai">6</i>📍 Hitos</div>
+              <div style="position:relative;height:13mm">
+                <div style="position:absolute;top:3mm;left:0;right:0;height:.6mm;background:#cfe5d6"></div>
+                <div style="position:absolute;left:0;width:45%;top:3mm;height:.6mm;background:#448361"></div>
+                <div style="position:absolute;left:0;top:1.8mm;width:3mm;height:3mm;border-radius:50%;background:#448361"></div><div style="position:absolute;left:0;top:6mm;font-size:5.2pt">Plan ✓</div>
+                <div style="position:absolute;left:30%;top:1.8mm;width:3mm;height:3mm;border-radius:50%;background:#448361"></div><div style="position:absolute;left:26%;top:6mm;font-size:5.2pt">Avance 1 ✓</div>
+                <div style="position:absolute;left:55%;top:1.8mm;width:3mm;height:3mm;border-radius:50%;background:#fff;border:.5mm solid #448361"></div><div style="position:absolute;left:50%;top:6mm;font-size:5.2pt">Avance 2</div>
+                <div style="position:absolute;left:78%;top:1.8mm;width:3mm;height:3mm;border-radius:50%;background:#fff;border:.5mm solid #b9dcc6"></div><div style="position:absolute;left:70%;top:6mm;font-size:5.2pt">Pre-sust.</div>
+                <div style="position:absolute;right:0;top:1.8mm;width:3mm;height:3mm;border-radius:50%;background:#fff;border:.5mm solid #b9dcc6"></div><div style="position:absolute;right:0;top:6mm;font-size:5.2pt">Sustentación</div>
+              </div>
+            </div>
+          </div>
+          <div class="cols" style="grid-template-columns:1.1fr 1fr;gap:3mm;margin-top:2.5mm">
+            <div><div class="vhead"><i class="ai">7</i>✍️ Sesiones de escritura <span class="vt">· palabras por día</span></div>
+              <div class="chart" style="height:13mm"><i style="height:20%;background:#b9dcc6"></i><i style="height:55%;background:#b9dcc6"></i><i style="height:0%"></i><i style="height:70%;background:#b9dcc6"></i><i style="height:45%;background:#b9dcc6"></i><i style="height:85%;background:#b9dcc6"></i><i style="height:30%;background:#b9dcc6"></i><i style="height:95%;background:#448361"></i></div></div>
+            <div><div class="vhead">📌 Próximos pasos</div>
+              <div class="li"><span class="chk"></span>Responder objeción "costo regulatorio"</div>
+              <div class="li"><span class="chk"></span>Fichar 3 fuentes del cap. 2</div>
+              <div class="li"><span class="chk"></span>Enviar sección 2.3 al asesor</div></div>
+          </div>
+        </div>
+      </div></div>
+    </div>
+    <div>
+      <ul class="legend" style="list-style:none;padding:0">
+        <li><b class="n">1</b><b>Tablero de la tesis</b>: palabras escritas contra la meta, avance, próximo hito y fuentes leídas.</li>
+        <li><b class="n">2</b><b>Capítulos</b> como tarjetas que avanzan de Esquema a Final, cada una con su barra de palabras.</li>
+        <li><b class="n">3</b><b>Biblioteca de fuentes</b> con cita APA lista, estado de lectura y capítulo donde se usa.</li>
+        <li><b class="n">4</b><b>Mapa de argumentos</b>: afirmaciones que se apoyan o refutan, cada una con su evidencia.</li>
+        <li><b class="n">5</b><b>Reuniones con asesor</b> grabadas en Fireflies, con acuerdos convertidos en tareas.</li>
+        <li><b class="n">6</b><b>Hitos</b> hasta la sustentación, en línea de tiempo.</li><li><b class="n">7</b><b>Sesiones de escritura</b>: palabras por día para ver tu ritmo, más los próximos pasos concretos.</li>
+      </ul>
+      <div class="callout c-green" style="margin-top:3mm"><span class="ic">🧠</span><div class="small">Cuando escribes, abres el capítulo y ves <b>las fuentes, conceptos y normas que ya fichaste</b>. Así el capítulo se arma con lo que ya está procesado, sin empezar en blanco.</div></div>
+    </div>
+  </div>
+  <div class="foot"><span>Versión B · Segundo Cerebro Jurídico</span><span>B4</span></div>
+</section>
+
+<!-- B5: PIPELINE + REVISIÓN SEMANAL -->
+<section class="page">
+  <div style="display:flex;align-items:center;gap:3mm;margin-bottom:3mm"><span class="tag-v vB">B</span><h2 style="margin:0">De la grabación al conocimiento, y la <span class="cB">revisión semanal</span></h2></div>
+  <div class="grid" style="grid-template-columns:1fr 112mm;gap:6mm">
+    <div>
+      <h3>🔄 El flujo CODE aplicado a una clase</h3>
+      <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:2mm;margin:2mm 0 4mm">
+        <div class="card" style="border-color:#d4c3ef;padding:2.5mm"><div class="pill p-purple">1 · Capturar</div><p class="small" style="margin-top:1mm">Fireflies graba y <b>escribe una fila en la Bandeja</b>: título, fecha, resumen, acuerdos y link a la transcripción. Tú apuntas en vivo.</p></div>
+        <div class="card" style="border-color:#d4c3ef;padding:2.5mm"><div class="pill p-purple">2 · Organizar</div><p class="small" style="margin-top:1mm"><i>"Claude, procesa la bandeja"</i> → crea la <b>Nota de clase</b>, la liga al área y al proyecto, y archiva la fila.</p></div>
+        <div class="card" style="border-color:#d4c3ef;padding:2.5mm"><div class="pill p-purple">3 · Destilar</div><p class="small" style="margin-top:1mm">Extrae <b>conceptos</b> (semillas), <b>normas y artículos</b> citados, <b>resoluciones</b> y <b>tarjetas</b>. Todo enlazado.</p></div>
+        <div class="card" style="border-color:#d4c3ef;padding:2.5mm"><div class="pill p-purple">4 · Repasar</div><p class="small" style="margin-top:1mm">Tarjetas con repaso espaciado; conceptos con semáforo de confianza. Las semillas maduran en la revisión semanal.</p></div>
+        <div class="card" style="border-color:#d4c3ef;padding:2.5mm"><div class="pill p-purple">5 · Expresar</div><p class="small" style="margin-top:1mm">Lo destilado alimenta <b>exámenes, la tesis, artículos o posts de LinkedIn</b>. Claude arma el borrador con tus fichas.</p></div>
+      </div>
+      <h3>⚙️ Fórmulas y automatizaciones clave</h3>
+      <ul>
+        <li><b>Fireflies → Bandeja</b>: integración nativa a una base de datos de Notion (resumen, acuerdos, link). Una plantilla de resumen "Clase" en Fireflies agrega <i>normas citadas</i> y <i>posibles preguntas de examen</i>.</li>
+        <li><b>Normas enlazadas consigo mismas</b>: modifica / modificada por / deroga, para ver la historia de cada norma.</li>
+        <li><b>Avance de proyecto</b> = tareas hechas ÷ tareas totales, como barra ▰▰▰▱▱.</li>
+        <li><b>Avance de tesis</b> = suma de palabras actuales ÷ meta, por capítulo y total.</li>
+        <li><b>Madurez de concepto</b> con vista "por madurar" y conteo de conexiones.</li>
+        <li><b>Archivo</b>: casilla "Archivado" en todo, para que lo viejo desaparezca de las vistas sin borrarse.</li>
+      </ul>
+    </div>
+    <div class="win" style="height:170mm">
+      <div class="top"><span class="dots"><i></i><i></i><i></i></span><span>🗓️ Revisiones / Semana 41</span></div>
+      <div class="body"><div class="main"><div class="pg noc">
+        <div class="icon">🗓️</div><div class="title" style="font-size:11pt">Revisión semanal · Sem. 41</div>
+        <div class="grid g3" style="gap:1.5mm;margin-bottom:2mm"><div class="stat"><div class="k">Horas</div><div class="v">8.5</div></div><div class="stat"><div class="k">Conceptos nuevos</div><div class="v">14</div></div><div class="stat"><div class="k">Palabras tesis</div><div class="v">+2 100</div></div></div>
+        <div class="h">1 · Limpiar</div>
+        <div class="li"><span class="chk on"></span>Bandeja en cero (7 → 0)</div><div class="li"><span class="chk on"></span>Tareas vencidas reprogramadas</div><div class="li"><span class="chk"></span>Tarjetas "difíciles" reescritas (4)</div>
+        <div class="h">2 · Destilar</div>
+        <div class="li"><span class="chk"></span>Madurar 3 conceptos 🌱 → 🌿</div><div class="li"><span class="chk"></span>Fichar normas citadas en clase</div>
+        <div class="h">3 · Planificar</div>
+        <div class="li"><span class="chk"></span>Elegir 7 tareas de la semana</div><div class="li"><span class="chk"></span>Revisar hitos de tesis y evaluaciones</div>
+        <div class="h">4 · Reflexionar</div>
+        <div class="blk muted">¿Qué salió bien? · ¿Qué me trabó? · ¿Qué aprendí que me sorprendió?</div>
+        <div class="mini-call c-purple" style="margin-top:2mm"><span>🤖</span><div><b>Claude prepara esta página</b> cada viernes con tus números de la semana y los pendientes ya listados.</div></div>
+      </div></div></div>
+    </div>
+  </div>
+  <div class="foot"><span>Versión B · Segundo Cerebro Jurídico</span><span>B5</span></div>
+</section>
+
+<!-- B6: VENTAJAS -->
+<section class="page">
+  <div style="display:flex;align-items:center;gap:3mm;margin-bottom:4mm"><span class="tag-v vB">B</span><h2 style="margin:0">Cómo encajan tus otros cursos y evaluación de la versión</h2></div>
+  <div class="grid g3" style="gap:5mm">
+    <div class="card"><h3>📱 Fórmula 100K (Marketing)</h3><p>Área con sus notas de clase, conceptos (gancho, retención, CTA) y un proyecto "Campaña" con tareas. Recursos: plantillas de guiones y videos de referencia.</p></div>
+    <div class="card"><h3>🇬🇧 Inglés</h3><p>Los conceptos tienen <b>término en inglés</b>: tu glosario jurídico bilingüe sale solo (OPA = <i>tender offer</i>). Se agrega una vista de vocabulario y un registro de práctica con minutos por habilidad.</p></div>
+    <div class="card"><h3>📈 Bolsa de Valores</h3><p>Área con conceptos de inversión enlazados a los jurídicos (OPA ↔ evento de mercado). Opcional: <b>watchlist</b>, <b>tesis de inversión</b> y <b>diario de trading</b> con R-múltiplo y lecciones.</p></div>
+  </div>
+  <div class="grid g3" style="gap:5mm;margin-top:6mm">
+    <div class="card" style="border-color:#bcd8c3;background:#f6faf6"><h3>👍 Ventajas</h3><ul><li>La más poderosa a largo plazo: te sirve para la carrera, no solo para el ciclo.</li><li>Capa jurídica única: normas, artículos y resoluciones conectados.</li><li>La tesis se escribe sobre lo ya fichado.</li><li>Fireflies entra solo, sin copiar y pegar.</li></ul></div>
+    <div class="card" style="border-color:#f3c7c5;background:#fdf7f7"><h3>👎 Desventajas</h3><ul><li>La más compleja: 15 bases y más decisiones al clasificar.</li><li>Exige una revisión semanal constante; sin ella se desordena.</li><li>Menos foco en notas y evaluaciones del ciclo que A.</li><li>Con TDA, el riesgo de abandono es mayor si no se automatiza bien.</li></ul></div>
+    <div class="card"><h3>🛠️ Construcción</h3><p>Construcción + configuración de Fireflies → Notion + carga inicial de normas clave (LMV, LGS, Ley de Bancos, reglamentos SMV que uses): <b>2 sesiones de trabajo</b>.</p><p class="small muted" style="margin-top:2mm">Requiere: Notion Free. La "Bandeja" automática usa la integración de Fireflies que ya tienes.</p></div>
+  </div>
+  <div class="foot"><span>Versión B · Segundo Cerebro Jurídico</span><span>B6</span></div>
+</section>
+<!-- ===================== VERSIÓN C — FOCUS OS ===================== -->
+<section class="page" style="background:linear-gradient(135deg,#fdf1ea 0%,#fff 55%)">
+  <div style="display:flex;align-items:center;gap:3mm"><span class="tag-v vC">VERSIÓN C</span><span class="kicker" style="margin:0">Diseñado primero para TDA y procrastinación</span></div>
+  <h1 style="margin:3mm 0 2mm" class="cC">Focus OS</h1>
+  <p class="lead" style="max-width:250mm">Parte de una idea de la investigación sobre TDA: el problema no es saber qué hacer, sino <b>hacerlo en el momento</b>. Por eso abres Notion y ves <b>una sola tarea</b>, su primer paso y un botón para empezar el temporizador. Todo lo demás —clases, repaso, Kanban— queda detrás, en pestañas. Suma energía del día, XP y niveles, recompensas, menú de dopamina y un modo rescate para los días malos.</p>
+  <div class="grid" style="grid-template-columns:168mm 1fr;gap:7mm;margin-top:4mm">
+    <div class="card" style="padding:4mm;background:#fff">
+      <h4 style="margin-bottom:2mm">Arquitectura · 12 bases alrededor de una sola pantalla</h4>
+      <div class="arch" style="width:158mm;height:114mm;position:relative">
+        <svg width="158mm" height="114mm" viewBox="0 0 158 114" style="position:absolute;inset:0"><g stroke="#e8b89e" stroke-width=".5" fill="none">
+          <line x1="79" y1="57" x2="22" y2="12"/><line x1="79" y1="57" x2="79" y2="12"/><line x1="79" y1="57" x2="136" y2="12"/>
+          <line x1="79" y1="57" x2="20" y2="57"/><line x1="79" y1="57" x2="138" y2="57"/>
+          <line x1="79" y1="57" x2="22" y2="102"/><line x1="79" y1="57" x2="79" y2="102"/><line x1="79" y1="57" x2="136" y2="102"/>
+          <line x1="22" y1="12" x2="20" y2="35"/><line x1="136" y1="12" x2="138" y2="35"/><line x1="20" y1="80" x2="22" y2="102"/><line x1="138" y1="80" x2="136" y2="102"/>
+        </g></svg>
+        <div style="position:absolute;left:54mm;top:47mm;width:50mm;height:20mm;background:#c2562a;color:#fff;border-radius:3mm;display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 1mm 3mm rgba(194,86,42,.35)"><b style="font-size:10pt">⚡ AHORA</b><span style="font-size:6.2pt;opacity:.9">1 tarea · temporizador · energía</span></div>
+        <div class="db" style="position:absolute;left:2mm;top:4mm;width:40mm;border-color:#e8b89e"><b>✅ Tareas</b><span>energía, minutos, primer paso, XP</span></div>
+        <div class="db" style="position:absolute;left:59mm;top:4mm;width:40mm;border-color:#e8b89e"><b>📥 Bandeja</b><span>volcado mental en 5 segundos</span></div>
+        <div class="db" style="position:absolute;left:116mm;top:4mm;width:40mm;border-color:#e8b89e"><b>🎯 Proyectos</b><span>tesis, exámenes, campañas</span></div>
+        <div class="db" style="position:absolute;left:0mm;top:35mm;width:40mm;border-color:#e8b89e"><b>⏱️ Sesiones de foco</b><span>pomodoros, distracciones</span></div>
+        <div class="db" style="position:absolute;left:118mm;top:35mm;width:40mm;border-color:#e8b89e"><b>☀️ Check-in diario</b><span>energía, ánimo, sueño, hábitos</span></div>
+        <div class="db" style="position:absolute;left:0mm;top:72mm;width:40mm;border-color:#e8b89e"><b>📚 Clases</b><span>procesadas por Claude</span></div>
+        <div class="db" style="position:absolute;left:118mm;top:72mm;width:40mm;border-color:#e8b89e"><b>🎮 Jugador</b><span>XP, nivel, monedas, rachas</span></div>
+        <div class="db" style="position:absolute;left:2mm;top:96mm;width:40mm;border-color:#e8b89e"><b>🃏 Tarjetas</b><span>repaso express</span></div>
+        <div class="db" style="position:absolute;left:59mm;top:96mm;width:40mm;border-color:#e8b89e"><b>🍬 Menú de dopamina</b><span>recompensas sanas</span></div>
+        <div class="db" style="position:absolute;left:116mm;top:96mm;width:40mm;border-color:#e8b89e"><b>🎁 Tienda</b><span>canjear monedas por premios</span></div>
+        <div class="db" style="position:absolute;left:44mm;top:24mm;width:28mm;border-style:dashed;border-color:#d6b3a1;font-size:6pt"><b style="font-size:6.6pt">📅 Bloques</b><span>Notion Calendar</span></div>
+        <div class="db" style="position:absolute;left:87mm;top:76mm;width:28mm;border-style:dashed;border-color:#d6b3a1;font-size:6pt"><b style="font-size:6.6pt">🗓️ Revisión</b><span>semanal</span></div>
+      </div>
+    </div>
+    <div>
+      <h3>Para quién es</h3>
+      <p>Para cuando el cuello de botella no es organizar sino <b>empezar, sostener la atención y no dispersarte</b>. Si lo que más te cuesta es sentarte a estudiar, esta versión ataca eso primero.</p>
+      <h3 style="margin-top:4mm">Qué la hace distinta</h3>
+      <ul>
+        <li><b>Pantalla AHORA:</b> una tarea, su primer paso ridículo (2 min) y un botón ▶️ que abre el temporizador.</li>
+        <li><b>Tareas según tu energía:</b> si hoy tienes 🔋 baja, solo ves tareas de ≤15 min.</li>
+        <li><b>Puntaje "hazlo ya":</b> una fórmula combina urgencia e impacto y ordena por ti. No decides, ejecutas.</li>
+        <li><b>XP, niveles y monedas:</b> cada pomodoro, tarea y repaso suma. Las monedas se canjean en tu tienda de premios.</li>
+        <li><b>Modo rescate:</b> en días malos el sistema se reduce a 3 cosas mínimas y las rachas perdonan un día ("nunca falles dos veces").</li>
+      </ul>
+      <div class="grid g2" style="margin-top:3mm;gap:3mm">
+        <div class="stat"><div class="k">Bases de datos</div><div class="v">12</div></div>
+        <div class="stat"><div class="k">Pantallas principales</div><div class="v">5</div></div>
+        <div class="stat"><div class="k">Tu tiempo diario</div><div class="v">5 min + bloques</div></div>
+        <div class="stat"><div class="k">Complejidad para ti</div><div class="v"><div class="score"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></div></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span>Versión C · Focus OS</span><span>C1</span></div>
+</section>
+
+<!-- C2: AHORA -->
+<section class="page">
+  <div style="display:flex;align-items:center;gap:3mm;margin-bottom:3mm"><span class="tag-v vC">C</span><h2 style="margin:0">Pantalla principal: <span class="cC">AHORA</span></h2></div>
+  <div class="grid" style="grid-template-columns:205mm 1fr;gap:5mm">
+    <div><div class="win" style="height:128mm">
+      <div class="top"><span class="dots"><i></i><i></i><i></i></span><span>Gus OS / ⚡ Ahora</span></div>
+      <div class="body"><div class="main">
+        <div class="cover" style="height:9mm;background:linear-gradient(120deg,#5c2410,#c2562a 50%,#f6c7a8)"></div>
+        <div class="pg">
+          <div class="icon">⚡</div>
+          <div class="tabs" style="margin-top:2mm"><i class="ai">1</i><span class="on">⚡ Ahora</span><span>📋 Hoy</span><span>📥 Bandeja</span><span>📚 Estudio</span><span>🗂️ Kanban</span><span>🛟 Rescate</span></div>
+          <div class="cols" style="grid-template-columns:1.6fr 1fr;gap:4mm">
+            <div>
+              <div style="border:2px solid #c2562a;border-radius:3mm;padding:3.5mm;background:#fffaf6">
+                <div style="font-size:6pt;font-weight:800;color:#c2562a;letter-spacing:.08em"><i class="ai">2</i>TU ÚNICA TAREA AHORA</div>
+                <div style="font-size:13pt;font-weight:800;color:var(--ink);margin:1.5mm 0 1mm">Escribir la sección 2.3 de la tesis</div>
+                <div style="display:flex;gap:1.2mm;margin-bottom:2mm"><span class="pill p-purple">✍️ Tesis</span><span class="pill p-red">🔋 Alta</span><span class="pill p-gray">⏱️ 2 pomodoros</span><span class="pill p-yellow">+50 XP</span></div>
+                <div class="mini-call c-yellow"><span>👣</span><div><b>Primer paso (2 min):</b> abrir el Google Doc y escribir el título de la sección.</div></div>
+                <div style="display:flex;gap:1.6mm;margin-top:2mm;align-items:center"><i class="ai">3</i><span class="btn" style="background:#c2562a;color:#fff;border-color:#c2562a;font-size:7pt;padding:1.2mm 3mm">▶️ Empezar 25 min</span><span class="btn" style="font-size:7pt;padding:1.2mm 2.5mm">✅ Terminé</span><span class="btn" style="font-size:7pt;padding:1.2mm 2.5mm">🧱 Me trabé</span><span class="btn" style="font-size:7pt;padding:1.2mm 2.5mm">🔄 Otra</span></div>
+              </div>
+              <div class="vhead" style="margin-top:3mm"><i class="ai">4</i>⏱️ Temporizador <span class="vt">· bloque HTML interactivo</span></div>
+              <div style="display:flex;align-items:center;gap:4mm;border:1px solid var(--line);border-radius:2mm;padding:2.5mm">
+                <div style="width:22mm;height:22mm;border-radius:50%;background:conic-gradient(#c2562a 0 62%,#f3e3d9 62% 100%);display:flex;align-items:center;justify-content:center"><div style="width:16mm;height:16mm;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:10pt">15:32</div></div>
+                <div class="blk"><b>Pomodoro 1 de 2</b><br>Celular en modo avión 📵<br>Sesión con body doubling: <b>Focusmate</b> 🔗<br><span class="muted">Al terminar se registra la sesión (+25 XP)</span></div>
+              </div>
+            </div>
+            <div>
+              <div class="vhead"><i class="ai">5</i>🔋 ¿Cómo está tu batería hoy?</div>
+              <div style="display:flex;gap:1.2mm;margin-bottom:2mm"><span class="btn">🪫 Baja</span><span class="btn" style="background:#fbecdd;border-color:#f2c9a5;font-weight:800">🔋 Media</span><span class="btn">⚡ Alta</span></div>
+              <div class="vhead">📋 Siguiente en la fila <span class="vt">· puntaje "hazlo ya"</span></div>
+              <div class="li">Repaso express (10 tarjetas)<span class="r"><span class="pill p-orange">12</span></span></div>
+              <div class="li">Leer art. 5–12 LMV<span class="r"><span class="pill p-orange">10</span></span></div>
+              <div class="li">Responder al asesor<span class="r"><span class="pill p-yellow">7</span></span></div>
+              <div class="vhead" style="margin-top:2mm"><i class="ai">6</i>🏁 Hoy</div>
+              <div class="grid g3" style="gap:1.2mm"><div class="stat"><div class="k">Tareas</div><div class="v" style="font-size:9pt">1 / 3</div></div><div class="stat"><div class="k">Foco</div><div class="v" style="font-size:9pt">50′</div></div><div class="stat"><div class="k">XP hoy</div><div class="v" style="font-size:9pt">+85</div></div></div>
+              <div style="margin-top:2mm;font-size:6.4pt"><b style="color:#9065b0">Nivel 7</b> ▰▰▰▰▰▰▱▱▱▱ 380/650 XP · 🔥 racha 5</div>
+              <div class="vhead" style="margin-top:2mm">📥 Captura rápida</div>
+              <div style="border:1px dashed #d6b3a1;border-radius:1.4mm;padding:1.4mm 2mm;font-size:6.2pt;color:var(--muted)">Escribe lo que se te cruce y sigue con tu tarea…</div>
+            </div>
+          </div>
+        </div>
+      </div></div>
+    </div>
+    <div class="grid g3" style="gap:3mm;margin-top:3mm">
+      <div class="callout c-gray"><span class="ic">🙈</span><div class="small"><b>Lo que no ves aquí:</b> listas largas, cursos, notas. Están a un clic en las pestañas. Menos estímulos, más foco.</div></div>
+      <div class="callout c-orange"><span class="ic">🧱</span><div class="small"><b>"Me trabé"</b> manda la tarea a Claude, que la parte en pasos de 25 min y deja el primero en pantalla.</div></div>
+      <div class="callout c-yellow"><span class="ic">🎯</span><div class="small"><b>La fila se ordena sola</b> con el puntaje "hazlo ya": urgencia × impacto, con bono a lo corto.</div></div>
+    </div></div>
+    <div>
+      <ul class="legend" style="list-style:none;padding:0">
+        <li><b class="n">1</b><b>Pestañas</b> (bloque Tabs, Notion 3.4): lo que no es "ahora" queda escondido. Cero ruido visual.</li>
+        <li><b class="n">2</b><b>Una sola tarea</b>, la que está en "Haciendo", con su <b>primer paso de 2 minutos</b> para vencer la resistencia inicial.</li>
+        <li><b class="n">3</b><b>Botones</b>: Terminé (suma XP y trae la siguiente), Me trabé (Claude la divide en pasos), Otra (vuelve a la fila).</li>
+        <li><b class="n">4</b><b>Temporizador visual</b> dentro de la página (bloque HTML) y acceso a body doubling.</li>
+        <li><b class="n">5</b><b>Energía del día</b>: con batería baja solo aparecen tareas cortas y fáciles.</li>
+        <li><b class="n">6</b><b>Progreso inmediato</b>: tareas, minutos de foco, XP, nivel y racha. Recompensa al instante.</li>
+      </ul>
+      <div class="callout c-orange" style="margin-top:3mm"><span class="ic">📱</span><div class="small">Es la página de inicio en la compu y el widget del celular. Abres Notion y ya sabes qué hacer.</div></div>
+    </div>
+  </div>
+  <div class="foot"><span>Versión C · Focus OS</span><span>C2</span></div>
+</section>
+
+<!-- C3: PLANIFICAR -->
+<section class="page">
+  <div style="display:flex;align-items:center;gap:3mm;margin-bottom:3mm"><span class="tag-v vC">C</span><h2 style="margin:0">Planificar la semana: <span class="cC">bloques de tiempo + Kanban con límites</span></h2></div>
+  <div class="grid" style="grid-template-columns:150mm 1fr;gap:5mm">
+    <div class="win" style="height:150mm">
+      <div class="top"><span class="dots"><i></i><i></i><i></i></span><span>Notion Calendar · Semana 42</span></div>
+      <div class="body"><div class="main" style="padding:2.5mm">
+        <div class="vhead" style="margin-top:0"><i class="ai">1</i>📅 Bloques por tema <span class="vt">· arrastras tareas desde el Kanban</span></div>
+        <div style="display:grid;grid-template-columns:10mm repeat(6,1fr);font-size:5.4pt;color:var(--muted);border-top:1px solid var(--line)">
+          <div></div><div style="padding:1mm">Lun 13</div><div style="padding:1mm">Mar 14</div><div style="padding:1mm">Mié 15</div><div style="padding:1mm">Jue 16</div><div style="padding:1mm">Vie 17</div><div style="padding:1mm">Sáb 18</div>
+        </div>
+        <div style="position:relative;display:grid;grid-template-columns:10mm repeat(6,1fr);height:116mm;font-size:5.2pt;color:#a3a29e">
+          <div style="display:flex;flex-direction:column;justify-content:space-between;padding:1mm 0"><span>7:00</span><span>9:00</span><span>11:00</span><span>13:00</span><span>15:00</span><span>17:00</span><span>19:00</span><span>21:00</span><span>23:00</span></div>
+          <div style="border-left:1px solid var(--line);position:relative">
+            <div style="position:absolute;top:2%;left:1mm;right:1mm;height:11%;background:#f6f3f9;border-left:1mm solid #9065b0;border-radius:1mm;padding:.8mm;color:#5a3f80"><b>Deep work: Tesis</b><br>cap. 2 · 2 🍅</div>
+            <div style="position:absolute;top:75%;left:1mm;right:1mm;height:10%;background:#fdebec;border-left:1mm solid #d44c47;border-radius:1mm;padding:.8mm;color:#a03530"><b>Clase Tributación</b><br>19:00</div>
+          </div>
+          <div style="border-left:1px solid var(--line);position:relative">
+            <div style="position:absolute;top:2%;left:1mm;right:1mm;height:6%;background:#fbf3db;border-left:1mm solid #cb912f;border-radius:1mm;padding:.8mm;color:#8a6417"><b>Repaso</b> 15′</div>
+            <div style="position:absolute;top:75%;left:1mm;right:1mm;height:10%;background:#f6f3f9;border-left:1mm solid #9065b0;border-radius:1mm;padding:.8mm;color:#5a3f80"><b>Clase Regulación MV</b></div>
+            <div style="position:absolute;top:87%;left:1mm;right:1mm;height:6%;background:#f1f1ef;border-left:1mm solid #787774;border-radius:1mm;padding:.8mm;color:#555"><b>Procesar clase</b> 5′</div>
+          </div>
+          <div style="border-left:1px solid var(--line);position:relative">
+            <div style="position:absolute;top:2%;left:1mm;right:1mm;height:11%;background:#f6f3f9;border-left:1mm solid #9065b0;border-radius:1mm;padding:.8mm;color:#5a3f80"><b>Deep work: Tesis</b></div>
+            <div style="position:absolute;top:62%;left:1mm;right:1mm;height:8%;background:#e7f3f8;border-left:1mm solid #337ea9;border-radius:1mm;padding:.8mm;color:#245e80"><b>Societario</b> lectura</div>
+          </div>
+          <div style="border-left:1px solid var(--line);position:relative">
+            <div style="position:absolute;top:2%;left:1mm;right:1mm;height:6%;background:#fbf3db;border-left:1mm solid #cb912f;border-radius:1mm;padding:.8mm;color:#8a6417"><b>Repaso</b> 15′</div>
+            <div style="position:absolute;top:75%;left:1mm;right:1mm;height:10%;background:#e7f3f8;border-left:1mm solid #337ea9;border-radius:1mm;padding:.8mm;color:#245e80"><b>Clase Contratos B.</b></div>
+            <div style="position:absolute;top:87%;left:1mm;right:1mm;height:9%;background:#faf1f5;border-left:1mm solid #c14c8a;border-radius:1mm;padding:.8mm;color:#8f3466"><b>Fórmula 100K</b> 21:00</div>
+          </div>
+          <div style="border-left:1px solid var(--line);position:relative">
+            <div style="position:absolute;top:25%;left:1mm;right:1mm;height:8%;background:#fdebec;border-left:1mm solid #d44c47;border-radius:1mm;padding:.8mm;color:#a03530"><b>🇬🇧 Inglés</b> 30′</div>
+            <div style="position:absolute;top:62%;left:1mm;right:1mm;height:9%;background:#fbecdd;border-left:1mm solid #d9730d;border-radius:1mm;padding:.8mm;color:#9c520a"><b>Cierre semanal</b> con Claude</div>
+          </div>
+          <div style="border-left:1px solid var(--line);position:relative">
+            <div style="position:absolute;top:13%;left:1mm;right:1mm;height:12%;background:#edf3ec;border-left:1mm solid #448361;border-radius:1mm;padding:.8mm;color:#2f6146"><b>Seminario tesis</b><br>10:00</div>
+            <div style="position:absolute;top:40%;left:1mm;right:1mm;height:8%;background:#edf3ec;border-left:1mm solid #448361;border-radius:1mm;padding:.8mm;color:#2f6146"><b>📈 Bolsa</b> módulo 1</div>
+          </div>
+        </div>
+      </div></div>
+    </div>
+    <div>
+      <div class="win" style="height:76mm">
+        <div class="top"><span class="dots"><i></i><i></i><i></i></span><span>🗂️ Kanban de la semana</span></div>
+        <div class="body"><div class="main" style="padding:2.5mm">
+          <div class="vhead" style="margin-top:0"><i class="ai">2</i>Límites visibles en cada columna</div>
+          <div class="board" style="grid-template-columns:repeat(4,1fr)">
+            <div class="col"><div class="ch">📥 Bandeja <span>14</span></div><div class="kc"><b>Elegir curso de inglés</b><span class="pill p-gray">🪫 15′</span></div><div class="kc"><b>Ver video análisis técnico</b><span class="pill p-gray">🔋 30′</span></div><div class="kc" style="opacity:.5"><b>+12 más…</b></div></div>
+            <div class="col"><div class="ch">📅 Semana <span style="color:#448361">5/7</span></div><div class="kc"><b>Esquema comparativo contratos</b><span class="pill p-red">⚡ 60′</span></div><div class="kc"><b>Video TikTok tarea 3</b><span class="pill p-gray">🔋 30′</span></div><div class="kc"><b>Leer LGS art. 201–206</b><span class="pill p-gray">🔋 30′</span></div></div>
+            <div class="col"><div class="ch">⭐ Hoy <span style="color:#448361">3/3</span></div><div class="kc"><b>🐸 Sección 2.3 tesis</b><span class="pill p-red">⚡ 50′</span></div><div class="kc"><b>Repaso express</b><span class="pill p-gray">🪫 10′</span></div><div class="kc"><b>Leer art. 5–12 LMV</b><span class="pill p-gray">🔋 30′</span></div></div>
+            <div class="col" style="background:#fdf1ea"><div class="ch">🔨 Haciendo <span style="color:#c2562a">1/1</span></div><div class="kc" style="border-left:1mm solid #c2562a"><b>🐸 Sección 2.3 tesis</b><span class="pill p-yellow">+50 XP</span></div></div>
+          </div>
+        </div></div>
+      </div>
+      <ul class="legend" style="list-style:none;padding:0;margin-top:3mm">
+        <li><b class="n">1</b><b>Bloques por tema, no por tarea.</b> Reservas "Deep work: Tesis" y eliges la tarea al empezar. Las clases y los repasos ya están puestos. Se ve en Notion Calendar y en Google Calendar.</li>
+        <li><b class="n">2</b><b>Kanban con límites</b>: Semana 7 · Hoy 3 · Haciendo 1. El contador se pone rojo si te pasas.</li>
+      </ul>
+      <div class="callout c-orange" style="margin-top:2mm"><span class="ic">🤖</span><div class="small"><b>Lunes, 10 min:</b> <i>"Claude, planifiquemos la semana"</i>. Revisa evaluaciones y clases, propone 7 tareas, estima minutos y energía, y arma los bloques en tu calendario. Planifica solo el ~60% del tiempo, para dejar aire.</div></div>
+    </div>
+  </div>
+  <div class="foot"><span>Versión C · Focus OS</span><span>C3</span></div>
+</section>
+
+<!-- C4: PROGRESO / JUGADOR -->
+<section class="page">
+  <div style="display:flex;align-items:center;gap:3mm;margin-bottom:3mm"><span class="tag-v vC">C</span><h2 style="margin:0">Progreso: <span class="cC">XP, niveles, rachas y tienda de premios</span></h2></div>
+  <div class="grid" style="grid-template-columns:205mm 1fr;gap:5mm">
+    <div><div class="win" style="height:132mm">
+      <div class="top"><span class="dots"><i></i><i></i><i></i></span><span>Gus OS / 🎮 Mi progreso</span></div>
+      <div class="body"><div class="main">
+        <div class="cover" style="height:9mm;background:linear-gradient(120deg,#2a1f45,#6b4f9e 40%,#c2562a)"></div>
+        <div class="pg">
+          <div class="icon">🎮</div><div class="title">Mi progreso</div>
+          <div class="cols" style="grid-template-columns:1.2fr 1fr 1fr;gap:2.5mm;margin-bottom:2.5mm">
+            <div class="stat" style="background:linear-gradient(135deg,#f6f3f9,#fff)"><div class="k"><i class="ai">1</i>Nivel</div><div class="v" style="color:#6b4f9e">Nivel 7 · Estratega</div><div style="font-size:7pt;margin-top:1mm">▰▰▰▰▰▰▱▱▱▱ 380 / 650 XP</div></div>
+            <div class="stat"><div class="k">🪙 Monedas</div><div class="v">1 240</div><div class="k">+85 hoy</div></div>
+            <div class="stat"><div class="k">⏱️ Foco esta semana</div><div class="v">9h 10′</div><div class="k">22 pomodoros</div></div>
+          </div>
+          <div class="cols" style="grid-template-columns:1fr 1fr;gap:3mm">
+            <div>
+              <div class="vhead"><i class="ai">2</i>🔥 Rachas <span class="vt">· perdonan 1 día</span></div>
+              <div class="li">📖 Estudiar 25 min<span class="r"><span class="pill p-orange">🔥 12</span></span></div>
+              <div class="li">🔁 Repaso diario<span class="r"><span class="pill p-orange">🔥 5</span></span></div>
+              <div class="li">🇬🇧 Inglés 15 min<span class="r"><span class="pill p-yellow">🔥 2</span></span></div>
+              <div class="li">📵 Foco sin celular<span class="r"><span class="pill p-orange">🔥 7</span></span></div>
+              <div class="vhead" style="margin-top:2mm">📆 Últimas 9 semanas</div>
+              <div class="heat">
+                <i class="l1"></i><i class="l2"></i><i></i><i class="l3"></i><i class="l2"></i><i class="l1"></i><i></i><i class="l2"></i><i class="l3"></i><i class="l3"></i><i class="l1"></i><i></i><i></i><i class="l2"></i><i class="l1"></i><i class="l2"></i><i class="l3"></i><i class="l2"></i><i></i><i class="l1"></i><i class="l3"></i>
+                <i class="l2"></i><i></i><i class="l1"></i><i class="l3"></i><i class="l2"></i><i class="l3"></i><i class="l1"></i><i></i><i class="l2"></i><i class="l3"></i><i class="l2"></i><i class="l1"></i><i class="l1"></i><i></i><i class="l2"></i><i class="l3"></i><i class="l3"></i><i class="l2"></i><i class="l1"></i><i></i><i class="l2"></i>
+                <i class="l3"></i><i class="l2"></i><i class="l1"></i><i></i><i class="l1"></i><i class="l2"></i><i class="l3"></i><i class="l3"></i><i class="l2"></i><i></i><i class="l1"></i><i class="l2"></i><i class="l3"></i><i class="l1"></i><i class="l2"></i><i class="l3"></i><i class="l2"></i><i class="l3"></i><i class="l3"></i><i class="l2"></i><i class="l1"></i>
+              </div>
+              <div class="vhead" style="margin-top:2mm"><i class="ai">3</i>📈 XP por semana</div>
+              <div class="chart" style="height:15mm"><i style="height:30%;background:#d4c3ef"></i><i style="height:45%;background:#d4c3ef"></i><i style="height:40%;background:#d4c3ef"></i><i style="height:65%;background:#d4c3ef"></i><i style="height:58%;background:#d4c3ef"></i><i style="height:80%;background:#d4c3ef"></i><i style="height:72%;background:#d4c3ef"></i><i style="height:95%;background:#6b4f9e"></i></div>
+            </div>
+            <div>
+              <div class="vhead"><i class="ai">4</i>🎁 Tienda de premios</div>
+              <div class="gal" style="grid-template-columns:1fr 1fr">
+                <div class="gc"><div class="gi" style="height:7mm;background:#fbecdd">🎬</div><div class="gt">Episodio de serie</div><div class="gm">🪙 150</div></div>
+                <div class="gc"><div class="gi" style="height:7mm;background:#edf3ec">🎮</div><div class="gt">1 h de videojuego</div><div class="gm">🪙 250</div></div>
+                <div class="gc"><div class="gi" style="height:7mm;background:#fdebec">🍣</div><div class="gt">Cena de sushi</div><div class="gm">🪙 800</div></div>
+                <div class="gc"><div class="gi" style="height:7mm;background:#e7f3f8">👟</div><div class="gt">Zapatillas nuevas</div><div class="gm">🪙 4 000</div></div>
+              </div>
+              <div class="vhead" style="margin-top:2mm"><i class="ai">5</i>🏅 Logros</div>
+              <div><span class="pill p-yellow">🥇 Primer capítulo</span><span class="pill p-purple">🧠 100 tarjetas dominadas</span><span class="pill p-orange">🔥 Racha 10</span><span class="pill p-gray">🔒 Sustentación</span><span class="pill p-gray">🔒 Nivel 10</span></div>
+              <div class="vhead" style="margin-top:2mm">⚖️ Cómo se gana XP</div>
+              <div class="blk">🍅 Pomodoro: +25 · ✅ Tarea: +10/25/50 según esfuerzo · 🃏 Repaso del día: +20 · 🔥 Hábito: +5 · 🎯 Hito: +100</div>
+            </div>
+          </div>
+        </div>
+      </div></div>
+    </div>
+    <div class="grid g3" style="gap:3mm;margin-top:3mm">
+      <div class="callout c-purple"><span class="ic">⚙️</span><div class="small"><b>Economía ajustable:</b> los valores de XP y precios viven en una página de configuración. Se rebalancea todo en un solo lugar.</div></div>
+      <div class="callout c-green"><span class="ic">🧾</span><div class="small"><b>Canjear</b> es un botón en el premio: descuenta monedas y queda registrado.</div></div>
+      <div class="callout c-yellow"><span class="ic">🏅</span><div class="small"><b>Logros automáticos:</b> se desbloquean solos cuando una fórmula detecta el hito.</div></div>
+    </div></div>
+    <div>
+      <ul class="legend" style="list-style:none;padding:0">
+        <li><b class="n">1</b><b>Nivel con curva</b>: cada nivel cuesta un poco más (50, 200, 450, 800 XP…). Siempre ves cuánto falta.</li>
+        <li><b class="n">2</b><b>Rachas que perdonan</b>: un día perdido no las rompe; dos seguidos sí. Sin culpa.</li>
+        <li><b class="n">3</b><b>Gráficos</b> de XP y foco: progreso visible, que es lo que más motiva con TDA.</li>
+        <li><b class="n">4</b><b>Tienda</b>: tú pones los premios y su precio. Canjear es un botón.</li>
+        <li><b class="n">5</b><b>Logros</b> por hitos reales: capítulos, tarjetas dominadas, rachas.</li>
+      </ul>
+      <div class="callout c-purple" style="margin-top:3mm"><span class="ic">🔁</span><div class="small">Recomendación de la investigación: <b>rotar premios</b> cada cierto tiempo, porque la novedad se gasta, y preferir el perdón de racha antes que los castigos.</div></div>
+    </div>
+  </div>
+  <div class="foot"><span>Versión C · Focus OS</span><span>C4</span></div>
+</section>
+
+<!-- C5: RESCATE + CHECK-IN + ESTUDIO -->
+<section class="page">
+  <div style="display:flex;align-items:center;gap:3mm;margin-bottom:3mm"><span class="tag-v vC">C</span><h2 style="margin:0">Check-in diario, <span class="cC">modo rescate</span> y estudio express</h2></div>
+  <div class="grid g3" style="gap:4mm">
+    <div class="win" style="height:122mm">
+      <div class="top"><span class="dots"><i></i><i></i><i></i></span><span>☀️ Check-in · formulario</span></div>
+      <div class="body"><div class="main"><div class="pg noc">
+        <div class="icon">☀️</div><div class="title" style="font-size:10.5pt">Check-in de 2 minutos</div>
+        <div class="blk muted" style="margin-bottom:2mm">Se abre desde el celular cada mañana. Crea la fila del día.</div>
+        <div class="h">¿Cuánto dormiste?</div><div><span class="btn">&lt;6h</span> <span class="btn" style="background:#e7f3f8">6–7h</span> <span class="btn">7–8h</span> <span class="btn">8h+</span></div>
+        <div class="h">Energía</div><div><span class="btn">🪫</span> <span class="btn" style="background:#fbecdd">🔋</span> <span class="btn">⚡</span></div>
+        <div class="h">Ánimo</div><div><span class="btn">😞</span> <span class="btn">😐</span> <span class="btn" style="background:#edf3ec">🙂</span> <span class="btn">😄</span></div>
+        <div class="h">¿Medicación / rutina de la mañana?</div><div><span class="btn" style="background:#edf3ec">Sí</span> <span class="btn">No</span></div>
+        <div class="h">Mis 3 prioridades de hoy</div>
+        <div style="border:1px solid var(--line);border-radius:1.2mm;padding:1.2mm;font-size:6pt;color:var(--muted)">1. Sección 2.3 tesis<br>2. Repaso<br>3. Leer LMV</div>
+        <div class="mini-call c-blue" style="margin-top:2mm"><span>📊</span><div>Con semanas de datos se ve cuándo rindes mejor: por ejemplo, "después de dormir 7h+ haces 40% más pomodoros".</div></div>
+      </div></div></div>
+    </div>
+    <div class="win" style="height:122mm">
+      <div class="top"><span class="dots"><i></i><i></i><i></i></span><span>⚡ Ahora / 🛟 Rescate</span></div>
+      <div class="body"><div class="main">
+        <div class="cover" style="height:7mm;background:linear-gradient(120deg,#b9d4e8,#e7f3f8)"></div>
+        <div class="pg">
+          <div class="icon">🛟</div><div class="title" style="font-size:10.5pt">Modo rescate</div>
+          <div class="mini-call c-blue"><span>🫶</span><div><b>Hoy es un día difícil, y está bien.</b> Solo 3 cosas mínimas. Hacerlas cuenta como día ganado y no rompe la racha.</div></div>
+          <div class="li"><span class="chk"></span>💊 Rutina básica (agua, comida, medicación)</div>
+          <div class="li"><span class="chk"></span>🔁 5 tarjetas de repaso (5 min)</div>
+          <div class="li"><span class="chk"></span>📥 Vaciar la cabeza en la bandeja</div>
+          <div class="h">🍬 Menú de dopamina</div>
+          <div class="blk"><b>Entradas</b> (5 min): caminar, música, ducha<br><b>Principales</b>: entrenar, llamar a un amigo<br><b>Acompañantes</b> para tareas aburridas: playlist lo-fi, café, body doubling<br><b>Postres</b> (con medida): redes, series</div>
+          <div class="mini-call c-yellow" style="margin-top:2mm"><span>🤖</span><div>Si marcas 🪫 dos días seguidos, Claude te propone bajar la carga de la semana.</div></div>
+        </div>
+      </div></div>
+    </div>
+    <div class="win" style="height:122mm">
+      <div class="top"><span class="dots"><i></i><i></i><i></i></span><span>⚡ Ahora / 📚 Estudio</span></div>
+      <div class="body"><div class="main"><div class="pg noc">
+        <div class="icon">📚</div><div class="title" style="font-size:10.5pt">Estudio</div>
+        <div class="navbar"><span class="btn" style="background:#c2562a;color:#fff;border-color:#c2562a">▶️ Repaso express (10)</span><span class="btn">📥 Procesar clase</span></div>
+        <div class="vhead">🃏 Repaso express <span class="vt">· 10 tarjetas, 8 min</span></div>
+        <div class="li">¿Qué es un hecho de importancia?<span class="r"><span class="pill p-red">❌</span><span class="pill p-green">✅</span></span></div>
+        <div class="li">Leasing vs. arrendamiento<span class="r"><span class="pill p-red">❌</span><span class="pill p-green">✅</span></span></div>
+        <div class="li">"tender offer" =<span class="r"><span class="pill p-red">❌</span><span class="pill p-green">✅</span></span></div>
+        <div class="vhead" style="margin-top:2mm">📥 Clases por procesar</div>
+        <div class="li">🎙️ Regulación MV · S10<span class="r"><span class="pill p-gray">ayer</span></span></div>
+        <div class="li">🎙️ Fórmula 100K · Clase 6<span class="r"><span class="pill p-gray">jue</span></span></div>
+        <div class="vhead" style="margin-top:2mm">🎓 Mis cursos</div>
+        <div class="gal" style="grid-template-columns:1fr 1fr">
+          <div class="gc"><div class="gi" style="height:5mm;background:linear-gradient(135deg,#6b4f9e,#a98bd6)"></div><div class="gt">Maestría PUCP</div><div class="gm">próx. examen: 9 días</div></div>
+          <div class="gc"><div class="gi" style="height:5mm;background:linear-gradient(135deg,#2f5d8a,#7fb0dc)"></div><div class="gt">Der. Societario</div><div class="gm">expo: 23 días</div></div>
+          <div class="gc"><div class="gi" style="height:5mm;background:linear-gradient(135deg,#c14c8a,#eeb1cf)"></div><div class="gt">Fórmula 100K</div><div class="gm">clase jue 21:00</div></div>
+          <div class="gc"><div class="gi" style="height:5mm;background:linear-gradient(135deg,#448361,#9fd1b2)"></div><div class="gt">Inglés · Bolsa</div><div class="gm">pendientes</div></div>
+        </div>
+        <div class="blk muted" style="margin-top:2mm">El estudio es más simple que en A: clases procesadas por Claude + tarjetas, sin notas ni evaluaciones detalladas.</div>
+      </div></div></div>
+    </div>
+  </div>
+  <div class="grid g3" style="gap:4mm;margin-top:3.5mm">
+    <div class="callout c-blue"><span class="ic">☀️</span><div class="small"><b>Check-in:</b> un formulario de Notion que crea la fila del día. Los datos de sueño y energía muestran tus patrones.</div></div>
+    <div class="callout c-gray"><span class="ic">🛟</span><div class="small"><b>Rescate:</b> una pestaña para días de batería baja. Tres mínimos que mantienen la racha y un menú de dopamina sano.</div></div>
+    <div class="callout c-orange"><span class="ic">📚</span><div class="small"><b>Estudio express:</b> 10 tarjetas en 8 minutos entre bloques, y las clases por procesar a un botón.</div></div>
+  </div>
+  <div class="foot"><span>Versión C · Focus OS</span><span>C5</span></div>
+</section>
+
+<!-- C6: FLUJOS -->
+<section class="page">
+  <div style="display:flex;align-items:center;gap:3mm;margin-bottom:3mm"><span class="tag-v vC">C</span><h2 style="margin:0">Cómo funciona en el día a día</h2></div>
+  <div class="grid g3" style="gap:5mm">
+    <div>
+      <h3>☀️ Un día normal</h3>
+      <table class="t">
+        <tr><td style="width:22mm"><b>Mañana</b></td><td>Check-in de 2 min en el celular (energía, sueño, 3 prioridades).</td></tr>
+        <tr><td><b>Al sentarte</b></td><td>Abres AHORA → ves 1 tarea → ▶️ 25 min. Si te trabas: "Me trabé" y Claude la divide.</td></tr>
+        <tr><td><b>Entre bloques</b></td><td>Repaso express de 10 tarjetas (8 min) y captura de lo que se te cruce.</td></tr>
+        <tr><td><b>Tras clase</b></td><td>"Procesa la clase" (2 min). Gana XP.</td></tr>
+        <tr><td><b>Noche</b></td><td>Ves tu XP, racha y canjeas premios si quieres.</td></tr>
+      </table>
+    </div>
+    <div>
+      <h3>⚙️ Fórmulas y automatizaciones</h3>
+      <ul>
+        <li><b>Puntaje "hazlo ya"</b> = urgencia (días a la fecha) × impacto, +1 si dura ≤15 min. Ordena la fila.</li>
+        <li><b>Filtro por energía</b>: con 🪫 solo aparecen tareas de energía baja y ≤15 min.</li>
+        <li><b>XP</b> por tarea según esfuerzo, +10 si fue a tiempo; por pomodoro y por repaso.</li>
+        <li><b>Nivel</b> = raíz(XP ÷ 50) + 1, con barra ▰▱ hacia el siguiente.</li>
+        <li><b>Racha con perdón</b> calculada sobre el check-in diario.</li>
+        <li><b>Plantilla diaria recurrente</b>: la fila de cada día aparece sola.</li>
+        <li><b>Monedas</b> = XP ÷ 10 − premios canjeados.</li>
+      </ul>
+    </div>
+    <div>
+      <h3>🧠 Por qué funciona con TDA</h3>
+      <ul>
+        <li><b>Punto de desempeño</b> (Barkley): la tarea, el tiempo y el primer paso están frente a ti, no en tu cabeza.</li>
+        <li><b>Si… entonces</b> (Gollwitzer, d = 0,65): cada bloque es un plan concreto de cuándo y qué.</li>
+        <li><b>Ecuación de la procrastinación</b> (Steel): tareas pequeñas (+ expectativa), XP inmediato (− demora), modo avión (− impulsividad).</li>
+        <li><b>Menos decisiones</b>: la fórmula elige el orden; tú solo ejecutas.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="grid g3" style="gap:5mm;margin-top:5mm">
+    <div class="card" style="border-color:#bcd8c3;background:#f6faf6"><h3>👍 Ventajas</h3><ul><li>La que mejor ataca la procrastinación y la dispersión.</li><li>La más simple de usar: abres y ejecutas.</li><li>Motivación inmediata con XP, rachas y premios.</li><li>Se adapta a días buenos y malos.</li></ul></div>
+    <div class="card" style="border-color:#f3c7c5;background:#fdf7f7"><h3>👎 Desventajas</h3><ul><li>El "segundo cerebro" de conocimiento es básico: sin normas, jurisprudencia ni estudio de tesis.</li><li>Notas y promedios del ciclo más simples que en A.</li><li>La gamificación cansa si no se renuevan los premios.</li></ul></div>
+    <div class="card"><h3>🛠️ Construcción</h3><p>Construcción + temporizador HTML + configuración de Notion Calendar: <b>1 sesión de trabajo</b>. Tu parte: definir tus premios y sus precios.</p><p class="small muted" style="margin-top:2mm">Automatizaciones y gráficos ilimitados: <span class="pill p-orange">Plus</span> (posiblemente gratis con correo PUCP).</p></div>
+  </div>
+  <div class="foot"><span>Versión C · Focus OS</span><span>C6</span></div>
+</section>
+<!-- ============ 08 COMPARACIÓN ============ -->
+<section class="page">
+  <div class="kicker">08 · Decisión</div>
+  <h1 style="margin-bottom:4mm">Las tres versiones, lado a lado</h1>
+  <table class="t" style="font-size:8.4pt">
+    <tr><th style="width:52mm">Criterio</th><th><span class="tag-v vA">A · Campus</span></th><th><span class="tag-v vB">B · Segundo Cerebro Jurídico</span></th><th><span class="tag-v vC">C · Focus OS</span></th></tr>
+    <tr><td><b>Centro del sistema</b></td><td>Tus cursos y evaluaciones</td><td>Tu conocimiento jurídico y la tesis</td><td>Tu foco: qué haces ahora</td></tr>
+    <tr><td><b>Bases de datos</b></td><td>11</td><td>15</td><td>12</td></tr>
+    <tr><td><b>Repaso espaciado por tarjeta</b></td><td>●●●●● completo + modo examen</td><td>●●●●○ completo</td><td>●●●○○ repaso express</td></tr>
+    <tr><td><b>Notas, pesos y promedios</b></td><td>●●●●● con "nota necesaria"</td><td>●●○○○ básico</td><td>●●○○○ básico</td></tr>
+    <tr><td><b>Normas, artículos, jurisprudencia</b></td><td>●○○○○ glosario simple</td><td>●●●●● capa jurídica completa</td><td>○○○○○</td></tr>
+    <tr><td><b>Tesis</b></td><td>●●○○○ como proyecto</td><td>●●●●● estudio de tesis</td><td>●●○○○ como proyecto</td></tr>
+    <tr><td><b>Ayuda con TDA y procrastinación</b></td><td>●●●○○ Kanban + hábitos</td><td>●●○○○ revisión semanal</td><td>●●●●● pantalla única, energía, XP</td></tr>
+    <tr><td><b>Kanban con límites</b></td><td>✅</td><td>✅</td><td>✅ + puntaje "hazlo ya"</td></tr>
+    <tr><td><b>Gamificación</b></td><td>Rachas y gráficos</td><td>—</td><td>XP, niveles, monedas, tienda, logros</td></tr>
+    <tr><td><b>Tu tiempo diario</b></td><td>20–30 min</td><td>25–35 min</td><td>5 min + tus bloques de estudio</td></tr>
+    <tr><td><b>Curva de aprendizaje</b></td><td>Media</td><td>Alta</td><td>Baja</td></tr>
+    <tr><td><b>Riesgo de abandono</b> (tu historial)</td><td>Medio</td><td><span style="color:#d44c47;font-weight:700">Alto</span> si no se automatiza</td><td><span style="color:#448361;font-weight:700">Bajo</span></td></tr>
+    <tr><td><b>Valor a largo plazo</b></td><td>Alto durante los estudios</td><td><b>Muy alto</b>: archivo profesional</td><td>Alto en hábitos; bajo como archivo</td></tr>
+    <tr><td><b>Plan de Notion</b></td><td colspan="3">Funcionan con Free. Recomendado <b>Plus</b> (automatizaciones y gráficos), posiblemente gratis con el plan Educación.</td></tr>
+    <tr><td><b>Construcción</b></td><td>1 sesión</td><td>2 sesiones</td><td>1 sesión</td></tr>
+  </table>
+  <div class="grid g3" style="gap:5mm;margin-top:5mm">
+    <div class="callout c-blue"><span class="ic">🅰️</span><div class="small"><b>Elige A si</b> tu prioridad este ciclo son las notas y llegar preparado a cada examen.</div></div>
+    <div class="callout c-purple"><span class="ic">🅱️</span><div class="small"><b>Elige B si</b> quieres un archivo jurídico para toda tu carrera y terminar la tesis con todo fichado.</div></div>
+    <div class="callout c-orange"><span class="ic">©️</span><div class="small"><b>Elige C si</b> lo que más te frena es empezar, concentrarte y no dispersarte.</div></div>
+  </div>
+  <div class="foot"><span>Gus OS · Propuesta de rediseño</span><span>8</span></div>
+</section>
+
+<!-- ============ 08b RECOMENDACIÓN ============ -->
+<section class="page">
+  <div class="kicker">08 · Decisión</div>
+  <h1 style="margin-bottom:2mm">Mi recomendación</h1>
+  <p class="lead" style="max-width:250mm;margin-bottom:4mm">Recomiendo <b class="cC">C como pantalla diaria con el núcleo académico de A detrás</b>, y sumar la <b class="cB">capa jurídica y el estudio de tesis de B</b> cuando el hábito esté firme. La razón: tus sistemas anteriores murieron por mantenimiento, no por falta de funciones. Primero tiene que existir el hábito de abrir Notion y estudiar; después vale la pena la profundidad.</p>
+  <div class="grid g3" style="gap:5mm">
+    <div class="card" style="border-top:2mm solid #c2562a">
+      <div class="pill p-orange">Fase 1 · semana 1</div>
+      <h3 style="margin-top:2mm">Arrancar el hábito</h3>
+      <ul>
+        <li>Pantalla <b>AHORA</b>, Kanban con límites, check-in, XP y tienda (de C).</li>
+        <li><b>Programas → cursos → sesiones → tarjetas</b>, evaluaciones con pesos y modo examen (de A).</li>
+        <li>Fireflies escribiendo directo a la bandeja de Notion.</li>
+        <li>Migración de tus clases 2026 desde Fireflies.</li>
+      </ul>
+    </div>
+    <div class="card" style="border-top:2mm solid #6b4f9e">
+      <div class="pill p-purple">Fase 2 · semanas 3–4</div>
+      <h3 style="margin-top:2mm">Segundo cerebro jurídico</h3>
+      <ul>
+        <li><b>Normas, artículos y jurisprudencia</b> enlazados a conceptos (de B).</li>
+        <li><b>Estudio de tesis</b>: capítulos, fuentes, argumentos, asesor, hitos.</li>
+        <li>Carga inicial de las normas que más usas (LMV, LGS, Ley de Bancos, reglamentos SMV).</li>
+        <li>Revisión semanal guiada.</li>
+      </ul>
+    </div>
+    <div class="card" style="border-top:2mm solid #448361">
+      <div class="pill p-green">Fase 3 · mes 2</div>
+      <h3 style="margin-top:2mm">Módulos de tus otros cursos</h3>
+      <ul>
+        <li><b>Inglés:</b> vocabulario jurídico bilingüe + registro de práctica.</li>
+        <li><b>Bolsa:</b> watchlist, tesis de inversión y diario de trading.</li>
+        <li><b>Fórmula 100K:</b> banco de guiones y referencias.</li>
+        <li>Rutinas automáticas de Claude (procesar clases cada noche, cierre de los viernes).</li>
+      </ul>
+    </div>
+  </div>
+  <div class="callout c-gray" style="margin-top:4mm"><span class="ic">↔️</span><div>Si prefieres una versión <b>tal cual</b> (solo A, solo B o solo C), también se construye completa. Las tres comparten la misma base, así que <b>después se pueden sumar piezas de las otras</b> sin rehacer nada.</div></div>
+  <div class="grid" style="grid-template-columns:1.5fr 1fr;gap:6mm;margin-top:5mm">
+    <div>
+      <h4 style="margin-bottom:2mm">Cómo se ve la combinación recomendada</h4>
+      <div style="border-radius:2.5mm;overflow:hidden;border:1px solid var(--line)">
+        <div style="background:#fdf1ea;padding:2.5mm 3.5mm;border-bottom:1px solid #f2d6c4"><span class="tag-v vC">C</span> <b style="font-size:8.6pt">Capa diaria — lo que ves</b><div style="margin-top:1.2mm"><span class="pill p-orange">⚡ Ahora</span><span class="pill p-orange">🗂️ Kanban 7·3·1</span><span class="pill p-orange">☀️ Check-in</span><span class="pill p-orange">🎮 XP y tienda</span><span class="pill p-orange">🛟 Rescate</span></div></div>
+        <div style="background:#eef4fa;padding:2.5mm 3.5mm;border-bottom:1px solid #cfe0ef"><span class="tag-v vA">A</span> <b style="font-size:8.6pt">Núcleo académico — detrás de la pestaña Estudio</b><div style="margin-top:1.2mm"><span class="pill p-blue">🎓 Programas</span><span class="pill p-blue">📘 Cursos</span><span class="pill p-blue">🗓️ Sesiones Cornell</span><span class="pill p-blue">🃏 Tarjetas</span><span class="pill p-blue">📝 Evaluaciones y notas</span><span class="pill p-blue">🧪 Modo examen</span></div></div>
+        <div style="background:#f4f0fa;padding:2.5mm 3.5mm"><span class="tag-v vB">B</span> <b style="font-size:8.6pt">Capa de conocimiento — se suma en la fase 2</b><div style="margin-top:1.2mm"><span class="pill p-purple">🧠 Conceptos</span><span class="pill p-purple">📜 Normas y artículos</span><span class="pill p-purple">⚖️ Jurisprudencia</span><span class="pill p-purple">✍️ Estudio de tesis</span><span class="pill p-purple">🗓️ Revisión semanal</span></div></div>
+      </div>
+    </div>
+    <div>
+      <h4 style="margin-bottom:2mm">Por qué en este orden</h4>
+      <ul>
+        <li><b>El hábito primero:</b> si no abres Notion a diario, ninguna función sirve. C resuelve eso.</li>
+        <li><b>Lo urgente después:</b> evaluaciones y tesis tienen fecha. A te da control del ciclo desde la semana 1.</li>
+        <li><b>Lo profundo al final:</b> la capa jurídica de B rinde cuando ya hay clases y conceptos cargados para conectar.</li>
+        <li><b>Todo es la misma base:</b> no se rehace nada al sumar piezas.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot"><span>Gus OS · Propuesta de rediseño</span><span>9</span></div>
+</section>
+
+<!-- ============ 08c LO QUE NECESITO ============ -->
+<section class="page">
+  <div class="kicker">08 · Decisión</div>
+  <h1 style="margin-bottom:4mm">Lo que necesito que me apruebes</h1>
+  <div class="grid g2" style="gap:7mm">
+    <div>
+      <table class="t" style="font-size:9.5pt">
+        <tr><td style="width:10mm"><span class="num" style="font-size:16pt">1</span></td><td><b>¿Qué versión?</b><br><span class="muted">A, B, C, o la recomendada (C + A ahora, B después).</span></td></tr>
+        <tr><td><span class="num" style="font-size:16pt">2</span></td><td><b>Tus cursos con sus subdivisiones</b><br><span class="muted">Maestría PUCP y Derecho Societario: nombre de cada curso, profesor, horario y fechas de evaluaciones. Si tienes los sílabos en PDF, mejor.</span></td></tr>
+        <tr><td><span class="num" style="font-size:16pt">3</span></td><td><b>¿Tienes correo @pucp.edu.pe?</b><br><span class="muted">Para activar el plan Educación de Notion (Plus gratis).</span></td></tr>
+        <tr><td><span class="num" style="font-size:16pt">4</span></td><td><b>¿Conecto Fireflies para que escriba directo en Notion?</b><br><span class="muted">Así cada clase llega sola a la bandeja. Se configura en Fireflies → Integraciones → Notion.</span></td></tr>
+        <tr><td><span class="num" style="font-size:16pt">5</span></td><td><b>¿Qué hago con la versión anterior?</b><br><span class="muted">"Gus OS — Estudio" (la que no te gustó): la reemplazo por la nueva y archivo lo viejo, sin borrar nada.</span></td></tr>
+      </table>
+    </div>
+    <div>
+      <div class="callout c-green" style="margin-bottom:4mm"><span class="ic">✅</span><div><b>Cuando me respondas,</b> construyo la versión aprobada completa en tu Notion. Incluye pantallas, plantillas, fórmulas, botones, colores y portadas, y la migración de tus clases de Fireflies de 2026.</div></div>
+      <div class="callout c-yellow" style="margin-bottom:4mm"><span class="ic">💬</span><div><b>Puedes pedir cambios sobre este documento:</b> por ejemplo, "la A pero con la pantalla AHORA de C" o "quita la gamificación". Ajusto y te muestro antes de construir.</div></div>
+      <div class="callout c-gray"><span class="ic">🎁</span><div class="small"><b>Si eliges C:</b> anota 5–8 premios que te motiven de verdad, y su "precio" aproximado en esfuerzo. Los cargo en la tienda.</div></div>
+    </div>
+  </div>
+  <div class="foot"><span>Gus OS · Propuesta de rediseño</span><span>10</span></div>
+</section>
+
+<!-- ============ ANEXO: FÓRMULAS ============ -->
+<section class="page">
+  <div class="kicker">Anexo A</div>
+  <h1 style="margin-bottom:4mm">Fórmulas clave (Notion Formulas 2.0)</h1>
+  <p class="small muted" style="margin-bottom:3mm">Versiones de referencia armadas a partir de la investigación; se prueban y ajustan al construir.</p>
+  <div class="grid g2" style="gap:5mm">
+    <div>
+      <h4>🃏 Próximo repaso (caja Leitner 1–6)</h4>
+<pre class="code">lets(
+  caja, if(empty(prop("Caja")), 1, prop("Caja")),
+  dias, [1, 3, 7, 16, 35, 90].at(caja - 1),
+  if(empty(prop("Último repaso")), today(),
+     dateAdd(prop("Último repaso"), dias, "days")))</pre>
+      <h4 style="margin-top:3mm">⏳ Cuenta regresiva con color</h4>
+<pre class="code">lets(d, dateBetween(prop("Fecha"), today(), "days"),
+  ifs(empty(prop("Fecha")), "",
+      d &lt; 0,  style("✅ pasó", "gray"),
+      d == 0, style("🔥 HOY", "b", "red"),
+      d &lt;= 7, style("🚨 " + format(d) + " días", "red"),
+      d &lt;= 14, style("⚠️ " + format(d) + " días", "orange"),
+      style("📅 " + format(d) + " días", "green")))</pre>
+      <h4 style="margin-top:3mm">▰ Barra de avance</h4>
+<pre class="code">lets(p, prop("Avance"), n, round(p * 10),
+  style(repeat("▰", n), "purple") + repeat("▱", 10 - n)
+  + " " + format(round(p * 100)) + "%")</pre>
+    </div>
+    <div>
+      <h4>🧮 Promedio ponderado (escala 0–20)</h4>
+<pre class="code">lets(
+  g, prop("Evaluaciones").filter(not empty(current.prop("Nota"))),
+  w, g.map(current.prop("Peso")).sum(),
+  if(w == 0, 0,
+     round(g.map(current.prop("Nota") * current.prop("Peso")).sum()
+           / w * 100) / 100))</pre>
+      <h4 style="margin-top:3mm">🎯 Puntaje "hazlo ya"</h4>
+<pre class="code">lets(
+  d,   if(empty(prop("Fecha límite")), 30,
+          dateBetween(prop("Fecha límite"), today(), "days")),
+  urg, ifs(d &lt;= 0, 5, d &lt;= 2, 4, d &lt;= 7, 3, d &lt;= 14, 2, 1),
+  imp, ifs(prop("Impacto") == "Alto", 3, prop("Impacto") == "Medio", 2, 1),
+  urg * imp + if(prop("Minutos") &lt;= 15, 1, 0))</pre>
+      <h4 style="margin-top:3mm">🎮 Nivel desde el XP</h4>
+<pre class="code">lets(xp, prop("XP total"),
+  nivel, floor(sqrt(xp / 50)) + 1,
+  base, 50 * (nivel - 1) ^ 2, meta, 50 * nivel ^ 2,
+  "Nivel " + format(nivel) + " · " + format(xp - base)
+  + "/" + format(meta - base) + " XP")</pre>
+    </div>
+  </div>
+  <div class="foot"><span>Gus OS · Propuesta de rediseño</span><span>11</span></div>
+</section>
+
+<!-- ============ ANEXO: FUENTES ============ -->
+<section class="page">
+  <div class="kicker">Anexo B</div>
+  <h1 style="margin-bottom:4mm">Fuentes consultadas</h1>
+  <div class="grid g3" style="gap:5mm">
+    <div class="src">
+      <h4>Sistemas de referencia</h4>
+      thomasjfrank.com/docs/ultimate-brain (databases, pages, 3.0)<br>thomasjfrank.com/brain · notion.com/templates/ultimate-brain<br>easlo.co/templates/student-dashboard · notion.com/templates/easlos-student-dashboard<br>notionlifedesign.com (PPV) · esilva.net/tla_insights/ppv_bradley<br>notion.com/templates/student-os (Gridfiti) · gridfiti.com<br>notion4management.com/notion-student-os · templatesfornotion.com/student-os<br>matthiasfrank.de (Study Planner, Zettelkasten) · mariepoulin.com (PARA)<br>redgregory.com (fórmulas, barras de progreso)
+      <h4 style="margin-top:3mm">Derecho y tesis</h4>
+      notion.com/templates/law-school-case-brief-organizer · law-school-planner<br>law.ubalt.libguides.com/NotionOrganizedLearning<br>barbri.com/resources/law-school-notetaking-part-ii<br>quimbee.com/resources/how-to-write-a-case-brief<br>library.onu.edu/lawschoolsuccess/exampreparation<br>kaydeebarker.notion.site (PhD Planning) · iainjackson.gumroad.com<br>busquedas.elperuano.pe (TUO LMV, D.S. 020-2023-EF — verificar)
+    </div>
+    <div class="src">
+      <h4>Notion: funciones y planes</h4>
+      notion.com/releases (2025-09-18, 2026-03-26, 2026-07-01, 2026-07-31, 2026-09-15)<br>notion.com/help: buttons, database-buttons, database-automations, layouts, charts, dashboards, forms, custom-agent, ai-meeting-notes<br>notion.com/help/guides/new-formulas-whats-changed<br>notion.com/educators (plan Educación)<br>easlo.co/blog/notion-new-tabbed-layout-and-how-to-use-it<br>matthiasfrank.de/en/notion-html-blocks · notion-dashboards-database-view<br>heise.de (cierre de Notion Mail, sep 2026)<br>costbench.com · get-alfred.ai (precios de Notion)
+      <h4 style="margin-top:3mm">Repaso espaciado</h4>
+      notion.com/templates/spaced-repetition-scheduler · /memory<br>theeudaimon.com (repaso con botones)<br>thienqc.notion.site (Leitner) · pgoddardphd.notion.site<br>github.com/2anki/server · notion.com/integrations/2anki
+      <h4 style="margin-top:3mm">Fireflies</h4>
+      guide.fireflies.ai (integración con Notion, plantillas de resumen)<br>fireflies.ai/blog/fireflies-notion-database
+    </div>
+    <div class="src">
+      <h4>Aprendizaje (evidencia)</h4>
+      Dunlosky et al. (2013), Psychological Science in the Public Interest 14(1)<br>Roediger y Karpicke (2006), Psychological Science — efecto de la evaluación<br>Pauk — método Cornell · Forte — PARA / CODE / resumen progresivo<br>aliabdaal.com (retrospective revision timetable)
+      <h4 style="margin-top:3mm">TDA y procrastinación</h4>
+      Barkley — punto de desempeño, ceguera temporal (Taking Charge of Adult ADHD)<br>Steel (2007), Psychological Bulletin 133(1) — ecuación de la procrastinación<br>Gollwitzer y Sheeran (2006) — intenciones de implementación, d = 0,65<br>chadd.org (body doubling) · goodgoodgood.co (menú de dopamina)<br>notion.com/templates/adhd-brain-manager… · adhd-second-brain<br>notionforadhd.gumroad.com (Your ADHD Mynd)
+      <h4 style="margin-top:3mm">Gamificación</h4>
+      liferpg.site · notiondone.com (Life RPG) · olsnotion.com<br>notion.com/templates/level-up-gamified-second-brain
+    </div>
+  </div>
+  <div class="callout c-gray" style="margin-top:5mm"><span class="ic">ℹ️</span><div class="small">Algunas páginas no se pudieron abrir directamente durante la investigación; los datos vienen de resúmenes de búsqueda de esas fuentes. Precios, planes y sintaxis exacta de fórmulas se verifican al construir.</div></div>
+  <div class="foot"><span>Gus OS · Propuesta de rediseño</span><span>12</span></div>
+</section>
+</body></html>
