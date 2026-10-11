@@ -5,17 +5,21 @@
 
 ## Estructura
 
+Diseño horizontal (rediseño del 11 oct 2026), en filas de columnas:
+
 ```
-🧠 Gus OS — Estudio          ← página que se abre cada día
-│  1. ⭐ Mis tareas de hoy     (Tareas: Estado ∈ {Hoy, Haciendo})
-│  2. 🔁 Repasar hoy           (Clases: Toca repasar = "🔁 Sí")
-│  3. 📥 Clases por procesar   (Clases: Estado = Por procesar)
-│  4. 🔥 Hábitos de hoy        (Hábitos: Fecha = hoy)
-│  5. 🗂️ Tablero Kanban        (Tareas agrupadas por Estado)
-│  6. 🎓 Mis cursos            (Cursos agrupados por Programa)
-│  📖 Guía de uso (desplegable)
-└── 🗄️ Bases de datos
+🎓 Gus OS — Estudio  (portada + icono)
+├─ Fila 1 · widgets HTML (3 columnas)
+│    🕐 Reloj, saludo y avance del Seminario 2 · 🍅 Pomodoro 25/5/15 · ⏳ Próxima entrega (días que faltan)
+├─ Barra de navegación (callout): Cursos · Clases · Conceptos · Recursos · Tareas · Proyectos · Hábitos
+├─ Fila 2 · 3 columnas
+│    ⭐ Hoy + 🔁 Repasar hoy │ 📌 Próximas entregas + 📥 Por procesar │ 🔥 Hábitos de hoy (galería) + 🔗 Accesos rápidos
+├─ Pestañas: 🗂️ Kanban · 📅 Calendario · 📚 Ruta de clases (tablero por estado) · 🎓 Cursos · 🔥 Historial · 📈 Progreso (gráfico)
+├─ 🗄️ Bases de datos
+└─ 📖 Cómo usar esta página (desplegable)
 ```
+
+Los widgets son archivos HTML subidos a Notion (bloques embed). Fuentes en la carpeta `widgets/` de este repositorio: `reloj.html`, `pomodoro.html`, `hitos.html`. Las fechas de los widgets están escritas en el código (sílabo del Seminario 2) y hay que actualizarlas cuando cambien.
 
 ## Bases de datos (IDs de data source)
 
