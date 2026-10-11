@@ -61,3 +61,15 @@ Ejemplo: "Clase 01 — TikTok: perfil, SEO y contenido que retiene" (Fórmula 10
 - Archivar los sistemas viejos: Gus Life's, trackers de hábitos duplicados, plantillas.
 - Carpetas en Drive por curso.
 - Rutinas automáticas de Claude: procesar clases nuevas cada noche y cerrar la semana los viernes.
+
+## Registro — 11 oct 2026: conexión Fireflies → Notion
+
+- Fireflies ya exportaba a Notion (página "Notas" de Gus Life's) **todas** las reuniones, incluidas las de trabajo y las personales. No se modificó esa integración (se cambia desde Fireflies → Integraciones).
+- Claude lee Fireflies directamente (conector) e importa **solo clases** a 📚 Clases con estado "📥 Por procesar":
+  - Seminario de Investigación 1 (1DBF09, 2026-1): S01 26 mar, S02 10 abr, S04 7 may, S05 21 may, exposición final 2 jul.
+  - Seminario de Investigación 2 (1DBF12, 2026-2): S01 20 ago, S02 3 set. Sin grabación en Fireflies: 17 set y 1 oct.
+  - Fórmula 100K: Clase 02 (TikTok Ads).
+- Cursos actualizados desde los sílabos en Drive (MDBF, docente Bruno Debenedetti Luján). Se agregó Seminario 1 como terminado.
+- Tareas: 2da entrega escrita (18 oct, 15%) y 3ra entrega/trabajo final (22 nov, 40%).
+- Pendiente de clasificar: "Mock Class Presentation" (6 may) e "imo-effg-jxi" (8 oct, intermediación bursátil).
+- Nota del sílabo: la tabla de pesos (15/15/15/15/40) no coincide con la fórmula (0.15·1EE + 0.25·2EE + 0.30·E + 0.30·3EE).
