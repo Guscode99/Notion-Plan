@@ -1,0 +1,89 @@
+LO QUE QUIERE CARLOS — REQUISITOS DEL SISTEMA DE ESTUDIO EN NOTION
+Actualizado: 11 de octubre de 2026
+Este archivo resume todo lo que Carlos ha pedido. Se consulta antes de proponer o construir cualquier cosa.
+
+======================================================================
+1. QUIÉN ES Y QUÉ ESTUDIA
+======================================================================
+- Carlos Huarcaya ("Gus"). Abogado.
+- Maestría en Derecho Bancario y Financiero (PUCP, virtual). Tiene varios cursos
+  y cada curso tiene subdivisiones. Ahora lleva Seminario de Investigación 2 (tesis).
+- Tesis (tema por confirmar): deducibilidad tributaria de las pérdidas por fraude
+  en bancos peruanos.
+- Curso de Derecho Societario (también con subdivisiones).
+- Fórmula 100K (marketing digital: TikTok, Meta Ads).
+- Pendientes para después: inglés y bolsa de valores.
+- Tiene TDA, procrastina y le cuesta priorizar.
+
+======================================================================
+2. QUÉ QUIERE LOGRAR
+======================================================================
+- Usar Notion como "segundo cerebro" de estudio.
+- Por ahora, SOLO estudio. Lo demás (trabajo, vida) se ve después.
+- Que él haga lo mínimo posible y solo se dedique a estudiar. Claude automatiza
+  el resto.
+
+======================================================================
+3. QUÉ DEBE TENER (FUNCIONES)
+======================================================================
+1) CLASES
+   - Fireflies graba las clases.
+   - Él toma notas rápidas e incompletas; el sistema las completa con la grabación.
+   - Cada clase tiene resumen, palabras clave y preguntas de repaso.
+2) REPOSITORIO CONECTADO
+   - Links de YouTube, grabaciones, Drive, lecturas: todo enlazado a su curso y clase.
+3) KANBAN BIEN DESARROLLADO
+   - Para tareas y proyectos (la tesis es un proyecto).
+4) HÁBITOS
+   - Seguimiento simple de hábitos de estudio.
+5) POMODORO SIEMPRE A LA MANO
+   - Visible en la página principal.
+6) NORMAS Y CONCEPTOS ENTRELAZADOS (le encantó esto de la versión B)
+   - Red de normas, artículos y conceptos conectados entre sí y con las clases.
+   - Sin tener que llenar muchas normas a mano: Claude las carga.
+7) CURSOS CON SUBDIVISIONES
+   - Programa > curso > módulo o unidad > clase.
+8) REPASO
+   - Preguntas o tarjetas con repaso espaciado. Que sea simple de usar.
+9) AUTOMATIZACIÓN
+   - Claude trae las clases de Fireflies (solo clases, nunca reuniones personales
+     ni de trabajo), las procesa y crea tareas con fecha.
+
+======================================================================
+4. CÓMO DEBE VERSE (DISEÑO)
+======================================================================
+- Le gustó la VERSIÓN A ("Campus", enfocada en estudio) del PDF de propuestas.
+  Quiere que lo construido se parezca a esa plantilla, no a otra cosa.
+- Basarse en PLANTILLAS QUE YA EXISTAN, reconocidas y con estándares establecidos,
+  y adaptarlas a él: cambiar cosas, agregar lo que pide arriba.
+- Diseño HORIZONTAL: columnas, bloques lado a lado.
+- Con widgets (reloj, pomodoro, cuenta regresiva, etc.).
+- Que se vea profesional y completo, como los diseños más usados del mundo.
+  No plano ni una lista debajo de otra.
+
+======================================================================
+5. LO QUE NO QUIERE
+======================================================================
+- Premios, puntos, XP, niveles ni gamificación ("me parece tonto").
+- "Modo rescate" ("me parece tonto").
+- Diseños planos o improvisados ("basura", "porquería").
+- Cosas engorrosas o con muchos pasos.
+- Tener que llenar mucha información a mano.
+- Que se construya sin que él lo apruebe primero.
+
+======================================================================
+6. HERRAMIENTAS
+======================================================================
+- Notion (plan actual; puede activar el plan Plus gratis con su correo PUCP).
+- Claude (prefiere Claude a Notion AI).
+- Fireflies (graba las clases).
+- Google Drive (PDFs, lecturas, sílabos).
+
+======================================================================
+7. CÓMO TRABAJAR CON ÉL
+======================================================================
+- Investigar primero; presentar opciones claras; esperar su aprobación.
+- No borrar ni reemplazar lo viejo de su Notion hasta que apruebe.
+- Explicar directo, en español simple, sin rodeos.
+- Fechas urgentes: 2.ª entrega del Seminario 2 el 18 oct 2026; entrega final el
+  22 nov 2026; requisito de inglés para sustentar.
