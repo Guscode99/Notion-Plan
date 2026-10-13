@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Campus</title>
+<style>
+  :root {
+    --ink: #0f2a47; --muted: #4b6584; --line: rgba(15, 42, 71, .12);
+    --blue: #2f6fb3; --blue-soft: #e8f1fb; --navy1: #17304f; --navy2: #2f5d8c;
+    --hot: #d64545; --warn: #c27c0e; --ok: #2f8a5b;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: transparent; }
+  body { font-family: Inter, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; padding: 4px; color: var(--ink); }
+  .wrap { display: grid; grid-template-columns: minmax(0, 1.75fr) minmax(250px, 1fr); gap: 12px; }
+  .card { border-radius: 16px; padding: 16px 18px; min-height: 196px; }
+
+  /* Saludo + hitos */
+  .hello { background: linear-gradient(135deg, #f4f8fd, var(--blue-soft)); border: 1px solid #d6e4f5; display: flex; flex-direction: column; gap: 12px; }
+  .top { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+  .greet { font-size: 18px; font-weight: 800; letter-spacing: -.01em; }
+  .date { font-size: 12.5px; color: var(--muted); }
+  .hito { display: flex; align-items: center; gap: 14px; background: #fff; border: 1px solid #d6e4f5; border-radius: 12px; padding: 10px 14px; }
+  .num { font-size: 40px; font-weight: 800; line-height: 1; letter-spacing: -.03em; font-variant-numeric: tabular-nums; min-width: 56px; text-align: center; }
+  .num small { display: block; font-size: 11px; font-weight: 700; color: var(--muted); letter-spacing: .02em; margin-top: 3px; }
+  .hito .lbl { font-size: 10.5px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--blue); }
+  .hito .what { font-size: 15px; font-weight: 700; margin-top: 2px; }
+  .hito .when { font-size: 12px; color: var(--muted); margin-top: 2px; }
+  .chips { display: flex; gap: 6px; flex-wrap: wrap; }
+  .chip { font-size: 11.5px; background: #fff; border: 1px solid var(--line); border-radius: 999px; padding: 4px 10px; white-space: nowrap; }
+  .chip b { font-weight: 700; }
+  .cycle { display: flex; align-items: center; gap: 10px; font-size: 11.5px; color: var(--muted); }
+  .bar { flex: 1; height: 6px; background: #d6e4f5; border-radius: 99px; overflow: hidden; }
+  .bar i { display: block; height: 100%; background: var(--blue); border-radius: 99px; }
+
+  /* Pomodoro */
+  .pomo { background: linear-gradient(150deg, var(--navy1), var(--navy2)); color: #fff; display: flex; flex-direction: column; gap: 10px; }
+  .modes { display: flex; gap: 4px; background: rgba(255, 255, 255, .1); border-radius: 999px; padding: 3px; }
+  .modes button { flex: 1; border: 0; background: transparent; color: rgba(255, 255, 255, .75); font: inherit; font-size: 11.5px; font-weight: 600; padding: 5px 4px; border-radius: 999px; cursor: pointer; white-space: nowrap; }
+  .modes button.on { background: #fff; color: var(--navy1); }
+  .main { flex: 1; display: flex; align-items: center; gap: 14px; }
+  .ring { position: relative; width: 104px; aspect-ratio: 1; flex: none; }
+  .ring svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+  .ring circle { fill: none; stroke-width: 9; }
+  .ring .bg { stroke: rgba(255, 255, 255, .16); }
+  .ring .fg { stroke: #8ec5ff; stroke-linecap: round; transition: stroke-dashoffset .5s linear; }
+  .ring .t { position: absolute; inset: 0; display: grid; place-items: center; font-size: 25px; font-weight: 800; font-variant-numeric: tabular-nums; }
+  .side { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+  .msg { font-size: 12.5px; color: rgba(255, 255, 255, .78); line-height: 1.35; }
+  .msg b { color: #fff; }
+  .btns { display: flex; gap: 6px; }
+  .btns button { border: 0; font: inherit; font-size: 13px; font-weight: 700; border-radius: 10px; padding: 8px 12px; cursor: pointer; }
+  .go { background: #8ec5ff; color: var(--navy1); }
+  .reset { background: rgba(255, 255, 255, .14); color: #fff; }
+  .count { font-size: 11.5px; color: rgba(255, 255, 255, .7); }
+
+  @media (max-width: 620px) {
+    .wrap { grid-template-columns: 1fr; }
+    .card { min-height: 0; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <section class="card hello">
+    <div class="top">
+      <div class="greet" id="greet">Hola, Carlos.</div>
+      <div class="date" id="date"></div>
+    </div>
+    <div class="hito">
+      <div class="num" id="num">–<small>días</small></div>
+      <div>
+        <div class="lbl">Próximo hito</div>
+        <div class="what" id="what">Sin entregas pendientes</div>
+        <div class="when" id="when"></div>
+      </div>
+    </div>
+    <div class="chips" id="chips"></div>
+    <div class="cycle"><span id="week">Semana –</span><div class="bar"><i id="cyc" style="width:0%"></i></div><span id="left"></span></div>
+  </section>
+
+  <section class="card pomo">
+    <div class="modes">
+      <button data-m="focus" class="on">Enfoque 25</button>
+      <button data-m="short">Pausa 5</button>
+      <button data-m="long">Pausa 15</button>
+    </div>
+    <div class="main">
+      <div class="ring">
+        <svg viewBox="0 0 120 120"><circle class="bg" cx="60" cy="60" r="52"/><circle class="fg" id="arc" cx="60" cy="60" r="52"/></svg>
+        <div class="t" id="t">25:00</div>
+      </div>
+      <div class="side">
+        <div class="msg" id="msg"><b>Una sola tarea.</b> Celular lejos.</div>
+        <div class="btns">
+          <button class="go" id="go">▶ Empezar</button>
+          <button class="reset" id="reset" title="Reiniciar">↺</button>
+        </div>
+        <div class="count" id="count">🍅 0 hoy</div>
+      </div>
+    </div>
+  </section>
+</div>
+<script>
+  // ---------- Calendario del ciclo (Claude actualiza estas fechas) ----------
+  var CICLO = { nombre: '2026-2', inicio: '2026-08-17', semanas: 16 };
+  var EVENTOS = [
+    { d: '2026-10-15T19:00', t: 'Clase S5 · Seminario 2', k: 'clase' },
+    { d: '2026-10-18T23:59', t: '2.ª entrega escrita', k: 'entrega', peso: '15%' },
+    { d: '2026-10-29T19:00', t: 'Clase S6 · Seminario 2', k: 'clase' },
+    { d: '2026-11-12T19:00', t: 'Clase S7 · Seminario 2', k: 'clase' },
+    { d: '2026-11-22T23:59', t: 'Entrega final de la tesis', k: 'entrega', peso: '40%' },
+    { d: '2026-11-26T19:00', t: 'Clase S8 · Seminario 2 (última)', k: 'clase' }
+  ];
+
+  function parse(s) {
+    var a = s.split('T'), d = a[0].split('-'), h = (a[1] || '00:00').split(':');
+    return new Date(+d[0], +d[1] - 1, +d[2], +h[0], +h[1]);
+  }
+  function dayDiff(f, now) {
+    var a = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    var b = new Date(f.getFullYear(), f.getMonth(), f.getDate());
+    return Math.round((b - a) / 86400000);
+  }
+  function cap(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
+  function fmtDate(f, opts) { try { return cap(f.toLocaleDateString('es-PE', opts)); } catch (e) { return f.toDateString(); } }
+  function enDias(n) { return n === 0 ? 'hoy' : (n === 1 ? 'mañana' : n + ' días'); }
+
+  function renderHello() {
+    var now = new Date(), h = now.getHours();
+    var saludo = h < 12 ? '☀️ Buenos días' : (h < 19 ? '🌤️ Buenas tardes' : '🌙 Buenas noches');
+    document.getElementById('greet').textContent = saludo + ', Carlos.';
+
+    var ini = parse(CICLO.inicio), d = Math.max(0, dayDiff(now, ini));
+    var sem = Math.min(CICLO.semanas, Math.floor(d / 7) + 1);
+    document.getElementById('date').textContent = fmtDate(now, { weekday: 'long', day: 'numeric', month: 'long' }) + ' · Semana ' + sem + ' del ciclo';
+    document.getElementById('week').textContent = 'Ciclo ' + CICLO.nombre + ' · semana ' + sem + ' de ' + CICLO.semanas;
+    document.getElementById('cyc').style.width = Math.round(sem / CICLO.semanas * 100) + '%';
+    document.getElementById('left').textContent = (CICLO.semanas - sem) + ' sem. restantes';
+
+    var fut = EVENTOS.map(function (e) { return { f: parse(e.d), t: e.t, k: e.k, peso: e.peso }; })
+                     .filter(function (e) { return e.f > now; })
+                     .sort(function (a, b) { return a.f - b.f; });
+    var ent = fut.filter(function (e) { return e.k === 'entrega'; })[0];
+    var num = document.getElementById('num');
+    if (ent) {
+      var n = dayDiff(ent.f, now);
+      num.innerHTML = n + '<small>' + (n === 1 ? 'día' : 'días') + '</small>';
+      num.style.color = n <= 3 ? 'var(--hot)' : (n <= 7 ? 'var(--warn)' : 'var(--ok)');
+      document.getElementById('what').textContent = ent.t + (ent.peso ? ' · ' + ent.peso + ' de la nota' : '');
+      document.getElementById('when').textContent = fmtDate(ent.f, { weekday: 'long', day: 'numeric', month: 'long' });
+    } else {
+      num.innerHTML = '✓<small>al día</small>';
+      document.getElementById('what').textContent = 'Sin entregas pendientes';
+      document.getElementById('when').textContent = 'Pídele a Claude que agregue tus nuevas fechas';
+    }
+    var html = '';
+    fut.filter(function (e) { return e !== ent; }).slice(0, 3).forEach(function (e) {
+      var n = dayDiff(e.f, now);
+      html += '<span class="chip">' + (e.k === 'clase' ? '🎓 ' : '📝 ') + e.t + ' · <b>' + enDias(n) + '</b></span>';
+    });
+    document.getElementById('chips').innerHTML = html;
+  }
+
+  // ---------- Pomodoro 25/5/15 ----------
+  var DUR = { focus: 25 * 60000, short: 5 * 60000, long: 15 * 60000 };
+  var MSG = { focus: '<b>Una sola tarea.</b> Celular lejos.', short: '<b>Pausa corta.</b> Levántate y toma agua.', long: '<b>Pausa larga.</b> Camina 15 minutos.' };
+  var C = 2 * Math.PI * 52, arc = document.getElementById('arc');
+  arc.style.strokeDasharray = C;
+  var mem = {};
+  function load() { try { var s = localStorage.getItem('gus-pomo'); if (s) return JSON.parse(s); } catch (e) {} return mem.s || null; }
+  function save(s) { mem.s = s; try { localStorage.setItem('gus-pomo', JSON.stringify(s)); } catch (e) {} }
+  function today() { var d = new Date(); return d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate(); }
+  var st = load() || { mode: 'focus', running: false, endAt: 0, left: DUR.focus, count: 0, day: today(), streak: 0 };
+  if (st.day !== today()) { st.count = 0; st.day = today(); }
+  function remaining() { return st.running ? Math.max(0, st.endAt - Date.now()) : st.left; }
+  function fmt(ms) { var s = Math.ceil(ms / 1000), m = Math.floor(s / 60), r = s % 60; return (m < 10 ? '0' : '') + m + ':' + (r < 10 ? '0' : '') + r; }
+  function beep() {
+    try {
+      var ctx = new (window.AudioContext || window.webkitAudioContext)();
+      [0, .35, .7].forEach(function (t) {
+        var o = ctx.createOscillator(), g = ctx.createGain();
+        o.frequency.value = 880; o.connect(g); g.connect(ctx.destination);
+        g.gain.setValueAtTime(.0001, ctx.currentTime + t);
+        g.gain.exponentialRampToValueAtTime(.3, ctx.currentTime + t + .02);
+        g.gain.exponentialRampToValueAtTime(.0001, ctx.currentTime + t + .3);
+        o.start(ctx.currentTime + t); o.stop(ctx.currentTime + t + .32);
+      });
+    } catch (e) {}
+  }
+  function setMode(m) { st.mode = m; st.running = false; st.left = DUR[m]; st.endAt = 0; save(st); render(); }
+  function finish() {
+    beep();
+    if (st.mode === 'focus') {
+      st.count++; st.streak = (st.streak || 0) + 1;
+      setMode(st.streak % 4 === 0 ? 'long' : 'short');
+      document.getElementById('msg').innerHTML = '<b>Pomodoro completo.</b> Ahora una pausa.';
+    } else {
+      setMode('focus');
+      document.getElementById('msg').innerHTML = '<b>De vuelta.</b> Abre tu tarea de hoy.';
+    }
+  }
+  function render() {
+    var ms = remaining();
+    document.getElementById('t').textContent = fmt(ms);
+    arc.style.strokeDashoffset = C * (1 - ms / DUR[st.mode]);
+    var b = document.querySelectorAll('.modes button');
+    for (var i = 0; i < b.length; i++) b[i].className = b[i].getAttribute('data-m') === st.mode ? 'on' : '';
+    document.getElementById('go').textContent = st.running ? '⏸ Pausar' : (ms < DUR[st.mode] ? '▶ Seguir' : '▶ Empezar');
+    document.getElementById('count').textContent = '🍅 ' + st.count + ' hoy';
+  }
+  document.getElementById('go').onclick = function () {
+    if (st.running) { st.left = remaining(); st.running = false; }
+    else { st.endAt = Date.now() + st.left; st.running = true; document.getElementById('msg').innerHTML = MSG[st.mode]; }
+    save(st); render();
+  };
+  document.getElementById('reset').onclick = function () { setMode(st.mode); document.getElementById('msg').innerHTML = MSG[st.mode]; };
+  var mb = document.querySelectorAll('.modes button');
+  for (var i = 0; i < mb.length; i++) mb[i].onclick = function () { setMode(this.getAttribute('data-m')); document.getElementById('msg').innerHTML = MSG[st.mode]; };
+
+  setInterval(function () { if (st.running && remaining() <= 0) finish(); else render(); }, 500);
+  setInterval(renderHello, 60000);
+  document.getElementById('msg').innerHTML = MSG[st.mode];
+  renderHello(); render();
+</script>
+</body>
+</html>

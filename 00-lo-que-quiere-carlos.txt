@@ -69,7 +69,8 @@ Este archivo resume todo lo que Carlos ha pedido. Se consulta antes de proponer 
 - Diseños planos o improvisados ("basura", "porquería").
 - Cosas engorrosas o con muchos pasos.
 - Tener que llenar mucha información a mano.
-- Que se construya sin que él lo apruebe primero.
+- Que le pidan aprobar cada paso o que le hagan probar tutoriales (desde el 13 oct
+  2026 aprobó todo de golpe).
 
 ======================================================================
 6. HERRAMIENTAS
@@ -82,8 +83,12 @@ Este archivo resume todo lo que Carlos ha pedido. Se consulta antes de proponer 
 ======================================================================
 7. CÓMO TRABAJAR CON ÉL
 ======================================================================
-- Investigar primero; presentar opciones claras; esperar su aprobación.
-- No borrar ni reemplazar lo viejo de su Notion hasta que apruebe.
+- Investigar primero y presentar opciones claras.
+- 13 oct 2026: aprobó todo de golpe ("Apruebo todo, no me preguntes más"). Ya no
+  quiere tutoriales ni aprobaciones paso a paso: construir completo y entregarlo listo.
+- Modelo elegido: versión A "Campus" del PDF, basada en Student OS, con sus datos.
+- No borrar ni reemplazar lo viejo de su Notion (Gus Life's, trackers viejos) sin
+  que lo pida.
 - Explicar directo, en español simple, sin rodeos.
 - Fechas urgentes: 2.ª entrega del Seminario 2 el 18 oct 2026; entrega final el
   22 nov 2026; requisito de inglés para sustentar.

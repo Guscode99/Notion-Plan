@@ -1,72 +1,140 @@
-# Gus OS — Estudio: mapa del sistema construido
+# Campus (Gus OS): mapa del sistema construido
 
-> Construido el 11 oct 2026. Alcance: solo estudio.
+> Construido el 11 oct 2026 y rehecho el 13 oct 2026 como réplica de la versión A "Campus" del PDF de propuestas, que se basa en Student OS. Alcance: solo estudio.
 > Página principal (privada): https://app.notion.com/p/3f63e6776c67819f9f67ee4441a520da
 
-## Estructura
-
-Diseño horizontal (rediseño del 11 oct 2026), en filas de columnas:
+## Estructura (13 oct 2026)
 
 ```
-🎓 Gus OS — Estudio  (portada + icono)
-├─ Fila 1 · widgets HTML (3 columnas)
-│    🕐 Reloj, saludo y avance del Seminario 2 · 🍅 Pomodoro 25/5/15 · ⏳ Próxima entrega (días que faltan)
-├─ Barra de navegación (callout): Cursos · Clases · Conceptos · Recursos · Tareas · Proyectos · Hábitos
-├─ Fila 2 · 3 columnas
-│    ⭐ Hoy + 🔁 Repasar hoy │ 📌 Próximas entregas + 📥 Por procesar │ 🔥 Hábitos de hoy (galería) + 🔗 Accesos rápidos
-├─ Pestañas: 🗂️ Kanban · 📅 Calendario · 📚 Ruta de clases (tablero por estado) · 🎓 Cursos · 🔥 Historial · 📈 Progreso (gráfico)
-├─ 🗄️ Bases de datos
-└─ 📖 Cómo usar esta página (desplegable)
+🏛️ Campus  (portada azul marino campus.png)
+├─ Fila de páginas: 🔁 Repaso · ✅ Tareas · 📊 Analítica · 🗓️ Revisión semanal · 📚 Biblioteca
+├─ Fila de acciones (callouts de color): ➕ Nueva clase · ⚡ Captura rápida · 🔁 Repasar · 📝 Nueva evaluación · 📜 Normas
+├─ Panel azul (widget campus.html): saludo, semana del ciclo, próximo hito con cuenta regresiva y peso, pomodoro 25/5/15
+├─ 3 columnas
+│    ⭐ Hoy + 🗓️ Clases de hoy │ 🔁 Repaso de hoy (tarjetas por curso) │ 📝 Próximas evaluaciones + 📅 Esta semana
+├─ 🎓 Mis programas (pestañas): Maestría · Societario · Fórmula 100K · Inglés · Bolsa (galería de cursos con portada, avance y nota)
+├─ 3 columnas: 📥 Bandeja de captura │ 📚 Lecturas en curso │ 🔥 Hábitos de hoy + 🔗 Accesos rápidos
+├─ 🗄️ Más vistas (pestañas): Kanban · Calendario · Entregas · Clases · Por procesar · Repasar clases · Cursos · Hábitos · Progreso (gráfico)
+└─ 📖 Cómo usar Campus (desplegable)
 ```
 
-Los widgets son archivos HTML subidos a Notion (bloques embed). Fuentes en la carpeta `widgets/` de este repositorio: `reloj.html`, `pomodoro.html`, `hitos.html`. Las fechas de los widgets están escritas en el código (sílabo del Seminario 2) y hay que actualizarlas cuando cambien.
+Páginas hijas:
+
+| Página | ID | Contenido |
+|---|---|---|
+| 🔁 Repaso | `3f83e6776c678187b609fd3df7564e68` | Cómo repasar, las 5 cajas y pestañas Toca hoy · Lo que viene · Nuevas · Difíciles (Fallos ≥ 2) · Todo el mazo |
+| ✅ Tareas | `3f83e6776c6781f082dfeb33204198a2` | Kanban · Hoy · Calendario · Por curso · Hechas |
+| 📊 Analítica | `3f83e6776c678115881ccd759e8372d6` | Programas (avance, promedio) y pestañas Cursos · Notas y pesos · Dominio de tarjetas · Historial de estudio |
+| 🗓️ Revisión semanal | `3f83e6776c67811d8461d07848e98cca` | Checklist del viernes y pestañas Bandeja · Clases · Evaluaciones · Próxima semana |
+
+Hubs de programa (filas de 🎓 Programas):
+
+- **Maestría:** acciones; pestañas Cursos, Sesiones, Tarjetas, Conceptos y Normas; Evaluaciones del ciclo y Cronograma lado a lado; Lecturas.
+- **Societario, Fórmula 100K, Inglés y Bolsa:** Cursos, Sesiones y Tareas.
+- **Filtros por curso:** las vistas de los hubs filtran por los cursos del programa. Si se agrega un curso nuevo, hay que sumarlo al filtro.
+
+Modo entrega: la evaluación "2.ª entrega escrita" (`3f83e6776c6781b8b123d3bcc374155e`) tiene:
+
+- Portada roja.
+- Tarjetas de fecha, peso, trabajo y meta.
+- Lista de lo que debe tener según el sílabo.
+- Plan inverso: vista de las tareas D-5 a D-0.
+
+Las páginas de Evaluaciones fijan Faltan, Fecha, Peso, Estado, Nota y Curso bajo el título.
+
+Páginas de clase (formato Cornell con pestañas): 📄 Clase (preguntas clave | notas, resumen, explícalo a un cliente, conectado con) · 🃏 Tarjetas (vista filtrada por la clase) · 🎙️ Transcripción · ❓ Dudas para el profe · 🔗 Fuentes. Modelo: S01 `3f63e6776c6781c1800fc6b004d4b42a`.
+
+Widgets: archivos HTML subidos a Notion como bloques embed. Fuentes en `widgets/`:
+
+- `campus.html`: el panel azul actual.
+- `reloj.html`, `pomodoro.html`, `hitos.html`: del diseño anterior, ya no están en la página.
+
+Las fechas del ciclo y de los hitos están escritas en el código de `campus.html` (`CICLO` y `EVENTOS`). Cuando cambian, hay que editar el archivo y volver a subirlo.
 
 ## Bases de datos (IDs de data source)
 
 | Base | Data source | Propiedades clave |
 |---|---|---|
-| 🎓 Cursos | `ac6fdb59-7ddf-43c1-a2a6-0bd6fed31cd8` | Programa (Maestría PUCP, Derecho Societario, Fórmula 100K, Inglés, Bolsa de Valores), Estado, Horario, Aula virtual, Carpeta Drive |
-| 📚 Clases | `e5f02f9f-d1da-4975-a671-5b90d50c8cb2` | Curso, Fecha, Sesión, Estado, Palabras clave, Grabación, Fireflies, Materiales, Repasos, Último repaso, Dificultad, Próximo repaso (fórmula), Toca repasar (fórmula), Programa (rollup), Conceptos, Recursos, Tareas |
+| 🎓 Programas | `ab7c4064-5289-4ce6-b197-9060a175516a` | Ciclo, Cursos, Orden, Carpeta Drive, Campus virtual, N° cursos, Promedio, Tarjetas hoy, Avance (barra) |
+| 🎓 Cursos | `ac6fdb59-7ddf-43c1-a2a6-0bd6fed31cd8` | Programa (relación), Área, Estado, Profesor, Horario, Sesiones totales, Sesiones vistas, Avance (barra), Nota actual (ponderada), Tarjetas hoy, Portada, Carpeta Drive |
+| 📚 Clases | `e5f02f9f-d1da-4975-a671-5b90d50c8cb2` | Curso, Módulo, Fecha, Hora, Sesión, Estado (incluye 🗓️ Programada), Confianza, Palabras clave, Fireflies, Materiales, N° tarjetas, Vista, Tarjetas, Normas, Artículos, Conceptos, Recursos, Tareas |
+| 🧩 Módulos | `8dd858c0-cd20-438e-bb4c-f89b0bd5b017` | Subdivisiones de cada curso (por cargar cuando haya temario) |
+| 🃏 Tarjetas | `9e7c7e82-ca73-488a-a678-3a3f1a795ebb` | Pregunta, Respuesta, Curso, Clase, Conceptos, Tipo, Caja (1–5), Responder, Último repaso, Fallos, Estado, Próximo repaso, Toca hoy, Hoy |
+| 📝 Evaluaciones | `c0fbd9ac-df4d-4ee2-91dc-ac0836aaa761` | Curso, Fecha, Peso, Nota, Tipo, Estado, Faltan (semáforo), Aporte, Tareas |
+| 📚 Lecturas | `511397ba-ecb4-47f0-8e2d-0fcd61f04329` | Curso, Autor, Páginas leídas/totales, Avance, Link, Estado, Obligatoria |
+| 📥 Bandeja de captura | `47c3185d-e256-425e-b51e-e776c1db458c` | Tipo, Link, Procesado, Nota |
+| 📜 Normas | `15d9156a-fc74-4d96-9f79-00314c9c58db` | Tipo, Número, Fecha, Estado, Link oficial, Resumen, Para la tesis, Artículos, Conceptos, Clases, Cursos |
+| § Artículos | `2656e082-d612-4091-a13f-d418713141f0` | Norma, Texto, En simple, Conceptos, Clases, Para la tesis, Verificado en SPIJ |
 | 🧠 Conceptos | `9d2a53d0-ea0b-41c5-9ffe-250fb6cacadc` | Definición, Tipo, Cursos, Clases, Dominio |
 | 🔗 Recursos | `a0f54e70-8396-4bd9-88fa-2b349fac4b37` | Tipo, Link, Curso, Clase, Estado, Nota |
 | ✅ Tareas | `43f01296-73da-4cf4-b4f9-c2a0d9ee3fb4` | Estado (Bandeja → Esta semana → Hoy → Haciendo → Bloqueado → Hecho), Prioridad (🐸 Rana / Alta / Normal), Tipo, Fecha límite, Siguiente acción, Pomodoros, Curso, Clase, Proyecto, Alerta (fórmula) |
 | 🎯 Proyectos | `68a100b4-0b77-4182-9fe0-095d2f2d3075` | Curso, Estado, Fecha límite, Meta, Tareas |
 | 🔥 Hábitos | `56b859db-7d5f-4600-89c3-7ad8ce302e92` | Fecha, 📖 Estudié 25 min, 🔁 Hice mi repaso, 📥 Procesé mis clases, 🇬🇧 Inglés 15 min, 📵 Estudié sin celular, Minutos de estudio, Qué aprendí hoy, Puntaje (0–100) |
 
-## Repaso espaciado
+## Repaso espaciado (por tarjeta, cajas Leitner)
 
-- Clase nueva → primer repaso el día siguiente a `Fecha`.
-- Al repasar: sumar 1 a `Repasos`, poner `Último repaso` = hoy y elegir `Dificultad`. El estado pasa a `🔁 En repaso`.
-- Intervalo base según `Repasos`: ≤1 → 3 días, 2 → 7, 3 → 14, 4 → 30, ≥5 → 60.
-- `😓 Difícil` → 1 día · `😊 Fácil` → intervalo × 2.
-- `🏁 Dominada` sale de la cola.
+- Cada pregunta es una fila de 🃏 Tarjetas. Una tarjeta nueva entra en la caja 1 y toca al día siguiente.
+- Carlos elige en `Responder`: ✅ Sabía, 🤔 Dudé o ❌ No sabía. La fórmula `Próximo repaso` se recalcula en el momento, usando la hora de edición.
+- Intervalos por caja: 1 → 1 día, 2 → 3, 3 → 7, 4 → 16, 5 → 35.
+- ✅ sube una caja · 🤔 se queda · ❌ vuelve a la caja 1 y suma un fallo.
+- Cada mañana la rutina guarda la caja, el último repaso y los fallos, y limpia `Responder`.
+- Sabía en la caja 5 → 🏁 Dominada, y la tarjeta sale de la cola.
+- El 13 oct, las 7 tarjetas de la S02 quedaron para hoy y las 7 de la S01 para el 14 oct, para repartir la carga.
+- El repaso por clase (propiedades `Repasos` y `Dificultad` de 📚 Clases) es del diseño anterior. Se mantiene, pero ya no se usa.
 
 ## Cómo procesar una clase (procedimiento para Claude)
 
 1. Buscar la transcripción en Fireflies o en la página "Notas" de Notion y los apuntes del usuario.
 2. Crear la fila en 📚 Clases con: curso, fecha, sesión, estado `✅ Procesada`, palabras clave, link de Fireflies o de la grabación, y `Repasos` = 0.
-3. Contenido de la página (formato Cornell):
-   - Callout de cómo repasar.
-   - ❓ 5–10 preguntas de repaso, cada una en un desplegable con la respuesta oculta.
-   - 🎯 Para tu tesis o tu entrega (solo si hay algo accionable; lo que no dijo el profesor se marca como sugerencia de Claude).
-   - 📝 Apuntes completos: los apuntes del usuario tal cual, lo que faltó marcado con ➕ y cada punto con un enlace 🎙️ al minuto exacto de Fireflies (`https://app.fireflies.ai/view/{id}?t={segundos}`).
-   - 🧾 Resumen.
+3. Contenido de la página, en formato Cornell con pestañas. Modelo: S01.
+   - 📄 Clase: preguntas clave | notas, resumen en 5 líneas, explícalo a un cliente, conectado con y, si aplica, 🎯 Para tu tesis o tu entrega.
+   - 🃏 Tarjetas: vista filtrada por la clase.
+   - 🎙️ Transcripción: los apuntes del usuario tal cual, lo que faltó marcado con ➕ y cada punto con un enlace 🎙️ al minuto exacto (`https://app.fireflies.ai/view/{id}?t={segundos}`).
+   - ❓ Dudas para el profe.
    - 🔗 Fuentes.
-4. Crear o enlazar los conceptos en 🧠 Conceptos.
-5. Crear en ✅ Tareas las tareas y entregas que dejó el profesor, con su fecha límite.
-6. Marcar el hábito "📥 Procesé mis clases" del día.
+4. Crear 5–10 tarjetas en 🃏 Tarjetas (caja 1). Crear o enlazar los conceptos en 🧠 Conceptos y las normas en 📜 Normas y § Artículos.
+5. Si ya existe una sesión `🗓️ Programada` de esa fecha, completarla en vez de crear otra.
+6. Crear en ✅ Tareas las tareas y entregas que dejó el profesor, con su fecha límite.
+7. Marcar el hábito "📥 Procesé mis clases" del día.
 
 Ejemplos: "Seminario 2 · S01 — Introducción al curso y capítulo 3" y "Seminario 2 · S02 — Simulacro de examen de grado".
 
 ## Pendiente
 
-- Subdivisiones reales de la Maestría PUCP y de Derecho Societario (las dará el usuario).
-- Migrar las grabaciones de Fireflies (página "Notas" de Gus Life's) y los apuntes sueltos a 📚 Clases.
-- Archivar los sistemas viejos: Gus Life's, trackers de hábitos duplicados, plantillas.
-- Carpetas en Drive por curso.
-- Agregar los conectores Fireflies y Notion a la rutina "Procesar clases de Fireflies" (ver abajo).
-- Rutina de cierre semanal de los viernes.
-- Construcción completa de la versión A+ cuando se apruebe: tarjetas con botones Sabía / No sabía, evaluaciones con pesos, red de normas y conceptos, pomodoro fijo en la página principal.
+- **Conectores de la rutina:** agregar los conectores Fireflies y Notion a la rutina en claude.ai. Sin ellos, la rutina no hace nada.
+- **Ancho completo:** activarlo en Campus (••• → Ancho completo). La API no puede activarlo.
+- **Módulos:** subdivisiones reales de la Maestría PUCP y de Derecho Societario. Se cargan cuando el usuario pase el temario.
+- **Normas:** verificar en SPIJ el texto literal de los artículos de § Artículos y marcar "Verificado en SPIJ".
+- **Bandeja:** confirmar a qué curso pertenecen "Mock Class Presentation" (6 may) e "imo-effg-jxi" (8 oct).
+- **Pesos del sílabo:** confirmar con el profesor cuáles valen. Hoy están cargados los de la tabla.
+- **Grabaciones antiguas:** migrar las de Fireflies (página "Notas" de Gus Life's) y los apuntes sueltos a 📚 Clases.
+- **Sistemas viejos:** archivar Gus Life's, los trackers de hábitos duplicados y las plantillas, cuando el usuario lo apruebe.
+- **Límites del plan Free de Notion:**
+  - Solo cabe 1 gráfico. Ya se usa en "Progreso".
+  - Los botones nativos y la vista Dashboard no se pueden crear por API. Los reemplazan los callouts de acción y la propiedad `Responder`.
+
+## Registro — 13 oct 2026: réplica del modelo Campus (versión A + Student OS)
+
+- **Datos reales cargados:**
+  - 5 programas y 7 cursos con portada.
+  - Sesiones S03–S08 del Seminario 2 (S05–S08 como `🗓️ Programada`).
+  - 3 evaluaciones con peso.
+  - Plan inverso de la 2.ª entrega (D-5 a D-0).
+  - 14 tarjetas de la S01 y la S02.
+- **Red de la tesis:**
+  - 7 normas: TUO LIR, Reglamento LIR, Ley 26702, TUO del Código Tributario, Res. SBS 11356-2008, Ley 30096 y GAFI.
+  - 6 artículos: LIR 37, 37 d), 37 i) y 44; Reglamento 21; Ley 30096 art. 8. El texto es paráfrasis y falta verificarlo en SPIJ.
+  - 6 conceptos nuevos: causalidad, pérdida extraordinaria por delito, castigo, provisión, fraude informático y gasto no deducible.
+- **Lecturas:** sílabos del Seminario 1 y 2 (Drive), la 1.ª entrega (Drive) y los artículos de la LIR, el Reglamento y la SBS.
+- **Bandeja:** 4 ítems por confirmar. **Hábitos:** fila "Mar 13 oct".
+- **Pantallas:** Campus, Repaso, Tareas, Analítica, Revisión semanal, 5 hubs de programa, Modo entrega y páginas Cornell S01/S02.
+- **Rutina:** renombrada "Campus: clases, repaso y hábitos (diario)", mismo ID y horario. Ahora hace esto cada mañana:
+  - Procesa las respuestas de las tarjetas.
+  - Crea la fila de hábitos.
+  - Completa las sesiones programadas en formato Cornell con tarjetas.
+  - Enlaza normas y artículos.
+  - Ubica la Bandeja.
+  - Los lunes, desmarca la revisión semanal.
 
 ## Registro — 11 oct 2026: conexión Fireflies → Notion
 
@@ -100,6 +168,8 @@ Ejemplos: "Seminario 2 · S01 — Introducción al curso y capítulo 3" y "Semin
   - Pedir asesoría personalizada antes de la 2.ª entrega.
 
 ### Rutina "Procesar clases de Fireflies"
+
+> El 13 oct 2026 se renombró como "Campus: clases, repaso y hábitos (diario)" y se amplió (ver el registro del 13 oct). Esta sección describe la versión original.
 
 | Campo | Valor |
 |---|---|
