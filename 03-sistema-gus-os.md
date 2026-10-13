@@ -3,20 +3,34 @@
 > Construido el 11 oct 2026 y rehecho el 13 oct 2026 como réplica de la versión A "Campus" del PDF de propuestas, que se basa en Student OS. Alcance: solo estudio.
 > Página principal (privada): https://app.notion.com/p/3f63e6776c67819f9f67ee4441a520da
 
-## Estructura (13 oct 2026)
+## Estructura (13 oct 2026, versión compacta estilo Gus Life's)
+
+El usuario comparó Campus con su panel viejo "Gus Life's" y pidió aprovechar mejor el espacio. Gus Life's tiene un solo bloque de 3 columnas de arriba a abajo: listas cortas con una o dos propiedades, un calendario grande al centro y una barra de accesos a la derecha. Campus se rehízo con esa lógica:
 
 ```
 🏛️ Campus  (portada azul marino campus.png)
-├─ Fila de páginas: 🔁 Repaso · ✅ Tareas · 📊 Analítica · 🗓️ Revisión semanal · 📚 Biblioteca
-├─ Fila de acciones (callouts de color): ➕ Nueva clase · ⚡ Captura rápida · 🔁 Repasar · 📝 Nueva evaluación · 📜 Normas
-├─ Panel azul (widget campus.html): saludo, semana del ciclo, próximo hito con cuenta regresiva y peso, pomodoro 25/5/15
-├─ 3 columnas
-│    ⭐ Hoy + 🗓️ Clases de hoy │ 🔁 Repaso de hoy (tarjetas por curso) │ 📝 Próximas evaluaciones + 📅 Esta semana
-├─ 🎓 Mis programas (pestañas): Maestría · Societario · Fórmula 100K · Inglés · Bolsa (galería de cursos con portada, avance y nota)
-├─ 3 columnas: 📥 Bandeja de captura │ 📚 Lecturas en curso │ 🔥 Hábitos de hoy + 🔗 Accesos rápidos
-├─ 🗄️ Más vistas (pestañas): Kanban · Calendario · Entregas · Clases · Por procesar · Repasar clases · Cursos · Hábitos · Progreso (gráfico)
+├─ Panel azul (widget campus.html, ocupa todo el alto de su marco):
+│    saludo + semana del ciclo + próximo hito │ lo que viene (4 fechas) │ pomodoro 25/5/15
+├─ Una fila de 3 columnas (27 / 48 / 25)
+│    Izquierda (tu día):  ⭐ Hoy · 🔁 Repaso de hoy · 🔥 Hábitos de hoy · 📥 Bandeja
+│    Centro:              📅 Calendario (Tareas por fecha límite) · 🎓 Mis cursos (pestañas por programa, tarjetas pequeñas)
+│    Derecha (navegación): 🧭 páginas (Repaso, Tareas, Analítica, Revisión semanal, Biblioteca) · 🏛️ programas ·
+│                          ➕ bases de datos · 📝 próximas evaluaciones · 📚 lecturas en curso · 🔗 accesos rápidos
+├─ 🗄️ Más vistas (desplegable cerrado, con pestañas): Kanban · Esta semana · Entregas · Clases de hoy · Clases ·
+│    Por procesar · Repasar clases · Cursos · Hábitos · Progreso (gráfico)
 └─ 📖 Cómo usar Campus (desplegable)
 ```
+
+Las vistas de la portada muestran solo una o dos propiedades:
+
+- Hoy: tarea y prioridad.
+- Repaso: pregunta y responder.
+- Evaluaciones: nombre y días que faltan.
+- Bandeja: el ítem.
+- Lecturas: nombre y avance.
+- Calendario: solo el título.
+
+Cada callout de color funciona como encabezado de sección, igual que en Gus Life's.
 
 Páginas hijas:
 
@@ -46,7 +60,7 @@ Páginas de clase (formato Cornell con pestañas): 📄 Clase (preguntas clave |
 
 Widgets: archivos HTML subidos a Notion como bloques embed. Fuentes en `widgets/`:
 
-- `campus.html`: el panel azul actual.
+- `campus.html`: el panel azul actual. Llena todo el alto de su marco y, si hay ancho de sobra, agrega la columna "Lo que viene".
 - `reloj.html`, `pomodoro.html`, `hitos.html`: del diseño anterior, ya no están en la página.
 
 Las fechas del ciclo y de los hitos están escritas en el código de `campus.html` (`CICLO` y `EVENTOS`). Cuando cambian, hay que editar el archivo y volver a subirlo.
