@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Campus · maqueta realista</title>
+<style>
+  @page { size: 1600px 1000px; margin: 0; }
+  :root {
+    --bg: #191919; --side: #202020; --card: #252525; --line: rgba(255,255,255,.094);
+    --tx: rgba(255,255,255,.86); --mu: rgba(255,255,255,.46); --mu2: rgba(255,255,255,.28);
+    --blue: #2383e2; --accent: #8ec5ff;
+    --t-gray: #373737; --t-brown: #4a3228; --t-orange: #5c3b23; --t-yellow: #564328; --t-green: #243d30;
+    --t-blue: #143a4e; --t-purple: #3c2d49; --t-pink: #4e2c3c; --t-red: #522e2a;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: ui-sans-serif, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; background: #0e0e0e; color: var(--tx); }
+  .page { width: 1600px; height: 1000px; position: relative; overflow: hidden; page-break-after: always; }
+
+  /* ---------- Ventana de Notion ---------- */
+  .win { position: absolute; inset: 0; display: flex; background: var(--bg); }
+  .sb { width: 224px; background: var(--side); border-right: 1px solid var(--line); padding: 10px 8px; font-size: 13px; color: rgba(255,255,255,.62); flex: none; }
+  .sb .ws { display: flex; align-items: center; gap: 8px; padding: 6px 8px; font-weight: 600; color: var(--tx); margin-bottom: 8px; }
+  .sb .it { padding: 4px 8px; border-radius: 6px; display: flex; gap: 8px; align-items: center; white-space: nowrap; }
+  .sb .it.on { background: rgba(255,255,255,.055); color: var(--tx); }
+  .sb .sub { padding-left: 26px; }
+  .sb .lab { font-size: 11px; font-weight: 600; color: var(--mu); padding: 14px 8px 4px; }
+  .main { flex: 1; display: flex; flex-direction: column; min-width: 0; }
+  .top { height: 44px; display: flex; align-items: center; justify-content: space-between; padding: 0 14px; font-size: 13px; color: var(--mu); flex: none; }
+  .top b { color: var(--tx); font-weight: 500; }
+  .cover { height: 92px; background: linear-gradient(100deg, #1b2c44, #2f5279 55%, #6f93bd); flex: none; }
+  .content { padding: 0 64px; position: relative; flex: 1; min-height: 0; }
+  .icon { font-size: 52px; line-height: 1; margin-top: -34px; }
+  h1 { font-size: 34px; font-weight: 700; margin: 8px 0 12px; letter-spacing: -.01em; }
+
+  /* ---------- Widget (franja de 160 px) ---------- */
+  .strip { height: 152px; border: 1px solid transparent; display: grid; grid-template-columns: 1.15fr 1fr 250px; gap: 10px; margin-bottom: 18px; }
+  .wc { border-radius: 12px; background: #202326; border: 1px solid rgba(255,255,255,.08); padding: 12px 14px; display: flex; flex-direction: column; justify-content: space-between; }
+  .wc .lbl { font-size: 9.5px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); }
+  .greet { font-size: 15px; font-weight: 700; }
+  .date { font-size: 11.5px; color: var(--mu); }
+  .hito { display: flex; gap: 12px; align-items: center; background: rgba(255,255,255,.04); border-radius: 9px; padding: 7px 10px; }
+  .num { font-size: 30px; font-weight: 800; color: #f0a43a; line-height: 1; text-align: center; min-width: 40px; }
+  .num small { display: block; font-size: 10px; color: var(--mu); font-weight: 600; }
+  .what { font-size: 13px; font-weight: 700; }
+  .when { font-size: 11px; color: var(--mu); }
+  .bar { height: 5px; border-radius: 9px; background: rgba(255,255,255,.1); overflow: hidden; flex: 1; }
+  .bar i { display: block; height: 100%; background: var(--accent); }
+  .cyc { display: flex; gap: 8px; align-items: center; font-size: 10.5px; color: var(--mu); }
+  .ag li { list-style: none; display: flex; justify-content: space-between; font-size: 12px; padding: 4px 0; border-bottom: 1px solid rgba(255,255,255,.06); }
+  .ag li:last-child { border: 0; }
+  .ag li span:last-child { color: var(--mu); }
+  .hot { color: #ff7b72 !important; font-weight: 700; }
+  .warn { color: #f0a43a !important; font-weight: 700; }
+  .pomo { background: linear-gradient(150deg, #142338, #23466f); }
+  .modes { display: flex; background: rgba(255,255,255,.08); border-radius: 99px; padding: 3px; font-size: 10.5px; }
+  .modes span { flex: 1; text-align: center; padding: 3px 0; border-radius: 99px; color: rgba(255,255,255,.7); }
+  .modes .on { background: #fff; color: #142338; font-weight: 700; }
+  .pm { display: flex; align-items: center; gap: 12px; }
+  .ring { width: 66px; height: 66px; border-radius: 50%; border: 7px solid var(--accent); display: grid; place-items: center; font-weight: 800; font-size: 16px; }
+  .go { background: var(--accent); color: #142338; font-weight: 700; font-size: 12px; border-radius: 8px; padding: 6px 10px; display: inline-block; }
+
+  /* ---------- Columnas ---------- */
+  .cols { display: grid; grid-template-columns: 19% 1fr 29%; gap: 28px; }
+  .sec { font-size: 13px; font-weight: 600; color: var(--tx); margin: 0 0 6px; display: flex; gap: 6px; align-items: center; }
+  .sec small { color: var(--mu); font-weight: 400; font-size: 12px; }
+  .blk { margin-bottom: 18px; }
+  .dir a { display: flex; gap: 8px; align-items: center; padding: 3px 4px; font-size: 13.5px; color: var(--tx); text-decoration: none; border-bottom: 1px solid transparent; }
+  .dir a u { text-decoration: none; border-bottom: 1px solid rgba(255,255,255,.2); }
+  .dir .h { font-size: 11px; font-weight: 600; color: var(--mu); margin: 10px 0 2px; text-transform: uppercase; letter-spacing: .04em; }
+  /* vista de base de datos (cabecera real de Notion) */
+  .dbh { display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; color: var(--tx); padding-bottom: 6px; border-bottom: 1px solid var(--line); }
+  .dbh .ar { color: var(--mu); font-weight: 400; }
+  .dbh .vt { margin-left: 8px; font-weight: 500; color: var(--mu); font-size: 12px; }
+  .row { display: flex; align-items: center; gap: 8px; padding: 5px 2px; border-bottom: 1px solid var(--line); font-size: 13px; min-height: 31px; }
+  .row .t { flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .row .d { color: var(--mu); font-size: 12px; white-space: nowrap; }
+  .tag { font-size: 11.5px; padding: 1px 6px; border-radius: 4px; white-space: nowrap; color: rgba(255,255,255,.86); }
+  .gray { background: var(--t-gray); } .brown { background: var(--t-brown); } .orange { background: var(--t-orange); } .yellow { background: var(--t-yellow); }
+  .green { background: var(--t-green); } .blue { background: var(--t-blue); } .purple { background: var(--t-purple); } .pink { background: var(--t-pink); } .red { background: var(--t-red); }
+  .chk { width: 14px; height: 14px; border: 1.5px solid rgba(255,255,255,.4); border-radius: 3px; flex: none; }
+  .chk.on { background: var(--blue); border-color: var(--blue); }
+  table.tb { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+  .tb th { text-align: left; font-weight: 400; color: var(--mu); padding: 6px 6px; border-bottom: 1px solid var(--line); font-size: 12px; }
+  .tb td { padding: 6px 6px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+  .tb td:first-child { max-width: 300px; overflow: hidden; text-overflow: ellipsis; }
+  .tabs { display: flex; gap: 14px; font-size: 12.5px; color: var(--mu); border-bottom: 1px solid var(--line); margin-bottom: 10px; }
+  .tabs span { padding: 6px 0; }
+  .tabs .on { color: var(--tx); border-bottom: 2px solid var(--tx); }
+  .gal { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+  .gc { background: var(--card); border-radius: 8px; overflow: hidden; border: 1px solid var(--line); }
+  .gc .cv { height: 54px; background-size: cover; }
+  .gc .bd { padding: 7px 9px; font-size: 12.5px; }
+  .gc .bd b { display: block; font-weight: 600; margin-bottom: 3px; }
+  .gc .bd span { color: var(--mu); font-size: 11.5px; font-family: ui-monospace, Menlo, monospace; }
+  .prog { font-family: ui-monospace, Menlo, monospace; font-size: 11.5px; color: var(--accent); }
+
+  /* ---------- Marcadores numerados ---------- */
+  .pin { position: absolute; width: 24px; height: 24px; border-radius: 50%; background: #ffd23f; color: #111; font-weight: 800; font-size: 13px; display: grid; place-items: center; box-shadow: 0 0 0 3px rgba(0,0,0,.5); z-index: 5; }
+
+  /* ---------- Página 2 ---------- */
+  .p2 { background: #f6f7f9; color: #111827; padding: 54px 70px; }
+  .p2 h2 { font-size: 30px; margin-bottom: 6px; color: #17304f; }
+  .p2 .lead { font-size: 16px; color: #4b5563; margin-bottom: 26px; max-width: 1200px; line-height: 1.5; }
+  .g3 { display: grid; grid-template-columns: 1.25fr 1fr; gap: 34px; }
+  .p2 ol { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .p2 ol li { display: flex; gap: 12px; font-size: 14px; line-height: 1.45; }
+  .box ul li { margin-bottom: 4px; }
+  .p2 ol li .n { flex: none; width: 24px; height: 24px; border-radius: 50%; background: #ffd23f; font-weight: 800; display: grid; place-items: center; font-size: 13px; }
+  .box { background: #fff; border: 1px solid #e5e7eb; border-radius: 14px; padding: 18px 20px; margin-bottom: 16px; }
+  .box h3 { font-size: 16px; margin-bottom: 8px; color: #17304f; }
+  .box p, .box li { font-size: 13.5px; line-height: 1.5; color: #374151; }
+  .box ul { padding-left: 18px; }
+  .warnbox { background: #fff7e6; border-color: #f5d48a; }
+  .okbox { background: #eef7f1; border-color: #b9dfc7; }
+  .src { position: absolute; bottom: 26px; left: 70px; font-size: 11.5px; color: #6b7280; }
+</style>
+</head>
+<body>
+
+<!-- ================= PÁGINA 1: maqueta ================= -->
+<div class="page">
+  <div class="win">
+    <div class="sb">
+      <div class="ws">🚀 Carlos Huarcaya</div>
+      <div class="it">🔍 Buscar</div>
+      <div class="it">🏠 Inicio</div>
+      <div class="lab">Privado</div>
+      <div class="it on">🏛️ Campus</div>
+      <div class="it sub">🔁 Repaso</div>
+      <div class="it sub">✅ Tareas</div>
+      <div class="it sub">📊 Analítica</div>
+      <div class="it sub">🗓️ Revisión semanal</div>
+      <div class="it sub">📚 Biblioteca</div>
+      <div class="it">🚀 Gus Life’s</div>
+    </div>
+    <div class="main">
+      <div class="top"><span>🏛️ <b>Campus</b> · Privado</span><span>Compartir · ☆ · •••</span></div>
+      <div class="cover"></div>
+      <div class="content">
+        <div class="icon">🏛️</div>
+        <h1>Campus</h1>
+
+        <!-- 1 · franja de widgets -->
+        <div class="strip">
+          <div class="wc">
+            <div><div class="greet">☀️ Buenos días, Carlos.</div><div class="date">Miércoles, 14 de octubre · semana 9 del ciclo</div></div>
+            <div class="hito"><div class="num">4<small>días</small></div><div><div class="lbl">Próximo hito</div><div class="what">2.ª entrega escrita · 15% de la nota</div><div class="when">Domingo, 18 de octubre</div></div></div>
+            <div class="cyc">Ciclo 2026-2 <div class="bar"><i style="width:56%"></i></div> 9/16 sem.</div>
+          </div>
+          <div class="wc ag">
+            <div class="lbl">🗓️ Lo que viene</div>
+            <ul>
+              <li><span>🎓 Clase S5 · Seminario 2</span><span class="hot">mañana</span></li>
+              <li><span>📝 2.ª entrega escrita</span><span class="warn">4 días</span></li>
+              <li><span>🎓 Clase S6 · Seminario 2</span><span>15 días</span></li>
+              <li><span>📦 Entrega final de la tesis</span><span>39 días</span></li>
+            </ul>
+          </div>
+          <div class="wc pomo">
+            <div class="modes"><span class="on">Enfoque 25</span><span>Pausa 5</span><span>Pausa 15</span></div>
+            <div class="pm"><div class="ring">25:00</div><div><span class="go">▶ Empezar</span><div class="date" style="margin-top:6px;color:rgba(255,255,255,.7)">🍅 0 hoy</div></div></div>
+            <div class="date" style="color:rgba(255,255,255,.75)"><b style="color:#fff">Una sola tarea.</b> Celular lejos.</div>
+          </div>
+        </div>
+
+        <div class="cols">
+          <!-- 2 · izquierda: directorio + bandeja -->
+          <div>
+            <div class="blk dir">
+              <div class="sec">🧭 Directorio</div>
+              <div class="h">Campus</div>
+              <a>🔁 <u>Repaso</u></a><a>✅ <u>Tareas</u></a><a>📊 <u>Analítica</u></a><a>🗓️ <u>Revisión semanal</u></a><a>📚 <u>Biblioteca</u></a>
+              <div class="h">Programas</div>
+              <a>🎓 <u>Maestría PUCP</u></a><a>⚖️ <u>Derecho Societario</u></a><a>📱 <u>Fórmula 100K</u></a><a>🇬🇧 <u>Inglés</u></a><a>📈 <u>Bolsa de Valores</u></a>
+              <div class="h">Consultar</div>
+              <a>📜 <u>Normas</u> · § <u>Artículos</u></a><a>🧠 <u>Conceptos</u> · 🔗 <u>Recursos</u></a>
+            </div>
+            <div class="blk">
+              <div class="dbh"><span class="ar">↗</span>📥 Bandeja <span class="vt">Sin procesar</span></div>
+              <div class="row"><span class="t">🎙️ Mock Class Presentation (6 may)</span></div>
+              <div class="row"><span class="t">🎙️ imo-effg-jxi · intermediación</span></div>
+              <div class="row"><span class="t">💡 S03 (17 set) sin grabación</span></div>
+              <div class="row"><span class="t">💡 S04 (1 oct) sin grabación</span></div>
+            </div>
+          </div>
+
+          <!-- 3 · centro: hoy + semana + cursos -->
+          <div>
+            <div class="blk">
+              <div class="dbh"><span class="ar">↗</span>✅ Tareas <span class="vt">⭐ Hoy</span></div>
+              <div class="row"><span class="chk"></span><span class="t">D-4 · Corregir los capítulos 1 y 2</span><span class="tag green">🐸 Rana</span><span class="d">🍅 3</span></div>
+              <div class="row"><span class="chk"></span><span class="t">Pedir asesoría personalizada antes de la 2.ª entrega</span><span class="tag red">🔴 Alta</span><span class="d">🍅 1</span></div>
+            </div>
+            <div class="blk">
+              <div class="dbh"><span class="ar">↗</span>✅ Tareas <span class="vt">📅 Esta semana</span></div>
+              <table class="tb">
+                <tr><th>Aa Tarea</th><th>Fecha</th><th>Curso</th><th>🍅</th></tr>
+                <tr><td>D-3 · Corregir el capítulo 3 (la discusión)</td><td>Jue 15</td><td>Seminario 2</td><td>3</td></tr>
+                <tr><td>D-2 · Redactar la introducción</td><td>Vie 16</td><td>Seminario 2</td><td>3</td></tr>
+                <tr><td>D-1 · Conclusiones y revisar citas APA</td><td>Sáb 17</td><td>Seminario 2</td><td>3</td></tr>
+                <tr><td>D-0 · Enviar la 2.ª entrega</td><td>Dom 18</td><td>Seminario 2</td><td>1</td></tr>
+              </table>
+            </div>
+            <div class="blk">
+              <div class="sec">🎓 Mis cursos <small>avance por sesiones vistas</small></div>
+              <div class="tabs"><span class="on">🎓 Maestría</span><span>⚖️ Societario</span><span>📱 100K</span><span>🇬🇧 Inglés</span><span>📈 Bolsa</span></div>
+              <div class="gal">
+                <div class="gc"><div class="cv" style="background-image:url(../../../../../home/user/Notion-Plan/assets/covers/card_morado.png);background:linear-gradient(120deg,#4b2f73,#8e6cc0)"></div><div class="bd"><b>🔬 Seminario 2</b><span>▰▰▰▰▰▱▱▱▱▱ 4/8</span></div></div>
+                <div class="gc"><div class="cv" style="background:linear-gradient(120deg,#3a3f47,#6b7380)"></div><div class="bd"><b>📘 Seminario 1</b><span>Terminado</span></div></div>
+                <div class="gc" style="opacity:.0"></div><div class="gc" style="opacity:0"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 4 · derecha: repaso + evaluaciones + notas + hábitos -->
+          <div>
+            <div class="blk">
+              <div class="dbh"><span class="ar">↗</span>🃏 Tarjetas <span class="vt">🔁 Repaso de hoy · 7</span></div>
+              <div class="row"><span class="t">¿Fechas de las tres entregas escritas?</span><span class="tag gray">Responder</span></div>
+              <div class="row"><span class="t">¿Qué evalúa el asesor temático y el profesor?</span><span class="tag gray">Responder</span></div>
+              <div class="row"><span class="t">¿Qué debe tener cada capítulo de la tesis?</span><span class="tag green">✅ Sabía</span></div>
+              <div class="row"><span class="t">¿Cuándo el uso de IA es plagio?</span><span class="tag gray">Responder</span></div>
+              <div class="row"><span class="d">+ 3 más</span></div>
+            </div>
+            <div class="blk">
+              <div class="dbh"><span class="ar">↗</span>📝 Evaluaciones <span class="vt">Próximas</span></div>
+              <div class="row"><span class="t">2.ª entrega escrita</span><span class="tag red">🔴 4 días</span><span class="d">15%</span></div>
+              <div class="row"><span class="t">Entrega final de la tesis</span><span class="tag green">🟢 39 días</span><span class="d">40%</span></div>
+            </div>
+            <div class="blk">
+              <div class="dbh"><span class="ar">↗</span>🔥 Hábitos <span class="vt">Hoy · Mié 14 oct</span></div>
+              <div class="row"><span class="chk"></span><span class="t">📖 Estudié 25 min</span><span class="chk"></span><span class="t">🔁 Hice mi repaso</span></div>
+              <div class="row"><span class="chk"></span><span class="t">📥 Procesé mis clases</span><span class="chk"></span><span class="t">🇬🇧 Inglés 15 min</span></div>
+            </div>
+            <div class="blk">
+              <div class="dbh"><span class="ar">↗</span>📚 Lecturas <span class="vt">En curso</span></div>
+              <div class="row"><span class="t">Mi 1.ª entrega · releer</span><span class="tag blue">📖 Leyendo</span></div>
+              <div class="row"><span class="t">TUO LIR · arts. 37 y 44</span><span class="tag gray">⏳ Pendiente</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pin" style="left:30px;top:72px">1</div>
+        <div class="pin" style="left:30px;top:246px">2</div>
+        <div class="pin" style="left:298px;top:246px">3</div>
+        <div class="pin" style="left:298px;top:530px">4</div>
+        <div class="pin" style="left:922px;top:246px">5</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ================= PÁGINA 2: explicación ================= -->
+<div class="page p2">
+  <h2>Campus, versión Student OS · cómo se verá en tu Notion real</h2>
+  <p class="lead">La página anterior es una maqueta de tu Notion <b>en modo oscuro y con ancho completo</b>, con los elementos que Notion sí permite. Sigue la estructura de Student OS de Gridfiti: un panel de widgets arriba, un directorio de páginas, las tareas de hoy y de la semana, los exámenes y entregas próximos, el seguimiento de notas del semestre y las lecturas. Los datos son los tuyos reales.</p>
+  <div class="g3">
+    <div>
+      <ol>
+        <li><span class="n">1</span><span><b>Franja de widgets (unos 160 px de alto).</b> Muestra los días que faltan para tu hito, lo que viene y el pomodoro, en colores oscuros que combinan con tu Notion. Ya no se estira ni deja espacio vacío.</span></li>
+        <li><span class="n">2</span><span><b>Directorio</b> (el "page directory" de Student OS). Son enlaces de una sola línea, sin cajas grandes: las páginas de Campus, tus 5 programas y las bases para consultar. Debajo está la Bandeja.</span></li>
+        <li><span class="n">3</span><span><b>Tu día y tu semana.</b> ⭐ Hoy (máximo 3 tareas) y una tabla corta de 📅 Esta semana con fecha, curso y pomodoros. Ahí está tu plan de la 2.ª entrega, día por día.</span></li>
+        <li><span class="n">4</span><span><b>Mis cursos.</b> Tarjetas pequeñas con portada y barra de avance, una pestaña por programa. Al tocar una, entras al curso.</span></li>
+        <li><span class="n">5</span><span><b>Columna de estudio.</b> 🔁 Repaso de hoy (eliges ✅ 🤔 ❌ en Responder), 📝 evaluaciones con semáforo y peso, 🔥 hábitos de hoy y 📚 lecturas en curso.</span></li>
+      </ol>
+      <div class="box" style="margin-top:22px">
+        <h3>Qué cambia respecto de hoy</h3>
+        <ul>
+          <li>Desaparecen los recuadros grandes de color. Cada sección queda solo con el título que Notion ya pone a cada vista.</li>
+          <li>Todo cabe en una pantalla con ancho completo. El Kanban, el calendario y lo demás siguen en "Más vistas" y en la página Tareas.</li>
+          <li>Se agrega 📅 Esta semana y el directorio pasa a la izquierda, como en Student OS.</li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <div class="box okbox">
+        <h3>✅ Lo que se mantiene</h3>
+        <p>Tus bases, tus datos, las 14 tarjetas, las normas de la tesis, los hubs de programa, las clases en formato Cornell y la rutina diaria. No se borra nada.</p>
+      </div>
+      <div class="box">
+        <h3>👆 Lo que haces tú (2 minutos, una sola vez)</h3>
+        <ul>
+          <li>En Campus: <b>••• → Ancho completo</b>.</li>
+          <li>Arrastra el borde inferior del panel hasta que mida unos 160 px. Notion no deja que yo cambie ese tamaño.</li>
+          <li>En claude.ai → Rutinas: agrega los conectores <b>Fireflies</b> y <b>Notion</b>.</li>
+        </ul>
+      </div>
+      <div class="box warnbox">
+        <h3>⚠️ Para ser honesto: lo que Notion no permite</h3>
+        <ul>
+          <li>Cada vista conserva su barra de Notion (título, vista y botón "Nuevo" al pasar el mouse). La maqueta la muestra tal cual.</li>
+          <li>No hay botones reales en el plan gratis. Para repasar se usa la columna Responder.</li>
+          <li>El panel es el único elemento con diseño propio. Lo demás son bloques nativos de Notion.</li>
+        </ul>
+      </div>
+      <div class="box">
+        <h3>Si apruebas</h3>
+        <p>Lo construyo en tu Notion en una sola pasada y te aviso para que me mandes una captura y ajustemos.</p>
+      </div>
+    </div>
+  </div>
+  <div class="src">Referencia: Student OS de Gridfiti (descripción pública del producto). No se compró ni se copió la plantilla; se replica su estructura con tus datos.</div>
+</div>
+
+</body>
+</html>
