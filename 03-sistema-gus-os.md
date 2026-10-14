@@ -207,6 +207,42 @@ Qué hace en cada ejecución:
 
 **Integración nativa de Fireflies:** sigue enviando todas las reuniones a la página "Notas" de Gus Life's, incluidas las personales. Para apagarla: Fireflies → Integraciones → Notion.
 
+## Registro — 14 oct 2026 (3): panel que llena su marco, unidades y Bandeja
+
+### Panel de Campus (widget v3)
+- **Problema:** Carlos mandó una captura ("se sigue viendo del asco"). El embed ocupaba unos 755 × 560 px. El panel usaba solo 160 px arriba y el resto del marco se veía gris claro, porque el fondo transparente dejaba ver el fondo del embed. La API no puede cambiar la altura del embed.
+- **Solución en `widgets/campus.html`:**
+  - Fondo #191919, el mismo de Notion en modo oscuro.
+  - El panel llena todo el marco con una cuadrícula de 2 × 2:
+    - saludo, próximo hito y ciclo;
+    - pomodoro;
+    - "Lo que viene", con 5 fechas y una ficha de cuenta regresiva;
+    - "Tus próximas 2 semanas", un calendario de 14 días con puntos por clase o entrega.
+  - Las letras se escalan con el alto del marco.
+  - Si el marco mide menos de 300 px de alto, muestra solo la franja de arriba.
+  - Si mide menos de 560 px de ancho, apila las tarjetas.
+- Se subió por URL de GitHub y se reemplazó el embed con replace_content. La página quedó con el mismo orden.
+
+### Unidades (🧩 Módulos), tomadas de los sílabos
+- **Seminario 2:**
+  - Unidad 1, Diseño del cap. 3: S01–S03.
+  - Unidad 2, Introducción y conclusiones: S04–S05.
+  - Unidad 3, Propuesta final: S06–S08.
+- **Seminario 1:**
+  - Unidad 1, Plan de trabajo: S01–S02.
+  - Unidad 2, Cap. 1 "estado del arte": S04–S05.
+  - Unidad 3, Cap. 2 "problema de investigación": exposición final.
+  - Sesiones sin grabación: 23 abr, 4 jun y 18 jun.
+- La página de cada curso muestra primero sus Módulos.
+- La vista "📚 Sesiones" del hub de la Maestría ahora se agrupa por unidad.
+
+### Bandeja
+- **"Mock Class Presentation" (6 may):** era una clase muestra de una charla de admisión a un LLM. Se marcó como procesada y se agregó como recurso de Inglés.
+- **"imo-effg-jxi" (8 oct):** es una conversación con Nicolás sobre las SAB y el contrato de intermediación. Sigue pendiente; la nota pide a Carlos escribir "Bolsa" o "descartar".
+
+### Seguimiento
+- Revisión única programada (`trig_01GubLcJytcK54aN2zQyZNJc`) para el 16 oct a las 8:00 a. m. de Lima: procesar la clase S05 del Seminario 2 si la grabación ya está en Fireflies. La rutina diaria todavía no tiene conectores.
+
 ## Registro — 14 oct 2026 (2): clases pendientes, tesis corregida y guía en PDF
 
 ### Corrección importante: el tema de la tesis
