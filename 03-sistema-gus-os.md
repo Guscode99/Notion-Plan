@@ -207,6 +207,100 @@ Qué hace en cada ejecución:
 
 **Integración nativa de Fireflies:** sigue enviando todas las reuniones a la página "Notas" de Gus Life's, incluidas las personales. Para apagarla: Fireflies → Integraciones → Notion.
 
+## Registro — 14 oct 2026 (2): clases pendientes, tesis corregida y guía en PDF
+
+### Corrección importante: el tema de la tesis
+- El 13 oct se cargó como tesis la "deducibilidad de pérdidas por fraude en bancos". Era un error: ese tema lo expuso **Carolina Fujita** en la exposición final del Seminario 1 (2 jul).
+- La tesis de Carlos siempre fue sobre fondos de inversión. Lo expuso el 9 abr y el 2 jul. Hoy se titula *"La asamblea general de partícipes en los fondos de inversión de oferta pública en el Perú: el trasplante de la junta general de accionistas frente a las actividades principales del negocio del fondo"* (resumen ejecutivo v1.7, 28 sep 2026, en Drive).
+- Su asesor temático es Aldo Fuertes, gerente de una SAFI.
+- Qué se corrigió (sin borrar nada):
+  - **Normas:** 5 nuevas con "Para la tesis":
+    - LFI (D. Leg. 862) `3f93e6776c678175ada2d1012a857c1b`
+    - RFI (Res. SMV 029-2014-SMV/01) `3f93e6776c67812c9f73cfa60ea4e20a`
+    - LGS (Ley 26887) `3f93e6776c6781c9990bfe49c366ef47`
+    - Reglamento de Fondos Mutuos (número por verificar) `3f93e6776c67818c910ff2014080f022`
+    - Res. 052-2020-SMV/02 `3f93e6776c678175ba78dc9f5256fc59`
+    - Se agregó la opción "Resolución SMV" al Tipo.
+  - **Artículos:** 10 nuevos: LFI 1 y 3, 11, 30; RFI 29, 93, 94, 98, 121; LGS 111/114/115 y 125–127. Son paráfrasis del resumen ejecutivo, con "Verificado en SPIJ" sin marcar.
+  - **Lo del tema de fraude:** normas, artículos y lecturas con "Para la tesis" desmarcado y rotulados "no es tu tesis".
+  - **Conceptos:** 7 nuevos de la tesis: sociedad administradora, Comité de Vigilancia, partícipe retail, Régimen General vs. Simplificado, problema de agencia, trasplante jurídico y actividades principales. Patrimonio autónomo y asamblea general de partícipes se enlazaron a sus normas y artículos.
+  - **Proyecto "Tesis"** (`3f63e6776c6781d3aaf3f248ba727f73`): ahora tiene página completa con:
+    - pregunta e hipótesis;
+    - estado por objetivo;
+    - documentos de Drive;
+    - normas;
+    - próximas entregas.
+    - También está enlazado en el Directorio de Campus, bajo PROGRAMAS.
+  - **Seminario 2 · S02:** la sección "🎯 Para tu tesis" se reescribió para el tema correcto.
+  - **Modo entrega:** ahora enlaza la tesis v1.7, la respuesta al dictamen, las 15 observaciones de los jurados y la página de la tesis.
+  - **Rutina diaria:** el prompt se actualizó con el tema correcto y con un plan B por si se alcanza el límite de consultas de Notion.
+  - **`00-lo-que-quiere-carlos.txt`:** actualizado.
+
+### Clases procesadas (subagentes, una clase cada uno)
+Cada clase quedó en formato Cornell con 5 pestañas, 8 tarjetas y la vista de tarjetas dentro de 🃏. Para repartir la carga, cada grupo de tarjetas vence en un día distinto:
+
+| Clase | Tarjetas vencen | Notas |
+|---|---|---|
+| Seminario 1 · Exposición final — Tu tesis: fondos de inversión y figuras societarias (2 jul) | 15 oct | 15 observaciones de los jurados a la tesis, cada una con su minuto. Tarea "Aplicar observaciones…" (`3f93e6776c6781399d28c790da8c7e8e`) para el 17 oct. |
+| Seminario 1 · S04 — Primera exposición de tesis (7 may) | 16 oct | Carlos fue jurado; no expuso. |
+| Seminario 1 · S05 — Exposiciones de avance y marco teórico (21 may) | 19 oct | Respuestas del profesor a sus consultas. |
+| Seminario 1 · S01 — Presentación del curso y metodología (26 mar) | 20 oct | |
+| Seminario 1 · S02 — Mapa de preguntas, hipótesis e índice (9 abr; antes figuraba el 10) | 21 oct | Carlos expuso fondos de inversión; 7 comentarios del profesor. |
+| Fórmula 100K · Clase 01 (pasada al formato nuevo; la fecha se cambió al 11 ago) | 22 oct | |
+| Fórmula 100K · Clase 02 (13 ago según la grabación) | 23 oct | |
+
+- En total hay 70 tarjetas.
+- Conceptos nuevos de las clases:
+  - problema de investigación, mapa de preguntas, medición del derecho;
+  - teoría de la regulación, tensión normativa, Capítulo 1: marco teórico;
+  - hipótesis de investigación, tabla de consistencia, asamblea general de partícipes;
+  - patrimonio autónomo, apatía racional, voice y exit;
+  - asimetría informativa, hecho de importancia, riesgo sistémico;
+  - contenido de valor, humanizar la marca, objetivo publicitario, segmentación, calentamiento de cuenta.
+- La tarea vieja "Repasar Clase 01 de TikTok" pasó a 📥 Bandeja con fecha 22 oct, porque ahora repasan las tarjetas.
+- Seminario 2 · S03 y S04 siguen "📥 Por procesar": no tienen grabación.
+
+### Apartados completados con datos reales de Drive
+- **Carpeta Drive:**
+  - Maestría: carpeta Maestría PUCP.
+  - Seminario 1 y 2: sus carpetas.
+  - Inglés: 5. Inglés.
+  - Derecho Societario: biblioteca compartida "DERECHO SOCIETARIO".
+- **🔗 Recursos:** 14 filas:
+  - de la tesis: carpeta, fuentes, derecho comparado, guía de fuentes oficiales, app de estudio, matriz, exposiciones y grabaciones;
+  - web: SPIJ y SMV;
+  - de otros cursos: biblioteca societaria, Transacciones Corporativas PUCP, material de Bolsa ULIMA y archivos de inglés.
+- **📚 Lecturas:** 7 nuevas:
+  - tesis v1.7 (versión de trabajo);
+  - respuesta al dictamen;
+  - resumen ejecutivo;
+  - guía de extensión;
+  - Guía de investigación PUCP;
+  - tesis modelo de La Serna (2022);
+  - tesis recomendadas.
+
+### Guía en PDF
+- `06-guia-de-uso-campus.pdf` (9 páginas horizontales, fuente `06-guia-de-uso-campus.html`):
+  1. Portada.
+  2. Pantalla principal con maqueta.
+  3. Rutina diaria.
+  4. Repaso y calendario de tarjetas.
+  5. Clases.
+  6. Tesis y 2.ª entrega.
+  7. Semana y frases.
+  8. Ajustes de una sola vez.
+  9. Mapa del sistema.
+- La página "📖 Guía de uso" de Notion enlaza la tesis y los recursos.
+
+### Límites encontrados
+- **Consultas a bases de Notion:** el workspace llegó al límite de query-data-sources, en modo SQL y en modo rows. Se trabajó con search y fetch.
+- **Chrome:** la extensión no es accesible desde la sesión en la nube. Siguen pendientes para Carlos, o para una sesión en Claude Desktop o `claude remote-control`:
+  - ancho completo;
+  - altura del panel;
+  - botones;
+  - conectores de la rutina.
+- **Subida de archivos a Notion:** el proxy bloquea la subida directa a api.notion.com, así que el PDF se adjunta por URL pública de GitHub.
+
 ## Registro — 14 oct 2026: Campus versión Student OS (aprobada)
 
 Construida según la maqueta `05-maqueta-campus-student-os.pdf`:
