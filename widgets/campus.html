@@ -6,75 +6,103 @@
 <title>Campus</title>
 <style>
   :root {
-    --ink: rgba(255,255,255,.88); --muted: rgba(255,255,255,.5); --line: rgba(255,255,255,.07);
-    --blue: #8ec5ff; --blue-soft: #202326; --navy1: #142338; --navy2: #23466f;
+    --page: #191919; --card: #202326; --card2: #262a2e; --edge: rgba(255,255,255,.08);
+    --ink: rgba(255,255,255,.9); --muted: rgba(255,255,255,.52); --line: rgba(255,255,255,.07);
+    --blue: #8ec5ff; --navy1: #142338; --navy2: #23466f;
     --hot: #ff7b72; --warn: #f0a43a; --ok: #57c78a;
+    color-scheme: dark;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  html, body { height: 100%; background: transparent; }
-  body { font-family: Inter, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; padding: 3px; color: var(--ink); }
-  /* Altura fija y fondo transparente: si el marco de Notion es más alto, el resto se ve como la página */
-  .wrap { height: 156px; display: grid; grid-template-columns: minmax(0, 1fr) 240px; gap: 8px; }
-  .card { border-radius: 14px; padding: 12px 14px; height: 100%; display: flex; flex-direction: column; justify-content: space-between; gap: 8px; min-width: 0; }
+  /* Fondo igual al de Notion en modo oscuro: el marco del embed nunca se ve gris */
+  html, body { height: 100%; background: var(--page); }
+  body { font-family: Inter, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; color: var(--ink); overflow: hidden; }
 
-  /* Saludo + hito */
-  .hello { background: #202326; border: 1px solid rgba(255,255,255,.08); }
-  .greet { font-size: 15px; font-weight: 800; letter-spacing: -.01em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .date { font-size: 11.5px; color: var(--muted); margin-top: 1px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .hito { display: flex; align-items: center; gap: 12px; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.06); border-radius: 10px; padding: 8px 12px; }
-  .num { font-size: 32px; font-weight: 800; line-height: 1; letter-spacing: -.03em; font-variant-numeric: tabular-nums; min-width: 44px; text-align: center; }
-  .num small { display: block; font-size: 10px; font-weight: 700; color: var(--muted); margin-top: 2px; }
+  /* El panel llena todo el marco que Notion le dé (por defecto unos 750 × 560 px) */
+  .wrap { height: 100vh; padding: 4px; display: grid; gap: 10px;
+          grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+          grid-template-rows: minmax(0, 1fr) minmax(0, 1.12fr);
+          grid-template-areas: "hello pomo" "agenda cal"; }
+  .card { border-radius: 16px; padding: clamp(12px, 2.6vh, 20px) clamp(14px, 2.4vw, 22px); min-width: 0; min-height: 0;
+          display: flex; flex-direction: column; justify-content: space-between; gap: clamp(8px, 1.8vh, 14px);
+          background: var(--card); border: 1px solid var(--edge); }
+  .lbl { font-size: clamp(9.5px, 1.9vh, 11.5px); font-weight: 800; letter-spacing: .09em; text-transform: uppercase; color: var(--blue); }
+
+  /* Saludo + próximo hito + ciclo */
+  .hello { grid-area: hello; }
+  .greet { font-size: clamp(15px, 3.7vh, 23px); font-weight: 800; letter-spacing: -.01em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .date { font-size: clamp(11.5px, 2.3vh, 14px); color: var(--muted); margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .hito { display: flex; align-items: center; gap: clamp(12px, 2vw, 18px); background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.06); border-radius: 12px; padding: clamp(8px, 1.8vh, 14px) clamp(12px, 2vw, 16px); }
+  .num { font-size: clamp(32px, 9vh, 58px); font-weight: 800; line-height: 1; letter-spacing: -.03em; font-variant-numeric: tabular-nums; min-width: 1.4em; text-align: center; }
+  .num small { display: block; font-size: clamp(10px, 1.9vh, 12px); font-weight: 700; color: var(--muted); margin-top: 3px; letter-spacing: 0; }
   .hito > div:last-child { min-width: 0; }
-  .lbl { font-size: 9.5px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--blue); }
-  .what { font-size: 13.5px; font-weight: 700; margin-top: 1px; line-height: 1.25; }
-  .when { font-size: 11.5px; color: var(--muted); margin-top: 1px; }
-  .next { font-size: 11.5px; color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .next b { font-weight: 700; }
-  .cycle { display: flex; align-items: center; gap: 8px; font-size: 10.5px; color: var(--muted); white-space: nowrap; }
-  .bar { flex: 1; height: 5px; background: rgba(255,255,255,.1); border-radius: 99px; overflow: hidden; }
+  .what { font-size: clamp(13.5px, 3vh, 18px); font-weight: 700; margin-top: 2px; line-height: 1.25; }
+  .when { font-size: clamp(11.5px, 2.3vh, 14px); color: var(--muted); margin-top: 2px; }
+  .cycle { display: flex; align-items: center; gap: 10px; font-size: clamp(10.5px, 2vh, 12.5px); color: var(--muted); white-space: nowrap; }
+  .bar { flex: 1; height: 6px; background: rgba(255,255,255,.1); border-radius: 99px; overflow: hidden; }
   .bar i { display: block; height: 100%; background: var(--blue); border-radius: 99px; }
 
   /* Pomodoro */
-  .pomo { background: linear-gradient(150deg, var(--navy1), var(--navy2)); color: #fff; border: 1px solid rgba(255,255,255,.08); }
-  .modes { display: flex; gap: 3px; background: rgba(255, 255, 255, .1); border-radius: 999px; padding: 3px; }
-  .modes button { flex: 1; border: 0; background: transparent; color: rgba(255, 255, 255, .75); font: inherit; font-size: 11px; font-weight: 600; padding: 4px 2px; border-radius: 999px; cursor: pointer; white-space: nowrap; }
+  .pomo { grid-area: pomo; background: linear-gradient(150deg, var(--navy1), var(--navy2)); color: #fff; align-items: stretch; }
+  .modes { display: flex; gap: 3px; background: rgba(255,255,255,.1); border-radius: 999px; padding: 3px; }
+  .modes button { flex: 1; border: 0; background: transparent; color: rgba(255,255,255,.75); font: inherit; font-size: clamp(11px, 2.1vh, 13px); font-weight: 600; padding: clamp(4px, .9vh, 7px) 2px; border-radius: 999px; cursor: pointer; white-space: nowrap; }
   .modes button.on { background: #fff; color: #142338; }
-  .main { display: flex; align-items: center; gap: 12px; }
-  .ring { position: relative; width: 76px; aspect-ratio: 1; flex: none; }
+  .main { display: flex; align-items: center; justify-content: center; gap: clamp(12px, 2.4vw, 22px); }
+  .ring { position: relative; width: clamp(76px, 24vh, 142px); aspect-ratio: 1; flex: none; }
   .ring svg { width: 100%; height: 100%; transform: rotate(-90deg); }
   .ring circle { fill: none; stroke-width: 10; }
-  .ring .bg { stroke: rgba(255, 255, 255, .16); }
-  .ring .fg { stroke: #8ec5ff; stroke-linecap: round; transition: stroke-dashoffset .5s linear; }
-  .ring .t { position: absolute; inset: 0; display: grid; place-items: center; font-size: 19px; font-weight: 800; font-variant-numeric: tabular-nums; }
-  .side { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
-  .btns { display: flex; gap: 5px; }
-  .btns button { border: 0; font: inherit; font-size: 12px; font-weight: 700; border-radius: 9px; padding: 7px 9px; cursor: pointer; white-space: nowrap; }
-  .go { background: #8ec5ff; color: #142338; }
-  .reset { background: rgba(255, 255, 255, .14); color: #fff; }
-  .count { font-size: 11px; color: rgba(255, 255, 255, .7); }
-  .msg { font-size: 11px; color: rgba(255, 255, 255, .78); line-height: 1.3; }
+  .ring .bg { stroke: rgba(255,255,255,.16); }
+  .ring .fg { stroke: var(--blue); stroke-linecap: round; transition: stroke-dashoffset .5s linear; }
+  .ring .t { position: absolute; inset: 0; display: grid; place-items: center; font-size: clamp(19px, 5vh, 30px); font-weight: 800; font-variant-numeric: tabular-nums; }
+  .side { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+  .btns { display: flex; gap: 6px; }
+  .btns button { border: 0; font: inherit; font-size: clamp(12px, 2.3vh, 14px); font-weight: 700; border-radius: 10px; padding: clamp(7px, 1.4vh, 10px) clamp(9px, 1.4vw, 13px); cursor: pointer; white-space: nowrap; }
+  .go { background: var(--blue); color: #142338; }
+  .reset { background: rgba(255,255,255,.14); color: #fff; }
+  .count { font-size: clamp(11px, 2.1vh, 13px); color: rgba(255,255,255,.72); }
+  .msg { font-size: clamp(11px, 2.2vh, 13.5px); color: rgba(255,255,255,.8); line-height: 1.35; text-align: center; }
   .msg b { color: #fff; }
 
-  /* Agenda: solo aparece cuando hay ancho de sobra */
-  .agenda { display: none; background: #202326; border: 1px solid rgba(255,255,255,.08); }
-  .agenda .lbl { margin-bottom: 2px; }
-  .agenda ul { list-style: none; display: flex; flex-direction: column; gap: 5px; flex: 1; justify-content: space-evenly; }
-  .agenda li { display: flex; justify-content: space-between; gap: 10px; font-size: 12.5px; border-bottom: 1px solid var(--line); padding-bottom: 4px; }
+  /* Lo que viene */
+  .agenda { grid-area: agenda; justify-content: flex-start; }
+  .agenda ul { list-style: none; display: flex; flex-direction: column; flex: 1; justify-content: space-evenly; min-height: 0; }
+  .agenda li { display: flex; align-items: center; gap: 10px; padding: clamp(4px, 1vh, 8px) 0; border-bottom: 1px solid var(--line); min-width: 0; }
   .agenda li:last-child { border-bottom: 0; }
-  .agenda li span:first-child { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .agenda li span:last-child { color: var(--muted); white-space: nowrap; font-variant-numeric: tabular-nums; }
-  .agenda .hot { color: var(--hot) !important; font-weight: 700; }
-  .agenda .warn { color: var(--warn) !important; font-weight: 700; }
-  @media (min-width: 780px) {
-    .wrap { grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr) 240px; }
-    .agenda { display: flex; }
-    .next { display: none; }
-  }
+  .agenda .ic { font-size: clamp(13px, 2.6vh, 16px); flex: none; }
+  .agenda .tx { flex: 1; min-width: 0; }
+  .agenda .tt { font-size: clamp(12.5px, 2.5vh, 15px); font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .agenda .dd { font-size: clamp(10.5px, 2vh, 12.5px); color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .chip { flex: none; font-size: clamp(10.5px, 2vh, 12.5px); font-weight: 700; padding: 2px 9px; border-radius: 99px; background: rgba(255,255,255,.08); color: var(--muted); font-variant-numeric: tabular-nums; }
+  .chip.hot { background: rgba(255,123,114,.16); color: var(--hot); }
+  .chip.warn { background: rgba(240,164,58,.16); color: var(--warn); }
 
-  /* Columna angosta (celular o columna de Notion pequeña): uno debajo del otro */
-  @media (max-width: 520px) {
-    .wrap { grid-template-columns: 1fr; height: auto; }
-    .card { height: auto; }
+  /* Próximas dos semanas */
+  .cal { grid-area: cal; justify-content: flex-start; }
+  .grid { flex: 1; display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); grid-template-rows: auto 1fr 1fr; gap: clamp(4px, .9vh, 7px); min-height: 0; }
+  .wd { text-align: center; font-size: clamp(9.5px, 1.8vh, 11px); font-weight: 700; color: var(--muted); text-transform: uppercase; }
+  .day { border-radius: 10px; background: var(--card2); border: 1px solid transparent; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; min-height: 0; }
+  .day b { font-size: clamp(12px, 2.6vh, 16px); font-weight: 700; font-variant-numeric: tabular-nums; }
+  .day.past { opacity: .35; }
+  .day.today { border-color: var(--blue); }
+  .day.today b { color: var(--blue); }
+  .dots { display: flex; gap: 3px; height: 7px; }
+  .dot { width: 7px; height: 7px; border-radius: 50%; }
+  .dot.clase { background: var(--blue); }
+  .dot.entrega { background: var(--hot); }
+  .legend { display: flex; gap: 14px; font-size: clamp(10px, 1.9vh, 12px); color: var(--muted); }
+  .legend span { display: inline-flex; align-items: center; gap: 5px; }
+
+  /* Marco bajo (si arrastras el borde del embed hacia arriba): solo la franja de arriba */
+  @media (max-height: 300px) {
+    .wrap { grid-template-rows: minmax(0, 1fr); grid-template-areas: "hello pomo"; }
+    .agenda, .cal { display: none; }
+    .main { justify-content: flex-start; }
+    .msg { text-align: left; }
+  }
+  /* Columna angosta o celular: una tarjeta debajo de otra */
+  @media (max-width: 560px) {
+    body { overflow: auto; }
+    .wrap { height: auto; grid-template-columns: 1fr; grid-template-rows: none; grid-template-areas: "hello" "pomo" "agenda" "cal"; }
+    .cal .grid { min-height: 150px; }
   }
 </style>
 </head>
@@ -93,13 +121,7 @@
         <div class="when" id="when"></div>
       </div>
     </div>
-    <div class="next" id="next"></div>
-    <div class="cycle"><span id="week">Semana –</span><div class="bar"><i id="cyc" style="width:0%"></i></div><span id="left"></span></div>
-  </section>
-
-  <section class="card agenda">
-    <div class="lbl">🗓️ Lo que viene</div>
-    <ul id="agenda"></ul>
+    <div class="cycle"><span id="week">Ciclo</span><div class="bar"><i id="cyc" style="width:0%"></i></div><span id="left"></span></div>
   </section>
 
   <section class="card pomo">
@@ -123,31 +145,46 @@
     </div>
     <div class="msg" id="msg"><b>Una sola tarea.</b> Celular lejos.</div>
   </section>
+
+  <section class="card agenda">
+    <div class="lbl">🗓️ Lo que viene</div>
+    <ul id="agenda"></ul>
+  </section>
+
+  <section class="card cal">
+    <div class="lbl">📆 Tus próximas 2 semanas</div>
+    <div class="grid" id="grid"></div>
+    <div class="legend"><span><i class="dot clase"></i>Clase</span><span><i class="dot entrega"></i>Entrega</span></div>
+  </section>
 </div>
 <script>
   // ---------- Calendario del ciclo (Claude actualiza estas fechas) ----------
   var CICLO = { nombre: '2026-2', inicio: '2026-08-17', semanas: 16 };
   var EVENTOS = [
     { d: '2026-10-15T19:00', t: 'Clase S5 · Seminario 2', k: 'clase' },
+    { d: '2026-10-17T23:59', t: 'Aplicar observaciones de los jurados', k: 'tarea' },
     { d: '2026-10-18T23:59', t: '2.ª entrega escrita', k: 'entrega', peso: '15%' },
     { d: '2026-10-29T19:00', t: 'Clase S6 · Seminario 2', k: 'clase' },
     { d: '2026-11-12T19:00', t: 'Clase S7 · Seminario 2', k: 'clase' },
     { d: '2026-11-22T23:59', t: 'Entrega final de la tesis', k: 'entrega', peso: '40%' },
     { d: '2026-11-26T19:00', t: 'Clase S8 · Seminario 2 (última)', k: 'clase' }
   ];
+  var ICON = { clase: '🎓', entrega: '📝', tarea: '🎯' };
 
   function parse(s) {
     var a = s.split('T'), d = a[0].split('-'), h = (a[1] || '00:00').split(':');
     return new Date(+d[0], +d[1] - 1, +d[2], +h[0], +h[1]);
   }
-  function dayDiff(f, now) {
-    var a = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-    var b = new Date(f.getFullYear(), f.getMonth(), f.getDate());
-    return Math.round((b - a) / 86400000);
-  }
+  function startOf(f) { return new Date(f.getFullYear(), f.getMonth(), f.getDate()); }
+  function dayDiff(f, now) { return Math.round((startOf(f) - startOf(now)) / 86400000); }
   function cap(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
   function fmtDate(f, opts) { try { return cap(f.toLocaleDateString('es-PE', opts)); } catch (e) { return f.toDateString(); } }
-  function enDias(n) { return n === 0 ? 'hoy' : (n === 1 ? 'mañana' : n + ' días'); }
+  function fmtHour(f) {
+    if (f.getHours() === 23 && f.getMinutes() === 59) return 'hasta las 11:59 p. m.';
+    var h = f.getHours(), m = f.getMinutes(), pm = h >= 12; h = h % 12 || 12;
+    return h + ':' + (m < 10 ? '0' : '') + m + (pm ? ' p. m.' : ' a. m.');
+  }
+  function enDias(n) { return n === 0 ? 'hoy' : (n === 1 ? 'mañana' : 'en ' + n + ' días'); }
 
   function renderHello() {
     var now = new Date(), h = now.getHours();
@@ -177,16 +214,29 @@
       document.getElementById('what').textContent = 'Sin entregas pendientes';
       document.getElementById('when').textContent = 'Pídele a Claude que agregue tus nuevas fechas';
     }
-    var otros = fut.filter(function (e) { return e !== ent; }).slice(0, 2).map(function (e) {
-      return (e.k === 'clase' ? '🎓 ' : '📝 ') + e.t + ' · <b>' + enDias(dayDiff(e.f, now)) + '</b>';
-    });
-    document.getElementById('next').innerHTML = otros.length ? 'Luego: ' + otros.join('  ·  ') : '';
+
+    // Lo que viene (hasta 5)
     var li = '';
-    fut.slice(0, 4).forEach(function (e) {
+    fut.slice(0, 5).forEach(function (e) {
       var n = dayDiff(e.f, now), cls = n <= 1 ? 'hot' : (n <= 7 ? 'warn' : '');
-      li += '<li><span>' + (e.k === 'clase' ? '🎓 ' : '📝 ') + e.t + '</span><span class="' + cls + '">' + enDias(n) + '</span></li>';
+      li += '<li><span class="ic">' + ICON[e.k] + '</span><span class="tx"><div class="tt">' + e.t + '</div>' +
+            '<div class="dd">' + fmtDate(e.f, { weekday: 'short', day: 'numeric', month: 'short' }) + ' · ' + fmtHour(e.f) + '</div></span>' +
+            '<span class="chip ' + cls + '">' + enDias(n) + '</span></li>';
     });
-    document.getElementById('agenda').innerHTML = li || '<li><span>Sin fechas próximas</span><span></span></li>';
+    document.getElementById('agenda').innerHTML = li || '<li><span class="tx"><div class="tt">Sin fechas próximas</div></span></li>';
+
+    // Próximas 2 semanas, desde el lunes de esta semana
+    var t0 = startOf(now), lun = new Date(t0); lun.setDate(t0.getDate() - ((t0.getDay() + 6) % 7));
+    var html = ['L', 'M', 'M', 'J', 'V', 'S', 'D'].map(function (w) { return '<div class="wd">' + w + '</div>'; }).join('');
+    for (var i = 0; i < 14; i++) {
+      var dia = new Date(lun); dia.setDate(lun.getDate() + i);
+      var evs = EVENTOS.filter(function (e) { return dayDiff(parse(e.d), dia) === 0 && e.k !== 'tarea'; });
+      var cls = 'day' + (dayDiff(dia, now) < 0 ? ' past' : '') + (dayDiff(dia, now) === 0 ? ' today' : '');
+      var tip = evs.map(function (e) { return e.t; }).join(' · ');
+      html += '<div class="' + cls + '" title="' + tip + '"><b>' + dia.getDate() + '</b><span class="dots">' +
+              evs.map(function (e) { return '<i class="dot ' + e.k + '"></i>'; }).join('') + '</span></div>';
+    }
+    document.getElementById('grid').innerHTML = html;
   }
 
   // ---------- Pomodoro 25/5/15 ----------
