@@ -206,3 +206,17 @@ Qué hace en cada ejecución:
 **Bloqueo pendiente:** la rutina se creó **sin conectores**, porque esta organización no permite pasarlos desde la sesión. Sin Fireflies ni Notion, la rutina solo reporta "Faltan los conectores". Para que funcione, hay que abrir la rutina en la sección de rutinas de claude.ai y agregarle los conectores **Fireflies** y **Notion**.
 
 **Integración nativa de Fireflies:** sigue enviando todas las reuniones a la página "Notas" de Gus Life's, incluidas las personales. Para apagarla: Fireflies → Integraciones → Notion.
+
+## Registro — 14 oct 2026: Campus versión Student OS (aprobada)
+
+Construida según la maqueta `05-maqueta-campus-student-os.pdf`:
+
+- **Panel oscuro:** franja de altura fija (156 px) con fondo transparente. Si el marco de Notion es más alto, lo que sobra se ve como la página.
+- **Fila de 3 columnas (19 / 52 / 29):**
+  - Directorio: páginas, programas, bases y accesos, con la Bandeja debajo.
+  - Centro: ⭐ Hoy, 📅 Esta semana (tabla con fecha, curso y pomodoros) y 🎓 Mis cursos.
+  - Derecha: 🔁 Repaso, 📝 Evaluaciones, 🔥 Hábitos y 📚 Lecturas.
+- **Encabezados:** sin callouts grandes. Cada vista usa el título que Notion ya le pone.
+- **Calendario:** pasó a "Más vistas".
+- **Guía de uso:** página nueva dentro de Campus (`3f93e6776c6781b3a621f7b281b68b28`), enlazada en el directorio.
+- **Botones:** Notion sí tiene botones en el plan gratis, pero la API no los crea. La guía explica cómo agregarlos con `/botón`.
