@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Campus en un árbol</title>
+<style>
+/* Una sola cara A4 horizontal. Árbol de izquierda a derecha; cada rama tiene su color. ✋ = lo tocas tú. */
+@page { size: A4 landscape; margin: 0; }
+:root{
+  --ink:#14202e; --ink2:#526072; --line:#9aa8b8; --paper:#ffffff;
+  --navy:#17304f; --navy-t:#e8eef6;
+  --amber:#a86400; --amber-t:#fff3d6; --amber-b:#f0c060;
+  --blue:#1f5fbf; --blue-t:#e6efff; --blue-b:#9cbcf0;
+  --red:#b3352a; --red-t:#fde8e5; --red-b:#efa69c;
+  --gray:#5a6676; --gray-t:#f0f2f5; --gray-b:#c7ced8;
+  --hand:#ffe27a;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--paper);color:var(--ink);font-family:Inter,"Liberation Sans",Arial,sans-serif;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.page{width:297mm;height:210mm;padding:9mm 11mm 8mm;display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:auto minmax(0,1fr) auto;gap:4mm;overflow:hidden}
+header{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;border-bottom:1.5px solid var(--ink);padding-bottom:2.5mm}
+header .tt{display:grid;gap:2px}
+header .tt p{margin:0;font-size:12.5px;color:var(--ink2)}
+h1{margin:0;font-family:"Inter Display",Inter,sans-serif;font-weight:800;font-size:27px;letter-spacing:-.01em}
+.legend{display:flex;gap:12px;font-size:11px;color:var(--ink2);align-items:center;white-space:nowrap}
+.legend span{display:flex;align-items:center;gap:5px}
+.legend i{display:inline-block;width:11px;height:11px;border-radius:3px;border:1px solid}
+.hand{background:var(--hand);color:#3a2e00;font-weight:700;font-size:9.5px;border-radius:3px;padding:0 4px;margin-left:5px;white-space:nowrap;letter-spacing:.02em}
+
+/* ---- árbol ---- */
+.stage{display:flex;align-items:center;justify-content:center;min-height:0;min-width:0;overflow:hidden}
+.t,.t ul{list-style:none;margin:0;padding:0}
+.t li{display:flex;align-items:center;position:relative;padding:2.2px 0 2.2px 16px}
+.t li::before{content:"";position:absolute;left:0;top:50%;width:16px;border-top:1.4px solid var(--line)}
+.t li::after{content:"";position:absolute;left:0;top:0;bottom:0;border-left:1.4px solid var(--line)}
+.t li:first-child::after{top:50%}
+.t li:last-child::after{bottom:50%}
+.t li:only-child::after{display:none}
+.t ul{display:flex;flex-direction:column;position:relative;margin-left:16px}
+.t ul::before{content:"";position:absolute;left:-16px;top:50%;width:16px;border-top:1.4px solid var(--line)}
+.t > li{padding-left:0}
+.t > li::before,.t > li::after{display:none}
+.n{display:inline-flex;flex-direction:column;justify-content:center;border:1.3px solid;border-radius:7px;padding:3.5px 9px;min-width:0;line-height:1.2;white-space:nowrap}
+.n b{font-size:12.5px;font-weight:700}
+.n s{text-decoration:none;font-size:10.2px;color:var(--ink2);font-weight:500;margin-top:1px}
+.n.leaf{flex-direction:row;align-items:baseline;gap:6px;padding:3px 8px}
+.n.leaf b{font-size:11.8px}
+.root{background:var(--navy);border-color:var(--navy);color:#fff;padding:10px 14px;border-radius:10px}
+.root b{font-size:19px;font-weight:800}
+.root s{color:#b6c7dc;font-size:11px}
+.c-navy{background:var(--navy-t);border-color:#9fb2cc}
+.c-amber{background:var(--amber-t);border-color:var(--amber-b)}
+.c-amber b{color:#6e4200}
+.c-blue{background:var(--blue-t);border-color:var(--blue-b)}
+.c-blue b{color:#163f80}
+.c-red{background:var(--red-t);border-color:var(--red-b)}
+.c-red b{color:#7d2018}
+.c-gray{background:var(--gray-t);border-color:var(--gray-b)}
+.branch > .n{min-width:118px}
+.branch > .n b{font-size:13.5px}
+
+/* ---- pie ---- */
+footer{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr) minmax(0,1.2fr);gap:4mm}
+.box{border:1.3px solid var(--gray-b);border-radius:9px;padding:7px 11px;display:grid;gap:4px;align-content:start}
+.box h2{margin:0;font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink2);font-weight:700}
+.steps{display:flex;align-items:center;gap:4px;flex-wrap:nowrap;font-size:11px;font-weight:600}
+.steps > span{white-space:nowrap}
+.steps em{font-style:normal;display:inline-grid;place-items:center;width:17px;height:17px;border-radius:50%;background:var(--ink);color:#fff;font-size:10px;font-weight:700;margin-right:3px}
+.steps .ar{color:var(--line);font-weight:400}
+.box p{margin:0;font-size:11.5px;line-height:1.35}
+.box.you{background:var(--amber-t);border-color:var(--amber-b)}
+.box.cl{background:var(--blue-t);border-color:var(--blue-b)}
+.warn{color:var(--red);font-weight:700}
+</style>
+</head>
+<body>
+<div class="page">
+  <header>
+    <div class="tt"><h1>Campus en un árbol</h1><p>Así está armado tu Notion. Lee de izquierda a derecha.</p></div>
+    <div class="legend">
+      <span><i style="background:var(--amber-t);border-color:var(--amber-b)"></i>Tu día</span>
+      <span><i style="background:var(--blue-t);border-color:var(--blue-b)"></i>Estudio</span>
+      <span><i style="background:var(--red-t);border-color:var(--red-b)"></i>Tesis</span>
+      <span><i style="background:var(--gray-t);border-color:var(--gray-b)"></i>Más páginas</span>
+      <span><span class="hand" style="margin:0">✋</span> lo tocas tú · lo demás lo llena Claude</span>
+    </div>
+  </header>
+
+  <div class="stage">
+    <ul class="t">
+      <li>
+        <span class="n root"><b>🏛️ Campus</b><s>tu página principal</s></span>
+        <ul>
+          <li class="branch"><span class="n c-navy"><b>☀️ Panel</b><s>días que faltan · 🍅 pomodoro · lo que viene</s></span></li>
+
+          <li class="branch">
+            <span class="n c-amber"><b>✋ Tu día</b><s>en la portada</s></span>
+            <ul>
+              <li><span class="n leaf c-amber"><b>⭐ Hoy</b><s>máx. 3 tareas · empieza por la 🐸</s><span class="hand">✋</span></span></li>
+              <li><span class="n leaf c-amber"><b>📅 Esta semana</b><s>lo que vence en 7 días</s></span></li>
+              <li><span class="n leaf c-amber"><b>🔁 Repaso de hoy</b><s>elige ✅ 🤔 ❌</s><span class="hand">✋</span></span></li>
+              <li><span class="n leaf c-amber"><b>🔥 Hábitos</b><s>marca antes de dormir</s><span class="hand">✋</span></span></li>
+              <li><span class="n leaf c-amber"><b>📥 Bandeja</b><s>pega aquí lo suelto</s><span class="hand">✋</span></span></li>
+            </ul>
+          </li>
+
+          <li class="branch">
+            <span class="n c-blue"><b>🎓 Programa</b><s>Maestría · Societario · 100K · Inglés · Bolsa</s></span>
+            <ul>
+              <li>
+                <span class="n c-blue"><b>📘 Curso</b><s>ej.: Seminario 2</s></span>
+                <ul>
+                  <li>
+                    <span class="n c-blue"><b>🧩 Unidad</b><s>U1 · U2 · U3</s></span>
+                    <ul>
+                      <li>
+                        <span class="n c-blue"><b>📚 Clase</b><s>S01 a S08 · grabada en Fireflies</s></span>
+                        <ul>
+                          <li><span class="n leaf c-blue"><b>🃏 Tarjetas</b><s>preguntas para repasar</s></span></li>
+                          <li><span class="n leaf c-blue"><b>🧠 Conceptos</b><s>definiciones</s></span></li>
+                          <li><span class="n leaf c-blue"><b>📜 Normas › § Artículos</b><s>LFI, RFI, LGS…</s></span></li>
+                          <li><span class="n leaf c-blue"><b>✅ Tareas</b><s>lo que dejó el profe</s></span></li>
+                          <li><span class="n leaf c-blue"><b>🔗 Recursos</b><s>links y carpetas</s></span></li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                  <li><span class="n leaf c-blue"><b>📝 Evaluaciones</b><s>fecha · peso · nota</s></span></li>
+                  <li><span class="n leaf c-blue"><b>📖 Lecturas</b><s>con avance</s></span></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+
+          <li class="branch">
+            <span class="n c-red"><b>🎯 Mi tesis</b><s>pregunta · hipótesis · objetivos</s></span>
+            <ul>
+              <li>
+                <span class="n c-red"><b>🧪 2.ª entrega</b><s>dom 18 oct · Modo entrega</s></span>
+                <ul>
+                  <li><span class="n leaf c-red"><b>🗓️ Plan día por día</b><s>D-4 → D-0</s></span></li>
+                  <li><span class="n leaf c-red"><b>☑️ Qué debe tener</b><s>según el sílabo</s></span></li>
+                </ul>
+              </li>
+              <li><span class="n leaf c-red"><b>📦 Entrega final</b><s>dom 22 nov · 40 %</s></span></li>
+            </ul>
+          </li>
+
+          <li class="branch">
+            <span class="n c-gray"><b>🧭 Más páginas</b><s>en el Directorio</s></span>
+            <ul>
+              <li><span class="n leaf c-gray"><b>🔁 Repaso</b><s>todo el mazo</s></span></li>
+              <li><span class="n leaf c-gray"><b>✅ Tareas</b><s>Kanban</s></span></li>
+              <li><span class="n leaf c-gray"><b>📊 Analítica</b><s>avance y notas</s></span></li>
+              <li><span class="n leaf c-gray"><b>🗓️ Revisión semanal</b><s>viernes, 15 min</s><span class="hand">✋</span></span></li>
+              <li><span class="n leaf c-gray"><b>📚 Biblioteca</b><s>las 15 bases</s></span></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+
+  <footer>
+    <div class="box you">
+      <h2>✋ Tu día en 4 pasos</h2>
+      <div class="steps"><span><em>1</em>Mira el panel</span><span class="ar">→</span><span><em>2</em>🐸 + 🍅 25 min</span><span class="ar">→</span><span><em>3</em>Repaso</span><span class="ar">→</span><span><em>4</em>Hábitos</span></div>
+      <p>Sin energía: haz solo el paso 2. Ya cuenta.</p>
+    </div>
+    <div class="box">
+      <h2>Cada viernes</h2>
+      <p>🗓️ Revisión semanal (15 min). Al final, dile a Claude: <b>«Hice mi revisión semanal»</b>.</p>
+    </div>
+    <div class="box cl">
+      <h2>Claude, cada mañana a las 6:46</h2>
+      <p>Trae tus clases de Fireflies · mueve tus tarjetas · crea tu fila de hábitos · ordena la Bandeja.</p>
+      <p class="warn">Falta conectar Fireflies y Notion a esa tarea programada.</p>
+    </div>
+  </footer>
+</div>
+<script>
+(function fit(){var st=document.querySelector(".stage"),t=document.querySelector(".t");t.style.zoom=1;var z=Math.min(1,(st.clientWidth-4)/t.scrollWidth,(st.clientHeight-4)/t.scrollHeight);t.style.zoom=z;for(var i=0;i<12;i++){var r=t.getBoundingClientRect();if(r.height<=st.clientHeight-6&&r.width<=st.clientWidth-6)break;z*=0.97;t.style.zoom=z}document.body.setAttribute("data-zoom",z.toFixed(3))})();
+</script>
+</body>
+</html>
