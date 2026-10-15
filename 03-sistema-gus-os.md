@@ -207,6 +207,46 @@ Qué hace en cada ejecución:
 
 **Integración nativa de Fireflies:** sigue enviando todas las reuniones a la página "Notas" de Gus Life's, incluidas las personales. Para apagarla: Fireflies → Integraciones → Notion.
 
+## Registro — 14 oct 2026 (4): manual interactivo y correcciones de la revisión
+
+### Manual interactivo
+- **Archivo:** `07-guia-interactiva-campus.html`, publicado como página privada de claude.ai: https://claude.ai/artifact/KM9ig871cYhZ3gubVY5XoN
+- **Enlace en Notion:** al inicio de la página «📖 Guía de uso», en un callout.
+- **Base:** un recorrido de cada página, vista y base de Campus. El inventario completo está en `reports/inventario-campus-2026-10-14.md`.
+- **Partes interactivas:**
+  - «¿Qué necesitas ahora?», con 10 situaciones y sus pasos.
+  - Rutina diaria y del viernes para marcar. Se guarda en el navegador.
+  - Mapa clicable de la portada.
+  - Estados de una clase y de una tarea.
+  - Simulador de cajas, con las fórmulas reales de Próximo repaso y Toca hoy.
+  - Pestañas de una clase.
+  - Frases para copiar.
+  - Ajustes de una sola vez.
+  - Avisos de la revisión.
+  - Mapa del sistema.
+  - Glosario filtrable de 71 campos.
+  - Buscador.
+
+### Correcciones en Notion (sin borrar nada)
+- **Campus › 📅 Esta semana:** ahora incluye las tareas vencidas y muestra Alerta. Filtro: Estado ≠ Hecho y Fecha límite ≤ dentro de una semana. Antes, una tarea vencida desaparecía de la portada.
+- **Campus › 📚 Lecturas en curso:** ahora filtra Estado = 📖 Leyendo. Antes salían las pendientes, incluidas las de LIR y SBS.
+- **Más vistas › Semana (lista):** la vista se renombró «📆 Elegidas para esta semana (por estado)», porque tenía el mismo nombre que la tabla de la portada.
+- **Revisión semanal › Evaluaciones:** ahora filtra Estado ≠ ✅ Calificada y muestra Estado y Nota. Pasó a llamarse «📝 Evaluaciones que vienen o esperan nota», porque el paso 3 pide anotar las notas.
+- **Hubs de 100K, Inglés y Bolsa:** las vistas de Tareas ahora excluyen las ✅ Hecho, como la de Societario.
+- **§ Artículos:** los 6 artículos del tema de fraude/LIR tienen ahora «(referencia, no es tu tesis)» en el título.
+
+### Lo que sigue pendiente, según la revisión
+- **Tarea programada diaria:** sigue sin conectores (`mcp_connections` vacío). La ejecución del 14 oct duró 12 segundos. Mientras no los tenga:
+  - las cajas de las tarjetas no se guardan;
+  - no se crea la fila de hábitos;
+  - no se procesan las clases.
+- **Pesos del sílabo:** no coinciden, y lo cargado en Seminario 2 suma 70 %.
+- **Conceptos:** 6 del tema de fraude siguen enlazados a SI2.
+- **Modo entrega:** solo existe para la 2.ª entrega.
+- **Mi tesis:** el estado por objetivo es una tabla fija.
+- **Clases de hoy:** se ordena por Hora, que es texto.
+- **Fecha de la 1.ª entrega:** dice 14 set en Mi tesis y 13 set en Evaluaciones.
+
 ## Registro — 14 oct 2026 (3): panel que llena su marco, unidades y Bandeja
 
 ### Panel de Campus (widget v3)

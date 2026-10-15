@@ -1,0 +1,1474 @@
+<title>Manual de Campus</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,600&family=Public+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: índice fijo a la izquierda, como el índice de un código, y una columna de lectura.
+   En el teléfono el índice pasa a una barra de capítulos arriba. Lo que haces tú va marcado con resaltador. */
+:root{
+  --paper:#f3f5f8; --sheet:#ffffff; --sunk:#e9edf2; --rule:#d8dfe7;
+  --ink:#132033; --ink-2:#47566a; --ink-3:#6f7d90;
+  --navy:#17304f; --navy-ink:#f1f5fa; --navy-2:#b6c7dc; --navy-line:rgba(255,255,255,.16);
+  --accent:#2160c4; --accent-soft:#e2ebfa;
+  --mark:#ffe27a; --mark-ink:#352a00;
+  --ok:#1b7a51; --ok-soft:#ddf1e7; --warn:#995a00; --warn-soft:#fbeed6; --hot:#b3352a; --hot-soft:#fae3df;
+  --shadow:0 1px 2px rgba(19,32,51,.06),0 6px 18px rgba(19,32,51,.06);
+  --f-display:"Newsreader",Georgia,"Times New Roman",serif;
+  --f-body:"Public Sans",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+  --r:10px;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --paper:#10141a; --sheet:#171d25; --sunk:#0c1015; --rule:#28313c;
+  --ink:#e6ebf1; --ink-2:#a8b4c2; --ink-3:#7e8b9b;
+  --navy:#132238; --navy-ink:#eef3f9; --navy-2:#9fb3cc; --navy-line:rgba(255,255,255,.12);
+  --accent:#8ec5ff; --accent-soft:#182b44;
+  --mark:#5a4b10; --mark-ink:#ffeaa8;
+  --ok:#5ccb8f; --ok-soft:#14301f; --warn:#f0a43a; --warn-soft:#382812; --hot:#ff7d73; --hot-soft:#3a1c1a;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 22px rgba(0,0,0,.25);
+  color-scheme:dark;
+}}
+:root[data-theme="dark"]{
+  --paper:#10141a; --sheet:#171d25; --sunk:#0c1015; --rule:#28313c;
+  --ink:#e6ebf1; --ink-2:#a8b4c2; --ink-3:#7e8b9b;
+  --navy:#132238; --navy-ink:#eef3f9; --navy-2:#9fb3cc; --navy-line:rgba(255,255,255,.12);
+  --accent:#8ec5ff; --accent-soft:#182b44;
+  --mark:#5a4b10; --mark-ink:#ffeaa8;
+  --ok:#5ccb8f; --ok-soft:#14301f; --warn:#f0a43a; --warn-soft:#382812; --hot:#ff7d73; --hot-soft:#3a1c1a;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 22px rgba(0,0,0,.25);
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+body{background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:var(--accent)}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:6px}
+.wrap{max-width:1200px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3,h4{text-wrap:balance;margin:0}
+p{margin:0}
+.mono{font-family:var(--f-mono);font-size:.86em}
+
+/* ---------- Encabezado ---------- */
+.band{background:var(--navy);color:var(--navy-ink)}
+.band .wrap{padding-block:40px 28px;display:grid;gap:20px}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--navy-2)}
+.band h1{font-family:var(--f-display);font-weight:600;font-size:clamp(34px,5vw,54px);line-height:1.05;letter-spacing:-.01em}
+.band .lede{max-width:64ch;color:var(--navy-2);font-size:17px}
+.band .lede b{color:var(--navy-ink);font-weight:600}
+.live{display:flex;flex-wrap:wrap;gap:8px}
+.live .chip{display:flex;align-items:baseline;gap:8px;border:1px solid var(--navy-line);border-radius:999px;padding:6px 14px;font-size:14px;color:var(--navy-2)}
+.live .chip b{color:var(--navy-ink);font-weight:600;font-variant-numeric:tabular-nums}
+.live .chip.hot{border-color:rgba(255,125,115,.55)}
+.live .chip.hot b{color:#ffb4ac}
+.search{position:relative;max-width:560px}
+.search input{width:100%;font:inherit;font-size:15px;padding:11px 14px 11px 40px;border-radius:10px;border:1px solid var(--navy-line);background:rgba(255,255,255,.07);color:var(--navy-ink)}
+.search input::placeholder{color:var(--navy-2)}
+.search svg{position:absolute;left:13px;top:50%;transform:translateY(-50%);width:17px;height:17px;stroke:var(--navy-2);fill:none}
+.results{position:absolute;z-index:30;left:0;right:0;top:calc(100% + 6px);background:var(--sheet);color:var(--ink);border:1px solid var(--rule);border-radius:10px;box-shadow:var(--shadow);overflow:hidden}
+.results a{display:block;padding:10px 14px;text-decoration:none;color:var(--ink);border-top:1px solid var(--rule)}
+.results a:first-child{border-top:0}
+.results a:hover,.results a.sel{background:var(--accent-soft)}
+.results .rt{font-weight:600;font-size:14px}
+.results .rs{font-size:13px;color:var(--ink-2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.results .none{padding:12px 14px;font-size:14px;color:var(--ink-2)}
+
+/* ---------- Disposición ---------- */
+.layout{display:grid;grid-template-columns:230px minmax(0,1fr);gap:48px;align-items:start;padding-block:32px 80px}
+.toc{position:sticky;top:calc(env(safe-area-inset-top,0px) + 20px);max-height:calc(100vh - 40px);overflow:auto;padding-right:6px;font-size:14px}
+.toc .g{font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);margin:18px 0 6px}
+.toc .g:first-child{margin-top:0}
+.toc a{display:block;padding:5px 10px;border-radius:7px;color:var(--ink-2);text-decoration:none;border-left:2px solid transparent}
+.toc a:hover{background:var(--sunk);color:var(--ink)}
+.toc a[aria-current="true"]{color:var(--ink);font-weight:600;background:var(--sheet);border-left-color:var(--accent)}
+main{min-width:0;display:grid;gap:64px}
+@media (max-width:920px){
+  .layout{grid-template-columns:minmax(0,1fr);gap:24px;padding-top:0}
+  .toc{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;max-height:none;display:flex;gap:6px;overflow-x:auto;white-space:nowrap;padding:10px 0;margin:0 calc(-1 * max(16px,env(safe-area-inset-left,0px)));padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));background:var(--paper);border-bottom:1px solid var(--rule);scrollbar-width:none}
+  .toc::-webkit-scrollbar{display:none}
+  .toc .g{display:none}
+  .toc a{border:1px solid var(--rule);border-radius:999px;padding:5px 12px;background:var(--sheet)}
+  .toc a[aria-current="true"]{border-color:var(--accent)}
+}
+
+/* ---------- Secciones ---------- */
+.sec{scroll-margin-top:24px;display:grid;gap:22px}
+@media (max-width:920px){.sec{scroll-margin-top:68px}}
+.sec-head{display:grid;gap:10px;max-width:72ch}
+.kicker{font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+.sec h2{font-family:var(--f-display);font-weight:600;font-size:clamp(26px,3.2vw,34px);line-height:1.15}
+.sec .lede{font-size:17px;color:var(--ink-2)}
+.where{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;margin-top:4px}
+.crumb{font-family:var(--f-mono);font-size:13px;color:var(--ink-2);background:var(--sunk);border-radius:6px;padding:4px 10px}
+.open{display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:600;text-decoration:none;color:var(--accent);padding:4px 2px}
+.open:hover{text-decoration:underline}
+h3{font-size:15px;font-weight:700;letter-spacing:.01em}
+.sub{font-family:var(--f-display);font-weight:600;font-size:21px;line-height:1.25;margin-top:6px}
+
+.trio{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+@media (max-width:1080px){.trio{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.trio .see{grid-column:1 / -1}}
+@media (max-width:640px){.trio{grid-template-columns:minmax(0,1fr)}}
+.col{background:var(--sheet);border:1px solid var(--rule);border-radius:var(--r);padding:16px 18px;display:grid;gap:10px;align-content:start;min-width:0}
+.col h3{display:flex;align-items:center;gap:8px}
+.col ul,.col ol{margin:0;padding-left:20px;display:grid;gap:6px}
+.col li{padding-left:2px}
+.col.you{background:var(--sheet)}
+.col.you h3 span{background:linear-gradient(transparent 52%,var(--mark) 52%);color:var(--ink);padding:0 3px}
+.col.claude h3::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--accent)}
+.col.see h3::before{content:"";width:9px;height:9px;border-radius:2px;background:var(--ink-3)}
+mark,.hl{background:var(--mark);color:var(--mark-ink);padding:0 3px;border-radius:3px}
+.ojo{border-left:3px solid var(--warn);background:var(--warn-soft);border-radius:0 var(--r) var(--r) 0;padding:12px 16px;font-size:15px;display:grid;gap:4px}
+.ojo b:first-child{color:var(--warn)}
+.tip{border-left:3px solid var(--accent);background:var(--accent-soft);border-radius:0 var(--r) var(--r) 0;padding:12px 16px;font-size:15px}
+.prop{font-family:var(--f-mono);font-size:.84em;background:var(--sunk);border:1px solid var(--rule);border-radius:5px;padding:0 6px;white-space:nowrap;color:var(--ink)}
+.who{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;border-radius:4px;padding:1px 7px;vertical-align:1px;white-space:nowrap}
+.who.tu{background:var(--mark);color:var(--mark-ink)}
+.who.cl{background:var(--accent-soft);color:var(--accent)}
+.who.auto{background:var(--sunk);color:var(--ink-2);border:1px solid var(--rule)}
+.who.old{background:transparent;color:var(--ink-3);border:1px dashed var(--rule)}
+.say{font-family:var(--f-mono);font-size:.86em;background:var(--accent-soft);color:var(--accent);border-radius:5px;padding:1px 7px;white-space:nowrap}
+
+/* Tablas */
+.tbl{overflow-x:auto;border:1px solid var(--rule);border-radius:var(--r);background:var(--sheet)}
+table{border-collapse:collapse;width:100%;font-size:14.5px}
+th,td{text-align:left;padding:9px 14px;border-top:1px solid var(--rule);vertical-align:top}
+thead th{border-top:0;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);font-weight:600;background:var(--sunk)}
+td.n{font-variant-numeric:tabular-nums;white-space:nowrap}
+tbody tr:hover{background:color-mix(in srgb,var(--sunk) 55%,transparent)}
+
+/* ---------- ¿Qué necesitas ahora? ---------- */
+.finder{display:grid;grid-template-columns:minmax(0,300px) minmax(0,1fr);gap:16px;align-items:start}
+@media (max-width:760px){.finder{grid-template-columns:minmax(0,1fr)}}
+.asks{display:grid;gap:6px}
+.ask{font:inherit;text-align:left;font-size:15px;padding:10px 14px;border-radius:9px;border:1px solid var(--rule);background:var(--sheet);color:var(--ink);cursor:pointer;display:flex;justify-content:space-between;gap:10px;align-items:center}
+.ask:hover{border-color:var(--accent)}
+.ask[aria-pressed="true"]{background:var(--navy);color:var(--navy-ink);border-color:var(--navy)}
+.ask small{font-family:var(--f-mono);font-size:11px;color:var(--ink-3);white-space:nowrap}
+.ask[aria-pressed="true"] small{color:var(--navy-2)}
+@media (max-width:760px){.asks{display:flex;overflow-x:auto;padding-bottom:4px}.ask{white-space:nowrap;flex:0 0 auto}.ask small{display:none}}
+.recipe{background:var(--sheet);border:1px solid var(--rule);border-radius:12px;box-shadow:var(--shadow);padding:22px 24px;display:grid;gap:14px;min-width:0}
+.recipe h3{font-family:var(--f-display);font-size:24px;font-weight:600;letter-spacing:0}
+.recipe .meta{font-family:var(--f-mono);font-size:12px;color:var(--ink-3)}
+.steps{list-style:none;margin:0;padding:0;display:grid;gap:10px;counter-reset:s}
+.steps li{display:grid;grid-template-columns:30px minmax(0,1fr);gap:12px;align-items:start;counter-increment:s}
+.steps li::before{content:counter(s);display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--sunk);color:var(--ink);font-weight:700;font-size:14px;font-variant-numeric:tabular-nums}
+.recipe .links{display:flex;flex-wrap:wrap;gap:8px 16px;padding-top:4px;border-top:1px solid var(--rule)}
+.recipe .links a{font-size:14px;font-weight:600;text-decoration:none;padding-top:8px}
+
+/* ---------- Checklists ---------- */
+.lists{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+@media (max-width:760px){.lists{grid-template-columns:minmax(0,1fr)}}
+.checkcard{background:var(--sheet);border:1px solid var(--rule);border-radius:12px;padding:18px 20px;display:grid;gap:12px;align-content:start;min-width:0}
+.checkcard header{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap}
+.checkcard h3{font-family:var(--f-display);font-size:21px;font-weight:600}
+.prog{font-family:var(--f-mono);font-size:12px;color:var(--ink-3);font-variant-numeric:tabular-nums}
+.bar{height:6px;border-radius:9px;background:var(--sunk);overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--ok);transition:width .25s}
+.check{list-style:none;margin:0;padding:0;display:grid;gap:2px}
+.check label{display:grid;grid-template-columns:22px minmax(0,1fr);gap:10px;align-items:start;padding:8px 6px;border-radius:8px;cursor:pointer}
+.check label:hover{background:var(--sunk)}
+.check input{width:18px;height:18px;margin:3px 0 0;accent-color:var(--ok)}
+.check .t{display:grid;gap:2px}
+.check .t b{font-weight:600}
+.check .t span{font-size:14px;color:var(--ink-2)}
+.check .t em{font-style:normal;font-family:var(--f-mono);font-size:11.5px;color:var(--ink-3)}
+.check input:checked + .t b{text-decoration:line-through;text-decoration-color:var(--ink-3);color:var(--ink-2)}
+.mini{font:inherit;font-size:13px;background:none;border:0;color:var(--ink-3);cursor:pointer;padding:0;text-decoration:underline;justify-self:start}
+
+/* ---------- Mapa de la portada ---------- */
+.mapwrap{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:16px;align-items:start}
+@media (max-width:1000px){.mapwrap{grid-template-columns:minmax(0,1fr)}}
+.map{background:var(--sunk);border:1px solid var(--rule);border-radius:12px;padding:14px;display:grid;gap:10px}
+.map .bar-top{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--ink-3);font-family:var(--f-mono)}
+.map .bar-top i{width:9px;height:9px;border-radius:50%;background:var(--rule)}
+.blk{font:inherit;font-size:13px;text-align:left;border:1px solid var(--rule);background:var(--sheet);color:var(--ink);border-radius:8px;padding:9px 10px;cursor:pointer;display:grid;gap:4px;min-width:0}
+.blk:hover{border-color:var(--accent)}
+.blk[aria-pressed="true"]{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent) inset}
+.blk b{font-weight:600}
+.blk span{font-size:11.5px;color:var(--ink-3);line-height:1.35}
+.blk.panel{background:#191919;color:rgba(255,255,255,.9);border-color:#191919;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;padding:10px}
+.blk.panel .q{background:#202326;border-radius:6px;padding:7px 8px;display:grid;gap:2px}
+.blk.panel .q b{font-size:12px;color:rgba(255,255,255,.92)}
+.blk.panel .q span{color:rgba(255,255,255,.55);font-size:11px}
+.blk.panel[aria-pressed="true"]{box-shadow:0 0 0 2px #8ec5ff inset}
+@media (max-width:520px){.blk.panel{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.cols3{display:grid;grid-template-columns:19fr 52fr 29fr;gap:8px;align-items:start}
+.cols3 > div{display:grid;gap:8px;min-width:0}
+@media (max-width:520px){.cols3{grid-template-columns:minmax(0,1fr)}}
+.detail{background:var(--sheet);border:1px solid var(--rule);border-radius:12px;padding:20px 22px;display:grid;gap:12px;box-shadow:var(--shadow);min-width:0}
+.detail h3{font-family:var(--f-display);font-size:22px;font-weight:600}
+.detail dl{display:grid;grid-template-columns:110px minmax(0,1fr);gap:8px 14px;margin:0;font-size:15px}
+.detail dt{font-family:var(--f-mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);padding-top:3px}
+.detail dd{margin:0}
+@media (max-width:520px){.detail dl{grid-template-columns:minmax(0,1fr)}.detail dt{padding-top:6px}}
+
+/* ---------- Simulador de cajas ---------- */
+.sim{background:var(--sheet);border:1px solid var(--rule);border-radius:12px;padding:20px 22px;display:grid;gap:16px;box-shadow:var(--shadow)}
+.boxes{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
+.box{font:inherit;cursor:pointer;border:1px solid var(--rule);border-radius:10px;background:var(--paper);color:var(--ink);padding:12px 8px;display:grid;gap:2px;justify-items:center;text-align:center;position:relative;min-width:0}
+.box b{font-family:var(--f-display);font-size:26px;line-height:1}
+.box span{font-size:12px;color:var(--ink-2)}
+.box[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-soft)}
+.box.to{border-color:var(--ok);border-style:dashed}
+.box.to::after{content:"aquí va";position:absolute;top:-9px;left:50%;transform:translateX(-50%);font-size:10.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;background:var(--ok);color:var(--sheet);padding:0 6px;border-radius:4px;white-space:nowrap}
+.answers{display:flex;flex-wrap:wrap;gap:8px}
+.ans{font:inherit;cursor:pointer;border:1px solid var(--rule);background:var(--paper);color:var(--ink);border-radius:999px;padding:7px 14px;font-size:15px}
+.ans[aria-pressed="true"]{background:var(--navy);color:var(--navy-ink);border-color:var(--navy)}
+.out{display:grid;gap:6px;background:var(--sunk);border-radius:10px;padding:14px 16px}
+.out .big{font-family:var(--f-display);font-size:22px;font-weight:600;line-height:1.25}
+.out .sm{font-size:14px;color:var(--ink-2)}
+.lane{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:13px;color:var(--ink-2)}
+.lane span{background:var(--paper);border:1px solid var(--rule);border-radius:6px;padding:3px 8px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.lane i{font-style:normal;color:var(--ink-3)}
+.simrow{display:grid;gap:8px}
+.simrow > p{font-family:var(--f-mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)}
+
+/* ---------- Kanban ---------- */
+.flow{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.flow .arrow{color:var(--ink-3);font-size:14px}
+.st{font:inherit;cursor:pointer;border:1px solid var(--rule);background:var(--sheet);color:var(--ink);border-radius:8px;padding:8px 12px;font-size:15px}
+.st[aria-pressed="true"]{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent) inset}
+.st.side{border-style:dashed}
+
+/* ---------- Pestañas de la clase ---------- */
+.ntabs{background:var(--sheet);border:1px solid var(--rule);border-radius:12px;overflow:hidden}
+.ntabs [role="tablist"]{display:flex;overflow-x:auto;border-bottom:1px solid var(--rule);background:var(--sunk)}
+.ntabs [role="tab"]{font:inherit;font-size:14px;cursor:pointer;border:0;background:none;color:var(--ink-2);padding:11px 14px;white-space:nowrap;border-bottom:2px solid transparent}
+.ntabs [role="tab"][aria-selected="true"]{color:var(--ink);font-weight:600;border-bottom-color:var(--ink);background:var(--sheet)}
+.ntabs [role="tabpanel"]{padding:18px 20px;display:grid;gap:12px}
+.cornell{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.6fr);gap:10px}
+@media (max-width:600px){.cornell{grid-template-columns:minmax(0,1fr)}}
+.cn{border-radius:8px;padding:12px 14px;font-size:14px;display:grid;gap:4px;border:1px solid var(--rule)}
+.cn b{font-size:13px}
+.cn.y{background:var(--warn-soft)}
+.cn.b{background:var(--accent-soft)}
+.cn.w{background:var(--paper)}
+
+/* ---------- Árbol ---------- */
+.tree{display:grid;gap:10px}
+.tier{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.tier .lv{font-family:var(--f-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);width:92px;flex:0 0 auto}
+.node{display:inline-grid;gap:1px;text-decoration:none;color:var(--ink);background:var(--sheet);border:1px solid var(--rule);border-radius:9px;padding:8px 12px;font-size:14px;min-width:0}
+.node small{color:var(--ink-3);font-size:12px}
+.node:hover{border-color:var(--accent)}
+.tier.down{padding-left:100px;color:var(--ink-3);font-size:13px}
+@media (max-width:600px){.tier .lv{width:100%}.tier.down{padding-left:0}}
+
+/* ---------- Frases ---------- */
+.phrases{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+@media (max-width:700px){.phrases{grid-template-columns:minmax(0,1fr)}}
+.ph{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:center;background:var(--sheet);border:1px solid var(--rule);border-radius:10px;padding:10px 12px}
+.ph q{font-family:var(--f-mono);font-size:14px;quotes:none;color:var(--ink)}
+.ph small{display:block;font-size:13px;color:var(--ink-2);margin-top:2px}
+.copy{font:inherit;font-size:13px;font-weight:600;cursor:pointer;border:1px solid var(--rule);background:var(--paper);color:var(--accent);border-radius:7px;padding:5px 10px;white-space:nowrap}
+.copy.done{color:var(--ok);border-color:var(--ok)}
+
+/* ---------- Glosario ---------- */
+.gfilters{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.gfilters select,.gfilters input{font:inherit;font-size:14px;padding:7px 10px;border-radius:8px;border:1px solid var(--rule);background:var(--sheet);color:var(--ink)}
+.gfilters input{flex:1 1 220px;min-width:0}
+.fchip{font:inherit;font-size:13px;cursor:pointer;border:1px solid var(--rule);background:var(--sheet);color:var(--ink-2);border-radius:999px;padding:5px 11px}
+.fchip[aria-pressed="true"]{border-color:var(--ink);color:var(--ink);font-weight:600}
+.gcount{font-family:var(--f-mono);font-size:12px;color:var(--ink-3)}
+#gtable td:first-child{white-space:nowrap}
+
+.two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+@media (max-width:760px){.two{grid-template-columns:minmax(0,1fr)}}
+.card{background:var(--sheet);border:1px solid var(--rule);border-radius:var(--r);padding:16px 18px;display:grid;gap:8px;align-content:start;min-width:0}
+.card h3{font-size:16px}
+.card p,.card li{font-size:15px}
+.card ul,.card ol{margin:0;padding-left:20px;display:grid;gap:5px}
+.status{display:inline-block;font-size:12px;font-weight:600;border-radius:5px;padding:1px 8px;white-space:nowrap}
+.status.ok{background:var(--ok-soft);color:var(--ok)}
+.status.warn{background:var(--warn-soft);color:var(--warn)}
+.status.hot{background:var(--hot-soft);color:var(--hot)}
+.status.n{background:var(--sunk);color:var(--ink-2)}
+footer{border-top:1px solid var(--rule);padding-block:24px 40px;color:var(--ink-3);font-size:14px}
+</style>
+
+<header class="band">
+  <div class="wrap">
+    <p class="eyebrow">Campus · tu sistema de estudio en Notion · Maestría en Derecho Bancario y Financiero (PUCP)</p>
+    <h1>Manual de Campus</h1>
+    <p class="lede">Cada apartado de tu Notion, revisado por dentro el 14 de octubre de 2026: <b>qué es, dónde hacer clic, qué haces tú y qué hace Claude</b>. Empieza por «¿Qué necesitas ahora?» o busca cualquier cosa abajo.</p>
+    <div class="live" id="live" aria-live="polite">
+      <span class="chip">Ciclo 2026-2 <b id="lv-sem">semana 9 de 16</b></span>
+      <span class="chip hot">2.ª entrega escrita <b id="lv-e2">dom 18 oct</b></span>
+      <span class="chip">Próxima clase <b id="lv-cl">jue 15 oct, 7:00 p. m.</b></span>
+      <span class="chip">Entrega final <b id="lv-ef">dom 22 nov</b></span>
+    </div>
+    <div class="search" role="search">
+      <svg viewBox="0 0 24 24" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-4-4"></path></svg>
+      <input id="q" type="search" autocomplete="off" placeholder="Busca un apartado o un campo: Responder, Rana, Bandeja, SPIJ…" aria-label="Buscar en el manual" aria-controls="results">
+      <div class="results" id="results" hidden></div>
+    </div>
+  </div>
+</header>
+
+<div class="wrap layout">
+  <nav class="toc" id="toc" aria-label="Índice">
+    <p class="g">Empieza aquí</p>
+    <a href="#ahora">¿Qué necesitas ahora?</a>
+    <a href="#rutina">Tu rutina</a>
+    <a href="#portada">La pantalla principal</a>
+    <a href="#panel">El panel y el pomodoro</a>
+    <p class="g">Estudiar</p>
+    <a href="#clases">Clases</a>
+    <a href="#cursos">Cursos y unidades</a>
+    <a href="#repaso">Repaso con tarjetas</a>
+    <a href="#normas">Normas y conceptos</a>
+    <a href="#lecturas">Lecturas y recursos</a>
+    <p class="g">Organizarte</p>
+    <a href="#tareas">Tareas</a>
+    <a href="#evaluaciones">Evaluaciones y notas</a>
+    <a href="#habitos">Hábitos</a>
+    <a href="#bandeja">Bandeja</a>
+    <a href="#semanal">Revisión semanal</a>
+    <p class="g">Tesis</p>
+    <a href="#tesis">Mi tesis y la 2.ª entrega</a>
+    <p class="g">Claude y ajustes</p>
+    <a href="#claude">Qué hace Claude</a>
+    <a href="#config">Ajustes de una sola vez</a>
+    <a href="#avisos">Lo que encontré al revisar</a>
+    <p class="g">Consulta</p>
+    <a href="#mapa">Mapa del sistema</a>
+    <a href="#glosario">Glosario de campos</a>
+  </nav>
+
+  <main id="main">
+
+  <!-- ================= AHORA ================= -->
+  <section class="sec" id="ahora">
+    <div class="sec-head">
+      <p class="kicker">Empieza aquí</p>
+      <h2>¿Qué necesitas ahora?</h2>
+      <p class="lede">Elige lo que quieres hacer y te digo los pasos exactos, en orden, con el enlace a la pantalla de Notion.</p>
+    </div>
+    <div class="finder">
+      <div class="asks" id="asks" role="group" aria-label="Situaciones"></div>
+      <article class="recipe" id="recipe" aria-live="polite"></article>
+    </div>
+  </section>
+
+  <!-- ================= RUTINA ================= -->
+  <section class="sec" id="rutina">
+    <div class="sec-head">
+      <p class="kicker">Empieza aquí</p>
+      <h2>Tu rutina: 4 pasos al día, 15 minutos el viernes</h2>
+      <p class="lede">Marca cada paso aquí mismo. La lista de hoy se limpia sola mañana y la del viernes, cada semana. Lo que marques se guarda solo en este navegador.</p>
+    </div>
+    <div class="lists">
+      <div class="checkcard">
+        <header><h3>Hoy</h3><span class="prog" id="p-dia">0 de 4</span></header>
+        <div class="bar"><i id="b-dia"></i></div>
+        <ul class="check" data-list="dia" data-scope="day">
+          <li><label><input type="checkbox" id="dia-1"><span class="t"><b>Mira el panel</b><span>¿Cuántos días faltan para lo próximo? ¿Hay clase hoy o mañana?</span><em>10 segundos</em></span></label></li>
+          <li><label><input type="checkbox" id="dia-2"><span class="t"><b>Haz la 🐸 Rana de ⭐ Hoy</b><span>Ábrela, lee su <span class="prop">Siguiente acción</span> y dale ▶ al pomodoro. Solo esa tarea hasta que suene.</span><em>1 a 3 pomodoros de 25 min</em></span></label></li>
+          <li><label><input type="checkbox" id="dia-3"><span class="t"><b>Responde 🔁 Repaso de hoy</b><span>Responde en voz alta, despliega 👀 Ver respuesta y elige en <span class="prop">Responder</span>.</span><em>5 a 10 minutos</em></span></label></li>
+          <li><label><input type="checkbox" id="dia-4"><span class="t"><b>Marca 🔥 Hábitos de hoy</b><span>Antes de dormir. Si quieres, una frase en <span class="prop">Qué aprendí hoy</span>.</span><em>30 segundos</em></span></label></li>
+        </ul>
+        <p class="tip">Si un día estás sin energía, haz solo el paso 2 con un pomodoro. Eso ya cuenta.</p>
+        <button class="mini" type="button" data-reset="dia">Desmarcar la lista de hoy</button>
+      </div>
+      <div class="checkcard">
+        <header><h3>Viernes · revisión semanal</h3><span class="prog" id="p-sem">0 de 6</span></header>
+        <div class="bar"><i id="b-sem"></i></div>
+        <ul class="check" data-list="sem" data-scope="week">
+          <li><label><input type="checkbox" id="sem-1"><span class="t"><b>Vacía la 📥 Bandeja</b><span>Marca lo que ya no sirve o díselo a Claude.</span></span></label></li>
+          <li><label><input type="checkbox" id="sem-2"><span class="t"><b>Revisa tus clases</b><span>¿Todas procesadas? Marca tu <span class="prop">Confianza</span> 🟢🟡🔴.</span></span></label></li>
+          <li><label><input type="checkbox" id="sem-3"><span class="t"><b>Mira tus evaluaciones</b><span>Anota las notas que ya te dieron.</span></span></label></li>
+          <li><label><input type="checkbox" id="sem-4"><span class="t"><b>Elige la semana</b><span>Pasa a 📅 Esta semana solo lo que sí vas a hacer.</span></span></label></li>
+          <li><label><input type="checkbox" id="sem-5"><span class="t"><b>Repasa las tarjetas difíciles</b><span>En 🔁 Repaso › pestaña ❌ Difíciles (2 fallos o más).</span></span></label></li>
+          <li><label><input type="checkbox" id="sem-6"><span class="t"><b>Dile a Claude: «Hice mi revisión semanal»</b><span>Claude arma tu semana con lo que elegiste.</span></span></label></li>
+        </ul>
+        <p class="tip">Es la misma lista de la página <a href="https://app.notion.com/p/3f83e6776c67811d8461d07848e98cca" target="_blank" rel="noopener">🗓️ Revisión semanal</a>. Allá Claude la desmarca cada lunes.</p>
+        <button class="mini" type="button" data-reset="sem">Desmarcar la lista de esta semana</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PORTADA ================= -->
+  <section class="sec" id="portada">
+    <div class="sec-head">
+      <p class="kicker">Empieza aquí</p>
+      <h2>La pantalla principal, bloque por bloque</h2>
+      <p class="lede">Así está armada la página 🏛️ Campus: el panel arriba y una fila de tres columnas (directorio, tu día y tu estudio). Toca un bloque para ver qué muestra, con qué filtro y qué haces ahí.</p>
+      <div class="where"><span class="crumb">Barra lateral › Privado › 🏛️ Campus</span><a class="open" href="https://app.notion.com/p/3f63e6776c67819f9f67ee4441a520da" target="_blank" rel="noopener">Abrir Campus ↗</a></div>
+    </div>
+    <div class="mapwrap">
+      <div class="map" id="map" role="group" aria-label="Maqueta de la pantalla principal">
+        <div class="bar-top"><i></i><i></i><i></i> 🏛️ Campus</div>
+        <button class="blk panel" type="button" data-k="panel" aria-label="Panel">
+          <span class="q"><b>☀️ Saludo y próximo hito</b><span>días que faltan</span></span>
+          <span class="q"><b>🍅 Pomodoro</b><span>25 · 5 · 15</span></span>
+          <span class="q"><b>🗓️ Lo que viene</b><span>5 fechas</span></span>
+          <span class="q"><b>Tus próximas 2 semanas</b><span>14 días</span></span>
+        </button>
+        <div class="cols3">
+          <div>
+            <button class="blk" type="button" data-k="directorio"><b>🧭 Directorio</b><span>páginas, programas, bases, accesos</span></button>
+            <button class="blk" type="button" data-k="bandeja"><b>📥 Bandeja</b><span>lo que falta ubicar</span></button>
+          </div>
+          <div>
+            <button class="blk" type="button" data-k="hoy"><b>⭐ Hoy</b><span>máximo 3 tareas</span></button>
+            <button class="blk" type="button" data-k="semana"><b>📅 Esta semana</b><span>vence en 7 días o ya venció</span></button>
+            <button class="blk" type="button" data-k="miscursos"><b>🎓 Mis cursos</b><span>5 pestañas, una por programa</span></button>
+          </div>
+          <div>
+            <button class="blk" type="button" data-k="repasohoy"><b>🔁 Repaso de hoy</b><span>tarjetas que tocan</span></button>
+            <button class="blk" type="button" data-k="evals"><b>📝 Próximas evaluaciones</b><span>con semáforo</span></button>
+            <button class="blk" type="button" data-k="habhoy"><b>🔥 Hábitos de hoy</b><span>5 casillas</span></button>
+            <button class="blk" type="button" data-k="lect"><b>📚 Lecturas en curso</b><span>con avance</span></button>
+          </div>
+        </div>
+        <button class="blk" type="button" data-k="mas"><b>🗄️ Más vistas</b><span>desplegable con 11 pestañas: calendario, Kanban, clases, hábitos, progreso…</span></button>
+      </div>
+      <article class="detail" id="detail" aria-live="polite"></article>
+    </div>
+
+    <h3 class="sub">Las 11 pestañas de 🗄️ Más vistas</h3>
+    <p style="color:var(--ink-2);max-width:72ch">Está al final de Campus, cerrado. Haz clic en el triángulo de «🗄️ Más vistas» para abrirlo. No lo necesitas a diario.</p>
+    <div class="tbl"><table>
+      <thead><tr><th>Pestaña</th><th>Qué muestra</th><th>Cuándo usarla</th></tr></thead>
+      <tbody>
+        <tr><td>📅 Calendario</td><td>Todas tus tareas en un calendario mensual, según su <span class="prop">Fecha límite</span>.</td><td>Para ver el mes de un vistazo.</td></tr>
+        <tr><td>🗂️ Kanban</td><td>Todas las tareas en columnas por <span class="prop">Estado</span>, con prioridad, curso, fecha, alerta y pomodoros.</td><td>Para mover tareas de estado arrastrándolas.</td></tr>
+        <tr><td>📆 Semana (lista)</td><td>«Elegidas para esta semana»: las tareas que pusiste en el estado 📅 Esta semana.</td><td>Lo que elegiste el viernes, aunque venza más tarde.</td></tr>
+        <tr><td>📌 Entregas</td><td>Tareas no hechas que tienen fecha, la más próxima arriba, con su <span class="prop">Alerta</span>.</td><td>Para ver plazos.</td></tr>
+        <tr><td>🗓️ Clases de hoy</td><td>Las sesiones con fecha de hoy, con hora, curso y estado.</td><td>Antes de entrar a clase.</td></tr>
+        <tr><td>📚 Clases</td><td>«Ruta de mis clases»: todas tus clases en columnas por estado, la más reciente arriba.</td><td>Para ver qué está procesado y qué falta.</td></tr>
+        <tr><td>📥 Por procesar</td><td>Clases en 📥 Por procesar. Hoy: Seminario 2 · S03 (17 set) y S04 (1 oct), que no tienen grabación.</td><td>Si tienes apuntes de esas clases.</td></tr>
+        <tr><td>🔁 Repasar clases</td><td>El repaso por clase del diseño anterior.</td><td><span class="who old">Ya no se usa</span> El repaso ahora va por tarjetas.</td></tr>
+        <tr><td>🎓 Cursos</td><td>Tus cursos agrupados por área, con estado y horario.</td><td>Vista general de todo.</td></tr>
+        <tr><td>🔥 Hábitos</td><td>El historial de tus hábitos, del día más reciente al más antiguo.</td><td>Para ver tu semana.</td></tr>
+        <tr><td>📈 Progreso</td><td>Un gráfico de dona con tus tareas por estado.</td><td>Vista rápida. Es el único gráfico que permite tu plan de Notion.</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <!-- ================= PANEL ================= -->
+  <section class="sec" id="panel">
+    <div class="sec-head">
+      <p class="kicker">Empieza aquí</p>
+      <h2>El panel y el pomodoro</h2>
+      <p class="lede">El recuadro oscuro de arriba de Campus. Es una pequeña página web incrustada: se actualiza sola con la fecha y la hora, y el pomodoro funciona ahí mismo.</p>
+      <div class="where"><span class="crumb">Campus › arriba de todo</span></div>
+    </div>
+    <div class="two">
+      <div class="card"><h3>☀️ Saludo y próximo hito</h3><p>Buenos días, tardes o noches; la fecha y la <b>semana del ciclo</b> (2026-2 empezó el lunes 17 de agosto y dura 16 semanas). Al lado, el <b>próximo hito</b>: cuántos días faltan para tu siguiente entrega y cuánto pesa en la nota.</p></div>
+      <div class="card"><h3>🍅 Pomodoro 25 · 5 · 15</h3>
+        <ul>
+          <li><b>▶ Empezar</b> arranca 25 minutos de enfoque. <b>⏸ Pausar</b> lo detiene; <b>▶ Seguir</b> lo retoma. <b>↺</b> lo reinicia.</li>
+          <li>Al terminar suena tres veces y pasa solo a una pausa de 5 minutos. Cada cuarto pomodoro te da una pausa de 15.</li>
+          <li>Debajo cuenta tus 🍅 de hoy. El contador vuelve a 0 cada día.</li>
+          <li>Si recargas la página o cambias de pestaña, el reloj sigue corriendo. Para escuchar el aviso, deja Campus abierto.</li>
+        </ul></div>
+      <div class="card"><h3>🗓️ Lo que viene</h3><p>Tus próximas 5 fechas (clases, tareas y entregas) con los días que faltan, y una ficha con la cuenta regresiva de la más importante.</p></div>
+      <div class="card"><h3>Tus próximas 2 semanas</h3><p>Un calendario de 14 días. Cada punto marca una clase o una entrega. Hoy aparece resaltado.</p></div>
+    </div>
+    <div class="ojo"><b>Ojo</b><span>Las fechas del panel están escritas dentro del archivo del panel. No salen de tus bases de datos. Si aparece una fecha nueva (un examen, una entrega), escríbele a Claude <span class="say">Agrega esta fecha al panel: …</span> y él lo vuelve a subir.</span></div>
+    <p style="color:var(--ink-2);font-size:15px;max-width:72ch">El panel llena todo su marco: si el marco es bajo (menos de 300 px), muestra solo la franja de arriba; si es angosto, como en el celular, apila las tarjetas.</p>
+  </section>
+
+  <!-- ================= CLASES ================= -->
+  <section class="sec" id="clases">
+    <div class="sec-head">
+      <p class="kicker">Estudiar</p>
+      <h2>Clases: grabas con Fireflies y al día siguiente la clase está lista</h2>
+      <p class="lede">Cada sesión es una página de la base 📚 Clases, en formato Cornell, repartida en 5 pestañas. Tú solo grabas y, si puedes, anotas ideas sueltas.</p>
+      <div class="where"><span class="crumb">Campus › 🎓 Mis cursos › un curso › Clases</span><span class="crumb">Directorio › CONSULTAR › 📚 Clases</span><a class="open" href="https://app.notion.com/p/3f63e6776c6781c1800fc6b004d4b42a" target="_blank" rel="noopener">Ver una clase modelo ↗</a></div>
+    </div>
+
+    <h3 class="sub">El ciclo de una clase</h3>
+    <div class="flow" id="cflow" role="group" aria-label="Estados de una clase"></div>
+    <div class="detail" id="cdetail" aria-live="polite"></div>
+
+    <h3 class="sub">Qué hay dentro de cada página de clase</h3>
+    <p style="color:var(--ink-2);max-width:72ch">Bajo el título ves <span class="prop">Curso</span>, <span class="prop">Fecha</span>, <span class="prop">Estado</span>, <span class="prop">Confianza</span>, <span class="prop">N° tarjetas</span> y <span class="prop">Fireflies</span>. Luego vienen las 5 pestañas. Toca cada una:</p>
+    <div class="ntabs" id="ctabs">
+      <div role="tablist" aria-label="Pestañas de una clase">
+        <button role="tab" id="ct-1" aria-controls="cp-1" aria-selected="true">📄 Clase</button>
+        <button role="tab" id="ct-2" aria-controls="cp-2" aria-selected="false" tabindex="-1">🃏 Tarjetas</button>
+        <button role="tab" id="ct-3" aria-controls="cp-3" aria-selected="false" tabindex="-1">🎙️ Transcripción</button>
+        <button role="tab" id="ct-4" aria-controls="cp-4" aria-selected="false" tabindex="-1">❓ Dudas para el profe</button>
+        <button role="tab" id="ct-5" aria-controls="cp-5" aria-selected="false" tabindex="-1">🔗 Fuentes</button>
+      </div>
+      <div role="tabpanel" id="cp-1" aria-labelledby="ct-1">
+        <div class="cornell">
+          <div class="cn y"><b>❓ Preguntas clave</b><span>Las preguntas de la clase, sin respuesta. Tapa las notas y respóndelas.</span></div>
+          <div class="cn w"><b>✍️ Notas</b><span>Las ideas de la clase, ordenadas. Ejemplo de la exposición final: «Hipótesis aprobada: gobernanza ex ante y ex post…».</span></div>
+        </div>
+        <div class="cn b"><b>🧾 Resumen en 5 líneas</b><span>Lo esencial de la sesión, para leer en un minuto.</span></div>
+        <div class="cornell">
+          <div class="cn w"><b>🗣️ Explícalo a un cliente</b><span><mark>Lo escribes tú</mark>: 3 líneas, como se lo dirías a alguien que no es abogado. Es la mejor prueba de que entendiste.</span></div>
+          <div class="cn w"><b>🔗 Conectado con</b><span>Enlaces a los conceptos, normas y evaluaciones de esa clase.</span></div>
+        </div>
+        <div class="cn w"><b>🎯 Para tu tesis o tu entrega</b><span>Solo si hay algo que aplicar. Lo que no dijo el profesor va marcado como «Sugerencias de Claude». Si comentaron tu tesis, cada observación es una casilla con su minuto 🎙️.</span></div>
+      </div>
+      <div role="tabpanel" id="cp-2" aria-labelledby="ct-2" hidden>
+        <p>Una tabla con las tarjetas de esa clase (de 5 a 10): <span class="prop">Pregunta</span>, <span class="prop">Responder</span>, <span class="prop">Caja</span>, <span class="prop">Próximo repaso</span> y <span class="prop">Tipo</span>. Puedes responderlas aquí mismo, igual que en 🔁 Repaso.</p>
+        <p class="tip">No necesitas venir aquí para repasar: las tarjetas que tocan aparecen solas en Campus. Esta pestaña sirve para estudiar una clase entera antes de un examen.</p>
+      </div>
+      <div role="tabpanel" id="cp-3" aria-labelledby="ct-3" hidden>
+        <p>Tus apuntes tal cual los escribiste. Lo que faltó va marcado con <b>➕</b>. Cada punto termina con un enlace <b>🎙️ mm:ss</b> que abre la grabación de Fireflies en ese minuto exacto.</p>
+        <p class="tip">Si no tomaste apuntes, aquí está la clase completa, reconstruida desde la grabación.</p>
+      </div>
+      <div role="tabpanel" id="cp-4" aria-labelledby="ct-4" hidden>
+        <p>Preguntas para el profesor o para tu asesor. Claude deja las que quedaron abiertas en la clase; <mark>tú agregas las tuyas</mark> y las llevas a la siguiente sesión.</p>
+      </div>
+      <div role="tabpanel" id="cp-5" aria-labelledby="ct-5" hidden>
+        <p>El enlace a Fireflies, el sílabo y los materiales (diapositivas, carpeta de Drive) de esa sesión.</p>
+      </div>
+    </div>
+
+    <div class="trio">
+      <div class="col see"><h3>En la barra lateral</h3><p style="font-size:15px">Al abrir la clase, a la derecha: <span class="prop">Palabras clave</span>, <span class="prop">Programa</span>, <span class="prop">Módulo</span> (la unidad), <span class="prop">Sesión</span>, <span class="prop">Hora</span>, <span class="prop">Grabación</span>, <span class="prop">Materiales</span> y las relaciones: Conceptos, Normas, Artículos, Tarjetas, Tareas y Recursos.</p></div>
+      <div class="col you"><h3><span>Qué haces tú</span></h3><ol>
+        <li>Grabas con Fireflies, como siempre.</li>
+        <li>Si anotas algo, en la página de esa sesión (ya existe como 🗓️ Programada). Incompleto está bien.</li>
+        <li>Cuando la clase esté ✅ Procesada: marcas <span class="prop">Confianza</span> 🟢 🟡 🔴 y escribes 3 líneas en 🗣️ Explícalo a un cliente. Unos 5 minutos.</li>
+      </ol></div>
+      <div class="col claude"><h3>Qué hace Claude</h3><ul>
+        <li>Trae de Fireflies solo las clases. Nunca reuniones personales ni de trabajo.</li>
+        <li>Completa la sesión programada: las 5 pestañas, de 5 a 10 tarjetas, conceptos, normas y artículos enlazados.</li>
+        <li>Crea en ✅ Tareas lo que dejó el profesor, con fecha.</li>
+        <li>Marca tu hábito «📥 Procesé mis clases».</li>
+      </ul></div>
+    </div>
+    <div class="ojo"><b>Ojo</b><span>Esto lo hace la tarea programada de las 6:46 a. m., que todavía no tiene los conectores (ver <a href="#config">Ajustes de una sola vez</a>). Mientras tanto, escríbele a Claude <span class="say">Procesa mis clases nuevas</span> y lo hace en el momento.</span></div>
+    <div class="card">
+      <h3>Clases ya procesadas</h3>
+      <p>Seminario 1: S01, S02, S04, S05 y la exposición final. Seminario 2: S01 y S02. Fórmula 100K: Clases 01 y 02. En total, 70 tarjetas.</p>
+      <p>Seminario 2 · S03 (17 set) y S04 (1 oct) no tienen grabación. Si tienes apuntes, pégalos en su página y di <span class="say">Procesa la S03</span>.</p>
+      <p><b>Próxima:</b> Seminario 2 · S05, jueves 15 de octubre, 7:00 p. m. Graba con Fireflies. Hay una revisión programada para el viernes 16 a las 8:00 a. m. que la procesará si la grabación ya está en Fireflies.</p>
+    </div>
+  </section>
+
+  <!-- ================= CURSOS ================= -->
+  <section class="sec" id="cursos">
+    <div class="sec-head">
+      <p class="kicker">Estudiar</p>
+      <h2>Cursos y unidades: programa › curso › unidad › clase</h2>
+      <p class="lede">Todo cuelga de un curso. Cada curso pertenece a un programa (Maestría, Societario, 100K, Inglés o Bolsa) y se divide en unidades, que en Notion se llaman 🧩 Módulos.</p>
+      <div class="where"><span class="crumb">Campus › 🎓 Mis cursos › pestaña del programa › clic en el curso</span></div>
+    </div>
+    <div class="trio">
+      <div class="col see"><h3>La página de un curso</h3><ul>
+        <li><b>Bajo el título:</b> <span class="prop">Programa</span>, <span class="prop">Estado</span>, <span class="prop">Profesor</span>, <span class="prop">Horario</span>, <span class="prop">Avance</span>, <span class="prop">Nota actual</span> y <span class="prop">Carpeta Drive</span>.</li>
+        <li><b>Luego, en este orden:</b> 🧩 Módulos, 📚 Clases, 📝 Evaluaciones, 🃏 Tarjetas, 📚 Lecturas, 🧠 Conceptos, 📜 Normas, ✅ Tareas y 🔗 Recursos. Todo filtrado a ese curso.</li>
+        <li><b>A la derecha:</b> área, sesiones totales y vistas, tarjetas de hoy y aula virtual.</li>
+      </ul></div>
+      <div class="col you"><h3><span>Qué haces tú</span></h3><ol>
+        <li>Entras al curso cuando quieres estudiarlo entero o buscar algo de él.</li>
+        <li>Nada que llenar: los números se calculan solos.</li>
+      </ol></div>
+      <div class="col claude"><h3>Qué hace Claude</h3><ul>
+        <li>Carga las unidades desde el sílabo y enlaza cada clase a su unidad.</li>
+        <li>Crea las sesiones futuras como 🗓️ Programada.</li>
+        <li>Pone la carpeta de Drive, el profesor y el horario.</li>
+      </ul></div>
+    </div>
+    <div class="two">
+      <div class="card"><h3>Cómo se calcula el <span class="prop">Avance</span></h3><p>Sesiones vistas ÷ sesiones totales, como una barra: <span class="mono">▰▰▰▰▱▱▱▱ 4/8</span>. Una sesión cuenta como vista en cuanto deja de estar 🗓️ Programada, es decir, cuando la clase ya pasó, esté procesada o no.</p></div>
+      <div class="card"><h3>Cómo se calcula la <span class="prop">Nota actual</span></h3><p>Suma de (nota × peso) ÷ suma de los pesos de las evaluaciones que ya tienen nota, con un decimal. Si todavía no hay ninguna nota, queda vacía.</p></div>
+    </div>
+    <div class="card">
+      <h3>Ejemplo: Seminario de Investigación 2 · 1DBF12</h3>
+      <p>Profesor Bruno Debenedetti Luján. Jueves quincenales, 7:00 p. m. por Zoom: 20 ago, 3 y 17 set, 1, 15 y 29 oct, 12 y 26 nov. Dentro tiene 3 unidades, 8 clases, 3 evaluaciones, 14 tarjetas, 12 lecturas, 20 conceptos, 12 normas, 11 tareas y 8 recursos, y está enlazado a tu tesis.</p>
+      <a class="open" href="https://app.notion.com/p/3f63e6776c67811d8bf6ce828237318e" target="_blank" rel="noopener">Abrir Seminario 2 ↗</a>
+    </div>
+    <h3 class="sub">Unidades cargadas desde los sílabos</h3>
+    <div class="tbl"><table>
+      <thead><tr><th>Curso</th><th>Unidad</th><th>Sesiones</th></tr></thead>
+      <tbody>
+        <tr><td>Seminario 2</td><td>Unidad 1 · Diseño del capítulo 3</td><td>S01 a S03</td></tr>
+        <tr><td>Seminario 2</td><td>Unidad 2 · Introducción y conclusiones</td><td>S04 y S05</td></tr>
+        <tr><td>Seminario 2</td><td>Unidad 3 · Propuesta final del trabajo de investigación (meta: documento APTO, 22 nov, 40 %)</td><td>S06 a S08</td></tr>
+        <tr><td>Seminario 1</td><td>Unidad 1 · El plan de trabajo</td><td>S01 y S02</td></tr>
+        <tr><td>Seminario 1</td><td>Unidad 2 · Capítulo 1, «estado del arte»</td><td>S04 y S05</td></tr>
+        <tr><td>Seminario 1</td><td>Unidad 3 · Capítulo 2, «problema de investigación»</td><td>Exposición final</td></tr>
+      </tbody>
+    </table></div>
+    <h3 class="sub">Los hubs de cada programa</h3>
+    <p style="color:var(--ink-2);max-width:72ch">En el Directorio, debajo de PROGRAMAS, cada nombre abre el hub de ese programa: una página que reúne todo lo suyo.</p>
+    <div class="two" id="hubs">
+      <div class="card"><h3>🎓 Maestría PUCP · ciclo 2026-2</h3><ol>
+        <li><b>Cuatro accesos arriba:</b> ➕ Nueva sesión, 📝 Nueva evaluación, 📚 Nueva lectura y 🧪 Modo entrega. Los tres primeros abren la base; ahí usas + Nuevo.</li>
+        <li><b>Pestañas:</b> 📘 Cursos (profesor, horario, avance, nota), 📚 Sesiones agrupadas por unidad, 🃏 Tarjetas, 🧠 Conceptos y 📜 Normas (las de tu tesis primero).</li>
+        <li><b>Lado a lado:</b> 📝 Evaluaciones de Seminario 1 y 2 con peso, nota y días que faltan, y el aviso de los pesos; a la derecha, 🗓️ Cronograma, un calendario de las sesiones.</li>
+        <li><b>Abajo:</b> 📚 Lecturas, con estado, obligatoria y avance.</li>
+      </ol><a class="open" href="https://app.notion.com/p/3f83e6776c6781d7a547ddb643141f39" target="_blank" rel="noopener">Abrir el hub de la Maestría ↗</a></div>
+      <div class="card"><h3>Los otros cuatro programas</h3><ul>
+        <li><b>⚖️ Derecho Societario:</b> sesiones y tareas pendientes lado a lado, y sus cursos. Pide el sílabo: <span class="say">Carga el sílabo de Societario</span>. <a href="https://app.notion.com/p/3f83e6776c6781548365e844ecc16af3" target="_blank" rel="noopener">Abrir ↗</a></li>
+        <li><b>📱 Fórmula 100K:</b> sus 2 cursos, sesiones y tareas. Cada clase que grabe Fireflies entra sola. <a href="https://app.notion.com/p/3f83e6776c67813aba1ae6b990999b1a" target="_blank" rel="noopener">Abrir ↗</a></li>
+        <li><b>🇬🇧 Inglés:</b> por iniciar. Meta: cumplir el requisito para sustentar. Hábito diario: 15 minutos. <a href="https://app.notion.com/p/3f83e6776c6781188057eef10cb5197b" target="_blank" rel="noopener">Abrir ↗</a></li>
+        <li><b>📈 Bolsa de Valores:</b> por iniciar. Espera tu respuesta sobre la grabación del 8 oct. <a href="https://app.notion.com/p/3f83e6776c6781079882ed8f85fec0dc" target="_blank" rel="noopener">Abrir ↗</a></li>
+      </ul></div>
+    </div>
+    <div class="ojo"><b>Ojo</b><span>Las vistas de sesiones, tarjetas, tareas y lecturas de cada hub están filtradas por los cursos que existen hoy. Si empiezas un curso nuevo, pídele a Claude <span class="say">Agrega el curso … a la Maestría</span> para que lo sume a los filtros.</span></div>
+  </section>
+
+  <!-- ================= REPASO ================= -->
+  <section class="sec" id="repaso">
+    <div class="sec-head">
+      <p class="kicker">Estudiar</p>
+      <h2>Repaso con tarjetas: 5 cajas y una sola columna, <span class="prop" style="font-size:.7em;vertical-align:4px">Responder</span></h2>
+      <p class="lede">Cada pregunta es una tarjeta y vive en una caja del 1 al 5. Mientras mejor la sabes, más tarda en volver. Así repasas justo antes de olvidar.</p>
+      <div class="where"><span class="crumb">Campus › columna derecha › 🔁 Repaso de hoy</span><span class="crumb">Campus › 🔁 Repaso</span><a class="open" href="https://app.notion.com/p/3f83e6776c678187b609fd3df7564e68" target="_blank" rel="noopener">Abrir 🔁 Repaso ↗</a></div>
+    </div>
+
+    <div class="sim" id="sim">
+      <div class="simrow"><p>1 · ¿En qué caja está la tarjeta?</p>
+        <div class="boxes" id="boxes" role="group" aria-label="Caja actual"></div></div>
+      <div class="simrow"><p>2 · ¿Qué eliges hoy en Responder?</p>
+        <div class="answers" id="answers" role="group" aria-label="Respuesta"></div></div>
+      <div class="out" id="simout" aria-live="polite"></div>
+      <div class="simrow"><p>Si la sabes cada vez, a partir de hoy</p><div class="lane" id="lane"></div></div>
+    </div>
+
+    <div class="trio">
+      <div class="col see"><h3>Qué ves</h3><ul>
+        <li>En Campus, <b>🔁 Repaso de hoy</b>: las tarjetas que tocan, primero las de caja 1, con <span class="prop">Pregunta</span> y <span class="prop">Responder</span>.</li>
+        <li>Dentro de cada tarjeta, la respuesta está escondida en 👀 Ver respuesta.</li>
+      </ul></div>
+      <div class="col you"><h3><span>Qué haces tú</span></h3><ol>
+        <li>Lee la pregunta y respóndela <mark>en voz alta</mark>, sin mirar.</li>
+        <li>Abre la tarjeta y despliega 👀 Ver respuesta.</li>
+        <li>Elige en <span class="prop">Responder</span>: ✅ Sabía, 🤔 Dudé o ❌ No sabía.</li>
+        <li>Listo: la tarjeta sale de la lista de hoy al instante.</li>
+      </ol></div>
+      <div class="col claude"><h3>Qué hace Claude</h3><ul>
+        <li>Cada mañana guarda la nueva <span class="prop">Caja</span>, el <span class="prop">Último repaso</span> y los <span class="prop">Fallos</span>, y limpia <span class="prop">Responder</span>.</li>
+        <li>Si una tarjeta llega a 3 fallos, la reescribe más concreta o la parte en dos.</li>
+        <li>Crea de 5 a 10 tarjetas nuevas por cada clase.</li>
+      </ul></div>
+    </div>
+    <div class="ojo"><b>Ojo</b><span>La fecha del próximo repaso cambia sola en cuanto respondes. Pero la caja nueva solo se guarda cuando Claude pasa en la mañana, y la tarea programada aún no tiene conectores. Mientras tanto, después de repasar, escríbele <span class="say">Procesa mis repasos</span>. Si no, la próxima vez que respondas esa tarjeta, Notion calculará desde la caja vieja.</span></div>
+
+    <h3 class="sub">Las 5 pestañas de la página 🔁 Repaso</h3>
+    <div class="tbl"><table>
+      <thead><tr><th>Pestaña</th><th>Qué muestra</th><th>Para qué</th></tr></thead>
+      <tbody>
+        <tr><td>🔁 Toca hoy</td><td>Las que tocan hoy, agrupadas por curso y ordenadas por caja, con <span class="prop">Responder</span>, <span class="prop">Caja</span>, <span class="prop">Tipo</span> y <span class="prop">Clase</span>.</td><td>Repasar un curso a la vez.</td></tr>
+        <tr><td>📆 Lo que viene</td><td>Todas las no dominadas, por fecha del próximo repaso.</td><td>Ver cuánto te toca los próximos días.</td></tr>
+        <tr><td>🆕 Nuevas</td><td>Las que todavía no repasaste nunca.</td><td>Adelantar tarjetas si te sobra tiempo.</td></tr>
+        <tr><td>❌ Difíciles</td><td>Las que fallaste 2 veces o más, la más fallada arriba.</td><td>El repaso del viernes.</td></tr>
+        <tr><td>🗂️ Todo el mazo</td><td>Todas en columnas: 🆕 Nueva, 📈 Aprendiendo y 🏁 Dominada.</td><td>Ver tu avance.</td></tr>
+      </tbody>
+    </table></div>
+
+    <h3 class="sub">Las tarjetas nuevas, repartidas para no saturarte</h3>
+    <div class="tbl"><table>
+      <thead><tr><th>Día</th><th>Tarjetas nuevas que te tocan</th></tr></thead>
+      <tbody>
+        <tr><td class="n">Jue 15 oct</td><td>Seminario 1 · Exposición final: tu tesis (8)</td></tr>
+        <tr><td class="n">Vie 16 oct</td><td>Seminario 1 · S04: primera exposición de tesis (8)</td></tr>
+        <tr><td class="n">Sáb 17 y dom 18</td><td>Libres para tu 2.ª entrega</td></tr>
+        <tr><td class="n">Lun 19 oct</td><td>Seminario 1 · S05: exposiciones de avance (8)</td></tr>
+        <tr><td class="n">Mar 20 oct</td><td>Seminario 1 · S01: presentación y metodología (8)</td></tr>
+        <tr><td class="n">Mié 21 oct</td><td>Seminario 1 · S02: mapa de preguntas e hipótesis (8)</td></tr>
+        <tr><td class="n">Jue 22 oct</td><td>Fórmula 100K · Clase 01 (8)</td></tr>
+        <tr><td class="n">Vie 23 oct</td><td>Fórmula 100K · Clase 02: TikTok Ads (8)</td></tr>
+      </tbody>
+    </table></div>
+    <p style="color:var(--ink-2);font-size:15px">Además vuelven las que ya respondiste, según su caja. Las 14 del Seminario 2 (S01 y S02) ya están en circulación.</p>
+  </section>
+
+  <!-- ================= NORMAS ================= -->
+  <section class="sec" id="normas">
+    <div class="sec-head">
+      <p class="kicker">Estudiar</p>
+      <h2>Normas, artículos y conceptos, todos enlazados</h2>
+      <p class="lede">Una red: cada clase se enlaza con sus 🧠 conceptos y sus 📜 normas, y cada norma con sus § artículos. No la llenas tú: la carga Claude a partir de tus clases.</p>
+      <div class="where"><span class="crumb">Campus › Directorio › CONSULTAR › 📜 Normas · § Artículos · 🧠 Conceptos</span><a class="open" href="https://app.notion.com/p/506ad6370842441f8fb21b90c9bf41e1" target="_blank" rel="noopener">Abrir 📜 Normas ↗</a></div>
+    </div>
+    <div class="trio">
+      <div class="col see"><h3>Qué ves</h3><ul>
+        <li><b>📜 Normas:</b> <span class="prop">Tipo</span>, <span class="prop">Número</span>, <span class="prop">Estado</span> (🟢 vigente, 🟡 modificada, 🔴 derogada), <span class="prop">Link oficial</span>, <span class="prop">Resumen</span> y la casilla <span class="prop">Para la tesis</span>.</li>
+        <li><b>§ Artículos:</b> <span class="prop">Texto</span>, <span class="prop">En simple</span>, su norma y la casilla <span class="prop">Verificado en SPIJ</span>.</li>
+        <li><b>🧠 Conceptos:</b> <span class="prop">Definición</span> en 1 o 2 líneas, <span class="prop">Tipo</span> y <span class="prop">Dominio</span>.</li>
+      </ul></div>
+      <div class="col you"><h3><span>Qué haces tú</span></h3><ol>
+        <li>Para ver solo lo tuyo, filtra <span class="prop">Para la tesis</span> = ✔.</li>
+        <li>Cuando uses un artículo en la tesis, <mark>copia su texto literal desde SPIJ</mark> en <span class="prop">Texto</span> y marca <span class="prop">Verificado en SPIJ</span>.</li>
+        <li>Si quieres, actualiza el <span class="prop">Dominio</span> de un concepto (🆕 → 🔁 → ✅).</li>
+      </ol></div>
+      <div class="col claude"><h3>Qué hace Claude</h3><ul>
+        <li>Crea o enlaza las normas y artículos que se citan en cada clase.</li>
+        <li>Nunca inventa texto literal: escribe «[Paráfrasis — pegar el texto literal desde SPIJ]».</li>
+        <li>Para agregar una a mano: <span class="say">Agrega esta norma: …</span></li>
+      </ul></div>
+    </div>
+    <div class="two">
+      <div class="card"><h3>Las normas de tu tesis</h3><ul>
+        <li>LFI · Ley de Fondos de Inversión (D. Leg. 862)</li>
+        <li>RFI · Reglamento de Fondos de Inversión (Res. SMV 029-2014-SMV/01)</li>
+        <li>LGS · Ley General de Sociedades (Ley 26887), supletoria</li>
+        <li>Reglamento de Fondos Mutuos (número por verificar)</li>
+        <li>Res. SMV 052-2020-SMV/02</li>
+      </ul><p style="font-size:14px;color:var(--ink-2)">Con 10 artículos clave: LFI 1 y 3, 11 y 30; RFI 29, 93, 94, 98 y 121; LGS 111, 114, 115 y 125 a 127.</p></div>
+      <div class="card"><h3>Lo que no es de tu tesis</h3><p>El TUO de la LIR, su reglamento, la Ley 26702, la Res. SBS 11356-2008, la Ley 30096 y el GAFI se cargaron por error el 13 de octubre: eran de la exposición de Carolina Fujita sobre fraude. No se borraron; quedan como referencia, con <span class="prop">Para la tesis</span> sin marcar y el rótulo «no es tu tesis».</p></div>
+    </div>
+  </section>
+
+  <!-- ================= LECTURAS ================= -->
+  <section class="sec" id="lecturas">
+    <div class="sec-head">
+      <p class="kicker">Estudiar</p>
+      <h2>Lecturas y recursos</h2>
+      <p class="lede">📚 Lecturas es lo que tienes que leer, con su avance. 🔗 Recursos es todo lo demás: carpetas, videos, páginas web, diapositivas.</p>
+      <div class="where"><span class="crumb">Campus › columna derecha › 📚 Lecturas en curso</span><span class="crumb">Directorio › CONSULTAR › 🔗 Recursos</span></div>
+    </div>
+    <div class="two">
+      <div class="card"><h3>📚 Lecturas</h3>
+        <ul>
+          <li><span class="prop">Estado</span>: ⏳ Pendiente, 📖 Leyendo o ✅ Terminada.</li>
+          <li><span class="prop">Páginas leídas</span> ÷ <span class="prop">Páginas totales</span> = <span class="prop">Avance</span>.</li>
+          <li><span class="prop">Obligatoria</span> marca las del sílabo.</li>
+          <li><b>Tú:</b> cuando empieces una lectura, ponla en 📖 Leyendo: solo esas salen en Campus. Al leer, actualiza <mark>Páginas leídas</mark>. Si no llenas las páginas, el avance queda vacío; no pasa nada.</li>
+        </ul>
+        <p style="font-size:14px;color:var(--ink-2)">Hoy en 📖 Leyendo, entre otras: tu tesis v1.7 (versión de trabajo) y la respuesta al dictamen.</p>
+      </div>
+      <div class="card"><h3>🔗 Recursos</h3>
+        <ul>
+          <li><span class="prop">Tipo</span>: ▶️ YouTube, 🎥 Grabación, 📄 PDF / Lectura, 📁 Carpeta Drive, 📊 Diapositivas, ⚖️ Norma o 🌐 Web.</li>
+          <li><span class="prop">Estado</span>: 👀 Por ver, ✅ Visto o 📌 Referencia.</li>
+          <li>Hay 14: las carpetas de tu tesis (fuentes, derecho comparado, matriz), la guía de fuentes oficiales, SPIJ, la SMV y material de Societario, Bolsa e Inglés.</li>
+          <li><b>Tú:</b> no los creas a mano. Pega el link en la <a href="#bandeja">Bandeja</a>.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= TAREAS ================= -->
+  <section class="sec" id="tareas">
+    <div class="sec-head">
+      <p class="kicker">Organizarte</p>
+      <h2>Tareas: un tablero, una regla</h2>
+      <p class="lede">Regla del día: <mark>máximo 3 tareas en ⭐ Hoy</mark>. Empieza por la 🐸 Rana, la más difícil, con un pomodoro.</p>
+      <div class="where"><span class="crumb">Campus › ⭐ Hoy · 📅 Esta semana</span><span class="crumb">Campus › ✅ Tareas</span><a class="open" href="https://app.notion.com/p/3f83e6776c6781f082dfeb33204198a2" target="_blank" rel="noopener">Abrir ✅ Tareas ↗</a></div>
+    </div>
+    <h3 class="sub">El camino de una tarea</h3>
+    <p style="color:var(--ink-2);max-width:72ch">Toca cada estado para ver qué significa, dónde aparece y quién la mueve. Para cambiar el estado, abre la tarea y elige otro en <span class="prop">Estado</span>, o arrástrala en el Kanban.</p>
+    <div class="flow" id="kflow" role="group" aria-label="Estados de una tarea"></div>
+    <div class="detail" id="kdetail" aria-live="polite"></div>
+
+    <div class="trio">
+      <div class="col see"><h3>Los campos de una tarea</h3><ul>
+        <li><span class="prop">Prioridad</span>: 🐸 Rana (la más difícil), 🔴 Alta o ⚪ Normal. ⭐ Hoy las ordena así.</li>
+        <li><span class="prop">Siguiente acción</span>: el primer paso concreto y físico. Ej.: «abrir el PDF y leer 5 páginas».</li>
+        <li><span class="prop">Pomodoros</span>: bloques de 25 minutos estimados.</li>
+        <li><span class="prop">Alerta</span>: se calcula sola con la fecha límite.</li>
+        <li><span class="prop">Tipo</span>, <span class="prop">Curso</span>, <span class="prop">Clase</span>, <span class="prop">Evaluación</span> y <span class="prop">Proyecto</span>: los pone Claude.</li>
+      </ul></div>
+      <div class="col you"><h3><span>Qué haces tú</span></h3><ol>
+        <li>Cada mañana, mira ⭐ Hoy. Si está vacía, pasa hasta 3 tareas de 📅 Esta semana.</li>
+        <li>Abre la 🐸 Rana, lee su Siguiente acción y dale ▶ al pomodoro.</li>
+        <li>Al terminar: <span class="prop">Estado</span> = ✅ Hecho.</li>
+        <li>Si te trabaste: ⛔ Bloqueado y escribe por qué dentro de la tarea.</li>
+      </ol></div>
+      <div class="col claude"><h3>Qué hace Claude</h3><ul>
+        <li>Crea las tareas que deja el profesor, con fecha, prioridad, siguiente acción y pomodoros.</li>
+        <li>Si vence en 7 días o menos, la pone en 📅 Esta semana; si no, en 📥 Bandeja.</li>
+        <li>Si una tarea pasa de 3 pomodoros: <span class="say">Divide esta tarea: …</span></li>
+      </ul></div>
+    </div>
+    <div class="ojo"><b>Ojo: dos listas de la semana</b><span>La tabla «📅 Esta semana» de Campus muestra lo que <b>vence</b> en los próximos 7 días o ya venció, esté en el estado que esté. La pestaña «📆 Semana (lista)» de Más vistas, que ahora se llama «📆 Elegidas para esta semana (por estado)», muestra lo que tú <b>marcaste</b> con el estado 📅 Esta semana. Para el día a día, usa la de Campus.</span></div>
+    <h3 class="sub">Las 5 pestañas de la página ✅ Tareas</h3>
+    <div class="tbl"><table>
+      <thead><tr><th>Pestaña</th><th>Qué muestra</th></tr></thead>
+      <tbody>
+        <tr><td>🗂️ Kanban</td><td>Todas, en columnas por estado; dentro, por prioridad y fecha. Con siguiente acción y pomodoros a la vista.</td></tr>
+        <tr><td>⭐ Hoy</td><td>Lo de ⭐ Hoy y 🔨 Haciendo, con estado, prioridad, pomodoros, siguiente acción y fecha.</td></tr>
+        <tr><td>📅 Calendario</td><td>Por fecha límite, con su estado.</td></tr>
+        <tr><td>🎓 Por curso</td><td>Las no hechas, agrupadas por curso, con su alerta.</td></tr>
+        <tr><td>✅ Hechas</td><td>Lo que ya terminaste, lo más reciente arriba.</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <!-- ================= EVALUACIONES ================= -->
+  <section class="sec" id="evaluaciones">
+    <div class="sec-head">
+      <p class="kicker">Organizarte</p>
+      <h2>Evaluaciones y notas</h2>
+      <p class="lede">Cada entrega o examen es una fila de 📝 Evaluaciones, con fecha, peso y nota. Con eso Notion calcula tu nota actual en cada curso y en 📊 Analítica.</p>
+      <div class="where"><span class="crumb">Campus › columna derecha › 📝 Próximas evaluaciones</span><span class="crumb">Campus › 📊 Analítica</span><a class="open" href="https://app.notion.com/p/3f83e6776c678115881ccd759e8372d6" target="_blank" rel="noopener">Abrir 📊 Analítica ↗</a></div>
+    </div>
+    <div class="trio">
+      <div class="col see"><h3>Qué ves</h3><ul>
+        <li>En Campus: las ⏳ Pendiente, la más próxima arriba, con <span class="prop">Faltan</span>: 🔴 3 días o menos, 🟠 hasta 10, 🟢 más de 10.</li>
+        <li>Al abrir una evaluación, bajo el título: <span class="prop">Faltan</span>, <span class="prop">Fecha</span>, <span class="prop">Peso</span>, <span class="prop">Estado</span>, <span class="prop">Nota</span> y <span class="prop">Curso</span>.</li>
+      </ul></div>
+      <div class="col you"><h3><span>Qué haces tú</span></h3><ol>
+        <li>Cuando entregas: <span class="prop">Estado</span> = 📤 Entregada.</li>
+        <li>Cuando te califican: escribe la <mark>Nota</mark> y pon ✅ Calificada.</li>
+        <li>Nada más. La nota del curso se recalcula sola.</li>
+      </ol></div>
+      <div class="col claude"><h3>Qué hace Claude</h3><ul>
+        <li>Crea las evaluaciones del sílabo y las que anuncie el profesor.</li>
+        <li>Les enlaza sus tareas (por ejemplo, el plan inverso de la 2.ª entrega).</li>
+        <li>Avisa si hay que poner una fecha nueva en el panel.</li>
+      </ul></div>
+    </div>
+    <div class="tbl"><table>
+      <thead><tr><th>Evaluación (Seminario 2)</th><th>Fecha</th><th>Peso</th><th>Estado</th></tr></thead>
+      <tbody>
+        <tr><td>1.ª entrega escrita · capítulos 1 a 3</td><td class="n">dom 13 set</td><td class="n">15 %</td><td><span class="status n">📤 Entregada, sin nota</span></td></tr>
+        <tr><td>2.ª entrega escrita · correcciones, introducción y conclusiones</td><td class="n">dom 18 oct</td><td class="n">15 %</td><td><span class="status hot">⏳ Pendiente</span></td></tr>
+        <tr><td>Entrega final · trabajo de investigación completo</td><td class="n">dom 22 nov</td><td class="n">40 %</td><td><span class="status warn">⏳ Pendiente</span></td></tr>
+      </tbody>
+    </table></div>
+    <div class="ojo"><b>Ojo con los pesos</b><span>El sílabo tiene una tabla (15/15/15/15/40) y una fórmula (0,15·1EE + 0,25·2EE + 0,30·E + 0,30·3EE) que no coinciden. Están cargados los de la tabla, y las tres evaluaciones de Seminario 2 suman 70 %: falta saber qué completa el 100 %. Pregúntale al profesor y díselo a Claude.</span></div>
+    <h3 class="sub">📊 Analítica, por dentro</h3>
+    <div class="tbl"><table>
+      <thead><tr><th>Parte</th><th>Qué muestra</th></tr></thead>
+      <tbody>
+        <tr><td>🎓 Programas (arriba)</td><td>Cada programa con su ciclo, número de cursos, avance, promedio y tarjetas de hoy.</td></tr>
+        <tr><td>📘 Cursos</td><td>Agrupados por programa: estado, avance, nota actual, sesiones vistas y totales, tarjetas de hoy.</td></tr>
+        <tr><td>📝 Notas y pesos</td><td>Todas las evaluaciones por fecha: peso, nota, aporte, estado y días que faltan.</td></tr>
+        <tr><td>🃏 Dominio de tarjetas</td><td>Tus tarjetas en columnas: nuevas, aprendiendo y dominadas.</td></tr>
+        <tr><td>🔥 Historial de estudio</td><td>Tus hábitos día por día, con minutos de estudio y lo que aprendiste.</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <!-- ================= HÁBITOS ================= -->
+  <section class="sec" id="habitos">
+    <div class="sec-head">
+      <p class="kicker">Organizarte</p>
+      <h2>Hábitos: 5 casillas por día</h2>
+      <p class="lede">Una fila por día en 🔥 Hábitos. Sin puntos ni rachas: solo marcar lo que hiciste.</p>
+      <div class="where"><span class="crumb">Campus › columna derecha › 🔥 Hábitos de hoy</span></div>
+    </div>
+    <div class="trio">
+      <div class="col see"><h3>Las casillas</h3><ul>
+        <li>📖 Estudié 25 min</li><li>🔁 Hice mi repaso</li><li>📥 Procesé mis clases</li><li>🇬🇧 Inglés 15 min</li><li>📵 Estudié sin celular</li>
+      </ul><p style="font-size:14px;color:var(--ink-2)">Dentro de la fila también están <span class="prop">Minutos de estudio</span> y <span class="prop">Qué aprendí hoy</span>.</p></div>
+      <div class="col you"><h3><span>Qué haces tú</span></h3><ol>
+        <li>Antes de dormir, marca las casillas de 🔥 Hábitos de hoy en Campus.</li>
+        <li>Si quieres, una frase en Qué aprendí hoy.</li>
+      </ol></div>
+      <div class="col claude"><h3>Qué hace Claude</h3><ul>
+        <li>Crea la fila de cada día en la mañana («Jue 15 oct»).</li>
+        <li>Marca «📥 Procesé mis clases» cuando procesa una clase y «🔁 Hice mi repaso» si respondiste tarjetas ayer.</li>
+      </ul></div>
+    </div>
+    <div class="ojo"><b>Ojo</b><span>La fila del día la crea la tarea programada. Hasta que tenga conectores, si «🔥 Hábitos de hoy» aparece vacío, dile a Claude <span class="say">Crea mi fila de hábitos de hoy</span>, o crea la fila tú con + Nuevo y pon la fecha de hoy.</span></div>
+  </section>
+
+  <!-- ================= BANDEJA ================= -->
+  <section class="sec" id="bandeja">
+    <div class="sec-head">
+      <p class="kicker">Organizarte</p>
+      <h2>📥 Bandeja: lo que no sepas dónde poner</h2>
+      <p class="lede">Un link, un PDF, un video, una idea, una grabación dudosa. Lo escribes en la Bandeja y Claude lo ubica en el curso correcto.</p>
+      <div class="where"><span class="crumb">Campus › columna izquierda, debajo del Directorio</span></div>
+    </div>
+    <div class="trio">
+      <div class="col see"><h3>Qué ves</h3><p style="font-size:15px">Solo lo que falta procesar, lo más nuevo arriba. Al abrir un ítem: <span class="prop">Tipo</span> (🎙️ Grabación, 🎥 Video, 🔗 Link, 💡 Idea, 📄 Archivo), <span class="prop">Link</span>, <span class="prop">Nota</span> y <span class="prop">Procesado</span>.</p></div>
+      <div class="col you"><h3><span>Qué haces tú</span></h3><ol>
+        <li>En la Bandeja, clic en <b>+ Nuevo</b> y escribe qué es.</li>
+        <li>Si es un link, pégalo en <span class="prop">Link</span>.</li>
+        <li>Si sabes de qué curso es, escríbelo en <span class="prop">Nota</span>.</li>
+      </ol></div>
+      <div class="col claude"><h3>Qué hace Claude</h3><ul>
+        <li>Pasa los links a 🔗 Recursos, o a 📚 Lecturas si es para leer, en el curso correcto.</li>
+        <li>Si en la Nota dice de qué curso es una grabación, la procesa como clase.</li>
+        <li>Marca <span class="prop">Procesado</span> y el ítem desaparece de Campus.</li>
+      </ul></div>
+    </div>
+    <div class="card">
+      <h3>Pendiente de tu respuesta</h3>
+      <p><b>«imo-effg-jxi» (8 oct):</b> es una conversación con Nicolás sobre las SAB y el contrato de intermediación. Escribe en su <span class="prop">Nota</span> «Bolsa» si es para ese curso, o «descartar».</p>
+      <p><b>Seminario 2 · S03 y S04:</b> sin grabación. Quedan en la Bandeja hasta que tengas apuntes.</p>
+    </div>
+  </section>
+
+  <!-- ================= REVISIÓN SEMANAL ================= -->
+  <section class="sec" id="semanal">
+    <div class="sec-head">
+      <p class="kicker">Organizarte</p>
+      <h2>🗓️ Revisión semanal: cada viernes, 15 minutos</h2>
+      <p class="lede">Recorre la página de arriba a abajo. Al final, dile a Claude «Hice mi revisión semanal» y él arma tu semana.</p>
+      <div class="where"><span class="crumb">Campus › Directorio › 🗓️ Revisión semanal</span><a class="open" href="https://app.notion.com/p/3f83e6776c67811d8461d07848e98cca" target="_blank" rel="noopener">Abrir la revisión ↗</a></div>
+    </div>
+    <div class="two">
+      <div class="card"><h3>A la izquierda: ☑️ Checklist del viernes</h3><p>Las 6 casillas de la <a href="#rutina">lista de la semana</a>. Claude las desmarca cada lunes.</p></div>
+      <div class="card"><h3>A la derecha: 4 pestañas</h3><ul>
+        <li><b>📥 Bandeja:</b> lo que falta procesar, lo más antiguo arriba.</li>
+        <li><b>📚 Clases:</b> las de la semana pasada y la que viene, con estado, confianza y número de tarjetas.</li>
+        <li><b>📝 Evaluaciones:</b> las que vienen y las entregadas que esperan nota, con fecha, peso, estado, nota y días que faltan.</li>
+        <li><b>✅ Próxima semana:</b> tareas no hechas que vencen en 7 días o menos, incluidas las atrasadas.</li>
+      </ul></div>
+    </div>
+  </section>
+
+  <!-- ================= TESIS ================= -->
+  <section class="sec" id="tesis">
+    <div class="sec-head">
+      <p class="kicker">Tesis</p>
+      <h2>Mi tesis y la 2.ª entrega (domingo 18 de octubre)</h2>
+      <p class="lede"><i>La asamblea general de partícipes en los fondos de inversión de oferta pública en el Perú: el trasplante de la junta general de accionistas frente a las actividades principales del negocio del fondo</i> (versión 1.7, 28 set). Asesor temático: Aldo Fuertes.</p>
+      <div class="where"><span class="crumb">Campus › Directorio › PROGRAMAS › 🎓 Mi tesis</span><a class="open" href="https://app.notion.com/p/3f63e6776c6781d3aaf3f248ba727f73" target="_blank" rel="noopener">Abrir Mi tesis ↗</a><a class="open" href="https://app.notion.com/p/3f83e6776c6781b8b123d3bcc374155e" target="_blank" rel="noopener">Abrir el Modo entrega ↗</a></div>
+    </div>
+    <div class="two">
+      <div class="card"><h3>🎓 Mi tesis, de arriba a abajo</h3><ol id="tesis-page">
+        <li><b>El título</b>, con la versión (1.7, 28 set) y su fuente: el resumen ejecutivo de Drive.</li>
+        <li><b>Izquierda:</b> ❓ la pregunta principal y 💡 la hipótesis en tres partes: diagnóstico, propuesta y la hipótesis rival (Black, 1990).</li>
+        <li><b>Derecha:</b> 📊 el estado por objetivo (abajo) y 🧩 las seis actividades principales del fondo: ampliación del plazo, liquidación, aumento de capital, reducción de capital, estados financieros anuales y endeudamiento.</li>
+        <li><b>📂 Tus documentos:</b> tesis v1.7 de trabajo, respuesta al dictamen, resumen ejecutivo, plan de investigación v1.7, batería de preguntas, preguntas a expertos v1.7, guía de extensión (máximo 110 páginas), informe SMV, tu 1.ª entrega y la app de estudio, más tus carpetas de Drive.</li>
+        <li><b>📜 Normas de la tesis</b> y <b>🗓️ próximas entregas</b>.</li>
+      </ol><p style="font-size:14px;color:var(--ink-2)">Es una fila de 🎯 Proyectos con 11 tareas enlazadas. Meta del ciclo: documento APTO para jurados con la entrega final (22 nov).</p></div>
+      <div class="card"><h3>🧪 Modo entrega · 2.ª entrega escrita</h3><ol id="modo-page">
+        <li><b>Cuatro fichas:</b> ⏳ Entrega, domingo 18 a las 11:59 p. m.; ⚖️ Peso, 15 % según la tabla o 25 % según la fórmula del sílabo; 🍅 Trabajo, 15 pomodoros en 6 días; 🎯 Meta, 18 a 20 = pase directo a jurados.</li>
+        <li><b>📚 Qué debe tener (según el sílabo):</b> casillas para corregir los capítulos 1 (marco teórico), 2 (problema y método comparado) y 3 (discusión y propuesta); la introducción (tema, problema, hipótesis, objetivos y resumen de cada capítulo); las conclusiones; las citas APA; y usar la IA solo de apoyo. <mark>Las marcas tú a medida que avanzas.</mark></li>
+        <li><b>🔗 A la mano:</b> tesis v1.7 y respuesta al dictamen, tu 1.ª entrega en PDF, las 15 observaciones de los jurados, Mi tesis, el sílabo y la clase donde lo explicaron.</li>
+        <li><b>🗓️ Plan inverso:</b> las tareas de la entrega, una por día, con siguiente acción y pomodoros.</li>
+      </ol><p style="font-size:14px;color:var(--ink-2)">Se abre desde 📝 Próximas evaluaciones en Campus, o desde el acceso 🧪 del hub de la Maestría. Solo la 2.ª entrega tiene Modo entrega; para la final, pídele a Claude <span class="say">Arma el Modo entrega de la entrega final</span>.</p></div>
+    </div>
+    <h3 class="sub">Estado por objetivo</h3>
+    <div class="tbl"><table>
+      <thead><tr><th>Objetivo</th><th>Qué es</th><th>Dónde</th><th>Estado</th></tr></thead>
+      <tbody>
+        <tr><td>OE1</td><td>Separación entre propiedad y control</td><td>Capítulo 1</td><td><span class="status ok">✅ Ejecutado</span></td></tr>
+        <tr><td>OE2</td><td>La asamblea frente a la LGS</td><td>2.1</td><td><span class="status ok">✅ Ejecutado</span></td></tr>
+        <tr><td>OE3</td><td>Empírico: censo 2015–2025 y expertos</td><td>2.2</td><td><span class="status hot">⏳ Pendiente</span></td></tr>
+        <tr><td>OE3</td><td>Comparado: Chile, Colombia y EE. UU.</td><td>2.3.1</td><td><span class="status hot">⏳ Pendiente</span></td></tr>
+        <tr><td>OE3</td><td>Contraste con el fondo mutuo</td><td>2.3.2</td><td><span class="status hot">⏳ Pendiente</span></td></tr>
+        <tr><td>OE4</td><td>Propuesta por actividad</td><td>Capítulo 3</td><td><span class="status warn">🟡 Preliminar</span></td></tr>
+      </tbody>
+    </table></div>
+    <p style="color:var(--ink-2);font-size:15px">Esta tabla no se actualiza sola. Cuando avances un objetivo, cámbiala en Mi tesis o dile a Claude <span class="say">Marca el OE3 comparado como ejecutado</span>.</p>
+    <h3 class="sub">Plan inverso de la 2.ª entrega</h3>
+    <div class="tbl"><table id="plan">
+      <thead><tr><th>Día</th><th>Bloque</th><th>Pomodoros</th></tr></thead>
+      <tbody>
+        <tr data-d="2026-10-14"><td class="n">Mié 14</td><td>D-4 · Corregir los capítulos 1 y 2</td><td class="n">3</td></tr>
+        <tr data-d="2026-10-15"><td class="n">Jue 15</td><td>D-3 · Corregir el capítulo 3 (la discusión). En la noche, clase S05.</td><td class="n">3</td></tr>
+        <tr data-d="2026-10-16"><td class="n">Vie 16</td><td>D-2 · Redactar la introducción</td><td class="n">3</td></tr>
+        <tr data-d="2026-10-17"><td class="n">Sáb 17</td><td>D-1 · Conclusiones y citas APA, y aplicar las observaciones de los jurados</td><td class="n">3</td></tr>
+        <tr data-d="2026-10-18"><td class="n">Dom 18</td><td>D-0 · Enviar antes de las 11:59 p. m.</td><td class="n">1</td></tr>
+      </tbody>
+    </table></div>
+    <p style="color:var(--ink-2);font-size:15px">Si se te pasa un día: <span class="say">Reprograma mi plan de la 2.ª entrega</span>. Para revisarla antes de enviar: <span class="say">Revisa mi 2.ª entrega contra el sílabo</span>.</p>
+    <h3 class="sub">Lo que te dijeron los jurados (2 de julio)</h3>
+    <div class="two">
+      <div class="card"><ul>
+        <li><b>No eliminar, permitir:</b> que coexistan fondos con y sin asamblea, y quién controla el riesgo sin ella.</li>
+        <li><b>Salida del partícipe:</b> cómo sale quien no está de acuerdo, en un fondo cerrado.</li>
+        <li><b>Separar decisiones:</b> las operativas salen de la asamblea; las de fondo se quedan.</li>
+      </ul></div>
+      <div class="card"><ul>
+        <li><b>Parámetros en el reglamento:</b> cuándo, cuánto y a qué valor cuota se aumenta o reduce capital.</li>
+        <li><b>Hipótesis contraria:</b> ¿cómo demuestras que el marco «ya llegó a su límite»? (Black, 1990).</li>
+        <li><b>Datos:</b> cada afirmación con datos de terceros (reportes a la SMV); las encuestas, solo como complemento.</li>
+      </ul></div>
+    </div>
+    <p style="color:var(--ink-2);font-size:15px">Son 15 en total, cada una como casilla con su minuto 🎙️, en la clase <a href="https://app.notion.com/p/3f63e6776c67813ab410d9e70623a451" target="_blank" rel="noopener">«Seminario 1 · Exposición final»</a>, pestaña 📄 Clase › 🎯 Para tu 2.ª entrega. Márcalas a medida que las resuelvas. La tarea <a href="https://app.notion.com/p/3f93e6776c6781399d28c790da8c7e8e" target="_blank" rel="noopener">«Aplicar observaciones de los jurados»</a> vence el sábado 17.</p>
+  </section>
+
+  <!-- ================= CLAUDE ================= -->
+  <section class="sec" id="claude">
+    <div class="sec-head">
+      <p class="kicker">Claude y ajustes</p>
+      <h2>Qué hace Claude solo, y qué le puedes pedir</h2>
+      <p class="lede">Hay una tarea programada que corre todos los días a las 6:46 a. m. (hora de Lima) y te manda un aviso al celular con un reporte corto.</p>
+    </div>
+    <div class="tbl"><table>
+      <thead><tr><th>Paso</th><th>Qué hace cada mañana</th></tr></thead>
+      <tbody>
+        <tr><td class="n">1</td><td><b>Tarjetas:</b> lee lo que elegiste en <span class="prop">Responder</span>, mueve cada tarjeta de caja, guarda el último repaso y los fallos, y limpia la columna.</td></tr>
+        <tr><td class="n">2</td><td><b>Hábitos:</b> crea la fila de hoy y marca «🔁 Hice mi repaso» en la de ayer si repasaste.</td></tr>
+        <tr><td class="n">3</td><td><b>Clases:</b> revisa Fireflies (últimos 3 días), importa solo clases y las procesa en formato Cornell, con tarjetas, conceptos, normas y tareas. Lo dudoso lo deja en la Bandeja.</td></tr>
+        <tr><td class="n">4</td><td><b>Bandeja:</b> ubica los links en Recursos o Lecturas, y procesa las grabaciones a las que les pusiste curso.</td></tr>
+        <tr><td class="n">5</td><td><b>Lunes:</b> desmarca la lista de la revisión semanal.</td></tr>
+      </tbody>
+    </table></div>
+    <div class="ojo"><b>Todavía no está funcionando</b><span>La tarea programada corrió el miércoles 14 a las 6:47 a. m., pero no tiene los conectores de Fireflies y Notion, así que terminó en 12 segundos sin hacer nada. Agregarlos es el primer paso de <a href="#config">Ajustes de una sola vez</a>. Mientras tanto, pídele cada cosa a Claude en un chat con las frases de abajo.</span></div>
+    <h3 class="sub">Frases para Claude</h3>
+    <p style="color:var(--ink-2);max-width:72ch">Escríbelas en cualquier chat con Claude que tenga Notion conectado, como este. Toca «Copiar» y pégala.</p>
+    <div class="phrases" id="phrases"></div>
+    <p style="color:var(--ink-2);font-size:15px">Nunca borra nada, no toca la página «Notas» de Gus Life's ni tus sistemas viejos, y no inventa datos: todo sale de tus grabaciones, apuntes o materiales.</p>
+  </section>
+
+  <!-- ================= CONFIG ================= -->
+  <section class="sec" id="config">
+    <div class="sec-head">
+      <p class="kicker">Claude y ajustes</p>
+      <h2>Ajustes de una sola vez</h2>
+      <p class="lede">Notion y claude.ai no me dejan hacer estos pasos desde aquí. Te toman unos 10 minutos. Lo que marques se queda guardado en este navegador.</p>
+    </div>
+    <div class="checkcard">
+      <header><h3>Pendientes</h3><span class="prog" id="p-once">0 de 5</span></header>
+      <div class="bar"><i id="b-once"></i></div>
+      <ul class="check" data-list="once" data-scope="once">
+        <li><label><input type="checkbox" id="once-1"><span class="t"><b>Agrega los conectores a la tarea programada (importante)</b><span>En claude.ai, abre tus tareas programadas de Claude Code (en inglés, <i>Routines</i>) y entra a «Campus: clases, repaso y hábitos (diario)». En Conectores agrega <b>Fireflies</b> y <b>Notion</b> y guarda. Si no aparecen, primero conéctalos a tu cuenta en claude.ai/customize/connectors.</span><em>Sin esto, nada de lo de la mañana ocurre</em></span></label></li>
+        <li><label><input type="checkbox" id="once-2"><span class="t"><b>Activa el ancho completo</b><span>En Campus, arriba a la derecha, ••• › <i>Ancho completo</i> (Full width). Repite en Repaso, Tareas, Analítica, Revisión semanal y Guía de uso.</span><em>1 minuto</em></span></label></li>
+        <li><label><input type="checkbox" id="once-3"><span class="t"><b>Responde el ítem de la Bandeja</b><span>«imo-effg-jxi»: escribe «Bolsa» o «descartar» en su Nota.</span><em>10 segundos</em></span></label></li>
+        <li><label><input type="checkbox" id="once-4"><span class="t"><b>Pregunta los pesos al profesor</b><span>¿Vale la tabla (15/15/15/15/40) o la fórmula del sílabo? Díselo a Claude.</span><em>En la clase del jueves</em></span></label></li>
+        <li><label><input type="checkbox" id="once-5"><span class="t"><b>Botones (opcional)</b><span>En el Directorio de Campus escribe <b>/botón</b> y pulsa Enter. Elige «Agregar página a…» y la base: ➕ Nueva clase (📚 Clases, Estado = 📥 Por procesar), 📥 Capturar (📥 Bandeja de captura) y 🃏 Nueva tarjeta (🃏 Tarjetas, Caja = 1, Estado = 🆕 Nueva).</span><em>3 minutos</em></span></label></li>
+      </ul>
+      <p class="tip">La altura del panel es opcional: ya llena su marco. Si prefieres solo la franja de arriba, pasa el mouse sobre el panel y arrastra la barrita de su borde inferior hacia arriba. ¿Prefieres que lo haga yo? Abre Claude Desktop en tu computadora con la extensión de Chrome conectada y Notion abierto, y escríbeme «Termina lo del navegador en Campus».</p>
+    </div>
+  </section>
+
+  <!-- ================= AVISOS ================= -->
+  <section class="sec" id="avisos">
+    <div class="sec-head">
+      <p class="kicker">Claude y ajustes</p>
+      <h2>Lo que encontré al revisar cada apartado</h2>
+      <p class="lede">Entré a cada página y a cada base para escribir este manual. Esto es lo que vi, y qué hice con cada cosa.</p>
+    </div>
+    <div class="tbl"><table id="avisos-t">
+      <thead><tr><th>Qué</th><th>Dónde</th><th>Qué pasa ahora</th></tr></thead>
+      <tbody></tbody>
+    </table></div>
+  </section>
+
+  <!-- ================= MAPA ================= -->
+  <section class="sec" id="mapa">
+    <div class="sec-head">
+      <p class="kicker">Consulta</p>
+      <h2>Mapa del sistema</h2>
+      <p class="lede">Cómo se conecta todo. De cada clase cuelgan sus tarjetas, conceptos, normas, recursos y tareas. Toca un recuadro para ir a su explicación.</p>
+      <div class="where"><span class="crumb">Las 15 bases viven en Campus › 📚 Biblioteca</span><a class="open" href="https://app.notion.com/p/3f63e6776c678112ada8c8f4352c5a84" target="_blank" rel="noopener">Abrir la Biblioteca ↗</a></div>
+    </div>
+    <div class="tree">
+      <div class="tier"><span class="lv">Programa</span><a class="node" href="#cursos">🎓 Programas<small>Maestría, Societario, 100K, Inglés, Bolsa</small></a></div>
+      <div class="tier"><span class="lv">Curso</span><a class="node" href="#cursos">🎓 Cursos<small>avance, nota, profesor, horario, Drive</small></a><a class="node" href="#evaluaciones">📝 Evaluaciones<small>peso, nota, semáforo</small></a><a class="node" href="#lecturas">📚 Lecturas · 🔗 Recursos<small>por curso</small></a><a class="node" href="#tesis">🎯 Proyectos<small>tu tesis</small></a></div>
+      <div class="tier"><span class="lv">Unidad</span><a class="node" href="#cursos">🧩 Módulos<small>unidades del sílabo</small></a></div>
+      <div class="tier"><span class="lv">Clase</span><a class="node" href="#clases">📚 Clases<small>Cornell + Fireflies</small></a></div>
+      <div class="tier"><span class="lv">De cada clase</span><a class="node" href="#repaso">🃏 Tarjetas<small>5 cajas</small></a><a class="node" href="#normas">🧠 Conceptos<small>definición, dominio</small></a><a class="node" href="#normas">📜 Normas › § Artículos<small>en simple, SPIJ</small></a><a class="node" href="#tareas">✅ Tareas<small>Kanban, hoy, semana</small></a></div>
+      <div class="tier"><span class="lv">Tu día</span><a class="node" href="#habitos">🔥 Hábitos<small>una fila por día</small></a><a class="node" href="#bandeja">📥 Bandeja<small>lo que falta ubicar</small></a></div>
+    </div>
+    <div class="ojo"><b>Dos íconos repetidos</b><span>📚 es a la vez Clases y Lecturas, y 🎓 es a la vez Cursos y Programas. Fíjate en el nombre, no solo en el ícono.</span></div>
+    <p style="color:var(--ink-2);font-size:15px">Tu página Gus Life's, sus «Notas» de Fireflies y tus trackers viejos siguen intactos. Se archivan solo si lo pides.</p>
+  </section>
+
+  <!-- ================= GLOSARIO ================= -->
+  <section class="sec" id="glosario">
+    <div class="sec-head">
+      <p class="kicker">Consulta</p>
+      <h2>Glosario de campos</h2>
+      <p class="lede">Cada columna de cada base: qué significa y quién la llena. Filtra por base o muestra solo lo que te toca a ti.</p>
+    </div>
+    <div class="gfilters">
+      <select id="gbase" aria-label="Base de datos"></select>
+      <button class="fchip" type="button" data-who="" aria-pressed="true">Todos</button>
+      <button class="fchip" type="button" data-who="tu" aria-pressed="false">Lo llenas tú</button>
+      <button class="fchip" type="button" data-who="cl" aria-pressed="false">Lo llena Claude</button>
+      <button class="fchip" type="button" data-who="auto" aria-pressed="false">Se calcula solo</button>
+      <input id="gq" type="search" placeholder="Filtrar campos…" aria-label="Filtrar campos">
+      <span class="gcount" id="gcount"></span>
+    </div>
+    <div class="tbl"><table id="gtable">
+      <thead><tr><th>Campo</th><th>Base</th><th>Quién</th><th>Qué es</th></tr></thead>
+      <tbody></tbody>
+    </table></div>
+  </section>
+
+  </main>
+</div>
+<footer><div class="wrap">Manual de Campus · revisado el 14 de octubre de 2026 · Carlos Huarcaya · ¿Algo no se ve como aquí? Mándale una captura a Claude.</div></footer>
+
+<script>
+(function(){
+  'use strict';
+  var N = 'https://app.notion.com/p/';
+  var L = {
+    campus: N+'3f63e6776c67819f9f67ee4441a520da', repaso: N+'3f83e6776c678187b609fd3df7564e68',
+    tareas: N+'3f83e6776c6781f082dfeb33204198a2', analitica: N+'3f83e6776c678115881ccd759e8372d6',
+    semanal: N+'3f83e6776c67811d8461d07848e98cca', biblioteca: N+'3f63e6776c678112ada8c8f4352c5a84',
+    tesis: N+'3f63e6776c6781d3aaf3f248ba727f73', modo: N+'3f83e6776c6781b8b123d3bcc374155e',
+    maestria: N+'3f83e6776c6781d7a547ddb643141f39', obs: N+'3f93e6776c6781399d28c790da8c7e8e',
+    clase: N+'3f63e6776c6781c1800fc6b004d4b42a', normas: N+'506ad6370842441f8fb21b90c9bf41e1',
+    articulos: N+'97decaba522e414b855ced1a780d0036', conceptos: N+'f9da8027ac3e404ea8299773dda918f0',
+    clases: N+'5c25883959984461bbda91df74e8c6c5', tarjetas: N+'2e21525e8ea04a92b7b19a35b908d425',
+    bandeja: N+'003b7eae242a403ab5c95f0ef80c3f2e', guia: N+'3f93e6776c6781b3a621f7b281b68b28'
+  };
+  function $(s,r){return (r||document).querySelector(s)}
+  function $$(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))}
+  function load(k,d){try{var v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}}
+  function save(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
+  function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+  function link(href,txt){return '<a href="'+href+'" target="_blank" rel="noopener">'+txt+' ↗</a>'}
+
+  /* ---------- Fechas ---------- */
+  var DIAS=['dom','lun','mar','mié','jue','vie','sáb'], MESES=['ene','feb','mar','abr','may','jun','jul','ago','set','oct','nov','dic'];
+  var DIASL=['domingo','lunes','martes','miércoles','jueves','viernes','sábado'], MESESL=['enero','febrero','marzo','abril','mayo','junio','julio','agosto','setiembre','octubre','noviembre','diciembre'];
+  function d0(d){return new Date(d.getFullYear(),d.getMonth(),d.getDate())}
+  function parse(s){var p=s.split(/[-T:]/);return new Date(+p[0],+p[1]-1,+p[2],+(p[3]||0),+(p[4]||0))}
+  function between(a,b){return Math.round((d0(b)-d0(a))/864e5)}
+  function addDays(d,n){var x=d0(d);x.setDate(x.getDate()+n);return x}
+  function corto(d){return DIAS[d.getDay()]+' '+d.getDate()+' '+MESES[d.getMonth()]}
+  function largo(d){return DIASL[d.getDay()]+' '+d.getDate()+' de '+MESESL[d.getMonth()]}
+  function enDias(n){return n===0?'hoy':n===1?'mañana':n<0?'hace '+(-n)+' días':'en '+n+' días'}
+  function iso(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
+  function semanaISO(d){var t=new Date(Date.UTC(d.getFullYear(),d.getMonth(),d.getDate()));var dn=t.getUTCDay()||7;t.setUTCDate(t.getUTCDate()+4-dn);var y=new Date(Date.UTC(t.getUTCFullYear(),0,1));return t.getUTCFullYear()+'-S'+Math.ceil(((t-y)/864e5+1)/7)}
+  var HOY=new Date();
+
+  var CICLO={inicio:'2026-08-17',semanas:16};
+  var EVENTOS=[
+    {d:'2026-10-15T19:00',t:'Clase S5 · Seminario 2',k:'clase'},
+    {d:'2026-10-17T23:59',t:'Aplicar observaciones de los jurados',k:'tarea'},
+    {d:'2026-10-18T23:59',t:'2.ª entrega escrita',k:'entrega'},
+    {d:'2026-10-29T19:00',t:'Clase S6 · Seminario 2',k:'clase'},
+    {d:'2026-11-12T19:00',t:'Clase S7 · Seminario 2',k:'clase'},
+    {d:'2026-11-22T23:59',t:'Entrega final de la tesis',k:'entrega'},
+    {d:'2026-11-26T19:00',t:'Clase S8 · Seminario 2 (última)',k:'clase'}
+  ];
+  (function live(){
+    var w=Math.floor(between(parse(CICLO.inicio),HOY)/7)+1;
+    var sem=$('#lv-sem');
+    if(w<1) sem.textContent='empieza el lun 17 ago'; else if(w>CICLO.semanas) sem.textContent='terminado'; else sem.textContent='semana '+w+' de '+CICLO.semanas;
+    function put(id,ev,pre){var el=$(id);if(!el)return;var d=parse(ev.d),n=between(HOY,d);el.textContent=(n<0?'pasó el ':'')+corto(d)+(n>=0?' · '+enDias(n):'')}
+    put('#lv-e2',EVENTOS[2]); put('#lv-ef',EVENTOS[5]);
+    var prox=EVENTOS.filter(function(e){return e.k==='clase'&&parse(e.d)>HOY})[0];
+    if(prox){var d=parse(prox.d);$('#lv-cl').textContent=corto(d)+', 7:00 p. m. · '+enDias(between(HOY,d))}
+    else $('#lv-cl').textContent='sin clases este ciclo';
+    $$('#plan tr[data-d]').forEach(function(tr){if(tr.getAttribute('data-d')===iso(HOY)){tr.style.background='var(--accent-soft)';tr.cells[0].innerHTML+=' · <b>hoy</b>'}});
+  })();
+
+  /* ---------- ¿Qué necesitas ahora? ---------- */
+  var RECETAS=[
+    {id:'dia',q:'Empiezo mi día',t:'20 a 30 min',h:'Empezar el día',s:[
+      'Abre '+link(L.campus,'Campus')+'. Mira el panel: cuántos días faltan para lo próximo y si hay clase hoy o mañana.',
+      'En <b>⭐ Hoy</b>, abre la tarea con 🐸 Rana. Lee su <span class="prop">Siguiente acción</span>.',
+      'Dale <b>▶ Empezar</b> al pomodoro del panel. Solo esa tarea hasta que suene. Luego, pausa de 5.',
+      'Responde las tarjetas de <b>🔁 Repaso de hoy</b>, en la columna derecha.',
+      'Antes de dormir, marca <b>🔥 Hábitos de hoy</b>.'],
+     links:[[L.campus,'Campus']]},
+    {id:'clase',q:'Tengo clase hoy',t:'0 min extra',h:'Antes y después de una clase',s:[
+      'La sesión ya existe como 🗓️ Programada. Para verla: Campus › 🗄️ Más vistas › <b>🗓️ Clases de hoy</b>.',
+      'Graba con <b>Fireflies</b> como siempre.',
+      'Si anotas algo, escríbelo en la página de esa sesión. Incompleto está bien: Claude lo completa con la grabación.',
+      'Al día siguiente la clase está procesada. Mientras la tarea programada no tenga conectores, escríbele a Claude <span class="say">Procesa mis clases nuevas</span>.',
+      'Cuando esté lista: marca <span class="prop">Confianza</span> 🟢 🟡 🔴 y escribe 3 líneas en 🗣️ Explícalo a un cliente.'],
+     links:[[L.clase,'Ver una clase modelo']]},
+    {id:'repasar',q:'Quiero repasar',t:'5 a 10 min',h:'Repasar las tarjetas de hoy',s:[
+      'En Campus, columna derecha: <b>🔁 Repaso de hoy</b>. O la página '+link(L.repaso,'🔁 Repaso')+' › pestaña Toca hoy, agrupada por curso.',
+      'Lee la pregunta y respóndela <mark>en voz alta</mark>, sin mirar.',
+      'Abre la tarjeta y despliega <b>👀 Ver respuesta</b>.',
+      'En <span class="prop">Responder</span> elige ✅ Sabía, 🤔 Dudé o ❌ No sabía. La tarjeta sale de la lista al instante.',
+      'Al terminar, mientras la tarea programada no tenga conectores: <span class="say">Procesa mis repasos</span>.'],
+     links:[[L.repaso,'🔁 Repaso']]},
+    {id:'captura',q:'Tengo un link, PDF o idea suelta',t:'30 s',h:'Guardar algo sin pensar dónde',s:[
+      'En Campus, columna izquierda, debajo del Directorio: <b>📥 Bandeja</b> › <b>+ Nuevo</b>.',
+      'Escribe qué es en el título.',
+      'Si es un link, pégalo en <span class="prop">Link</span> y elige el <span class="prop">Tipo</span>.',
+      'Si sabes de qué curso es, escríbelo en <span class="prop">Nota</span>. Claude lo ubica y lo marca como procesado.'],
+     links:[[L.campus,'Campus']]},
+    {id:'grande',q:'Una tarea me pesa',t:'2 min',h:'Cuando no sabes por dónde empezar',s:[
+      'Abre la tarea y mira <span class="prop">Pomodoros</span>. Si son más de 3, escríbele a Claude <span class="say">Divide esta tarea: …</span>.',
+      'Escribe en <span class="prop">Siguiente acción</span> el primer paso físico, por ejemplo «abrir el PDF y leer 5 páginas».',
+      'Dale ▶ a un solo pomodoro. Solo ese paso.',
+      'Si estás trabado de verdad: <span class="prop">Estado</span> = ⛔ Bloqueado y escribe por qué dentro de la tarea.'],
+     links:[[L.tareas,'✅ Tareas']]},
+    {id:'viernes',q:'Es viernes: planear la semana',t:'15 min',h:'La revisión semanal',s:[
+      'Abre '+link(L.semanal,'🗓️ Revisión semanal')+'.',
+      'Vacía la 📥 Bandeja (pestaña de la derecha).',
+      'Revisa las clases de la semana y marca tu Confianza. Mira las evaluaciones y anota las notas que te dieron.',
+      'Pasa a 📅 Esta semana solo lo que sí vas a hacer. Repasa las tarjetas ❌ Difíciles.',
+      'Escríbele a Claude <span class="say">Hice mi revisión semanal</span>.'],
+     links:[[L.semanal,'Revisión semanal']]},
+    {id:'tesis',q:'Avanzar la tesis',t:'3 pomodoros',h:'La 2.ª entrega, día por día',s:[
+      'Abre el '+link(L.modo,'Modo entrega')+': ahí están el plan, lo que pide el sílabo y los enlaces a tu tesis v1.7.',
+      'Haz el bloque del día (D-4 a D-0). Lo ves en ⭐ Hoy y en el plan inverso de abajo.',
+      'El sábado 17 aplica las observaciones de los jurados: están, con su minuto, en la clase «Seminario 1 · Exposición final».',
+      'Antes de enviar: <span class="say">Revisa mi 2.ª entrega contra el sílabo</span>. Si se te pasa un día: <span class="say">Reprograma mi plan de la 2.ª entrega</span>.'],
+     links:[[L.modo,'Modo entrega'],[L.tesis,'Mi tesis']]},
+    {id:'norma',q:'Buscar una norma o concepto',t:'1 min',h:'Encontrar una norma, artículo o concepto',s:[
+      'En Campus › Directorio › CONSULTAR: '+link(L.normas,'📜 Normas')+', '+link(L.articulos,'§ Artículos')+' o '+link(L.conceptos,'🧠 Conceptos')+'.',
+      'Para ver solo las de tu tesis, filtra <span class="prop">Para la tesis</span> = ✔.',
+      'Desde una clase: en su barra lateral están sus normas, artículos y conceptos.',
+      'Para agregar una: <span class="say">Agrega esta norma: …</span>.'],
+     links:[[L.normas,'📜 Normas']]},
+    {id:'nota',q:'Ver cómo voy',t:'1 min',h:'Notas y avance',s:[
+      'Abre '+link(L.analitica,'📊 Analítica')+': arriba, cada programa con su avance y promedio.',
+      'Pestaña <b>📝 Notas y pesos</b>: cada evaluación con su peso, nota y aporte.',
+      'Cuando te den una nota: abre la evaluación, escribe la <span class="prop">Nota</span> y pon ✅ Calificada. La nota del curso se recalcula sola.'],
+     links:[[L.analitica,'📊 Analítica']]},
+    {id:'volver',q:'Volví tras días sin entrar',t:'30 min',h:'Retomar después de unos días',s:[
+      'No se pierde nada. Las tarjetas vencidas siguen en Toca hoy hasta que las respondas.',
+      'Primero ⭐ Hoy: haz la 🐸 Rana con un pomodoro.',
+      'Luego responde hasta 20 tarjetas. La lista ya pone primero las de caja 1.',
+      'Escríbele a Claude <span class="say">¿Qué hago hoy?</span> y te ordena el día por lo que vence primero.'],
+     links:[[L.campus,'Campus']]}
+  ];
+  var asks=$('#asks'),recipe=$('#recipe');
+  RECETAS.forEach(function(r){var b=document.createElement('button');b.type='button';b.className='ask';b.id='ask-'+r.id;b.setAttribute('aria-pressed','false');b.innerHTML=esc(r.q)+'<small>'+esc(r.t)+'</small>';b.onclick=function(){showRecipe(r.id,true)};asks.appendChild(b)});
+  function showRecipe(id,remember){
+    var r=RECETAS.filter(function(x){return x.id===id})[0]||RECETAS[0];
+    $$('.ask',asks).forEach(function(b){b.setAttribute('aria-pressed',b.id==='ask-'+r.id?'true':'false')});
+    recipe.innerHTML='<p class="meta">'+esc(r.q)+' · '+esc(r.t)+'</p><h3>'+esc(r.h)+'</h3><ol class="steps">'+r.s.map(function(x){return '<li><span>'+x+'</span></li>'}).join('')+'</ol><div class="links">'+r.links.map(function(l){return link(l[0],'Abrir '+l[1])}).join('')+'</div>';
+    if(remember)save('campus-guia:receta',r.id);
+  }
+  showRecipe(load('campus-guia:receta','dia'));
+
+  /* ---------- Checklists ---------- */
+  function scopeKey(list,scope){if(scope==='day')return 'campus-guia:'+list+':'+iso(HOY);if(scope==='week')return 'campus-guia:'+list+':'+semanaISO(HOY);return 'campus-guia:'+list}
+  $$('ul.check').forEach(function(ul){
+    var list=ul.getAttribute('data-list'),key=scopeKey(list,ul.getAttribute('data-scope')),st=load(key,{});
+    var boxes=$$('input[type=checkbox]',ul);
+    function upd(){var n=boxes.filter(function(b){return b.checked}).length;var p=$('#p-'+list),b=$('#b-'+list);if(p)p.textContent=n+' de '+boxes.length+(n===boxes.length?' · listo':'');if(b)b.style.width=(100*n/boxes.length)+'%'}
+    boxes.forEach(function(b){b.checked=!!st[b.id];b.addEventListener('change',function(){st[b.id]=b.checked;save(key,st);upd()})});
+    var rb=$('[data-reset="'+list+'"]');if(rb)rb.onclick=function(){boxes.forEach(function(b){b.checked=false});st={};save(key,st);upd()};
+    upd();
+  });
+
+  /* ---------- Mapa de la portada ---------- */
+  var MAPA={
+    panel:{t:'Panel',m:'Saludo con la fecha y la semana del ciclo, tu próximo hito con los días que faltan, el pomodoro 25 · 5 · 15, «Lo que viene» con 5 fechas y un calendario de tus próximas 2 semanas.',h:'Dale ▶ Empezar al pomodoro cuando te sientes a estudiar.',o:'Las fechas están escritas en el panel. Si hay una nueva, pídele a Claude que la agregue.',go:'#panel'},
+    directorio:{t:'🧭 Directorio',m:'<b>Campus:</b> Repaso, Tareas, Analítica, Revisión semanal, Biblioteca y Guía de uso. <b>Programas:</b> Mi tesis, Maestría, Societario, 100K, Inglés y Bolsa. <b>Consultar:</b> Clases · Tarjetas, Normas · Artículos, Conceptos · Recursos. <b>Accesos:</b> PAIDEIA, Campus Virtual, Fireflies y Drive.',h:'Es tu menú. Desde aquí llegas a todo lo que no está en la portada.',go:'#mapa'},
+    bandeja:{t:'📥 Bandeja de captura',m:'Solo lo que falta procesar, lo más nuevo arriba. Muestra el título.',h:'+ Nuevo, escribe qué es, pega el link y, si sabes, el curso en Nota.',go:'#bandeja'},
+    hoy:{t:'⭐ Hoy',m:'Tareas con estado ⭐ Hoy o 🔨 Haciendo, ordenadas por prioridad: 🐸 Rana primero. Muestra tarea, prioridad y pomodoros.',h:'Máximo 3. Empieza por la Rana. Al terminar, Estado = ✅ Hecho y desaparece.',go:'#tareas'},
+    semana:{t:'📅 Esta semana',m:'Tabla con las tareas no hechas que vencen en los próximos 7 días o que ya vencieron, por fecha. Muestra tarea, fecha límite, curso, pomodoros y alerta: 🔥 Vencida o ⚠️ Vence pronto.',h:'De aquí eliges qué pasar a ⭐ Hoy. Lo que dice 🔥 Vencida va primero o se reprograma.',o:'Aquí cuenta la fecha, no el estado. La lista de Más vistas «📆 Elegidas para esta semana» sí usa el estado.',go:'#tareas'},
+    miscursos:{t:'🎓 Mis cursos',m:'Cinco pestañas: 🎓 Maestría, ⚖️ Societario, 📱 100K, 🇬🇧 Inglés y 📈 Bolsa. Cada curso es una tarjeta pequeña con su portada, el avance por sesiones vistas y, en la Maestría, la nota actual.',h:'Toca un curso para ver sus unidades, clases, evaluaciones, tarjetas, lecturas, normas, tareas y recursos.',go:'#cursos'},
+    repasohoy:{t:'🔁 Repaso de hoy',m:'Las tarjetas que tocan hoy (incluidas las atrasadas), ordenadas por caja. Muestra la pregunta y la columna Responder.',h:'Responde en voz alta, abre la tarjeta, mira 👀 Ver respuesta y elige ✅ 🤔 ❌.',go:'#repaso'},
+    evals:{t:'📝 Próximas evaluaciones',m:'Evaluaciones ⏳ Pendiente, la más próxima arriba, con Faltan: 🔴 si quedan 3 días o menos, 🟠 hasta 10 y 🟢 más de 10.',h:'Abre la 2.ª entrega escrita para entrar al Modo entrega.',go:'#evaluaciones'},
+    habhoy:{t:'🔥 Hábitos de hoy',m:'La fila de hoy, con 5 casillas: estudié 25 min, hice mi repaso, procesé mis clases, inglés 15 min y estudié sin celular.',h:'Márcalas antes de dormir.',o:'Si está vacío, falta crear la fila de hoy: pídeselo a Claude.',go:'#habitos'},
+    lect:{t:'📚 Lecturas en curso',m:'Lecturas en estado 📖 Leyendo, con su avance.',h:'Cuando empieces una lectura, ponla en 📖 Leyendo. Cuando leas, actualiza Páginas leídas dentro de ella.',go:'#lecturas'},
+    mas:{t:'🗄️ Más vistas',m:'Un desplegable cerrado al final de la página, con 11 pestañas: Calendario, Kanban, Semana (lista), Entregas, Clases de hoy, Clases, Por procesar, Repasar clases, Cursos, Hábitos y Progreso.',h:'Ábrelo con el triángulo. No lo necesitas a diario.',go:'#portada'}
+  };
+  var det=$('#detail');
+  function showMap(k){
+    var x=MAPA[k]||MAPA.hoy;
+    $$('#map .blk').forEach(function(b){b.setAttribute('aria-pressed',b.getAttribute('data-k')===k?'true':'false')});
+    det.innerHTML='<h3>'+x.t+'</h3><dl><dt>Muestra</dt><dd>'+x.m+'</dd><dt>Tú</dt><dd><mark>'+x.h+'</mark></dd>'+(x.o?'<dt>Ojo</dt><dd>'+x.o+'</dd>':'')+'</dl>'+(x.go&&x.go!=='#portada'?'<a class="open" href="'+x.go+'">Leer la explicación completa ↓</a>':'');
+  }
+  $$('#map .blk').forEach(function(b){b.onclick=function(){showMap(b.getAttribute('data-k'))}});
+  showMap('hoy');
+
+  /* ---------- Ciclo de una clase ---------- */
+  var CEST=[
+    {k:'prog',n:'🗓️ Programada',m:'La sesión existe antes de la clase, creada desde el sílabo, con su fecha, hora y unidad.',w:'Claude',d:'Seminario 2: S06 (29 oct), S07 (12 nov) y S08 (26 nov).'},
+    {k:'porp',n:'📥 Por procesar',m:'La clase ya pasó, pero falta su página. Aparece en Más vistas › 📥 Por procesar.',w:'Claude, o tú si no hay grabación',d:'Hoy: Seminario 2 · S03 y S04, sin grabación.'},
+    {k:'proc',n:'✅ Procesada',m:'Página Cornell completa, con tarjetas, conceptos, normas y tareas. Cuenta para el Avance del curso.',w:'Claude',d:'Aquí entras tú: Confianza y «Explícalo a un cliente».'},
+    {k:'old',n:'🔁 En repaso · 🏁 Dominada',m:'Estados del diseño anterior, cuando se repasaba la clase entera. Ya no se usan: ahora se repasan las tarjetas.',w:'Nadie',d:'Las propiedades Repasos, Dificultad y Toca repasar de la clase también son de ese diseño.',side:true}
+  ];
+  function flow(container,detail,items,def){
+    var c=$(container),dd=$(detail);
+    items.forEach(function(it,i){
+      if(i>0&&!it.side){var a=document.createElement('span');a.className='arrow';a.textContent='→';a.setAttribute('aria-hidden','true');c.appendChild(a)}
+      var b=document.createElement('button');b.type='button';b.className='st'+(it.side?' side':'');b.textContent=it.n;b.setAttribute('aria-pressed','false');b.setAttribute('data-k',it.k);
+      b.onclick=function(){show(it.k)};c.appendChild(b);
+    });
+    function show(k){
+      var it=items.filter(function(x){return x.k===k})[0];
+      $$('.st',c).forEach(function(b){b.setAttribute('aria-pressed',b.getAttribute('data-k')===k?'true':'false')});
+      dd.innerHTML='<h3>'+it.n+'</h3><dl><dt>Qué significa</dt><dd>'+it.m+'</dd><dt>Quién</dt><dd>'+it.w+'</dd>'+(it.v?'<dt>Dónde aparece</dt><dd>'+it.v+'</dd>':'')+(it.d?'<dt>Ahora</dt><dd>'+it.d+'</dd>':'')+'</dl>';
+    }
+    show(def);
+  }
+  flow('#cflow','#cdetail',CEST,'proc');
+
+  /* ---------- Estados de una tarea ---------- */
+  var KEST=[
+    {k:'band',n:'📥 Bandeja',m:'Tareas sin semana asignada, por lo general con fecha lejana.',v:'🗂️ Kanban (en ✅ Tareas o en Más vistas).',w:'Claude las crea aquí si vencen en más de 7 días.'},
+    {k:'sem',n:'📅 Esta semana',m:'Lo que elegiste hacer esta semana.',v:'Más vistas › 📆 Semana (lista) y el Kanban. La tabla «📅 Esta semana» de Campus muestra además todo lo que vence en 7 días o ya venció.',w:'Tú, el viernes. Claude, si vence en 7 días o menos.'},
+    {k:'hoy',n:'⭐ Hoy',m:'Lo que harás hoy. <mark>Máximo 3.</mark>',v:'⭐ Hoy, en Campus, ordenado por prioridad.',w:'Tú, cada mañana.'},
+    {k:'hac',n:'🔨 Haciendo',m:'La tarea en la que estás ahora, o una que empezaste y sigue mañana.',v:'Sigue en ⭐ Hoy.',w:'Tú.'},
+    {k:'hecho',n:'✅ Hecho',m:'Terminada. Sale de ⭐ Hoy y de 📅 Esta semana.',v:'✅ Tareas › pestaña ✅ Hechas.',w:'Tú, al terminar.'},
+    {k:'bloq',n:'⛔ Bloqueado',m:'No puedes avanzar: falta algo o alguien. Escribe por qué dentro de la tarea.',v:'Kanban. Claude lo ve en tu revisión semanal.',w:'Tú.',side:true}
+  ];
+  flow('#kflow','#kdetail',KEST,'hoy');
+
+  /* ---------- Simulador de cajas ---------- */
+  var INT=[0,1,3,7,16,35],caja=1,resp='si';
+  var RESP=[{k:'si',n:'✅ Sabía'},{k:'duda',n:'🤔 Dudé'},{k:'no',n:'❌ No sabía'}];
+  var bx=$('#boxes'),an=$('#answers');
+  for(var i=1;i<=5;i++){(function(i){var b=document.createElement('button');b.type='button';b.className='box';b.setAttribute('data-c',i);b.setAttribute('aria-pressed','false');b.innerHTML='<b>'+i+'</b><span>vuelve en '+INT[i]+(INT[i]===1?' día':' días')+'</span>';b.onclick=function(){caja=i;sim()};bx.appendChild(b)})(i)}
+  RESP.forEach(function(r){var b=document.createElement('button');b.type='button';b.className='ans';b.setAttribute('data-r',r.k);b.setAttribute('aria-pressed','false');b.textContent=r.n;b.onclick=function(){resp=r.k;sim()};an.appendChild(b)});
+  function sim(){
+    var nueva=resp==='si'?Math.min(caja+1,5):resp==='duda'?caja:1;
+    var dominada=resp==='si'&&caja===5;
+    $$('.box',bx).forEach(function(b){var c=+b.getAttribute('data-c');b.setAttribute('aria-pressed',c===caja?'true':'false');b.classList.toggle('to',!dominada&&c===nueva&&c!==caja)});
+    $$('.ans',an).forEach(function(b){b.setAttribute('aria-pressed',b.getAttribute('data-r')===resp?'true':'false')});
+    var out=$('#simout'),f=addDays(HOY,INT[nueva]);
+    if(dominada){out.innerHTML='<p class="big">🏁 Queda dominada y sale de la cola.</p><p class="sm">Estaba en la caja 5 y la sabías: no vuelve a aparecer en tu repaso. Sigue en 🗂️ Todo el mazo, en la columna 🏁 Dominada.</p>'}
+    else{
+      var mov=resp==='si'?'Sube a la caja '+nueva:resp==='duda'?'Se queda en la caja '+nueva:'Vuelve a la caja 1 y suma un fallo';
+      out.innerHTML='<p class="big">'+mov+'. Vuelve el '+largo(f)+'.</p><p class="sm">Es decir, '+enDias(INT[nueva])+'. La fecha cambia en cuanto eliges en Responder; la caja la guarda Claude a la mañana siguiente.'+(resp==='no'?' Con 2 fallos o más aparece en ❌ Difíciles.':'')+'</p>';
+    }
+    var lane=$('#lane'),h='',d=d0(HOY),acc=0;
+    h+='<span>hoy · caja '+caja+'</span>';
+    for(var c=caja;c<=5;c++){var nx=Math.min(c+1,5);if(c===5){h+='<i>→</i><span>🏁 dominada</span>';break}acc+=INT[nx];h+='<i>→</i><span>'+corto(addDays(d,acc))+' · caja '+nx+'</span>'}
+    lane.innerHTML=h;
+  }
+  sim();
+
+  /* ---------- Pestañas de la clase ---------- */
+  var tabs=$$('#ctabs [role=tab]');
+  function selTab(t){tabs.forEach(function(x){var on=x===t;x.setAttribute('aria-selected',on?'true':'false');x.tabIndex=on?0:-1;$('#'+x.getAttribute('aria-controls')).hidden=!on})}
+  tabs.forEach(function(t,i){t.onclick=function(){selTab(t)};t.onkeydown=function(e){var j=e.key==='ArrowRight'?i+1:e.key==='ArrowLeft'?i-1:null;if(j===null)return;j=(j+tabs.length)%tabs.length;tabs[j].focus();selTab(tabs[j]);e.preventDefault()}});
+
+  /* ---------- Frases ---------- */
+  var FRASES=[
+    ['¿Qué hago hoy?','Te arma el día con lo que vence primero.'],
+    ['Procesa mis clases nuevas','Trae de Fireflies las clases que falten y las deja en Cornell.'],
+    ['Procesa mis repasos','Guarda las cajas de las tarjetas que respondiste.'],
+    ['Crea mi fila de hábitos de hoy','Si 🔥 Hábitos de hoy está vacío.'],
+    ['Divide esta tarea: …','Para tareas de más de 3 pomodoros.'],
+    ['Reprograma mi plan de la 2.ª entrega','Si se te pasó un día del plan inverso.'],
+    ['Revisa mi 2.ª entrega contra el sílabo','Antes de enviarla el domingo.'],
+    ['Hazme un simulacro de examen de grado','Preguntas como las de los jurados.'],
+    ['Agrega esta norma: …','La carga con sus artículos y la enlaza.'],
+    ['Agrega esta fecha al panel: …','Para un examen o una entrega nueva.'],
+    ['Arma el Modo entrega de la entrega final','Como el de la 2.ª entrega, para el 22 de nov.'],
+    ['Hice mi revisión semanal','Arma tu semana con lo que elegiste el viernes.'],
+    ['Procesa la S03 con mis apuntes','Para una clase sin grabación.']
+  ];
+  var ph=$('#phrases');
+  FRASES.forEach(function(f,i){
+    var d=document.createElement('div');d.className='ph';
+    d.innerHTML='<div><q id="fr-'+i+'">'+esc(f[0])+'</q><small>'+esc(f[1])+'</small></div><button class="copy" type="button">Copiar</button>';
+    var b=$('button',d),q=$('q',d);
+    b.onclick=function(){
+      function ok(){b.textContent='Copiada';b.classList.add('done');setTimeout(function(){b.textContent='Copiar';b.classList.remove('done')},1600)}
+      function sel(){try{var r=document.createRange();r.selectNodeContents(q);var s=window.getSelection();s.removeAllRanges();s.addRange(r);b.textContent='Seleccionada: copia con Ctrl+C'}catch(e){}}
+      try{navigator.clipboard.writeText(f[0]).then(ok,sel)}catch(e){sel()}
+    };
+    ph.appendChild(d);
+  });
+
+  /* ---------- Avisos ---------- */
+  var AVISOS=[
+    ['La tarea programada de las 6:46 a. m. no tiene conectores','claude.ai','<span class="status hot">Te toca</span> Agrega Fireflies y Notion (Ajustes de una sola vez). Mientras, pídeselo a Claude en un chat.'],
+    ['La caja de una tarjeta solo se guarda cuando pasa Claude','🃏 Tarjetas','<span class="status warn">Ten en cuenta</span> Después de repasar, «Procesa mis repasos», hasta que la tarea programada funcione.'],
+    ['Dos listas con el nombre «📅 Esta semana»','Campus y Más vistas','<span class="status ok">Corregido</span> La de Más vistas ahora se llama «📆 Elegidas para esta semana (por estado)».'],
+    ['La revisión del viernes pide anotar notas, pero su pestaña de evaluaciones solo mostraba las pendientes','🗓️ Revisión semanal','<span class="status ok">Corregido</span> Ahora muestra también las entregadas que esperan nota, con su estado y nota.'],
+    ['Los hubs de 100K, Inglés y Bolsa mostraban también las tareas hechas','Hubs de programa','<span class="status ok">Corregido</span> Ahora muestran solo las pendientes, igual que Societario.'],
+    ['Solo la 2.ª entrega tiene Modo entrega','📝 Evaluaciones','<span class="status n">A pedido</span> «Arma el Modo entrega de la entrega final» cuando termines la 2.ª.'],
+    ['El estado por objetivo de Mi tesis es una tabla fija','🎓 Mi tesis','<span class="status n">A mano</span> Actualízala tú o pídeselo a Claude cuando avances.'],
+    ['Los pesos del sílabo no coinciden y lo cargado suma 70 %','📝 Evaluaciones','<span class="status hot">Te toca</span> Pregúntale al profesor cuál vale y qué falta.'],
+    ['El texto de los artículos es paráfrasis','§ Artículos','<span class="status warn">Ten en cuenta</span> Cópialo literal desde SPIJ cuando lo uses y marca «Verificado en SPIJ».'],
+    ['Restos del tema que no es tu tesis (fraude, LIR) seguían pareciendo tuyos','Normas, Artículos, Lecturas','<span class="status ok">Corregido</span> Los 6 artículos ahora dicen «(referencia, no es tu tesis)» en el título, como las normas y lecturas. No se borró nada.'],
+    ['«Lecturas en curso» mostraba lecturas pendientes, incluidas las de LIR y SBS','Campus','<span class="status ok">Corregido</span> Ahora muestra solo las que están en 📖 Leyendo.'],
+    ['Las tareas vencidas desaparecían de Campus','📅 Esta semana','<span class="status ok">Corregido</span> Ahora la tabla incluye lo atrasado, con su alerta 🔥 Vencida.'],
+    ['Seis conceptos del tema de fraude siguen enlazados a Seminario 2','🧠 Conceptos','<span class="status n">Sin tocar</span> Salen en la pestaña Conceptos del hub. Si te estorban, pide «Desenlaza del Seminario 2 lo que no es de mi tesis».'],
+    ['Seminario 2 · S03 y S04 sin grabación','📚 Clases','<span class="status n">Esperando</span> Si tienes apuntes, «Procesa la S03 con mis apuntes».'],
+    ['«🗓️ Clases de hoy» ordena la hora como texto','Más vistas','<span class="status n">Sin efecto</span> Solo importa si tienes dos clases el mismo día.'],
+    ['El repaso por clase del diseño anterior sigue ahí','📚 Clases, Más vistas','<span class="status n">Sin uso</span> «🔁 Repasar clases», Repasos y Dificultad ya no se usan.'],
+    ['El Dominio de los conceptos no cambia solo','🧠 Conceptos','<span class="status n">Opcional</span> Actualízalo tú si quieres. Tus tarjetas sí llevan su propio avance.'],
+    ['Las fechas del panel están en el código','Panel de Campus','<span class="status n">Explicado</span> «Agrega esta fecha al panel: …».']
+  ];
+  $('#avisos-t tbody').innerHTML=AVISOS.map(function(a){return '<tr><td>'+a[0]+'</td><td>'+a[1]+'</td><td>'+a[2]+'</td></tr>'}).join('');
+
+  /* ---------- Glosario ---------- */
+  var G=[
+    // base, campo, quién, qué es
+    ['✅ Tareas','Tarea','cl','El nombre de la tarea. Claude la crea; tú también puedes con + Nuevo.'],
+    ['✅ Tareas','Estado','tu','📥 Bandeja, 📅 Esta semana, ⭐ Hoy, 🔨 Haciendo, ⛔ Bloqueado o ✅ Hecho. Decide en qué lista aparece.'],
+    ['✅ Tareas','Prioridad','tu','🐸 Rana (la más difícil), 🔴 Alta o ⚪ Normal. ⭐ Hoy las ordena así. Claude pone una inicial.'],
+    ['✅ Tareas','Fecha límite','cl','Cuándo vence. La usan el calendario, la alerta y «📅 Esta semana».'],
+    ['✅ Tareas','Siguiente acción','cl','El primer paso concreto y físico. Cámbialo tú si no te sirve.'],
+    ['✅ Tareas','Pomodoros','cl','Bloques de 25 minutos estimados. Si son más de 3, pide que la divida.'],
+    ['✅ Tareas','Tipo','cl','📝 Tarea, 📖 Lectura, 🧪 Examen, 📦 Trabajo final, 📥 Procesar clase o 🔁 Repaso.'],
+    ['✅ Tareas','Alerta','auto','🔥 Vencida si ya pasó la fecha límite; ⚠️ Vence pronto si faltan 2 días o menos. Vacía si está hecha.'],
+    ['✅ Tareas','Curso · Clase · Evaluación · Proyecto','cl','Enlaces a dónde pertenece la tarea.'],
+    ['🃏 Tarjetas','Pregunta','cl','Lo que tienes que responder en voz alta.'],
+    ['🃏 Tarjetas','Respuesta','cl','La respuesta breve. La completa está dentro, en 👀 Ver respuesta.'],
+    ['🃏 Tarjetas','Responder','tu','✅ Sabía, 🤔 Dudé o ❌ No sabía. Lo único que tocas al repasar.'],
+    ['🃏 Tarjetas','Caja','cl','Del 1 al 5. Define cada cuánto vuelve: 1, 3, 7, 16 o 35 días.'],
+    ['🃏 Tarjetas','Último repaso','cl','La fecha en que la respondiste por última vez.'],
+    ['🃏 Tarjetas','Fallos','cl','Cuántas veces elegiste ❌. Con 2 o más aparece en ❌ Difíciles.'],
+    ['🃏 Tarjetas','Estado','cl','🆕 Nueva, 📈 Aprendiendo o 🏁 Dominada.'],
+    ['🃏 Tarjetas','Próximo repaso','auto','Cuándo vuelve: último repaso + días de su caja. Al elegir en Responder se recalcula al instante con la caja nueva.'],
+    ['🃏 Tarjetas','Toca hoy','auto','Dice «🔁 Sí» si el próximo repaso es hoy o ya pasó, salvo las dominadas. Es el filtro de 🔁 Repaso de hoy.'],
+    ['🃏 Tarjetas','Tipo','cl','Definición, Plazo o fecha, Excepción, Comparación, Caso, Dato o Regla.'],
+    ['🃏 Tarjetas','Curso · Clase · Conceptos','cl','De dónde sale la tarjeta.'],
+    ['📚 Clases','Clase','cl','«Curso · Sesión — tema».'],
+    ['📚 Clases','Estado','cl','🗓️ Programada, 📥 Por procesar o ✅ Procesada. 🔁 En repaso y 🏁 Dominada ya no se usan.'],
+    ['📚 Clases','Confianza','tu','🟢 Alta, 🟡 Media o 🔴 Baja: qué tan bien entendiste la clase.'],
+    ['📚 Clases','Fecha · Hora · Sesión','cl','Cuándo fue y su número en el sílabo.'],
+    ['📚 Clases','Módulo','cl','La unidad del sílabo a la que pertenece.'],
+    ['📚 Clases','Palabras clave','cl','De 2 a 6 temas de la clase.'],
+    ['📚 Clases','Fireflies · Grabación · Materiales','cl','Enlaces a la grabación, al video y a las diapositivas o carpeta.'],
+    ['📚 Clases','N° tarjetas','auto','Cuántas tarjetas salieron de la clase.'],
+    ['📚 Clases','Vista','auto','Vale 1 cuando la sesión ya no está 🗓️ Programada. Suma para el Avance del curso.'],
+    ['📚 Clases','Programa','auto','El área del curso (Maestría, Societario…).'],
+    ['📚 Clases','Repasos · Dificultad · Toca repasar','old','Del diseño anterior. Ya no se usan.'],
+    ['🎓 Cursos','Programa · Área','cl','A qué programa pertenece.'],
+    ['🎓 Cursos','Estado','cl','🟢 En curso, ⏳ Pendiente o ✅ Terminado.'],
+    ['🎓 Cursos','Profesor · Horario · Carpeta Drive · Aula virtual','cl','Datos del sílabo y enlaces.'],
+    ['🎓 Cursos','Sesiones totales','cl','Cuántas sesiones tiene el curso.'],
+    ['🎓 Cursos','Sesiones vistas','auto','Cuántas sesiones ya no están programadas, es decir, ya pasaron.'],
+    ['🎓 Cursos','Avance','auto','Sesiones vistas ÷ sesiones totales, como barra.'],
+    ['🎓 Cursos','Nota actual','auto','Tu promedio ponderado con las evaluaciones calificadas.'],
+    ['🎓 Cursos','Tarjetas hoy','auto','Cuántas tarjetas de ese curso tocan hoy.'],
+    ['🎓 Programas','Ciclo · Orden · Carpeta Drive · Campus virtual','cl','Datos del programa.'],
+    ['🎓 Programas','N° cursos · Avance · Promedio · Tarjetas hoy','auto','Suma de lo de sus cursos.'],
+    ['🧩 Módulos','Módulo · Descripción · Orden','cl','Cada unidad del sílabo, con sus semanas, entregas y meta.'],
+    ['📝 Evaluaciones','Evaluación · Tipo','cl','📝 Entrega, 🧪 Examen, 🎤 Exposición o 📋 Control.'],
+    ['📝 Evaluaciones','Fecha · Peso','cl','Cuándo es y cuánto vale de la nota.'],
+    ['📝 Evaluaciones','Estado','tu','⏳ Pendiente, 📤 Entregada o ✅ Calificada.'],
+    ['📝 Evaluaciones','Nota','tu','La nota que te dieron. Escríbela cuando la tengas.'],
+    ['📝 Evaluaciones','Faltan','auto','Días que quedan: 🔴 3 o menos, 🟠 hasta 10, 🟢 más. «✔️ listo» si ya no está pendiente.'],
+    ['📝 Evaluaciones','Aporte · Peso calificado','auto','Lo que esa nota suma al promedio del curso.'],
+    ['📝 Evaluaciones','Notas','cl','Comentarios, como la duda sobre los pesos del sílabo.'],
+    ['🔥 Hábitos','Día · Fecha','cl','Una fila por día, por ejemplo «Jue 15 oct».'],
+    ['🔥 Hábitos','📖 · 🔁 · 📥 · 🇬🇧 · 📵','tu','Las 5 casillas del día. Claude marca 📥 y 🔁 cuando corresponde.'],
+    ['🔥 Hábitos','Minutos de estudio · Qué aprendí hoy','tu','Opcionales.'],
+    ['🔥 Hábitos','Puntaje','auto','Porcentaje de casillas marcadas. No se muestra en Campus.'],
+    ['📚 Lecturas','Lectura · Autor · Link · Obligatoria','cl','Qué leer y dónde está.'],
+    ['📚 Lecturas','Estado','tu','⏳ Pendiente, 📖 Leyendo o ✅ Terminada.'],
+    ['📚 Lecturas','Páginas leídas','tu','Hasta dónde llegaste.'],
+    ['📚 Lecturas','Páginas totales','cl','El largo del texto.'],
+    ['📚 Lecturas','Avance','auto','Páginas leídas ÷ totales.'],
+    ['🔗 Recursos','Recurso · Tipo · Link · Curso · Clase','cl','YouTube, grabación, PDF, carpeta, diapositivas, norma o web.'],
+    ['🔗 Recursos','Estado','tu','👀 Por ver, ✅ Visto o 📌 Referencia.'],
+    ['📥 Bandeja','Item · Link · Tipo · Nota','tu','Lo que capturas: qué es, el enlace y, si sabes, el curso.'],
+    ['📥 Bandeja','Procesado','cl','Claude lo marca al ubicarlo. Sale de Campus.'],
+    ['📜 Normas','Norma · Tipo · Número · Fecha · Estado · Link oficial','cl','La ficha de la norma.'],
+    ['📜 Normas','Resumen','cl','Qué dice, en simple.'],
+    ['📜 Normas','Para la tesis','cl','Marcada si es de tu tema. Filtra por aquí.'],
+    ['§ Artículos','Artículo · Norma · En simple','cl','El artículo y su explicación.'],
+    ['§ Artículos','Texto','tu','El texto literal. Hoy es paráfrasis: pégalo desde SPIJ.'],
+    ['§ Artículos','Verificado en SPIJ','tu','Márcalo cuando copies el texto oficial.'],
+    ['🧠 Conceptos','Concepto · Definición · Tipo','cl','Definición en 1 o 2 líneas; tipo: concepto, principio, institución, norma, fórmula o herramienta.'],
+    ['🧠 Conceptos','Dominio','tu','🆕 Nuevo, 🔁 Aprendiendo o ✅ Lo domino. Opcional.'],
+    ['🎯 Proyectos','Proyecto · Curso · Estado · Fecha límite · Meta · Tareas','cl','Hoy hay uno: tu tesis, con meta APTO al 22 de nov.']
+  ];
+  var WHO={tu:['tu','Tú'],cl:['cl','Claude'],auto:['auto','Solo'],old:['old','En desuso']};
+  var gb=$('#gbase'),gq=$('#gq'),gw='';
+  var bases=[];G.forEach(function(g){if(bases.indexOf(g[0])<0)bases.push(g[0])});
+  gb.innerHTML='<option value="">Todas las bases</option>'+bases.map(function(b){return '<option>'+esc(b)+'</option>'}).join('');
+  function norm(s){return String(s).normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase()}
+  function gdraw(){
+    var b=gb.value,q=norm(gq.value.trim()),rows=G.filter(function(g){return (!b||g[0]===b)&&(!gw||g[2]===gw||(gw==='tu'&&g[2]==='tu'))&&(!q||norm(g.join(' ')).indexOf(q)>=0)});
+    $('#gtable tbody').innerHTML=rows.map(function(g){var w=WHO[g[2]];return '<tr><td><span class="prop">'+esc(g[1])+'</span></td><td>'+esc(g[0])+'</td><td><span class="who '+w[0]+'">'+w[1]+'</span></td><td>'+esc(g[3])+'</td></tr>'}).join('')||'<tr><td colspan="4">Ningún campo coincide. Prueba con otra palabra.</td></tr>';
+    $('#gcount').textContent=rows.length+' de '+G.length;
+  }
+  gb.onchange=gdraw;gq.oninput=gdraw;
+  $$('.fchip').forEach(function(c){c.onclick=function(){gw=c.getAttribute('data-who');$$('.fchip').forEach(function(x){x.setAttribute('aria-pressed',x===c?'true':'false')});gdraw()}});
+  gdraw();
+
+  /* ---------- Índice activo ---------- */
+  var navLinks=$$('#toc a'),secs=$$('main > section');
+  function setCur(id){navLinks.forEach(function(a){var on=a.getAttribute('href')==='#'+id;a.setAttribute('aria-current',on?'true':'false');if(on&&window.matchMedia('(max-width:920px)').matches){var t=$('#toc');var l=a.offsetLeft-t.clientWidth/2+a.clientWidth/2;t.scrollTo({left:l})}})}
+  if('IntersectionObserver' in window){
+    var vis={};var io=new IntersectionObserver(function(es){es.forEach(function(e){vis[e.target.id]=e.isIntersecting?e.intersectionRatio:0});var best=null;secs.forEach(function(s){if(vis[s.id]>0&&best===null)best=s.id});if(best)setCur(best)},{rootMargin:'-15% 0px -60% 0px',threshold:[0,0.01]});
+    secs.forEach(function(s){io.observe(s)});
+  }
+  setCur('ahora');
+
+  /* ---------- Buscador ---------- */
+  var IDX=secs.map(function(s){var h=$('h2',s);return {id:s.id,t:h?h.textContent:s.id,x:s.textContent.replace(/\s+/g,' ')}});
+  G.forEach(function(g){IDX.push({id:'glosario',t:g[1]+' · '+g[0],x:g.join(' '),g:g[1]})});
+  var q=$('#q'),res=$('#results'),selI=-1;
+  function snippet(x,qq){var n=norm(x),i=n.indexOf(qq);if(i<0)return x.slice(0,110);var a=Math.max(0,i-40);return (a>0?'…':'')+x.slice(a,a+120)+'…'}
+  function search(){
+    var v=norm(q.value.trim());selI=-1;
+    if(v.length<2){res.hidden=true;res.innerHTML='';return}
+    var words=v.split(/\s+/),hits=IDX.filter(function(r){var n=norm(r.t+' '+r.x);return words.every(function(w){return n.indexOf(w)>=0})}).slice(0,8);
+    res.innerHTML=hits.length?hits.map(function(h,i){return '<a href="#'+h.id+'" data-i="'+i+'"'+(h.g?' data-g="'+esc(h.g)+'"':'')+'><div class="rt">'+esc(h.t)+'</div><div class="rs">'+esc(snippet(h.x,words[0]))+'</div></a>'}).join(''):'<div class="none">No encontré «'+esc(q.value)+'». Prueba con otra palabra, por ejemplo «tarjeta» o «tesis».</div>';
+    res.hidden=false;
+    $$('a',res).forEach(function(a){a.onclick=function(){var g=a.getAttribute('data-g');if(g){gq.value=g;gb.value='';gdraw()}res.hidden=true}});
+  }
+  q.addEventListener('input',search);
+  q.addEventListener('keydown',function(e){var as=$$('a',res);if(!as.length)return;if(e.key==='ArrowDown'||e.key==='ArrowUp'){selI=(selI+(e.key==='ArrowDown'?1:-1)+as.length)%as.length;as.forEach(function(a,i){a.classList.toggle('sel',i===selI)});e.preventDefault()}else if(e.key==='Enter'){(as[selI]||as[0]).click();location.hash=(as[selI]||as[0]).getAttribute('href').slice(1);e.preventDefault()}else if(e.key==='Escape'){res.hidden=true}});
+  document.addEventListener('click',function(e){if(!e.target.closest('.search'))res.hidden=true});
+})();
+</script>
